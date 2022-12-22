@@ -14,9 +14,10 @@
 		BBF7062C294CF54F006DA73A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBF7062B294CF54F006DA73A /* Assets.xcassets */; };
 		BBF70630294CF54F006DA73A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBF7062F294CF54F006DA73A /* Preview Assets.xcassets */; };
 		BBF70637294CF835006DA73A /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70636294CF835006DA73A /* AddView.swift */; };
-		BBF70639294CF8CF006DA73A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70638294CF8CF006DA73A /* ImagePicker.swift */; };
-		BBF7063B294CFC3E006DA73A /* UserInfo + CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF7063A294CFC3E006DA73A /* UserInfo + CoreDataProperties.swift */; };
-		BBF7063D294CFC73006DA73A /* UserInfo+CoreDateClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF7063C294CFC73006DA73A /* UserInfo+CoreDateClass.swift */; };
+		BBFA467C2954AB46009E9E9A /* AZalert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AZalert.swift */; };
+		BBFA467F2954DECE009E9E9A /* Scam+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */; };
+		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
+		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +30,10 @@
 		BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoScamList.entitlements; sourceTree = "<group>"; };
 		BBF7062F294CF54F006DA73A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BBF70636294CF835006DA73A /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
-		BBF70638294CF8CF006DA73A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		BBF7063A294CFC3E006DA73A /* UserInfo + CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserInfo + CoreDataProperties.swift"; sourceTree = "<group>"; };
-		BBF7063C294CFC73006DA73A /* UserInfo+CoreDateClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserInfo+CoreDateClass.swift"; sourceTree = "<group>"; };
+		BBFA467B2954AB46009E9E9A /* AZalert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZalert.swift; sourceTree = "<group>"; };
+		BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scam+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scam+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		BBFA46812954E8A3009E9E9A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,13 +66,14 @@
 		BBF70621294CF54B006DA73A /* ToDoScamList */ = {
 			isa = PBXGroup;
 			children = (
+				BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */,
+				BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */,
 				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
 				BBF70624294CF54B006DA73A /* Persistence.swift */,
 				BBF70629294CF54B006DA73A /* ContentView.swift */,
 				BBF70636294CF835006DA73A /* AddView.swift */,
-				BBF70638294CF8CF006DA73A /* ImagePicker.swift */,
-				BBF7063A294CFC3E006DA73A /* UserInfo + CoreDataProperties.swift */,
-				BBF7063C294CFC73006DA73A /* UserInfo+CoreDateClass.swift */,
+				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
+				BBFA467B2954AB46009E9E9A /* AZalert.swift */,
 				BBF7062B294CF54F006DA73A /* Assets.xcassets */,
 				BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */,
 				BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */,
@@ -158,11 +161,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */,
+				BBFA467F2954DECE009E9E9A /* Scam+CoreDataClass.swift in Sources */,
 				BBF70625294CF54B006DA73A /* Persistence.swift in Sources */,
-				BBF7063D294CFC73006DA73A /* UserInfo+CoreDateClass.swift in Sources */,
-				BBF7063B294CFC3E006DA73A /* UserInfo + CoreDataProperties.swift in Sources */,
+				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
+				BBFA467C2954AB46009E9E9A /* AZalert.swift in Sources */,
+				BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */,
 				BBF70637294CF835006DA73A /* AddView.swift in Sources */,
-				BBF70639294CF8CF006DA73A /* ImagePicker.swift in Sources */,
 				BBF7062A294CF54B006DA73A /* ContentView.swift in Sources */,
 				BBF70628294CF54B006DA73A /* ToDoScamList.xcdatamodeld in Sources */,
 			);

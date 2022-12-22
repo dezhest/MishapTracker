@@ -7,9 +7,11 @@
 
 import SwiftUI
 
+
+
 struct AddView: View {
-    @Environment(\.presentationMode) var presentationMode // для закрытия шита
-    @Environment(\.managedObjectContext) var moc //core date
+    @Environment(\.presentationMode) private var presentationMode // для закрытия шита
+    @Environment(\.dismiss) private var dismiss
     @ObservedObject var expenses : Expenses
     @State private var name = ""
     @State private var amount: Double = 0
@@ -19,104 +21,112 @@ struct AddView: View {
     @State private var showsAlert = false
     @State private var alertInput = ""
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State private var selectedImage: UIImage?
+    @State private var image: Data = .init(count: 0)
     @State private var isImagePickerDisplay = false
+    @State private var show: Bool = false // show image
+    @Environment(\.managedObjectContext) private var moc //core date
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип"]
     @State private var type = "Финансовый"
+    let screenSize = UIScreen.main.bounds
     
     var body: some View {
-        VStack {
-            NavigationView {
-                Form {
-                    TextField("Что случилось?", text: $name)
-                    
-                    VStack(alignment: .leading) {
-                        Text("Сила скама")
-                        Slider(value: $amount, in: 0...10)
-                        Text("\(Int(amount))")
-                    }
-                    DatePicker("Когда был скам?", selection: $selectedDate, displayedComponents: .date)
-                        .datePickerStyle(.compact)
-                        .id(calendarId)
-                        .onChange(of: selectedDate, perform: { _ in
-                          calendarId += 1
-                        })
-                        .onTapGesture {
-                          calendarId += 1
+        ZStack {
+            VStack {
+                NavigationView {
+                    Form {
+                        VStack {
+                            TextField("Что случилось?", text: $name)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Сила скама")
+                                Slider(value: $amount, in: 0...10)
+                                Text("\(Int(amount))")
+                            }
+                            DatePicker("Когда был скам?", selection: $selectedDate, displayedComponents: .date)
+                                .datePickerStyle(.compact)
+                                .id(calendarId)
+                                .onChange(of: selectedDate, perform: { _ in
+                                    calendarId += 1
+                                })
+                                .onTapGesture {
+                                    calendarId += 1 // для закрытия календаря
+                                }
+                            
+                            Picker("Тип", selection: $type) {
+                                ForEach(types, id: \.self) {
+                                    Text($0)
+                                }
+                            }
+                            .onChange(of: type) { tag in print("Color tag: \(tag)");  checkSelfType()}
                         }
                         
-                    Picker("Тип", selection: $type) {
-                        ForEach(types, id: \.self) {
-                            Text($0)
+                        HStack {
+                            Text("Фото скама")
+                            Spacer()
+                            if self.image.count != 0 {
+                                Button(action: {
+                                    self.show.toggle()
+                                }){
+                                    Image(uiImage: UIImage(data: self.image)!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 100, height: 100)
+                                        .cornerRadius(20)
+                                        .shadow(radius: 8, x: 5, y: 5)
+                                        
+                                }
+                            } else {
+                                Button(action: {
+                                    self.show.toggle()
+                                }) {
+                                    Image(systemName: "photo.fill")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .cornerRadius(5)
+                                        .shadow(radius: 8, x: 5, y: 5)
+                                        .foregroundColor(.gray)
+                                }
+                            }
                         }
-                        //                        checkSelfType()
                     }
-                    .onChange(of: type) { tag in print("Color tag: \(tag)");  checkSelfType()}
-                    .alert("Добавить тип", isPresented: $showsAlert, actions: {
-                        TextField("Тип скама", text: $alertInput)
-                        Button("Добавить", action: {
-                            types.insert(alertInput, at: 0)
-                            type = alertInput
-                            
-                        })
-                        Button("Отмена", role: .cancel, action: {})
-                    }, message: {
-                        Text("Пожалуйста введите ваш тип скама")
+                    
+                    .navigationBarItems(trailing: Button("Сохранить"){
+                        let userInfo = Scam(context: self.moc)
+                        userInfo.name = self.name
+                        userInfo.type = self.type
+                        userInfo.amount = self.amount
+                        userInfo.selectedDate = self.selectedDate
+                        userInfo.imageD = self.image
+                        do {
+                            try self.moc.save()
+                        } catch {
+                            print("whoops \(error.localizedDescription)")
+                        }
+                        UserDefaults.standard.set(types, forKey: "types")
+                        self.presentationMode.wrappedValue.dismiss()
                     })
-                }
-                .navigationBarItems(trailing: Button("Сохранить"){
-                    let userInfo = Scam(context: self.moc)
-                    userInfo.name = self.name
-                    userInfo.type = self.type
-                    userInfo.amount = self.amount
-                    userInfo.selectedDate = self.selectedDate
-                    do {
-                        try self.moc.save()
-                    } catch {
-                        print("whoops \(error.localizedDescription)")
+                    .navigationBarTitle("Добавить скам")
+                    
+                   
+                
                     }
-                    UserDefaults.standard.set(types, forKey: "types")
-                    self.presentationMode.wrappedValue.dismiss()
-                })
-                .navigationBarTitle("Добавить скам")
+                    
+                    .sheet(isPresented: self.$show){
+                        ImagePicker(images: self.$image, show: self.$show)
+                    }
+                .onAppear{
+                    types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
+                }
+                
+               
             }
-            
-            
-            //            VStack {
-            //
-            //                if selectedImage != nil {
-            //                    Image(uiImage: selectedImage!)
-            //                        .resizable()
-            //                        .aspectRatio(contentMode: .fit)
-            //                        .clipShape(Circle())
-            //                        .frame(width: 120, height: 120)
-            //                } else {
-            //                    Image(systemName: "snow")
-            //                        .resizable()
-            //                        .aspectRatio(contentMode: .fit)
-            //                        .clipShape(Circle())
-            //                        .frame(width: 120, height: 120)
-            //                }
-            //
-            //                Button("Camera") {
-            //                    self.sourceType = .camera
-            //                    self.isImagePickerDisplay.toggle()
-            //                }
-            //
-            //                Button("Photo") {
-            //                    self.sourceType = .photoLibrary
-            //                    self.isImagePickerDisplay.toggle()
-            //                }.padding()
-            //            }
-            //            .sheet(isPresented: self.$isImagePickerDisplay) {
-            //                ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
-            //            }
-            
-        }
-        
-        .onAppear{
-            types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
+            AZalert(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
+                if alertInput != ""{
+                    types.insert(alertInput, at: 0)
+                }
+                type = alertInput
+            })
         }
     }
     func showAlert() {

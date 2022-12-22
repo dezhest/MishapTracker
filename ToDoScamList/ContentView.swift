@@ -14,7 +14,7 @@ struct ExpenseItem: Identifiable, Hashable {
     let type: String
     let amount: Double
     let selectedDate: Date
-    let selectedImage: UIImage
+    let image: Date
     
 }
 
@@ -31,7 +31,10 @@ struct ContentView: View {
     @State private var showingAddExpense = false
     @State var selectionIndex: Int = 0
     @State var selection: Int = 1
-
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
+    @State private var image: Data = .init(count: 0)
+    
     var sortByAll: Array<Scam> {
         switch selection {
         case(1): return users.sorted(by: {$0.selectedDate > $1.selectedDate})
@@ -40,13 +43,6 @@ struct ContentView: View {
         default: return []
         }
     }
-    
-    
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
-   
-  
-    
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -58,36 +54,39 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(sortByAll, id: \.self) { item in
-                    
-                    //                        NavigationLink(destination: Image(uiImage: item.selectedImage)
-                    //                            .resizable()
-                    //                            .aspectRatio(contentMode: .fit)
-                    //                        )
-                    //                    {
-                    HStack{
-                        VStack(alignment: .leading){
-                            Text(item.name)
-                                .font(.headline)
-                            Text(item.type)
+                    NavigationLink(destination: Image(uiImage: UIImage(data: item.imageD ?? Data()) ?? UIImage())
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    ) {
+                        
+                        HStack(alignment: .center, spacing: 0){
+                            VStack(alignment: .leading, spacing: 5){
+                                Text(item.name)
+                                    .font(.system(size: 14, weight: .bold, design: .default))
+                                Text(item.type)
+                                    .font(.system(size: 12, weight: .medium, design: .default))
+                                
+                            }
+                            Spacer()
+                            Image(uiImage: UIImage(data: item.imageD ?? self.image) ?? UIImage())
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
                             
+                            
+                            Spacer()
+                            Text("\(item.selectedDate, formatter: dateFormatter)")
+                                .font(.system(size: 12, weight: .medium, design: .default))
+                                .padding(3)
+                                .foregroundColor(.gray)
+                                .opacity(0.5)
+                            
+                            Text("\(Int(item.amount))")
                         }
-                        //                            Image(uiImage: item.selectedImage)
-                        //                                .resizable()
-                        //                                .aspectRatio(contentMode: .fit)
-                        //                                .clipShape(Circle())
-                        //                                .frame(width: 50, height: 50)
-                        Spacer()
-                        Text("\(item.selectedDate, formatter: dateFormatter)")
-                            .padding(.horizontal)
-                            .foregroundColor(.gray)
-                            .opacity(0.5)
-                        Text("\(Int(item.amount))")
                     }
-                    //                    }
                 }
                 .onDelete(perform: deleteUser(at:))
-                .onTapGesture {
-                }
             }
             .navigationBarTitle("Scam List")
             .navigationBarItems(trailing:
@@ -112,17 +111,15 @@ struct ContentView: View {
     func deleteUser(at offsets: IndexSet) {
         for index in offsets {
             let user = users[index]
-            moc.delete(user)
+            viewContext.delete(user)
         }
-        try? moc.save()
-    }
-    func sort() {
-        expenses.items = expenses.items.sorted {$0.type < $1.type}
+        try? viewContext.save()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewInterfaceOrientation(.portrait)
     }
 }
