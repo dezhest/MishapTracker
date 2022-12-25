@@ -8,7 +8,6 @@
 import SwiftUI
 
 
-
 struct AddView: View {
     @Environment(\.presentationMode) private var presentationMode // для закрытия шита
     @Environment(\.dismiss) private var dismiss
@@ -28,7 +27,7 @@ struct AddView: View {
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип"]
     @State private var type = "Финансовый"
-    let screenSize = UIScreen.main.bounds
+    
     
     var body: some View {
         ZStack {
@@ -36,23 +35,20 @@ struct AddView: View {
                 NavigationView {
                     Form {
                         VStack {
-                            TextField("Что случилось?", text: $name)
-                            
+                            TextField("Что случилось?", text: $name) 
+                            Spacer()
                             VStack(alignment: .leading) {
                                 Text("Сила скама")
                                 Slider(value: $amount, in: 0...10)
                                 Text("\(Int(amount))")
                             }
                             DatePicker("Когда был скам?", selection: $selectedDate, displayedComponents: .date)
-                                .datePickerStyle(.compact)
+                                .datePickerStyle(.automatic)
                                 .id(calendarId)
                                 .onChange(of: selectedDate, perform: { _ in
                                     calendarId += 1
                                 })
-                                .onTapGesture {
-                                    calendarId += 1 // для закрытия календаря
-                                }
-                            
+                                Spacer()
                             Picker("Тип", selection: $type) {
                                 ForEach(types, id: \.self) {
                                     Text($0)
@@ -60,7 +56,6 @@ struct AddView: View {
                             }
                             .onChange(of: type) { tag in print("Color tag: \(tag)");  checkSelfType()}
                         }
-                        
                         HStack {
                             Text("Фото скама")
                             Spacer()
@@ -74,7 +69,7 @@ struct AddView: View {
                                         .frame(width: 100, height: 100)
                                         .cornerRadius(20)
                                         .shadow(radius: 8, x: 5, y: 5)
-                                        
+                                        .padding()
                                 }
                             } else {
                                 Button(action: {
@@ -90,7 +85,6 @@ struct AddView: View {
                             }
                         }
                     }
-                    
                     .navigationBarItems(trailing: Button("Сохранить"){
                         let userInfo = Scam(context: self.moc)
                         userInfo.name = self.name
@@ -107,19 +101,14 @@ struct AddView: View {
                         self.presentationMode.wrappedValue.dismiss()
                     })
                     .navigationBarTitle("Добавить скам")
-                    
-                   
-                
                     }
-                    
                     .sheet(isPresented: self.$show){
                         ImagePicker(images: self.$image, show: self.$show)
                     }
                 .onAppear{
                     types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
                 }
-                
-               
+                .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)}) // для закрытия клавы коки при прокручивании навигатион вью
             }
             AZalert(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
                 if alertInput != ""{
@@ -139,7 +128,6 @@ struct AddView: View {
     }
     
 }
-
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {

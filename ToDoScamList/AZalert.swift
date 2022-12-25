@@ -7,19 +7,31 @@
 
 import SwiftUI
 
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) // для закрытия клавы коки
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
     }
 }
 
 struct AZalert: View {
+    enum FocusedField:Hashable{
+            case text
+        }
+    
     let screenSize = UIScreen.main.bounds
     var title: String = ""
     @Binding var isShown: Bool
     @Binding var text: String
     var onDone: (String) -> Void = { _ in }
     var onCancel: () -> Void = { }
+    @FocusState var focus: FocusedField?
     
     
     var body: some View {
@@ -28,15 +40,22 @@ struct AZalert: View {
             Text(title)
                 .font(.system(size: 20, weight: .bold, design: .default))
                 .foregroundColor(Color(.black))
-            TextField("Введите свой тип", text: $text)
-//                .background(Color(.white))
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+                TextField("", text: $text)
+                    .placeholder(when: text.isEmpty) {
+                        Text("Введите свой тип").foregroundColor(.gray)}
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
+                    .background(Color(.white))
+                    .foregroundColor(.black)
+                    .focused($focus, equals: .text)
+            
             HStack(spacing: 20) {
                 Button("Отмена") {
                     self.isShown = false
                     self.onCancel()
                 }
-                .font(.system(size: 18))
+                .font(.system(size: 18, weight: .bold, design: .default))
                 .foregroundColor(.red)
                 Button("Добавить") {
                     if text != "" {
@@ -44,12 +63,12 @@ struct AZalert: View {
                     self.onDone(self.text)
                     UIApplication.shared.endEditing()
                 }
-                .font(.system(size: 18, weight: .bold, design: .default))
+                .font(.system(size: 18))
             }
         }
         .padding()
         .frame(width: screenSize.width * 0.65, height: screenSize.height * 0.25)
-        .background(Color(#colorLiteral(red: 0.9268686175, green: 0.9416290522, blue: 0.9456014037, alpha: 1)))
+        .background(Color(.white))
         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         .offset(y: isShown ? 0 : screenSize.height)
         .animation(.spring())

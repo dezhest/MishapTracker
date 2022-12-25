@@ -107,6 +107,8 @@ struct ContentView: View {
                     AddView(expenses: self.expenses)
                 }
             )}
+       
+
     }
     func deleteUser(at offsets: IndexSet) {
         for index in offsets {
