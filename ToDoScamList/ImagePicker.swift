@@ -1,50 +1,55 @@
 //
 //  ImagePicker.swift
-//  ToDoScamList
+//  imagePickerTest
 //
-//  Created by Денис Жестерев on 22.12.2022.
+//  Created by Денис Жестерев on 26.12.2022.
 //
+//
+
 
 import Foundation
 import SwiftUI
 
+
 struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var images: Data
     @Binding var show: Bool
+    @Binding var image: Data
+    var source: UIImagePickerController.SourceType
     
-    func makeCoordinator() -> Coordinator {
-        return ImagePicker.Coordinator(img1: self)
+    func makeCoordinator() -> ImagePicker.Coordinator {
+        return ImagePicker.Coordinator(parent1: self)
     }
     
    
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.delegate = context.coordinator
-        return picker
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        let controller = UIImagePickerController()
+        controller.sourceType = source
+        controller.delegate = context.coordinator
+        return controller
     }
     
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
         
     }
     
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        var img0 : ImagePicker
-        init(img1: ImagePicker) {
-            img0 = img1
+        var parent : ImagePicker
+        init(parent1: ImagePicker) {
+            parent = parent1
         }
         
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            self.img0.show.toggle()
+            self.parent.show.toggle()
             
         }
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            let image = info[.originalImage] as? UIImage
-            let data = image?.jpegData(compressionQuality: 0.50)
-            self.img0.images = data!
-            self.img0.show.toggle()
+            let image = info[.originalImage] as! UIImage
+            let data = image.jpegData(compressionQuality: 0.50)
+            self.parent.image = data!
+            self.parent.show.toggle()
         }
     }
 }
+
 
 

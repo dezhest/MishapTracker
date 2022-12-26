@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
@@ -31,7 +32,7 @@ struct AZalert: View {
     @Binding var text: String
     var onDone: (String) -> Void = { _ in }
     var onCancel: () -> Void = { }
-    @FocusState var focus: FocusedField?
+   
     
     
     var body: some View {
@@ -48,7 +49,7 @@ struct AZalert: View {
                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
                     .background(Color(.white))
                     .foregroundColor(.black)
-                    .focused($focus, equals: .text)
+                    
             
             HStack(spacing: 20) {
                 Button("Отмена") {
@@ -72,7 +73,7 @@ struct AZalert: View {
         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         .offset(y: isShown ? 0 : screenSize.height)
         .animation(.spring())
-        .shadow(radius: 6, x: 9, y: 9)
+        .shadow(radius: 6)
         
     }
 }

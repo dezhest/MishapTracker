@@ -19,96 +19,114 @@ struct AddView: View {
     @State private var typeName = ""
     @State private var showsAlert = false
     @State private var alertInput = ""
-    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State private var image: Data = .init(count: 0)
-    @State private var isImagePickerDisplay = false
-    @State private var show: Bool = false // show image
+    @State var imageData: Data = .init(capacity: 0)
+    @State var show = false
+    @State var imagePicker = false
+    @State var source: UIImagePickerController.SourceType = .photoLibrary // show image
     @Environment(\.managedObjectContext) private var moc //core date
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип"]
     @State private var type = "Финансовый"
-    
+    @State var isFirstResponder = false
     
     var body: some View {
+        
         ZStack {
-            VStack {
-                NavigationView {
-                    Form {
+            NavigationView {
+                Form {
+                    VStack {
+                        TextField("Что случилось?", text: $name)
+                            .padding()
+                        Spacer()
+                        VStack(alignment: .leading) {
+                            Text("Сила скама")
+                            Slider(value: $amount, in: 0...10)
+                            Text("\(Int(amount))")
+                        }
+                        DatePicker("Когда был скам?", selection: $selectedDate, displayedComponents: .date)
+                            .datePickerStyle(.automatic)
+                            .id(calendarId)
+                            .onChange(of: selectedDate, perform: { _ in
+                                calendarId += 1
+                            })
+                        Spacer()
+                    }
                         VStack {
-                            TextField("Что случилось?", text: $name) 
-                            Spacer()
-                            VStack(alignment: .leading) {
-                                Text("Сила скама")
-                                Slider(value: $amount, in: 0...10)
-                                Text("\(Int(amount))")
-                            }
-                            DatePicker("Когда был скам?", selection: $selectedDate, displayedComponents: .date)
-                                .datePickerStyle(.automatic)
-                                .id(calendarId)
-                                .onChange(of: selectedDate, perform: { _ in
-                                    calendarId += 1
-                                })
-                                Spacer()
                             Picker("Тип", selection: $type) {
                                 ForEach(types, id: \.self) {
                                     Text($0)
                                 }
                             }
-                            .onChange(of: type) { tag in print("Color tag: \(tag)");  checkSelfType()}
-                        }
-                        HStack {
-                            Text("Фото скама")
-                            Spacer()
-                            if self.image.count != 0 {
-                                Button(action: {
-                                    self.show.toggle()
-                                }){
-                                    Image(uiImage: UIImage(data: self.image)!)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 100, height: 100)
-                                        .cornerRadius(20)
-                                        .shadow(radius: 8, x: 5, y: 5)
-                                        .padding()
-                                }
-                            } else {
-                                Button(action: {
-                                    self.show.toggle()
-                                }) {
-                                    Image(systemName: "photo.fill")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .cornerRadius(5)
-                                        .shadow(radius: 8, x: 5, y: 5)
-                                        .foregroundColor(.gray)
+                            .onChange(of: type) { tag in print("Color tag: \(tag)");
+                                if type == "Свой тип" {
+                                    self.showsAlert.toggle()
                                 }
                             }
                         }
-                    }
-                    .navigationBarItems(trailing: Button("Сохранить"){
-                        let userInfo = Scam(context: self.moc)
-                        userInfo.name = self.name
-                        userInfo.type = self.type
-                        userInfo.amount = self.amount
-                        userInfo.selectedDate = self.selectedDate
-                        userInfo.imageD = self.image
-                        do {
-                            try self.moc.save()
-                        } catch {
-                            print("whoops \(error.localizedDescription)")
+                    
+                    HStack {
+                        Text("Фото скама")
+                            .fullScreenCover(isPresented: $imagePicker) {
+                                ImagePicker(show: $imagePicker, image: $imageData, source: source)
+                            } // автоматически переходит по линку когда меняется imagePicker
+                        Spacer()
+                        if imageData.count != 0 {
+                            Button(action: {
+                                self.show.toggle()
+                            }){
+                                Image(uiImage: UIImage(data: self.imageData)!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(Circle())
+                                    .padding()
+                            }
+                        } else {
+                            Button(action: {
+                                self.show.toggle()
+                            }) {
+                                Image(systemName: "photo.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .cornerRadius(5)
+                                    .shadow(radius: 8, x: 5, y: 5)
+                                    .foregroundColor(.gray)
+                            }
                         }
-                        UserDefaults.standard.set(types, forKey: "types")
-                        self.presentationMode.wrappedValue.dismiss()
-                    })
-                    .navigationBarTitle("Добавить скам")
                     }
-                    .sheet(isPresented: self.$show){
-                        ImagePicker(images: self.$image, show: self.$show)
+                }
+                .navigationBarItems(trailing: Button("Сохранить"){
+                    let userInfo = Scam(context: self.moc)
+                    userInfo.name = self.name
+                    userInfo.type = self.type
+                    userInfo.amount = self.amount
+                    userInfo.selectedDate = self.selectedDate
+                    userInfo.imageD = self.imageData
+                    do {
+                        try self.moc.save()
+                    } catch {
+                        print("whoops \(error.localizedDescription)")
                     }
+                    UserDefaults.standard.set(types, forKey: "types")
+                    self.presentationMode.wrappedValue.dismiss()
+                })
+                .navigationBarTitle("Добавить скам")
+                
                 .onAppear{
                     types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
                 }
-                .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)}) // для закрытия клавы коки при прокручивании навигатион вью
+//                .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)}) // для закрытия клавы коки при прокручивании навигатион вью
+                .actionSheet(isPresented: self.$show){
+                    ActionSheet(title: Text("Сделайте фото скама или выберите из галереи"), message: Text(""), buttons:
+                                    [.default(Text("Галерея"), action: {
+                        self.source = .photoLibrary
+                        self.imagePicker.toggle()
+                    }),.default(Text("Камера"), action: {
+                        self.source = .camera
+                        self.imagePicker.toggle()
+                    })
+                                    ])
+                }
             }
             AZalert(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
                 if alertInput != ""{
@@ -117,16 +135,10 @@ struct AddView: View {
                 type = alertInput
             })
         }
+        
+       
+        
     }
-    func showAlert() {
-        self.showsAlert.toggle()
-    }
-    func checkSelfType() {
-        if type == "Свой тип" {
-            showAlert()
-        }
-    }
-    
 }
 
 struct AddView_Previews: PreviewProvider {
