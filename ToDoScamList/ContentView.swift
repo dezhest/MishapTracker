@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import PDFKit
 
 struct ExpenseItem: Identifiable, Hashable {
     let id = UUID()
@@ -34,6 +35,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State private var image: Data = .init(count: 0)
+    @GestureState private var scale: CGFloat = 1.0
     
     var sortByAll: Array<Scam> {
         switch selection {
@@ -57,6 +59,7 @@ struct ContentView: View {
                     NavigationLink(destination: Image(uiImage: UIImage(data: item.imageD ?? Data()) ?? UIImage())
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .pinchToZoom
                     ) {
                         
                         HStack(alignment: .center, spacing: 0){
@@ -73,6 +76,7 @@ struct ContentView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 50, height: 50)
                                 .clipShape(Circle())
+                            
                             
                             
                             Spacer()

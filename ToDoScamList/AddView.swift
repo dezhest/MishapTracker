@@ -27,7 +27,7 @@ struct AddView: View {
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип"]
     @State private var type = "Финансовый"
-    @State var isFirstResponder = false
+    
     
     var body: some View {
         
@@ -35,7 +35,7 @@ struct AddView: View {
             NavigationView {
                 Form {
                     VStack {
-                        TextField("Что случилось?", text: $name)
+                        TextField("Как вы заскамились?", text: $name)
                             .padding()
                         Spacer()
                         VStack(alignment: .leading) {
