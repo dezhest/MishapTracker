@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BB705C3C2959FF60006585BB /* PDFViewer in Frameworks */ = {isa = PBXBuildFile; productRef = BB705C3B2959FF60006585BB /* PDFViewer */; };
 		BB705C3E295A07E6006585BB /* ZoomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C3D295A07E6006585BB /* ZoomImage.swift */; };
+		BB705C46295C891E006585BB /* EditScam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C45295C891E006585BB /* EditScam.swift */; };
 		BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */; };
 		BBF70625294CF54B006DA73A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70624294CF54B006DA73A /* Persistence.swift */; };
 		BBF70628294CF54B006DA73A /* ToDoScamList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		BB705C3D295A07E6006585BB /* ZoomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImage.swift; sourceTree = "<group>"; };
+		BB705C45295C891E006585BB /* EditScam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScam.swift; sourceTree = "<group>"; };
 		BBF7061F294CF54B006DA73A /* ToDoScamList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoScamList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListApp.swift; sourceTree = "<group>"; };
 		BBF70624294CF54B006DA73A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				BBF70636294CF835006DA73A /* AddView.swift */,
 				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
 				BBFA467B2954AB46009E9E9A /* AZalert.swift */,
+				BB705C45295C891E006585BB /* EditScam.swift */,
 				BBF7062B294CF54F006DA73A /* Assets.xcassets */,
 				BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */,
 				BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */,
@@ -178,6 +181,7 @@
 				BB705C3E295A07E6006585BB /* ZoomImage.swift in Sources */,
 				BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */,
 				BBFA467F2954DECE009E9E9A /* Scam+CoreDataClass.swift in Sources */,
+				BB705C46295C891E006585BB /* EditScam.swift in Sources */,
 				BBF70625294CF54B006DA73A /* Persistence.swift in Sources */,
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AZalert.swift in Sources */,
