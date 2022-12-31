@@ -41,13 +41,13 @@ struct ContentView: View {
     @State private var image: Data = .init(count: 0)
     @GestureState private var scale: CGFloat = 1.0
     @State private var editIsShown = false
-    @State private var editIsShown2 = false
+    @State private var editIsCanceled = false
     @State private var editIsAdded = false
     @State private var editInput = ""
     @State private var editAmount: Double = 0
-    @State var editScam = EditScam(isShown: .constant(false), text: .constant(""), amount: .constant(0))
+//    @State var editScam = EditScam(isShown: .constant(false), isCanceled: .constant(false), text: .constant(""), amount: .constant(0))
     @State private var editOnChanged = false
-    @State var indexOfScam = -1
+    @State var indexOfEditScam = -1
     
     
     var sortByAll: Array<Scam> {
@@ -109,11 +109,10 @@ struct ContentView: View {
                         }
                         .swipeActions(edge: .leading) {
                             Button {
-                                editOnChanged = false
-                                editIsShown.toggle()
                                 editInput = item.name
                                 editAmount = item.amount
-                                indexOfScam = editUser(index: sortByAll.firstIndex(of: item)!)
+                                indexOfEditScam = sortByAll.firstIndex(of: item)!
+                                editIsShown.toggle()
                             } label: {
                                 Label("Edit", systemImage: "pencil")
                             }
@@ -121,22 +120,10 @@ struct ContentView: View {
                         }
                     }
                     .onChange(of: editIsShown) { tag in
-                        if editIsShown == false {
-                            var entityArray: Array<String> = []
-                            for i in sortByAll {
-                                entityArray.append(i.name)
-                            }
-                            if entityArray.contains(editInput) {
-                            }
-                            else {
-                                if indexOfScam > 0 {
-                                    sortByAll[indexOfScam].name = editInput
-                                }
-                                editOnChanged = true
-                                try? viewContext.save()
-                            }
+                                    sortByAll[indexOfEditScam].name = editInput
+                                    sortByAll[indexOfEditScam].amount = editAmount
+                                    try? viewContext.save()
                         }
-                    }
                 }
                 .navigationBarTitle("Scam List")
                 .navigationBarItems(trailing:
@@ -157,15 +144,9 @@ struct ContentView: View {
                     }
                 )}
             
-            EditScam(isShown: $editIsShown, text: $editInput,  amount: $editAmount)
+            EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput,  amount: $editAmount)
         }
         
-    }
-    func editUser(index: Int) -> Int {
-        return index
-    }
-    func editUser2(index: Int)  {
-        return sortByAll[index].name = editInput
     }
     
     func deleteUser(item: Scam) {
