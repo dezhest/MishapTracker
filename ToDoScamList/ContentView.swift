@@ -23,10 +23,10 @@ struct ExpenseItem: Identifiable, Hashable {
 class Expenses: ObservableObject {
     @Published var items: [ExpenseItem] = [ExpenseItem]()
     
-//    func removeScam(with scamID: ObjectIdentifier){
-//        guard let index = items.firstIndex(where: { $0.id == scamID }) else {return}
-//        items.remove(at: index)
-//    }
+//        func removeScam(with scamID: ObjectIdentifier){
+//            guard let index = items.firstIndex(where: { $0.id == scamID }) else {return}
+//            items.remove(at: index)
+//        }
 }
 
 
@@ -41,11 +41,14 @@ struct ContentView: View {
     @State private var image: Data = .init(count: 0)
     @GestureState private var scale: CGFloat = 1.0
     @State private var editIsShown = false
+    @State private var editIsShown2 = false
     @State private var editIsAdded = false
     @State private var editInput = ""
     @State private var editAmount: Double = 0
     @State var editScam = EditScam(isShown: .constant(false), text: .constant(""), amount: .constant(0))
-  
+    @State private var editOnChanged = false
+    @State var indexOfScam = -1
+    
     
     var sortByAll: Array<Scam> {
         switch selection {
@@ -72,11 +75,10 @@ struct ContentView: View {
                             .aspectRatio(contentMode: .fit)
                             .pinchToZoom
                         ) {
-                            
                             HStack(alignment: .center, spacing: 0){
                                 VStack(alignment: .leading, spacing: 5){
                                     Text(item.name)
-                                        .font(.system(size: 14, weight: .bold, design: .default))
+                                            .font(.system(size: 14, weight: .bold, design: .default))
                                     Text(item.type)
                                         .font(.system(size: 12, weight: .medium, design: .default))
                                     
@@ -87,9 +89,6 @@ struct ContentView: View {
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 50, height: 50)
                                     .clipShape(Circle())
-                                
-                                
-                                
                                 Spacer()
                                 Text("\(item.selectedDate, formatter: dateFormatter)")
                                     .font(.system(size: 12, weight: .medium, design: .default))
@@ -100,29 +99,44 @@ struct ContentView: View {
                                 Text("\(Int(item.amount))")
                             }
                         }
-                        .swipeActions(edge: .leading) {
-                                  Button {
-                                      editIsShown.toggle()
-                                      editInput = item.name
-                                      editAmount = item.amount
-                                     
-                                  } label: {
-                                      Label("Edit", systemImage: "pencil")
-                                  }
-                                  .tint(.green)
-                    
-                              }
+                     
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive, action: {
-                               
+                                deleteUser(item: item)
                             }){
                                 Label("Delete", systemImage: "trash")
-                              }
                             }
+                        }
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                editOnChanged = false
+                                editIsShown.toggle()
+                                editInput = item.name
+                                editAmount = item.amount
+                                indexOfScam = editUser(index: sortByAll.firstIndex(of: item)!)
+                            } label: {
+                                Label("Edit", systemImage: "pencil")
+                            }
+                            .tint(.green)
+                        }
                     }
-                    
-//                    .onDelete(perform: deleteUser())
-                  
+                    .onChange(of: editIsShown) { tag in
+                        if editIsShown == false {
+                            var entityArray: Array<String> = []
+                            for i in sortByAll {
+                                entityArray.append(i.name)
+                            }
+                            if entityArray.contains(editInput) {
+                            }
+                            else {
+                                if indexOfScam > 0 {
+                                    sortByAll[indexOfScam].name = editInput
+                                }
+                                editOnChanged = true
+                                try? viewContext.save()
+                            }
+                        }
+                    }
                 }
                 .navigationBarTitle("Scam List")
                 .navigationBarItems(trailing:
@@ -139,7 +153,7 @@ struct ContentView: View {
                 }
                     .pickerStyle(.menu)
                     .sheet(isPresented: $showingAddExpense) {
-                        AddView(expenses: self.expenses)
+                        AddView()
                     }
                 )}
             
@@ -147,15 +161,16 @@ struct ContentView: View {
         }
         
     }
-    func deleteUser(offsets: IndexSet) {
-        for index in offsets {
-            let user = users[index]
-            viewContext.delete(user)
-        }
-        try? viewContext.save()
+    func editUser(index: Int) -> Int {
+        return index
     }
-    func checkEditAdd() {
-        
+    func editUser2(index: Int)  {
+        return sortByAll[index].name = editInput
+    }
+    
+    func deleteUser(item: Scam) {
+        viewContext.delete(users[sortByAll.firstIndex(of: item)!])
+        try? viewContext.save()
     }
 }
 

@@ -11,7 +11,6 @@ import SwiftUI
 struct AddView: View {
     @Environment(\.presentationMode) private var presentationMode // для закрытия шита
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var expenses : Expenses
     @State private var name = ""
     @State private var amount: Double = 0
     @State private var selectedDate = Date()
@@ -97,18 +96,19 @@ struct AddView: View {
                 }
                 .navigationBarItems(trailing: Button("Сохранить"){
                     let userInfo = Scam(context: self.moc)
-                    userInfo.name = self.name
-                    userInfo.type = self.type
-                    userInfo.amount = self.amount
-                    userInfo.selectedDate = self.selectedDate
-                    userInfo.imageD = self.imageData
-                    do {
-                        try self.moc.save()
-                    } catch {
-                        print("whoops \(error.localizedDescription)")
-                    }
-                    UserDefaults.standard.set(types, forKey: "types")
-                    self.presentationMode.wrappedValue.dismiss()
+                        userInfo.type = self.type
+                        userInfo.amount = self.amount
+                        userInfo.selectedDate = self.selectedDate
+                        userInfo.imageD = self.imageData
+                        userInfo.name = self.name
+                        do {
+                            try self.moc.save()
+                        } catch {
+                            print("whoops \(error.localizedDescription)")
+                        }
+                        UserDefaults.standard.set(types, forKey: "types")
+                        self.presentationMode.wrappedValue.dismiss()
+                    
                 })
                 .navigationBarTitle("Добавить скам")
                 
@@ -143,6 +143,6 @@ struct AddView: View {
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
-        AddView(expenses: Expenses())
+        AddView()
     }
 }
