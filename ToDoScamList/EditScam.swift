@@ -25,6 +25,7 @@ struct EditScam: View {
     
     var body: some View {
         
+        
         VStack() {
             Text("Внести изменения")
                 .font(.system(size: 20, weight: .bold, design: .default))
@@ -47,27 +48,19 @@ struct EditScam: View {
                     .font(.system(size: 25 , weight: .bold))
                     .foregroundColor(.black)
                     .frame(width: 35, height: 35, alignment: .center)
-                        .padding()
+                    .padding()
                     .overlay(
                         Circle()
                             .stroke(Color.red, lineWidth: 6)
                             .padding(6)
-                            
+                        
                     )
                 Spacer()
             }
             Spacer()
-            
-            
             HStack(spacing: 40) {
-                Button("Отмена") {
-                    self.isShown = false
-                    self.isCanceled = true
-                    self.onCancel()
-                }
-                .font(.system(size: 18, weight: .bold, design: .default))
-                .foregroundColor(.red)
-                Button("Добавить") {
+                
+                Button("Сохранить и выйти") {
                     if text != "" {
                         self.isShown = false}
                     self.onDone(self.text)
@@ -77,7 +70,7 @@ struct EditScam: View {
             }
         }
         .padding()
-        .frame(width: screenSize.width * 0.92, height: screenSize.height * 0.55)
+        .frame(width: screenSize.width * 0.92, height: screenSize.height * 0.45)
         .background(Color(.white))
         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         .offset(y: isShown ? 0 : screenSize.height)
