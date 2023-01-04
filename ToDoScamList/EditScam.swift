@@ -19,7 +19,7 @@ struct EditScam: View {
     @Binding var text: String
     var onDone: (String) -> Void = { _ in }
     var onCancel: () -> Void = { }
-    @Binding var amount: Double
+    @Binding var power: Double
     
     
     
@@ -43,8 +43,8 @@ struct EditScam: View {
                 Text("Сила скама")
                     .foregroundColor(.black)
                 
-                Slider(value: $amount, in: 0...10)
-                Text("\(Int(amount))")
+                Slider(value: $power, in: 0...10)
+                Text("\(Int(power))")
                     .font(.system(size: 25 , weight: .bold))
                     .foregroundColor(.black)
                     .frame(width: 35, height: 35, alignment: .center)
@@ -82,6 +82,6 @@ struct EditScam: View {
 
 struct EditScam_Previews: PreviewProvider {
     static var previews: some View {
-        EditScam(title: "Внести изменения", isShown: .constant(true), isCanceled: .constant(false), text: .constant(""), amount: .constant(0.00))
+        EditScam(title: "Внести изменения", isShown: .constant(true), isCanceled: .constant(false), text: .constant(""), power: .constant(0.00))
     }
 }

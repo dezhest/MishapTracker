@@ -16,7 +16,7 @@ extension Scam {
         return NSFetchRequest<Scam>(entityName: "Scam")
     }
 
-    @NSManaged public var amount: Double
+    @NSManaged public var power: Double
     @NSManaged public var imageD: Data?
     @NSManaged public var name: String
     @NSManaged public var selectedDate: Date

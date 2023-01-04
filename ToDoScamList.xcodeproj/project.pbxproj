@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB705C3C2959FF60006585BB /* PDFViewer in Frameworks */ = {isa = PBXBuildFile; productRef = BB705C3B2959FF60006585BB /* PDFViewer */; };
 		BB705C3E295A07E6006585BB /* ZoomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C3D295A07E6006585BB /* ZoomImage.swift */; };
 		BB705C46295C891E006585BB /* EditScam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C45295C891E006585BB /* EditScam.swift */; };
+		BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF2AE829663EDE0066BD5A /* ScamItem.swift */; };
 		BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */; };
 		BBF70625294CF54B006DA73A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70624294CF54B006DA73A /* Persistence.swift */; };
 		BBF70628294CF54B006DA73A /* ToDoScamList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */; };
@@ -21,12 +21,12 @@
 		BBFA467F2954DECE009E9E9A /* Scam+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */; };
 		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
-		BBFA468529590637009E9E9A /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = BBFA468429590637009E9E9A /* SwiftUIX */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB705C3D295A07E6006585BB /* ZoomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImage.swift; sourceTree = "<group>"; };
 		BB705C45295C891E006585BB /* EditScam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScam.swift; sourceTree = "<group>"; };
+		BBBF2AE829663EDE0066BD5A /* ScamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamItem.swift; sourceTree = "<group>"; };
 		BBF7061F294CF54B006DA73A /* ToDoScamList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoScamList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListApp.swift; sourceTree = "<group>"; };
 		BBF70624294CF54B006DA73A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -47,8 +47,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBFA468529590637009E9E9A /* SwiftUIX in Frameworks */,
-				BB705C3C2959FF60006585BB /* PDFViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +77,7 @@
 				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
 				BBF70624294CF54B006DA73A /* Persistence.swift */,
 				BBF70629294CF54B006DA73A /* ContentView.swift */,
+				BBBF2AE829663EDE0066BD5A /* ScamItem.swift */,
 				BB705C3D295A07E6006585BB /* ZoomImage.swift */,
 				BBF70636294CF835006DA73A /* AddView.swift */,
 				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
@@ -117,8 +116,6 @@
 			);
 			name = ToDoScamList;
 			packageProductDependencies = (
-				BBFA468429590637009E9E9A /* SwiftUIX */,
-				BB705C3B2959FF60006585BB /* PDFViewer */,
 			);
 			productName = ToDoScamList;
 			productReference = BBF7061F294CF54B006DA73A /* ToDoScamList.app */;
@@ -186,6 +183,7 @@
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AZalert.swift in Sources */,
 				BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */,
+				BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */,
 				BBF70637294CF835006DA73A /* AddView.swift in Sources */,
 				BBF7062A294CF54B006DA73A /* ContentView.swift in Sources */,
 				BBF70628294CF54B006DA73A /* ToDoScamList.xcdatamodeld in Sources */,
@@ -427,19 +425,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		BB705C3B2959FF60006585BB /* PDFViewer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BB705C3A2959FF60006585BB /* XCRemoteSwiftPackageReference "PDFViewer" */;
-			productName = PDFViewer;
-		};
-		BBFA468429590637009E9E9A /* SwiftUIX */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BBFA468329590636009E9E9A /* XCRemoteSwiftPackageReference "SwiftUIX" */;
-			productName = SwiftUIX;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */ = {

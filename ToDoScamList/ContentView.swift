@@ -7,33 +7,10 @@
 
 import SwiftUI
 import CoreData
-import PDFKit
-
-struct ExpenseItem: Identifiable, Hashable {
-    let id = UUID().uuidString
-    let name: String
-    let type: String
-    let amount: Double
-    let selectedDate: Date
-    let image: Date
-    
-}
-
-
-class Expenses: ObservableObject {
-    @Published var items: [ExpenseItem] = [ExpenseItem]()
-    
-//        func removeScam(with scamID: ObjectIdentifier){
-//            guard let index = items.firstIndex(where: { $0.id == scamID }) else {return}
-//            items.remove(at: index)
-//        }
-}
-
-
 
 
 struct ContentView: View {
-    @ObservedObject var expenses = Expenses()
+    @ObservedObject var scams = Scams()
     @State private var showingAddExpense = false
     @State var selection: Int = 1
     @Environment(\.managedObjectContext) private var viewContext
@@ -44,8 +21,7 @@ struct ContentView: View {
     @State private var editIsCanceled = false
     @State private var editIsAdded = false
     @State private var editInput = ""
-    @State private var editAmount: Double = 0
-//    @State var editScam = EditScam(isShown: .constant(false), isCanceled: .constant(false), text: .constant(""), amount: .constant(0))
+    @State private var editpower: Double = 0
     @State private var editOnChanged = false
     @State var indexOfEditScam = -1
     
@@ -54,7 +30,7 @@ struct ContentView: View {
         switch selection {
         case(1): return users.sorted(by: {$0.selectedDate > $1.selectedDate})
         case(2): return users.sorted(by: {$0.name < $1.name})
-        case(3): return users.sorted(by: {$0.amount > $1.amount})
+        case(3): return users.sorted(by: {$0.power > $1.power})
         default: return []
         }
     }
@@ -96,7 +72,7 @@ struct ContentView: View {
                                     .foregroundColor(.gray)
                                     .opacity(0.5)
                                 
-                                Text("\(Int(item.amount))")
+                                Text("\(Int(item.power))")
                             }
                         }
                      
@@ -110,7 +86,7 @@ struct ContentView: View {
                         .swipeActions(edge: .leading) {
                             Button {
                                 editInput = item.name
-                                editAmount = item.amount
+                                editpower = item.power
                                 indexOfEditScam = sortByAll.firstIndex(of: item)!
                                 editIsShown.toggle()
                             } label: {
@@ -121,7 +97,7 @@ struct ContentView: View {
                     }
                     .onChange(of: editIsShown) { tag in
                                     sortByAll[indexOfEditScam].name = editInput
-                                    sortByAll[indexOfEditScam].amount = editAmount
+                                    sortByAll[indexOfEditScam].power = editpower
                                     try? viewContext.save()
                         }
                 }
@@ -144,7 +120,7 @@ struct ContentView: View {
                     }
                 )}
             
-            EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput,  amount: $editAmount)
+            EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput,  power: $editpower)
         }
         
     }

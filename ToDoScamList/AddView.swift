@@ -12,7 +12,7 @@ struct AddView: View {
     @Environment(\.presentationMode) private var presentationMode // для закрытия шита
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
-    @State private var amount: Double = 0
+    @State private var power: Double = 0
     @State private var selectedDate = Date()
     @State private var calendarId: Int = 0
     @State private var typeName = ""
@@ -39,8 +39,8 @@ struct AddView: View {
                         Spacer()
                         VStack(alignment: .leading) {
                             Text("Сила скама")
-                            Slider(value: $amount, in: 0...10)
-                            Text("\(Int(amount))")
+                            Slider(value: $power, in: 0...10)
+                            Text("\(Int(power))")
                         }
                         DatePicker("Когда был скам?", selection: $selectedDate, displayedComponents: .date)
                             .datePickerStyle(.automatic)
@@ -50,18 +50,18 @@ struct AddView: View {
                             })
                         Spacer()
                     }
-                        VStack {
-                            Picker("Тип", selection: $type) {
-                                ForEach(types, id: \.self) {
-                                    Text($0)
-                                }
-                            }
-                            .onChange(of: type) { tag in print("Color tag: \(tag)");
-                                if type == "Свой тип" {
-                                    self.showsAlert.toggle()
-                                }
+                    VStack {
+                        Picker("Тип", selection: $type) {
+                            ForEach(types, id: \.self) {
+                                Text($0)
                             }
                         }
+                        .onChange(of: type) { tag in print("Color tag: \(tag)");
+                            if type == "Свой тип" {
+                                self.showsAlert.toggle()
+                            }
+                        }
+                    }
                     
                     HStack {
                         Text("Фото скама")
@@ -96,18 +96,18 @@ struct AddView: View {
                 }
                 .navigationBarItems(trailing: Button("Сохранить"){
                     let userInfo = Scam(context: self.moc)
-                        userInfo.type = self.type
-                        userInfo.amount = self.amount
-                        userInfo.selectedDate = self.selectedDate
-                        userInfo.imageD = self.imageData
-                        userInfo.name = self.name
-                        do {
-                            try self.moc.save()
-                        } catch {
-                            print("whoops \(error.localizedDescription)")
-                        }
-                        UserDefaults.standard.set(types, forKey: "types")
-                        self.presentationMode.wrappedValue.dismiss()
+                    userInfo.type = self.type
+                    userInfo.power = self.power
+                    userInfo.selectedDate = self.selectedDate
+                    userInfo.imageD = self.imageData
+                    userInfo.name = self.name
+                    do {
+                        try self.moc.save()
+                    } catch {
+                        print("whoops \(error.localizedDescription)")
+                    }
+                    UserDefaults.standard.set(types, forKey: "types")
+                    self.presentationMode.wrappedValue.dismiss()
                     
                 })
                 .navigationBarTitle("Добавить скам")
@@ -115,7 +115,7 @@ struct AddView: View {
                 .onAppear{
                     types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
                 }
-//                .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)}) // для закрытия клавы коки при прокручивании навигатион вью
+                
                 .actionSheet(isPresented: self.$show){
                     ActionSheet(title: Text("Сделайте фото скама или выберите из галереи"), message: Text(""), buttons:
                                     [.default(Text("Галерея"), action: {
@@ -136,7 +136,7 @@ struct AddView: View {
             })
         }
         
-       
+        
         
     }
 }
