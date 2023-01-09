@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct AddView: View {
     @Environment(\.presentationMode) private var presentationMode
     @Environment(\.dismiss) private var dismiss
@@ -23,13 +22,12 @@ struct AddView: View {
     @State private var imagePicker = false
     @State private var source: UIImagePickerController.SourceType = .photoLibrary
     @Environment(\.managedObjectContext) private var moc
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
+    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип"]
     @State private var type = "Финансовый"
-    
-    
+
     var body: some View {
-        
+
         ZStack {
             NavigationView {
                 Form {
@@ -56,23 +54,22 @@ struct AddView: View {
                                 Text($0)
                             }
                         }
-                        .onChange(of: type) { tag in print("Color tag: \(tag)");
+                        .onChange(of: type) { tag in print("Color tag: \(tag)")
                             if type == "Свой тип" {
                                 self.showsAlert.toggle()
                             }
                         }
                     }
-                    
                     HStack {
                         Text("Фото скама")
                             .fullScreenCover(isPresented: $imagePicker) {
                                 ImagePicker(show: $imagePicker, image: $imageData, source: source)
-                            } 
+                            }
                         Spacer()
                         if imageData.count != 0 {
                             Button(action: {
                                 self.show.toggle()
-                            }){
+                            }) {
                                 Image(uiImage: UIImage(data: self.imageData)!)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -94,7 +91,7 @@ struct AddView: View {
                         }
                     }
                 }
-                .navigationBarItems(trailing: Button("Сохранить"){
+                .navigationBarItems(trailing: Button("Сохранить") {
                     let userInfo = Scam(context: self.moc)
                     userInfo.type = self.type
                     userInfo.power = self.power
@@ -108,20 +105,19 @@ struct AddView: View {
                     }
                     UserDefaults.standard.set(types, forKey: "types")
                     self.presentationMode.wrappedValue.dismiss()
-                    
+
                 })
                 .navigationBarTitle("Добавить скам")
-                
-                .onAppear{
+                .onAppear {
                     types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
                 }
-                
-                .actionSheet(isPresented: self.$show){
+
+                .actionSheet(isPresented: self.$show) {
                     ActionSheet(title: Text("Сделайте фото скама или выберите из галереи"), message: Text(""), buttons:
                                     [.default(Text("Галерея"), action: {
                         self.source = .photoLibrary
                         self.imagePicker.toggle()
-                    }),.default(Text("Камера"), action: {
+                    }), .default(Text("Камера"), action: {
                         self.source = .camera
                         self.imagePicker.toggle()
                     })
@@ -135,9 +131,7 @@ struct AddView: View {
                 type = alertInput
             })
         }
-        
-        
-        
+
     }
 }
 

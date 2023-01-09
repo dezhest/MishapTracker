@@ -8,10 +8,8 @@
 import Foundation
 import SwiftUI
 
-
 struct EditScam: View {
-    
-    
+
     let screenSize = UIScreen.main.bounds
     var title: String = ""
     @Binding var isShown: Bool
@@ -20,17 +18,14 @@ struct EditScam: View {
     var onDone: (String) -> Void = { _ in }
     var onCancel: () -> Void = { }
     @Binding var power: Double
-    
-    
-    
+
     var body: some View {
-        
-        
-        VStack() {
+
+        VStack {
             Text("Внести изменения")
                 .font(.system(size: 20, weight: .bold, design: .default))
                 .foregroundColor(Color(.black))
-            
+
             TextField("", text: $text)
                 .placeholder(when: text.isEmpty) {
                     Text("Название скама").foregroundColor(.gray)}
@@ -38,8 +33,8 @@ struct EditScam: View {
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
                 .background(Color(.white))
                 .foregroundColor(.black)
-           
-            VStack() {
+
+            VStack {
                 Text("Сила скама")
                     .foregroundColor(.black)
                 Slider(value: $power, in: 0...10)
@@ -62,7 +57,7 @@ struct EditScam: View {
         .offset(y: isShown ? 0 : screenSize.height)
         .animation(.spring())
         .shadow(radius: 6)
-        
+
     }
 }
 

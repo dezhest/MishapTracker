@@ -64,10 +64,10 @@
 		BBD34C04296C4C93006ECC63 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BBF70629294CF54B006DA73A /* ContentView.swift */,
 				BBF70636294CF835006DA73A /* AddView.swift */,
 				BBFA467B2954AB46009E9E9A /* AZalert.swift */,
 				BB705C45295C891E006585BB /* EditScam.swift */,
-				BBF70629294CF54B006DA73A /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

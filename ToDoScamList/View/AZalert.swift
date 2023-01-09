@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
@@ -22,26 +21,24 @@ extension View {
 }
 
 struct AZalert: View {
-    enum FocusedField:Hashable{
+    enum FocusedField: Hashable {
             case text
         }
-    
+
     let screenSize = UIScreen.main.bounds
     var title: String = ""
     @Binding var isShown: Bool
     @Binding var text: String
     var onDone: (String) -> Void = { _ in }
     var onCancel: () -> Void = { }
-   
-    
-    
+
     var body: some View {
-        
+
         VStack(spacing: 20) {
             Text(title)
                 .font(.system(size: 20, weight: .bold, design: .default))
                 .foregroundColor(Color(.black))
-            
+
                 TextField("", text: $text)
                     .placeholder(when: text.isEmpty) {
                         Text("Введите свой тип").foregroundColor(.gray)}
@@ -49,8 +46,7 @@ struct AZalert: View {
                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
                     .background(Color(.white))
                     .foregroundColor(.black)
-                    
-            
+
             HStack(spacing: 20) {
                 Button("Отмена") {
                     self.isShown = false
@@ -74,7 +70,7 @@ struct AZalert: View {
         .offset(y: isShown ? 0 : screenSize.height)
         .animation(.spring())
         .shadow(radius: 6)
-        
+
     }
 }
 

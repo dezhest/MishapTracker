@@ -106,7 +106,7 @@ struct PinchZoom: UIViewRepresentable {
 
     func updateUIView(_ pageControl: PinchZoomView, context: Context) { }
 
-    class Coordinator: NSObject, PinchZoomViewDelgate {
+    final class Coordinator: NSObject, PinchZoomViewDelgate {
         var pinchZoom: PinchZoom
 
         init(_ pinchZoom: PinchZoom) {

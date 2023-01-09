@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct ScamItem: Identifiable, Hashable {
     let id = UUID().uuidString
     let name: String
@@ -15,9 +14,8 @@ struct ScamItem: Identifiable, Hashable {
     let power: Double
     let selectedDate: Date
     let image: Date
-    
-}
 
+}
 
 class Scams: ObservableObject {
     @Published var items: [ScamItem] = [ScamItem]()

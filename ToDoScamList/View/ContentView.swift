@@ -8,13 +8,13 @@
 import SwiftUI
 import CoreData
 
-
 struct ContentView: View {
+    // MARK: — Private properties
     @ObservedObject var scams = Scams()
     @State private var showingAddExpense = false
     @State var selection: Int = 1
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
+    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State private var image: Data = .init(count: 0)
     @GestureState private var scale: CGFloat = 1.0
     @State private var editIsShown = false
@@ -24,9 +24,14 @@ struct ContentView: View {
     @State private var editpower: Double = 0
     @State private var editOnChanged = false
     @State private var indexOfEditScam = -1
-    
-    
-    var sortByAll: Array<Scam> {
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.dateFormat = "dd.MM.yy"
+        return formatter
+    }()
+
+    var sorting: [Scam] {
         switch selection {
         case(1): return users.sorted(by: {$0.selectedDate > $1.selectedDate})
         case(2): return users.sorted(by: {$0.name < $1.name})
@@ -34,25 +39,19 @@ struct ContentView: View {
         default: return []
         }
     }
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.dateFormat = "dd.MM.yy"
-        return formatter
-    }()
-    
+
     var body: some View {
         ZStack {
             NavigationView {
                 List {
-                    ForEach(sortByAll, id: \.self) { item in
+                    ForEach(sorting, id: \.self) { item in
                         NavigationLink(destination: Image(uiImage: UIImage(data: item.imageD ?? Data()) ?? UIImage())
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .pinchToZoom
                         ) {
-                            HStack(alignment: .center, spacing: 0){
-                                VStack(alignment: .leading, spacing: 5){
+                            HStack(alignment: .center, spacing: 0) {
+                                VStack(alignment: .leading, spacing: 5) {
                                     Text(item.name)
                                             .font(.system(size: 14, weight: .bold, design: .default))
                                     Text(item.type)
@@ -70,16 +69,16 @@ struct ContentView: View {
                                     .padding(3)
                                     .foregroundColor(.gray)
                                     .opacity(0.5)
-                                
+
                                 Text("\(Int(item.power))")
                             }
                         }
-                     
+
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive, action: {
                                 deleteUser(item: item)
-                               
-                            }){
+
+                            }) {
                                 Label("Delete", systemImage: "trash")
                             }
                         }
@@ -87,7 +86,7 @@ struct ContentView: View {
                             Button {
                                 editInput = item.name
                                 editpower = item.power
-                                if let unwrapped = sortByAll.firstIndex(of: item) {indexOfEditScam = unwrapped}
+                                if let unwrapped = sorting.firstIndex(of: item) {indexOfEditScam = unwrapped}
                                 editIsShown.toggle()
                             } label: {
                                 Label("Edit", systemImage: "pencil")
@@ -95,9 +94,9 @@ struct ContentView: View {
                             .tint(.green)
                         }
                     }
-                    .onChange(of: editIsShown) { tag in
-                                    sortByAll[indexOfEditScam].name = editInput
-                                    sortByAll[indexOfEditScam].power = editpower
+                    .onChange(of: editIsShown) { _ in
+                                    sorting[indexOfEditScam].name = editInput
+                                    sorting[indexOfEditScam].power = editpower
                                     try? viewContext.save()
                         }
                 }
@@ -109,7 +108,7 @@ struct ContentView: View {
                     Image(systemName: "plus")
                 })
                 .navigationBarItems(leading:
-                                        Picker("Select number", selection: $selection){
+                                        Picker("Select number", selection: $selection) {
                     Text("Сортировка по дате").tag(1)
                     Text("Сортировка по алфавиту").tag(2)
                     Text("Сортировка по силе скама").tag(3)
@@ -120,18 +119,17 @@ struct ContentView: View {
                     }
                 )}
 //            .onTapGesture{if editIsShown == true {editIsShown = false}}
-            
-            EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput,  power: $editpower)
+
+            EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput, power: $editpower)
         }
-        
+
     }
-    
+    // MARK: — Swipe to delete from list
     func deleteUser(item: Scam) {
-        viewContext.delete(users[sortByAll.firstIndex(of: item)!])
+        viewContext.delete(users[sorting.firstIndex(of: item)!])
         try? viewContext.save()
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
