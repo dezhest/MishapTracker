@@ -10,12 +10,11 @@
 		BB705C3E295A07E6006585BB /* ZoomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C3D295A07E6006585BB /* ZoomImage.swift */; };
 		BB705C46295C891E006585BB /* EditScam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C45295C891E006585BB /* EditScam.swift */; };
 		BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF2AE829663EDE0066BD5A /* ScamItem.swift */; };
+		BBD34C09296C5736006ECC63 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = BBD34C08296C5736006ECC63 /* Preview Content */; };
 		BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */; };
 		BBF70625294CF54B006DA73A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70624294CF54B006DA73A /* Persistence.swift */; };
 		BBF70628294CF54B006DA73A /* ToDoScamList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */; };
 		BBF7062A294CF54B006DA73A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70629294CF54B006DA73A /* ContentView.swift */; };
-		BBF7062C294CF54F006DA73A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBF7062B294CF54F006DA73A /* Assets.xcassets */; };
-		BBF70630294CF54F006DA73A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBF7062F294CF54F006DA73A /* Preview Assets.xcassets */; };
 		BBF70637294CF835006DA73A /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70636294CF835006DA73A /* AddView.swift */; };
 		BBFA467C2954AB46009E9E9A /* AZalert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AZalert.swift */; };
 		BBFA467F2954DECE009E9E9A /* Scam+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */; };
@@ -27,18 +26,17 @@
 		BB705C3D295A07E6006585BB /* ZoomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImage.swift; sourceTree = "<group>"; };
 		BB705C45295C891E006585BB /* EditScam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScam.swift; sourceTree = "<group>"; };
 		BBBF2AE829663EDE0066BD5A /* ScamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamItem.swift; sourceTree = "<group>"; };
+		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Preview Content"; path = "ToDoScamList/Preview Content"; sourceTree = "<group>"; };
 		BBF7061F294CF54B006DA73A /* ToDoScamList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoScamList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListApp.swift; sourceTree = "<group>"; };
 		BBF70624294CF54B006DA73A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BBF70627294CF54B006DA73A /* ToDoScamList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoScamList.xcdatamodel; sourceTree = "<group>"; };
 		BBF70629294CF54B006DA73A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BBF7062B294CF54F006DA73A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoScamList.entitlements; sourceTree = "<group>"; };
-		BBF7062F294CF54F006DA73A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BBF70636294CF835006DA73A /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		BBFA467B2954AB46009E9E9A /* AZalert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZalert.swift; sourceTree = "<group>"; };
-		BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scam+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scam+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Scam+CoreDataClass.swift"; path = "ToDoScamList/CoreDate/Scam+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Scam+CoreDataProperties.swift"; path = "ToDoScamList/CoreDate/Scam+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		BBFA46812954E8A3009E9E9A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,9 +51,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BBD34C03296C4C41006ECC63 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
+				BB705C3D295A07E6006585BB /* ZoomImage.swift */,
+				BBBF2AE829663EDE0066BD5A /* ScamItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BBD34C04296C4C93006ECC63 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BBF70636294CF835006DA73A /* AddView.swift */,
+				BBFA467B2954AB46009E9E9A /* AZalert.swift */,
+				BB705C45295C891E006585BB /* EditScam.swift */,
+				BBF70629294CF54B006DA73A /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BBD34C05296C4CB5006ECC63 /* CoreDate */ = {
+			isa = PBXGroup;
+			children = (
+				BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */,
+				BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */,
+				BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */,
+			);
+			path = CoreDate;
+			sourceTree = "<group>";
+		};
 		BBF70616294CF54B006DA73A = {
 			isa = PBXGroup;
 			children = (
+				BBD34C08296C5736006ECC63 /* Preview Content */,
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
 				BBF70620294CF54B006DA73A /* Products */,
 			);
@@ -72,31 +102,14 @@
 		BBF70621294CF54B006DA73A /* ToDoScamList */ = {
 			isa = PBXGroup;
 			children = (
-				BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */,
-				BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */,
+				BBD34C05296C4CB5006ECC63 /* CoreDate */,
+				BBD34C04296C4C93006ECC63 /* View */,
+				BBD34C03296C4C41006ECC63 /* Models */,
 				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
 				BBF70624294CF54B006DA73A /* Persistence.swift */,
-				BBF70629294CF54B006DA73A /* ContentView.swift */,
-				BBBF2AE829663EDE0066BD5A /* ScamItem.swift */,
-				BB705C3D295A07E6006585BB /* ZoomImage.swift */,
-				BBF70636294CF835006DA73A /* AddView.swift */,
-				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
-				BBFA467B2954AB46009E9E9A /* AZalert.swift */,
-				BB705C45295C891E006585BB /* EditScam.swift */,
-				BBF7062B294CF54F006DA73A /* Assets.xcassets */,
 				BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */,
-				BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */,
-				BBF7062E294CF54F006DA73A /* Preview Content */,
 			);
 			path = ToDoScamList;
-			sourceTree = "<group>";
-		};
-		BBF7062E294CF54F006DA73A /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				BBF7062F294CF54F006DA73A /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,6 +122,7 @@
 				BBF7061B294CF54B006DA73A /* Sources */,
 				BBF7061C294CF54B006DA73A /* Frameworks */,
 				BBF7061D294CF54B006DA73A /* Resources */,
+				BBD34C0A296C57C4006ECC63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -146,8 +160,6 @@
 			);
 			mainGroup = BBF70616294CF54B006DA73A;
 			packageReferences = (
-				BBFA468329590636009E9E9A /* XCRemoteSwiftPackageReference "SwiftUIX" */,
-				BB705C3A2959FF60006585BB /* XCRemoteSwiftPackageReference "PDFViewer" */,
 			);
 			productRefGroup = BBF70620294CF54B006DA73A /* Products */;
 			projectDirPath = "";
@@ -163,12 +175,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBF70630294CF54F006DA73A /* Preview Assets.xcassets in Resources */,
-				BBF7062C294CF54F006DA73A /* Assets.xcassets in Resources */,
+				BBD34C09296C5736006ECC63 /* Preview Content in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BBD34C0A296C57C4006ECC63 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BBF7061B294CF54B006DA73A /* Sources */ = {
@@ -406,25 +437,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		BB705C3A2959FF60006585BB /* XCRemoteSwiftPackageReference "PDFViewer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rajubd49/PDFViewer.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		BBFA468329590636009E9E9A /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.3;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */ = {

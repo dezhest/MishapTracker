@@ -38,28 +38,15 @@ struct EditScam: View {
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
                 .background(Color(.white))
                 .foregroundColor(.black)
-            Spacer()
+           
             VStack() {
                 Text("Сила скама")
                     .foregroundColor(.black)
-                
                 Slider(value: $power, in: 0...10)
                 Text("\(Int(power))")
-                    .font(.system(size: 25 , weight: .bold))
+                    .font(.system(size: 25, weight: .bold))
                     .foregroundColor(.black)
-                    .frame(width: 35, height: 35, alignment: .center)
-                    .padding()
-                    .overlay(
-                        Circle()
-                            .stroke(Color.red, lineWidth: 6)
-                            .padding(6)
-                        
-                    )
-                Spacer()
             }
-            Spacer()
-            HStack(spacing: 40) {
-                
                 Button("Сохранить и выйти") {
                     if text != "" {
                         self.isShown = false}
@@ -67,10 +54,9 @@ struct EditScam: View {
                     UIApplication.shared.endEditing()
                 }
                 .font(.system(size: 18))
-            }
         }
         .padding()
-        .frame(width: screenSize.width * 0.92, height: screenSize.height * 0.45)
+        .frame(width: screenSize.width * 0.92, height: 260)
         .background(Color(.white))
         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         .offset(y: isShown ? 0 : screenSize.height)

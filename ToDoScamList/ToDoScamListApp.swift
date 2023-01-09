@@ -21,7 +21,7 @@ struct ToDoScamListApp: App {
 }
 extension UIApplication {
     func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) // для закрытия клавы коки
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) // keyboard close
     }
 }
 

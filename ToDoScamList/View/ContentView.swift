@@ -23,7 +23,7 @@ struct ContentView: View {
     @State private var editInput = ""
     @State private var editpower: Double = 0
     @State private var editOnChanged = false
-    @State var indexOfEditScam = -1
+    @State private var indexOfEditScam = -1
     
     
     var sortByAll: Array<Scam> {
@@ -57,7 +57,6 @@ struct ContentView: View {
                                             .font(.system(size: 14, weight: .bold, design: .default))
                                     Text(item.type)
                                         .font(.system(size: 12, weight: .medium, design: .default))
-                                    
                                 }
                                 Spacer()
                                 Image(uiImage: UIImage(data: item.imageD ?? self.image) ?? UIImage())
@@ -79,6 +78,7 @@ struct ContentView: View {
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive, action: {
                                 deleteUser(item: item)
+                               
                             }){
                                 Label("Delete", systemImage: "trash")
                             }
@@ -87,7 +87,7 @@ struct ContentView: View {
                             Button {
                                 editInput = item.name
                                 editpower = item.power
-                                indexOfEditScam = sortByAll.firstIndex(of: item)!
+                                if let unwrapped = sortByAll.firstIndex(of: item) {indexOfEditScam = unwrapped}
                                 editIsShown.toggle()
                             } label: {
                                 Label("Edit", systemImage: "pencil")
@@ -119,6 +119,7 @@ struct ContentView: View {
                         AddView()
                     }
                 )}
+//            .onTapGesture{if editIsShown == true {editIsShown = false}}
             
             EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput,  power: $editpower)
         }

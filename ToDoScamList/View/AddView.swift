@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct AddView: View {
-    @Environment(\.presentationMode) private var presentationMode // для закрытия шита
+    @Environment(\.presentationMode) private var presentationMode
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
     @State private var power: Double = 0
@@ -18,11 +18,11 @@ struct AddView: View {
     @State private var typeName = ""
     @State private var showsAlert = false
     @State private var alertInput = ""
-    @State var imageData: Data = .init(capacity: 0)
-    @State var show = false
-    @State var imagePicker = false
-    @State var source: UIImagePickerController.SourceType = .photoLibrary // show image
-    @Environment(\.managedObjectContext) private var moc //core date
+    @State private var imageData: Data = .init(capacity: 0)
+    @State private var show = false
+    @State private var imagePicker = false
+    @State private var source: UIImagePickerController.SourceType = .photoLibrary
+    @Environment(\.managedObjectContext) private var moc
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath:\Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип"]
     @State private var type = "Финансовый"
@@ -67,7 +67,7 @@ struct AddView: View {
                         Text("Фото скама")
                             .fullScreenCover(isPresented: $imagePicker) {
                                 ImagePicker(show: $imagePicker, image: $imageData, source: source)
-                            } // автоматически переходит по линку когда меняется imagePicker
+                            } 
                         Spacer()
                         if imageData.count != 0 {
                             Button(action: {
