@@ -56,7 +56,9 @@ struct AddView: View {
                         }
                         .onChange(of: type) { tag in print("Color tag: \(tag)")
                             if type == "Свой тип" {
-                                self.showsAlert.toggle()
+                                withAnimation(.spring()) {
+                                    self.showsAlert.toggle()
+                                }
                             }
                         }
                     }

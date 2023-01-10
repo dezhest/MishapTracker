@@ -68,7 +68,6 @@ struct AZalert: View {
         .background(Color(.white))
         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         .offset(y: isShown ? 0 : screenSize.height)
-        .animation(.spring())
         .shadow(radius: 6)
 
     }

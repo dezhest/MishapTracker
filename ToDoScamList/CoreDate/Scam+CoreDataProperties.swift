@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Scam {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Scam> {
@@ -25,6 +24,5 @@ extension Scam {
 
 }
 
-extension Scam : Identifiable {
-
+extension Scam: Identifiable {
 }

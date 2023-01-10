@@ -73,10 +73,10 @@ struct ContentView: View {
                                 Text("\(Int(item.power))")
                             }
                         }
-
+                        .disabled(item.imageD == Data())
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive, action: {
-                                deleteUser(item: item)
+                                deleteScam(item: item)
 
                             }) {
                                 Label("Delete", systemImage: "trash")
@@ -87,7 +87,9 @@ struct ContentView: View {
                                 editInput = item.name
                                 editpower = item.power
                                 if let unwrapped = sorting.firstIndex(of: item) {indexOfEditScam = unwrapped}
-                                editIsShown.toggle()
+                                withAnimation(.spring()) {
+                                    editIsShown.toggle()
+                                }
                             } label: {
                                 Label("Edit", systemImage: "pencil")
                             }
@@ -118,14 +120,13 @@ struct ContentView: View {
                         AddView()
                     }
                 )}
-//            .onTapGesture{if editIsShown == true {editIsShown = false}}
 
             EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput, power: $editpower)
         }
 
     }
     // MARK: — Swipe to delete from list
-    func deleteUser(item: Scam) {
+    func deleteScam(item: Scam) {
         viewContext.delete(users[sorting.firstIndex(of: item)!])
         try? viewContext.save()
     }

@@ -17,6 +17,6 @@ struct ScamItem: Identifiable, Hashable {
 
 }
 
-class Scams: ObservableObject {
+final class Scams: ObservableObject {
     @Published var items: [ScamItem] = [ScamItem]()
 }

@@ -29,7 +29,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 
     }
 
-    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         var parent: ImagePicker
         init(parent1: ImagePicker) {
             parent = parent1

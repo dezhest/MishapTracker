@@ -1,7 +1,7 @@
 import UIKit
 import SwiftUI
 
-class PinchZoomView: UIView {
+final class PinchZoomView: UIView {
 
     weak var delegate: PinchZoomViewDelgate?
 

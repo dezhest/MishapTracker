@@ -11,6 +11,9 @@
 		BB705C46295C891E006585BB /* EditScam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C45295C891E006585BB /* EditScam.swift */; };
 		BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF2AE829663EDE0066BD5A /* ScamItem.swift */; };
 		BBD34C09296C5736006ECC63 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = BBD34C08296C5736006ECC63 /* Preview Content */; };
+		BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */; };
+		BBD34C1F296D9CE5006ECC63 /* ToDoScamListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */; };
+		BBD34C21296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */; };
 		BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */; };
 		BBF70625294CF54B006DA73A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70624294CF54B006DA73A /* Persistence.swift */; };
 		BBF70628294CF54B006DA73A /* ToDoScamList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */; };
@@ -22,11 +25,33 @@
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BBD34C13296D8379006ECC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBF70617294CF54B006DA73A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBF7061E294CF54B006DA73A;
+			remoteInfo = ToDoScamList;
+		};
+		BBD34C22296D9CE5006ECC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBF70617294CF54B006DA73A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBF7061E294CF54B006DA73A;
+			remoteInfo = ToDoScamList;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		BB705C3D295A07E6006585BB /* ZoomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImage.swift; sourceTree = "<group>"; };
 		BB705C45295C891E006585BB /* EditScam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScam.swift; sourceTree = "<group>"; };
 		BBBF2AE829663EDE0066BD5A /* ScamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamItem.swift; sourceTree = "<group>"; };
 		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Preview Content"; path = "ToDoScamList/Preview Content"; sourceTree = "<group>"; };
+		BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListTests.swift; sourceTree = "<group>"; };
+		BBD34C1C296D9CE4006ECC63 /* ToDoScamListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListUITests.swift; sourceTree = "<group>"; };
+		BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BBF7061F294CF54B006DA73A /* ToDoScamList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoScamList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListApp.swift; sourceTree = "<group>"; };
 		BBF70624294CF54B006DA73A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -41,6 +66,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BBD34C0C296D8378006ECC63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBD34C19296D9CE4006ECC63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBF7061C294CF54B006DA73A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -82,11 +121,30 @@
 			path = CoreDate;
 			sourceTree = "<group>";
 		};
+		BBD34C10296D8379006ECC63 /* ToDoScamListTests */ = {
+			isa = PBXGroup;
+			children = (
+				BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */,
+			);
+			path = ToDoScamListTests;
+			sourceTree = "<group>";
+		};
+		BBD34C1D296D9CE5006ECC63 /* ToDoScamListUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */,
+				BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */,
+			);
+			path = ToDoScamListUITests;
+			sourceTree = "<group>";
+		};
 		BBF70616294CF54B006DA73A = {
 			isa = PBXGroup;
 			children = (
 				BBD34C08296C5736006ECC63 /* Preview Content */,
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
+				BBD34C10296D8379006ECC63 /* ToDoScamListTests */,
+				BBD34C1D296D9CE5006ECC63 /* ToDoScamListUITests */,
 				BBF70620294CF54B006DA73A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				BBF7061F294CF54B006DA73A /* ToDoScamList.app */,
+				BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */,
+				BBD34C1C296D9CE4006ECC63 /* ToDoScamListUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +175,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BBD34C0E296D8378006ECC63 /* ToDoScamListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBD34C15296D8379006ECC63 /* Build configuration list for PBXNativeTarget "ToDoScamListTests" */;
+			buildPhases = (
+				BBD34C0B296D8378006ECC63 /* Sources */,
+				BBD34C0C296D8378006ECC63 /* Frameworks */,
+				BBD34C0D296D8378006ECC63 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BBD34C14296D8379006ECC63 /* PBXTargetDependency */,
+			);
+			name = ToDoScamListTests;
+			productName = ToDoScamListTests;
+			productReference = BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BBD34C1B296D9CE4006ECC63 /* ToDoScamListUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBD34C24296D9CE5006ECC63 /* Build configuration list for PBXNativeTarget "ToDoScamListUITests" */;
+			buildPhases = (
+				BBD34C18296D9CE4006ECC63 /* Sources */,
+				BBD34C19296D9CE4006ECC63 /* Frameworks */,
+				BBD34C1A296D9CE4006ECC63 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BBD34C23296D9CE5006ECC63 /* PBXTargetDependency */,
+			);
+			name = ToDoScamListUITests;
+			productName = ToDoScamListUITests;
+			productReference = BBD34C1C296D9CE4006ECC63 /* ToDoScamListUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		BBF7061E294CF54B006DA73A /* ToDoScamList */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBF70633294CF54F006DA73A /* Build configuration list for PBXNativeTarget "ToDoScamList" */;
@@ -145,6 +241,14 @@
 				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					BBD34C0E296D8378006ECC63 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = BBF7061E294CF54B006DA73A;
+					};
+					BBD34C1B296D9CE4006ECC63 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = BBF7061E294CF54B006DA73A;
+					};
 					BBF7061E294CF54B006DA73A = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -166,11 +270,27 @@
 			projectRoot = "";
 			targets = (
 				BBF7061E294CF54B006DA73A /* ToDoScamList */,
+				BBD34C0E296D8378006ECC63 /* ToDoScamListTests */,
+				BBD34C1B296D9CE4006ECC63 /* ToDoScamListUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BBD34C0D296D8378006ECC63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBD34C1A296D9CE4006ECC63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBF7061D294CF54B006DA73A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,6 +304,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		BBD34C0A296C57C4006ECC63 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -202,6 +323,23 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BBD34C0B296D8378006ECC63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBD34C18296D9CE4006ECC63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBD34C21296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift in Sources */,
+				BBD34C1F296D9CE5006ECC63 /* ToDoScamListUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBF7061B294CF54B006DA73A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -223,7 +361,103 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BBD34C14296D8379006ECC63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBF7061E294CF54B006DA73A /* ToDoScamList */;
+			targetProxy = BBD34C13296D8379006ECC63 /* PBXContainerItemProxy */;
+		};
+		BBD34C23296D9CE5006ECC63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBF7061E294CF54B006DA73A /* ToDoScamList */;
+			targetProxy = BBD34C22296D9CE5006ECC63 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		BBD34C16296D8379006ECC63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3DND9277P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dezhest.ToDoScamListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDoScamList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ToDoScamList";
+			};
+			name = Debug;
+		};
+		BBD34C17296D8379006ECC63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3DND9277P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dezhest.ToDoScamListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDoScamList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ToDoScamList";
+			};
+			name = Release;
+		};
+		BBD34C25296D9CE5006ECC63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3DND9277P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dezhest.ToDoScamListUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ToDoScamList;
+			};
+			name = Debug;
+		};
+		BBD34C26296D9CE5006ECC63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3DND9277P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dezhest.ToDoScamListUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ToDoScamList;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		BBF70631294CF54F006DA73A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -418,6 +652,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BBD34C15296D8379006ECC63 /* Build configuration list for PBXNativeTarget "ToDoScamListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBD34C16296D8379006ECC63 /* Debug */,
+				BBD34C17296D8379006ECC63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BBD34C24296D9CE5006ECC63 /* Build configuration list for PBXNativeTarget "ToDoScamListUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBD34C25296D9CE5006ECC63 /* Debug */,
+				BBD34C26296D9CE5006ECC63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BBF7061A294CF54B006DA73A /* Build configuration list for PBXProject "ToDoScamList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
