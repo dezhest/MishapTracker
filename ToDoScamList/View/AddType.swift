@@ -7,20 +7,7 @@
 
 import SwiftUI
 
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
-        }
-    }
-}
-
-struct AZalert: View {
+struct AddType: View {
     enum FocusedField: Hashable {
             case text
         }
@@ -83,6 +70,6 @@ struct AZalert: View {
 
 struct AZAlert_Previews: PreviewProvider {
     static var previews: some View {
-        AZalert(title: "", isShown: .constant(true), text: .constant(""))
+        AddType(title: "", isShown: .constant(true), text: .constant(""))
     }
 }

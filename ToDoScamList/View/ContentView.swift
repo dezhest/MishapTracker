@@ -117,7 +117,7 @@ struct ContentView: View {
                 }
                     .pickerStyle(.menu)
                     .sheet(isPresented: $showingAddExpense) {
-                        AddView()
+                        NewSheet()
                     }
                 )}
 

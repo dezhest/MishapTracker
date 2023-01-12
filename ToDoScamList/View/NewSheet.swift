@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddView: View {
+struct NewSheet: View {
     @Environment(\.presentationMode) private var presentationMode
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
@@ -146,8 +146,7 @@ struct AddView: View {
                                     ])
                 }
             }
-            
-            AZalert(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
+            AddType(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
                 if alertInput != ""{
                     types.insert(alertInput, at: 0)
                 }
@@ -159,6 +158,6 @@ struct AddView: View {
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
-        AddView()
+        NewSheet()
     }
 }

@@ -26,3 +26,8 @@ extension Scam {
 
 extension Scam: Identifiable {
 }
+
+@objc(Scam)
+public class Scam: NSManagedObject {
+
+}

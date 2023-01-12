@@ -14,13 +14,15 @@
 		BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */; };
 		BBD34C1F296D9CE5006ECC63 /* ToDoScamListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */; };
 		BBD34C21296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */; };
+		BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */; };
+		BBD7FD602970C40B006679BF /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD5F2970C40B006679BF /* HideKeyboard.swift */; };
+		BBD7FD622970C4BB006679BF /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD612970C4BB006679BF /* Placeholder.swift */; };
 		BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */; };
 		BBF70625294CF54B006DA73A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70624294CF54B006DA73A /* Persistence.swift */; };
 		BBF70628294CF54B006DA73A /* ToDoScamList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */; };
 		BBF7062A294CF54B006DA73A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70629294CF54B006DA73A /* ContentView.swift */; };
-		BBF70637294CF835006DA73A /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70636294CF835006DA73A /* AddView.swift */; };
-		BBFA467C2954AB46009E9E9A /* AZalert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AZalert.swift */; };
-		BBFA467F2954DECE009E9E9A /* Scam+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */; };
+		BBF70637294CF835006DA73A /* NewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70636294CF835006DA73A /* NewSheet.swift */; };
+		BBFA467C2954AB46009E9E9A /* AddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AddType.swift */; };
 		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
@@ -46,21 +48,23 @@
 		BB705C3D295A07E6006585BB /* ZoomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImage.swift; sourceTree = "<group>"; };
 		BB705C45295C891E006585BB /* EditScam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScam.swift; sourceTree = "<group>"; };
 		BBBF2AE829663EDE0066BD5A /* ScamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamItem.swift; sourceTree = "<group>"; };
-		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Preview Content"; path = "ToDoScamList/Preview Content"; sourceTree = "<group>"; };
+		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
 		BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListTests.swift; sourceTree = "<group>"; };
 		BBD34C1C296D9CE4006ECC63 /* ToDoScamListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListUITests.swift; sourceTree = "<group>"; };
 		BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchToZoom.swift; sourceTree = "<group>"; };
+		BBD7FD5F2970C40B006679BF /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
+		BBD7FD612970C4BB006679BF /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		BBF7061F294CF54B006DA73A /* ToDoScamList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoScamList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListApp.swift; sourceTree = "<group>"; };
 		BBF70624294CF54B006DA73A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BBF70627294CF54B006DA73A /* ToDoScamList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoScamList.xcdatamodel; sourceTree = "<group>"; };
 		BBF70629294CF54B006DA73A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoScamList.entitlements; sourceTree = "<group>"; };
-		BBF70636294CF835006DA73A /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
-		BBFA467B2954AB46009E9E9A /* AZalert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AZalert.swift; sourceTree = "<group>"; };
-		BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Scam+CoreDataClass.swift"; path = "ToDoScamList/CoreDate/Scam+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		BBF70636294CF835006DA73A /* NewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSheet.swift; sourceTree = "<group>"; };
+		BBFA467B2954AB46009E9E9A /* AddType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddType.swift; sourceTree = "<group>"; };
 		BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Scam+CoreDataProperties.swift"; path = "ToDoScamList/CoreDate/Scam+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		BBFA46812954E8A3009E9E9A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,8 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				BBF70629294CF54B006DA73A /* ContentView.swift */,
-				BBF70636294CF835006DA73A /* AddView.swift */,
-				BBFA467B2954AB46009E9E9A /* AZalert.swift */,
+				BBF70636294CF835006DA73A /* NewSheet.swift */,
+				BBFA467B2954AB46009E9E9A /* AddType.swift */,
 				BB705C45295C891E006585BB /* EditScam.swift */,
 			);
 			path = View;
@@ -115,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */,
-				BBFA467D2954DECE009E9E9A /* Scam+CoreDataClass.swift */,
 				BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */,
 			);
 			path = CoreDate;
@@ -138,10 +141,19 @@
 			path = ToDoScamListUITests;
 			sourceTree = "<group>";
 		};
+		BBD7FD5C2970C3AF006679BF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */,
+				BBD7FD5F2970C40B006679BF /* HideKeyboard.swift */,
+				BBD7FD612970C4BB006679BF /* Placeholder.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BBF70616294CF54B006DA73A = {
 			isa = PBXGroup;
 			children = (
-				BBD34C08296C5736006ECC63 /* Preview Content */,
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
 				BBD34C10296D8379006ECC63 /* ToDoScamListTests */,
 				BBD34C1D296D9CE5006ECC63 /* ToDoScamListUITests */,
@@ -162,11 +174,13 @@
 		BBF70621294CF54B006DA73A /* ToDoScamList */ = {
 			isa = PBXGroup;
 			children = (
-				BBD34C05296C4CB5006ECC63 /* CoreDate */,
 				BBD34C04296C4C93006ECC63 /* View */,
 				BBD34C03296C4C41006ECC63 /* Models */,
-				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
 				BBF70624294CF54B006DA73A /* Persistence.swift */,
+				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
+				BBD7FD5C2970C3AF006679BF /* Extensions */,
+				BBD34C08296C5736006ECC63 /* Preview Content */,
+				BBD34C05296C4CB5006ECC63 /* CoreDate */,
 				BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */,
 			);
 			path = ToDoScamList;
@@ -346,16 +360,18 @@
 			files = (
 				BB705C3E295A07E6006585BB /* ZoomImage.swift in Sources */,
 				BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */,
-				BBFA467F2954DECE009E9E9A /* Scam+CoreDataClass.swift in Sources */,
+				BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */,
 				BB705C46295C891E006585BB /* EditScam.swift in Sources */,
 				BBF70625294CF54B006DA73A /* Persistence.swift in Sources */,
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
-				BBFA467C2954AB46009E9E9A /* AZalert.swift in Sources */,
+				BBFA467C2954AB46009E9E9A /* AddType.swift in Sources */,
 				BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */,
+				BBD7FD602970C40B006679BF /* HideKeyboard.swift in Sources */,
 				BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */,
-				BBF70637294CF835006DA73A /* AddView.swift in Sources */,
+				BBF70637294CF835006DA73A /* NewSheet.swift in Sources */,
 				BBF7062A294CF54B006DA73A /* ContentView.swift in Sources */,
 				BBF70628294CF54B006DA73A /* ToDoScamList.xcdatamodeld in Sources */,
+				BBD7FD622970C4BB006679BF /* Placeholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
