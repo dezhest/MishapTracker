@@ -37,8 +37,28 @@ struct AddView: View {
                         Spacer()
                         VStack(alignment: .leading) {
                             Text("Сила скама")
-                            Slider(value: $power, in: 0...10)
-                            Text("\(Int(power))")
+                            ZStack {
+                                LinearGradient(
+                                    gradient: Gradient(colors: [.yellow, .red]),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                                .mask(Slider(value: $power, in: 0...10))
+                                Slider(value: $power, in: 0...10)
+                                    .opacity(0.05)
+                                    .alignmentGuide(VerticalAlignment.center) { $0[VerticalAlignment.center]}
+                                    .padding(.top)
+                                    .overlay(GeometryReader { geom in
+                                        Text("\(power, specifier: "%.f")")
+                                            .offset(y: -10)
+                                            .font(.system(size: 18, weight: .bold))
+                                            .foregroundColor(.black)
+                                            .alignmentGuide(HorizontalAlignment.leading) {
+                                                $0[HorizontalAlignment.leading] - (geom.size.width - $0.width) * power / 10
+                                            }
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    }, alignment: .top)
+                            }
                         }
                         DatePicker("Когда был скам?", selection: $selectedDate, displayedComponents: .date)
                             .datePickerStyle(.automatic)
@@ -126,14 +146,14 @@ struct AddView: View {
                                     ])
                 }
             }
+            
             AZalert(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
                 if alertInput != ""{
                     types.insert(alertInput, at: 0)
                 }
                 type = alertInput
             })
-        }
-
+        }.environment(\.colorScheme, .light)
     }
 }
 

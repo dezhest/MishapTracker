@@ -122,7 +122,7 @@ struct ContentView: View {
                 )}
 
             EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput, power: $editpower)
-        }
+        } .environment(\.colorScheme, .light)
 
     }
     // MARK: — Swipe to delete from list

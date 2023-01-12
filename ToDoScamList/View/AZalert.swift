@@ -34,10 +34,18 @@ struct AZalert: View {
 
     var body: some View {
 
-        VStack(spacing: 20) {
-            Text(title)
-                .font(.system(size: 20, weight: .bold, design: .default))
-                .foregroundColor(Color(.black))
+        VStack(spacing: 25) {
+            ZStack {
+                Text("Редактировать")
+                    .fontWeight(.bold)
+                    .font(.system(size: 18))
+                    .frame(width: screenSize.width * 0.92, height: 15)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color(.systemBlue))
+                    .cornerRadius(10)
+                .offset(y: -20)
+            }
 
                 TextField("", text: $text)
                     .placeholder(when: text.isEmpty) {
@@ -47,7 +55,7 @@ struct AZalert: View {
                     .background(Color(.white))
                     .foregroundColor(.black)
 
-            HStack(spacing: 20) {
+            HStack(spacing: 80) {
                 Button("Отмена") {
                     self.isShown = false
                     self.onCancel()
@@ -64,7 +72,7 @@ struct AZalert: View {
             }
         }
         .padding()
-        .frame(width: screenSize.width * 0.65, height: screenSize.height * 0.25)
+        .frame(width: screenSize.width * 0.92, height: 180)
         .background(Color(.white))
         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         .offset(y: isShown ? 0 : screenSize.height)
@@ -75,6 +83,6 @@ struct AZalert: View {
 
 struct AZAlert_Previews: PreviewProvider {
     static var previews: some View {
-        AZalert(title: "Добавьте тип", isShown: .constant(true), text: .constant(""))
+        AZalert(title: "", isShown: .constant(true), text: .constant(""))
     }
 }
