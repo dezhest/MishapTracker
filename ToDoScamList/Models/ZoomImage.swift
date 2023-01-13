@@ -141,7 +141,7 @@ struct PinchToZoom: ViewModifier {
         content
             .scaleEffect(scale, anchor: anchor)
             .offset(offset)
-            .animation(isPinching ? .none : .spring())
+            .animation(isPinching ? .none : .spring(), value: scale)
             .overlay(PinchZoom(scale: $scale, anchor: $anchor, offset: $offset, isPinching: $isPinching))
     }
 }

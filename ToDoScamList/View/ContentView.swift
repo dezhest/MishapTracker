@@ -12,9 +12,9 @@ struct ContentView: View {
     // MARK: — Private properties
     @ObservedObject var scams = Scams()
     @State private var showingAddExpense = false
-    @State var selection: Int = 1
+    @State var pickerSelection: Int = 1
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
+    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var entity: FetchedResults<Scam>
     @State private var image: Data = .init(count: 0)
     @GestureState private var scale: CGFloat = 1.0
     @State private var editIsShown = false
@@ -31,11 +31,11 @@ struct ContentView: View {
         return formatter
     }()
 
-    var sorting: [Scam] {
-        switch selection {
-        case(1): return users.sorted(by: {$0.selectedDate > $1.selectedDate})
-        case(2): return users.sorted(by: {$0.name < $1.name})
-        case(3): return users.sorted(by: {$0.power > $1.power})
+    var sortedScams: [Scam] {
+        switch pickerSelection {
+        case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
+        case(2): return entity.sorted(by: {$0.title < $1.title})
+        case(3): return entity.sorted(by: {$0.power > $1.power})
         default: return []
         }
     }
@@ -44,7 +44,7 @@ struct ContentView: View {
         ZStack {
             NavigationView {
                 List {
-                    ForEach(sorting, id: \.self) { item in
+                    ForEach(sortedScams, id: \.self) { item in
                         NavigationLink(destination: Image(uiImage: UIImage(data: item.imageD ?? Data()) ?? UIImage())
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -52,7 +52,7 @@ struct ContentView: View {
                         ) {
                             HStack(alignment: .center, spacing: 0) {
                                 VStack(alignment: .leading, spacing: 5) {
-                                    Text(item.name)
+                                    Text(item.title)
                                             .font(.system(size: 14, weight: .bold, design: .default))
                                     Text(item.type)
                                         .font(.system(size: 12, weight: .medium, design: .default))
@@ -84,9 +84,9 @@ struct ContentView: View {
                         }
                         .swipeActions(edge: .leading) {
                             Button {
-                                editInput = item.name
+                                editInput = item.title
                                 editpower = item.power
-                                if let unwrapped = sorting.firstIndex(of: item) {indexOfEditScam = unwrapped}
+                                if let unwrapped = sortedScams.firstIndex(of: item) {indexOfEditScam = unwrapped}
                                 withAnimation(.spring()) {
                                     editIsShown.toggle()
                                 }
@@ -97,8 +97,8 @@ struct ContentView: View {
                         }
                     }
                     .onChange(of: editIsShown) { _ in
-                                    sorting[indexOfEditScam].name = editInput
-                                    sorting[indexOfEditScam].power = editpower
+                                    sortedScams[indexOfEditScam].title = editInput
+                                    sortedScams[indexOfEditScam].power = editpower
                                     try? viewContext.save()
                         }
                 }
@@ -110,7 +110,7 @@ struct ContentView: View {
                     Image(systemName: "plus")
                 })
                 .navigationBarItems(leading:
-                                        Picker("Select number", selection: $selection) {
+                                        Picker("Select number", selection: $pickerSelection) {
                     Text("Сортировка по дате").tag(1)
                     Text("Сортировка по алфавиту").tag(2)
                     Text("Сортировка по силе скама").tag(3)
@@ -120,14 +120,13 @@ struct ContentView: View {
                         NewSheet()
                     }
                 )}
-
             EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput, power: $editpower)
         } .environment(\.colorScheme, .light)
 
     }
     // MARK: — Swipe to delete from list
     func deleteScam(item: Scam) {
-        viewContext.delete(users[sorting.firstIndex(of: item)!])
+        viewContext.delete(entity[sortedScams.firstIndex(of: item)!])
         try? viewContext.save()
     }
 }

@@ -15,7 +15,7 @@
 		BBD34C1F296D9CE5006ECC63 /* ToDoScamListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */; };
 		BBD34C21296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */; };
 		BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */; };
-		BBD7FD602970C40B006679BF /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD5F2970C40B006679BF /* HideKeyboard.swift */; };
+		BBD7FD602970C40B006679BF /* DismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD5F2970C40B006679BF /* DismissKeyboard.swift */; };
 		BBD7FD622970C4BB006679BF /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD612970C4BB006679BF /* Placeholder.swift */; };
 		BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */; };
 		BBF70625294CF54B006DA73A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70624294CF54B006DA73A /* Persistence.swift */; };
@@ -55,7 +55,7 @@
 		BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListUITests.swift; sourceTree = "<group>"; };
 		BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchToZoom.swift; sourceTree = "<group>"; };
-		BBD7FD5F2970C40B006679BF /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
+		BBD7FD5F2970C40B006679BF /* DismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboard.swift; sourceTree = "<group>"; };
 		BBD7FD612970C4BB006679BF /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		BBF7061F294CF54B006DA73A /* ToDoScamList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoScamList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListApp.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */,
-				BBD7FD5F2970C40B006679BF /* HideKeyboard.swift */,
+				BBD7FD5F2970C40B006679BF /* DismissKeyboard.swift */,
 				BBD7FD612970C4BB006679BF /* Placeholder.swift */,
 			);
 			path = Extensions;
@@ -174,10 +174,10 @@
 		BBF70621294CF54B006DA73A /* ToDoScamList */ = {
 			isa = PBXGroup;
 			children = (
+				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
+				BBF70624294CF54B006DA73A /* Persistence.swift */,
 				BBD34C04296C4C93006ECC63 /* View */,
 				BBD34C03296C4C41006ECC63 /* Models */,
-				BBF70624294CF54B006DA73A /* Persistence.swift */,
-				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
 				BBD7FD5C2970C3AF006679BF /* Extensions */,
 				BBD34C08296C5736006ECC63 /* Preview Content */,
 				BBD34C05296C4CB5006ECC63 /* CoreDate */,
@@ -366,7 +366,7 @@
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AddType.swift in Sources */,
 				BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */,
-				BBD7FD602970C40B006679BF /* HideKeyboard.swift in Sources */,
+				BBD7FD602970C40B006679BF /* DismissKeyboard.swift in Sources */,
 				BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */,
 				BBF70637294CF835006DA73A /* NewSheet.swift in Sources */,
 				BBF7062A294CF54B006DA73A /* ContentView.swift in Sources */,
@@ -601,16 +601,18 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -640,16 +642,18 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";

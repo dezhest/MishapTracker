@@ -17,7 +17,7 @@ extension Scam {
 
     @NSManaged public var power: Double
     @NSManaged public var imageD: Data?
-    @NSManaged public var name: String
+    @NSManaged public var title: String
     @NSManaged public var selectedDate: Date
     @NSManaged public var type: String
     @NSManaged public var typeArray: String

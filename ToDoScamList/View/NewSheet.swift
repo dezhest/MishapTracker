@@ -25,18 +25,16 @@ struct NewSheet: View {
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип"]
     @State private var type = "Финансовый"
-
     var body: some View {
-
         ZStack {
             NavigationView {
                 Form {
                     VStack {
                         TextField("Как вы заскамились?", text: $name)
-                            .padding()
+                            .padding(5)
                         Spacer()
                         VStack(alignment: .leading) {
-                            Text("Сила скама")
+                            Text("Сила скама:")
                             ZStack {
                                 LinearGradient(
                                     gradient: Gradient(colors: [.yellow, .red]),
@@ -97,7 +95,6 @@ struct NewSheet: View {
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 50, height: 50)
                                     .clipShape(Circle())
-                                    .padding()
                             }
                         } else {
                             Button(action: {
@@ -105,9 +102,9 @@ struct NewSheet: View {
                             }) {
                                 Image(systemName: "photo.fill")
                                     .resizable()
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: 50, height: 50)
                                     .cornerRadius(5)
-                                    .shadow(radius: 8, x: 5, y: 5)
+                                    .shadow(radius: 3, x: 5, y: -5)
                                     .foregroundColor(.gray)
                             }
                         }
@@ -119,7 +116,7 @@ struct NewSheet: View {
                     userInfo.power = self.power
                     userInfo.selectedDate = self.selectedDate
                     userInfo.imageD = self.imageData
-                    userInfo.name = self.name
+                    userInfo.title = self.name
                     do {
                         try self.moc.save()
                     } catch {
@@ -127,13 +124,11 @@ struct NewSheet: View {
                     }
                     UserDefaults.standard.set(types, forKey: "types")
                     self.presentationMode.wrappedValue.dismiss()
-
                 })
                 .navigationBarTitle("Добавить скам")
                 .onAppear {
                     types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
                 }
-
                 .actionSheet(isPresented: self.$show) {
                     ActionSheet(title: Text("Сделайте фото скама или выберите из галереи"), message: Text(""), buttons:
                                     [.default(Text("Галерея"), action: {
@@ -154,6 +149,9 @@ struct NewSheet: View {
             })
         }.environment(\.colorScheme, .light)
     }
+    private func endEditing() {
+            UIApplication.shared.endEditing()
+        }
 }
 
 struct AddView_Previews: PreviewProvider {
