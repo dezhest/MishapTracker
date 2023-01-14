@@ -30,7 +30,7 @@ struct ContentView: View {
         formatter.dateFormat = "dd.MM.yy"
         return formatter
     }()
-
+    
     var sortedScams: [Scam] {
         switch pickerSelection {
         case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
@@ -39,7 +39,7 @@ struct ContentView: View {
         default: return []
         }
     }
-
+    
     var body: some View {
         ZStack {
             NavigationView {
@@ -50,34 +50,41 @@ struct ContentView: View {
                             .aspectRatio(contentMode: .fit)
                             .pinchToZoom
                         ) {
-                            HStack(alignment: .center, spacing: 0) {
-                                VStack(alignment: .leading, spacing: 5) {
-                                    Text(item.title)
+                                ZStack {
+                                    Image(uiImage: UIImage(data: item.imageD ?? self.image) ?? UIImage())
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 60, height: 60)
+                                        .clipShape(Circle())
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Text(item.title)
                                             .font(.system(size: 14, weight: .bold, design: .default))
-                                    Text(item.type)
+                                        Text("#\(item.type)")
+                                            .font(.system(size: 10, weight: .medium, design: .default))
+                                            .opacity(0.6)
+                                        Text("\(Int(item.power))/10 скамов")
+                                            .font(.system(size: 12, weight: .medium, design: .default))
+                                            .foregroundColor(.black)
+                                            .padding(3)
+                                            .background(Color(.yellow))
+                                            .cornerRadius(20)
+                                            .shadow(color: .gray, radius: 3, x: 2, y: 2)
+                                    } .frame(maxWidth: .infinity, alignment: .center)
+                                    .offset(x: 10)
+                                    Text("\(item.selectedDate, formatter: dateFormatter)")
                                         .font(.system(size: 12, weight: .medium, design: .default))
-                                }
-                                Spacer()
-                                Image(uiImage: UIImage(data: item.imageD ?? self.image) ?? UIImage())
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 50, height: 50)
-                                    .clipShape(Circle())
-                                Spacer()
-                                Text("\(item.selectedDate, formatter: dateFormatter)")
-                                    .font(.system(size: 12, weight: .medium, design: .default))
-                                    .padding(3)
-                                    .foregroundColor(.gray)
-                                    .opacity(0.5)
-
-                                Text("\(Int(item.power))")
-                            }
+                                        .padding(3)
+                                        .foregroundColor(.gray)
+                                        .opacity(0.5)
+                                        .offset(x: 30, y: -30)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                } .frame(maxWidth: .infinity)
                         }
                         .disabled(item.imageD == Data())
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive, action: {
                                 deleteScam(item: item)
-
                             }) {
                                 Label("Delete", systemImage: "trash")
                             }
@@ -97,10 +104,10 @@ struct ContentView: View {
                         }
                     }
                     .onChange(of: editIsShown) { _ in
-                                    sortedScams[indexOfEditScam].title = editInput
-                                    sortedScams[indexOfEditScam].power = editpower
-                                    try? viewContext.save()
-                        }
+                        sortedScams[indexOfEditScam].title = editInput
+                        sortedScams[indexOfEditScam].power = editpower
+                        try? viewContext.save()
+                    }
                 }
                 .navigationBarTitle("Scam List")
                 .navigationBarItems(trailing:
@@ -122,7 +129,7 @@ struct ContentView: View {
                 )}
             EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput, power: $editpower)
         } .environment(\.colorScheme, .light)
-
+        
     }
     // MARK: — Swipe to delete from list
     func deleteScam(item: Scam) {
