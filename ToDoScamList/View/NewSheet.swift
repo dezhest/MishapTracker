@@ -42,7 +42,7 @@ struct NewSheet: View {
                                     endPoint: .trailing
                                 )
                                 .mask(Slider(value: $power, in: 0...10))
-                                Slider(value: $power, in: 0...10)
+                                Slider(value: $power, in: 0...10, step: 1)
                                     .opacity(0.05)
                                     .alignmentGuide(VerticalAlignment.center) { $0[VerticalAlignment.center]}
                                     .padding(.top)
