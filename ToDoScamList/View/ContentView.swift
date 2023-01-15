@@ -49,7 +49,7 @@ struct ContentView: View {
                             .pinchToZoom
                         ) {
                                 ZStack {
-                                    Image(uiImage: UIImage(data: item.imageD ?? self.image) ?? UIImage())
+                                    newOrSystemImage(item: item)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 60, height: 60)
@@ -68,18 +68,20 @@ struct ContentView: View {
                                             .background(colorOfPower(power: Int(item.power)))
                                             .cornerRadius(20)
                                             .shadow(color: .gray, radius: 3, x: 2, y: 2)
-                                    } .frame(maxWidth: .infinity, alignment: .center)
+                                    } .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.leading, 60)
                                     .offset(x: 10)
                                     Text("\(item.selectedDate, formatter: dateFormatter)")
                                         .font(.system(size: 12, weight: .medium, design: .default))
                                         .padding(3)
                                         .foregroundColor(.gray)
                                         .opacity(0.5)
-                                        .offset(x: 30, y: -30)
+                                        .offset(x: 30, y: 30)
                                         .frame(maxWidth: .infinity, alignment: .trailing)
                                 } .frame(maxWidth: .infinity)
                         }
-                        .disabled(item.imageD == Data())
+
+//                        .disabled(item.imageD == Data())
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive, action: {
                                 deleteScam(item: item)
@@ -159,6 +161,13 @@ struct ContentView: View {
             return Color(UIColor(red: 252/255, green: 55/255, blue: 51/255, alpha: 1.0))
         default:
            return Color(.black)
+        }
+    }
+    func newOrSystemImage(item: Scam) -> Image {
+        if item.imageD != Data() {
+            return Image(uiImage: UIImage(data: item.imageD ?? Data()) ?? UIImage())
+        } else {
+            return Image("Scam")
         }
     }
 }
