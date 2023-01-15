@@ -12,6 +12,7 @@ struct ContentView: View {
     // MARK: — Private properties
     @ObservedObject var scams = Scams()
     @State private var showingAddExpense = false
+    @State private var showingImage = false
     @State var pickerSelection: Int = 1
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var entity: FetchedResults<Scam>
@@ -24,11 +25,12 @@ struct ContentView: View {
     @State private var editpower: Double = 0
     @State private var editOnChanged = false
     @State private var indexOfEditScam = -1
+    @State private var indexOfImage = 0
     let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.dateFormat = "dd.MM.yy"
-        return formatter
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateFormat = "dd MMM"
+        return dateFormatter
     }()
     var sortedScams: [Scam] {
         switch pickerSelection {
@@ -43,45 +45,46 @@ struct ContentView: View {
             NavigationView {
                 List {
                     ForEach(sortedScams, id: \.self) { item in
-                        NavigationLink(destination: Image(uiImage: UIImage(data: item.imageD ?? Data()) ?? UIImage())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .pinchToZoom
-                        ) {
-                                ZStack {
-                                    newOrSystemImage(item: item)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 60, height: 60)
-                                        .clipShape(Circle())
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    VStack(alignment: .leading, spacing: 5) {
-                                        Text(item.title)
-                                            .font(.system(size: 14, weight: .bold, design: .default))
-                                        Text("#\(item.type)")
-                                            .font(.system(size: 10, weight: .medium, design: .default))
-                                            .opacity(0.6)
-                                        Text("\(Int(item.power))/10 скамов")
-                                            .font(.system(size: 12, weight: .medium, design: .default))
-                                            .foregroundColor(.black)
-                                            .padding(3)
-                                            .background(colorOfPower(power: Int(item.power)))
-                                            .cornerRadius(20)
-                                            .shadow(color: .gray, radius: 3, x: 2, y: 2)
-                                    } .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding(.leading, 60)
-                                    .offset(x: 10)
-                                    Text("\(item.selectedDate, formatter: dateFormatter)")
+                            ZStack {
+                                newOrSystemImage(item: item)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(Circle())
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .onTapGesture {
+                                        if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
+                                        self.showingImage.toggle()
+                                        print(indexOfImage)
+                                    }
+                                VStack(alignment: .leading, spacing: 0) {
+                                    Text(item.title)
+                                        .font(.system(size: 14, weight: .bold, design: .default))
+                                    Text("#\(item.type)")
+                                        .font(.system(size: 10, weight: .medium, design: .default))
+                                        .opacity(0.6)
+                                        .padding(5)
+                                        .padding(.bottom, 3)
+                                        .padding(.leading, -5)
+                                    Text("\(Int(item.power))/10 скамов")
                                         .font(.system(size: 12, weight: .medium, design: .default))
+                                        .foregroundColor(.white)
                                         .padding(3)
-                                        .foregroundColor(.gray)
-                                        .opacity(0.5)
-                                        .offset(x: 30, y: 30)
-                                        .frame(maxWidth: .infinity, alignment: .trailing)
-                                } .frame(maxWidth: .infinity)
-                        }
-
-//                        .disabled(item.imageD == Data())
+                                        .background(colorOfPower(power: Int(item.power)))
+                                        .cornerRadius(20)
+                                        .padding(.bottom, 3)
+                                }
+                                .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
+                                .padding(.leading, 65)
+                                .offset(x: 8)
+                                Text("\(item.selectedDate, formatter: dateFormatter)")
+                                    .font(.system(size: 10, weight: .medium, design: .default))
+                                    .padding(3)
+                                    .padding(.bottom, -1)
+                                    .foregroundColor(.gray)
+                                    .opacity(0.7)
+                                    .frame(maxWidth: .infinity, maxHeight: 60, alignment: .bottomTrailing)
+                            } .frame(maxWidth: .infinity)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive, action: {
                                 deleteScam(item: item)
@@ -126,6 +129,12 @@ struct ContentView: View {
                     .sheet(isPresented: $showingAddExpense) {
                         NewSheet()
                     }
+                    .sheet(isPresented: $showingImage, content: {
+                        Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .pinchToZoom()
+                            })
                 )}
             EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput, power: $editpower)
         } .environment(\.colorScheme, .light)
@@ -160,7 +169,7 @@ struct ContentView: View {
         case 10:
             return Color(UIColor(red: 252/255, green: 55/255, blue: 51/255, alpha: 1.0))
         default:
-           return Color(.black)
+            return Color(.black)
         }
     }
     func newOrSystemImage(item: Scam) -> Image {
