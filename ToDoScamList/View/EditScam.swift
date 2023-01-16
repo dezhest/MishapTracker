@@ -17,6 +17,7 @@ struct EditScam: View {
     var onDone: (String) -> Void = { _ in }
     var onCancel: () -> Void = { }
     @Binding var power: Double
+    @State private var alertTextCountError = false
     var body: some View {
         VStack {
             ZStack {
@@ -26,7 +27,7 @@ struct EditScam: View {
                     .frame(width: screenSize.width * 0.92, height: 15)
                     .foregroundColor(.white)
                     .padding()
-                    .background(Color(.systemBlue))
+                    .background(Color(.orange))
                     .cornerRadius(10)
                 .offset(y: -17)
             }
@@ -37,6 +38,7 @@ struct EditScam: View {
                 .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray))
                 .background(Color(.white))
                 .foregroundColor(.black)
+                .offset(y: -7)
             VStack {
                 ZStack {
                     LinearGradient(
@@ -60,20 +62,23 @@ struct EditScam: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }, alignment: .top)
                 }
+                Button("Сохранить и выйти") {
+                    if text.count > 30 {
+                        self.alertTextCountError.toggle()
+                    } else {
+                        self.isShown = false
+                        self.onDone(self.text)
+                        UIApplication.shared.endEditing()
+                    }
+                }
+                .font(.system(size: 18))
+                .frame(width: 180, height: 5)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color(.orange))
+                .cornerRadius(20)
+                .shadow(color: .gray, radius: 5, x: 5, y: 5)
             }
-            Button("Сохранить и выйти") {
-                if text != "" {
-                    self.isShown = false}
-                self.onDone(self.text)
-                UIApplication.shared.endEditing()
-            }
-            .font(.system(size: 18))
-            .frame(width: 200, height: 5)
-            .foregroundColor(.white)
-            .padding()
-            .background(Color(.systemBlue))
-            .cornerRadius(20)
-            .shadow(color: .gray, radius: 5, x: 5, y: 5)
         }
         .padding()
         .frame(width: screenSize.width * 0.92, height: 250)
@@ -81,6 +86,9 @@ struct EditScam: View {
         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         .offset(y: isShown ? 0 : screenSize.height)
         .shadow(radius: 6)
+        .alert(isPresented: $alertTextCountError) {
+            Alert(title: Text("Длина типа не может быть пустой или превышать 30 символов"))
+        }
     }
 }
 

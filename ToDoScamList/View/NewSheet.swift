@@ -16,11 +16,13 @@ struct NewSheet: View {
     @State private var calendarId: Int = 0
     @State private var typeName = ""
     @State private var showsAlert = false
+    @State private var showsAlertNameCount = false
     @State private var alertInput = ""
     @State private var imageData: Data = .init(capacity: 0)
     @State private var show = false
     @State private var imagePicker = false
     @State private var source: UIImagePickerController.SourceType = .photoLibrary
+    @State private var selection = "None"
     @Environment(\.managedObjectContext) private var moc
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип"]
@@ -31,7 +33,7 @@ struct NewSheet: View {
                 Form {
                     VStack {
                         TextField("Как вы заскамились?", text: $name)
-                            .padding(5)
+                            .padding(10)
                         Spacer()
                         VStack(alignment: .leading) {
                             Text("Сила скама:")
@@ -104,42 +106,47 @@ struct NewSheet: View {
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .cornerRadius(5)
-                                    .shadow(radius: 3, x: 5, y: -5)
                                     .foregroundColor(.gray)
+                            }
+                            .confirmationDialog("Выберите фото скама", isPresented: self.$show, titleVisibility: .visible) {
+                                Button("Камера") {
+                                    self.source = .camera
+                                    self.imagePicker.toggle()
+                                }
+                                Button("Галерея") {
+                                    self.source = .photoLibrary
+                                    self.imagePicker.toggle()
+                                }
                             }
                         }
                     }
                 }
                 .navigationBarItems(trailing: Button("Сохранить") {
-                    let userInfo = Scam(context: self.moc)
-                    userInfo.type = self.type
-                    userInfo.power = self.power
-                    userInfo.selectedDate = self.selectedDate
-                    userInfo.imageD = self.imageData
-                    userInfo.title = self.name
-                    do {
-                        try self.moc.save()
-                    } catch {
-                        print("whoops \(error.localizedDescription)")
+                    if name.count <= 25 {
+                        let userInfo = Scam(context: self.moc)
+                        userInfo.type = self.type
+                        userInfo.power = self.power
+                        userInfo.selectedDate = self.selectedDate
+                        userInfo.imageD = self.imageData
+                        userInfo.title = self.name
+                        do {
+                            try self.moc.save()
+                        } catch {
+                            print("whoops \(error.localizedDescription)")
+                        }
+                        UserDefaults.standard.set(types, forKey: "types")
+                        self.presentationMode.wrappedValue.dismiss()
+                    } else {
+                        self.showsAlertNameCount.toggle()
                     }
-                    UserDefaults.standard.set(types, forKey: "types")
-                    self.presentationMode.wrappedValue.dismiss()
                 })
                 .navigationBarTitle("Добавить скам")
                 .onAppear {
                     types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
                 }
-                .actionSheet(isPresented: self.$show) {
-                    ActionSheet(title: Text("Сделайте фото скама или выберите из галереи"), message: Text(""), buttons:
-                                    [.default(Text("Галерея"), action: {
-                        self.source = .photoLibrary
-                        self.imagePicker.toggle()
-                    }), .default(Text("Камера"), action: {
-                        self.source = .camera
-                        self.imagePicker.toggle()
-                    })
-                                    ])
-                }
+                .alert(isPresented: self.$showsAlertNameCount) {
+                            Alert(title: Text("Название скама не может превышать 30 символов"))
+                        }
             }
             AddType(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
                 if alertInput != ""{
@@ -150,8 +157,8 @@ struct NewSheet: View {
         }.environment(\.colorScheme, .light)
     }
     private func endEditing() {
-            UIApplication.shared.endEditing()
-        }
+        UIApplication.shared.endEditing()
+    }
 }
 
 struct AddView_Previews: PreviewProvider {

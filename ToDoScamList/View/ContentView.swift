@@ -37,14 +37,25 @@ struct ContentView: View {
         case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
         case(2): return entity.sorted(by: {$0.title < $1.title})
         case(3): return entity.sorted(by: {$0.power > $1.power})
+        case(4): return entity.sorted(by: {$0.type > $1.type})
         default: return []
         }
+    }
+    init() {
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.orange]
     }
     var body: some View {
         ZStack {
             NavigationView {
-                List {
-                    ForEach(sortedScams, id: \.self) { item in
+                LinearGradient(gradient: Gradient(colors: [Color(UIColor(red: 255/255, green: 254/255, blue: 215/255, alpha: 1.0)),
+                                                           Color(UIColor(red: 255/255, green: 223/255, blue: 226/255, alpha: 1.0))]),
+                               startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.vertical)
+                .overlay(
+                    List {
+                        ForEach(sortedScams, id: \.self) { item in
                             ZStack {
                                 newOrSystemImage(item: item)
                                     .resizable()
@@ -53,9 +64,10 @@ struct ContentView: View {
                                     .clipShape(Circle())
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .onTapGesture {
-                                        if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
-                                        self.showingImage.toggle()
-                                        print(indexOfImage)
+                                        if item.imageD != Data() {
+                                            if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
+                                            self.showingImage.toggle()
+                                        }
                                     }
                                 VStack(alignment: .leading, spacing: 0) {
                                     Text(item.title)
@@ -85,34 +97,36 @@ struct ContentView: View {
                                     .opacity(0.7)
                                     .frame(maxWidth: .infinity, maxHeight: 60, alignment: .bottomTrailing)
                             } .frame(maxWidth: .infinity)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button(role: .destructive, action: {
-                                deleteScam(item: item)
-                            }) {
-                                Label("Delete", systemImage: "trash")
-                            }
-                        }
-                        .swipeActions(edge: .leading) {
-                            Button {
-                                editInput = item.title
-                                editpower = item.power
-                                if let unwrapped = sortedScams.firstIndex(of: item) {indexOfEditScam = unwrapped}
-                                withAnimation(.spring()) {
-                                    editIsShown.toggle()
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                    Button(role: .destructive, action: {
+                                        deleteScam(item: item)
+                                    }) {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
-                            } label: {
-                                Label("Edit", systemImage: "pencil")
-                            }
-                            .tint(.green)
+                                .swipeActions(edge: .leading) {
+                                    Button {
+                                        editInput = item.title
+                                        editpower = item.power
+                                        if let unwrapped = sortedScams.firstIndex(of: item) {indexOfEditScam = unwrapped}
+                                        withAnimation(.spring()) {
+                                            editIsShown.toggle()
+                                        }
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }
+                                    .tint(.green)
+                                }
+                        }
+                        .onChange(of: editIsShown) { _ in
+                            sortedScams[indexOfEditScam].title = editInput
+                            sortedScams[indexOfEditScam].power = editpower
+                            try? viewContext.save()
                         }
                     }
-                    .onChange(of: editIsShown) { _ in
-                        sortedScams[indexOfEditScam].title = editInput
-                        sortedScams[indexOfEditScam].power = editpower
-                        try? viewContext.save()
-                    }
-                }
-                .navigationBarTitle("Scam List")
+                )
+                .navigationBarTitle(Text("Scam List"))
+                .navigationBarHidden(false)
                 .navigationBarItems(trailing:
                                         Button(action: {
                     self.showingAddExpense = true
@@ -124,6 +138,7 @@ struct ContentView: View {
                     Text("Сортировка по дате").tag(1)
                     Text("Сортировка по алфавиту").tag(2)
                     Text("Сортировка по силе скама").tag(3)
+                    Text("Сортировка по типу").tag(4)
                 }
                     .pickerStyle(.menu)
                     .sheet(isPresented: $showingAddExpense) {
@@ -134,7 +149,7 @@ struct ContentView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .pinchToZoom()
-                            })
+                    })
                 )}
             EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput, power: $editpower)
         } .environment(\.colorScheme, .light)
