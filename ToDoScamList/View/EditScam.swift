@@ -87,7 +87,7 @@ struct EditScam: View {
         .offset(y: isShown ? 0 : screenSize.height)
         .shadow(radius: 6)
         .alert(isPresented: $alertTextCountError) {
-            Alert(title: Text("Длина типа не может быть пустой или превышать 30 символов"))
+            Alert(title: Text("Длина типа не может превышать 30 символов"))
         }
     }
 }

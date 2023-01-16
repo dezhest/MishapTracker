@@ -74,7 +74,7 @@ struct NewSheet: View {
                                 Text($0)
                             }
                         }
-                        .onChange(of: type) { tag in print("Color tag: \(tag)")
+                        .onChange(of: type) { _ in
                             if type == "Свой тип" {
                                 withAnimation(.spring()) {
                                     self.showsAlert.toggle()
@@ -149,7 +149,7 @@ struct NewSheet: View {
                         }
             }
             AddType(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
-                if alertInput != ""{
+                if alertInput != "" {
                     types.insert(alertInput, at: 0)
                 }
                 type = alertInput
