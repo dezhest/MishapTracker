@@ -29,16 +29,22 @@ struct ContentView: View {
     @State private var indexOfImage = 0
     @State private var showImage = Image("Scam")
     // MARK: — Properties for MoreDetailed View
-    @State var indexOfMoreDetailed: Int = 0
-    @State var moreDetailTitle = ""
-//    @State var sortedScamcMoreDetailed = sortedScams
+    @State private var indexOfMoreDetailed: Int = 0
+    @State private var moreDetailTitle = ""
+    @State private var countsOfScams = 0
     
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateFormat = "dd MMM"
         return dateFormatter
     }()
+    let monthAgoDate = Calendar(identifier: .iso8601).date(byAdding: .day, value: -30, to: Date())!
+    let previosOneWeek = Date.today().previous(.monday).previous(.monday)
+    let previosTwoWeek = Date.today().previous(.monday).previous(.monday).previous(.monday)
+    let previosThreeWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday)
+    let previosFourWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
+    let previosFiveWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
+
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var entity: FetchedResults<Scam>
     var sortedScams: [Scam] {
         switch pickerSelection {
@@ -109,10 +115,37 @@ struct ContentView: View {
                                         .opacity(0.7)
                                         .frame(maxWidth: .infinity, maxHeight: 60, alignment: .trailing)
                                         .padding(20)
+    // MARK: — Properties for MoreDetailed View
                                         .onTapGesture {
                                             if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
                                             moreDetailTitle = sortedScams[indexOfMoreDetailed].title
-                                            self.showingMoreDetailed.toggle()
+                                            let arrayallPower = sortedScams.map({Int($0.power)})
+                                            let currentpower = sortedScams.map({Int($0.power)})[indexOfMoreDetailed]
+                                            let allPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
+                                            let medianaOfAll = (allPower / Double(sortedScams.count)*100).rounded()/100
+                                            let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
+                                            let previosOneWeekScams = sortedScams.filter({($0.selectedDate > previosOneWeek) && ($0.selectedDate < Date.today().previous(.monday))}).count
+                                            let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > previosTwoWeek) && ($0.selectedDate < previosOneWeek)}).count
+                                            let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > previosThreeWeek) && ($0.selectedDate < previosTwoWeek)}).count
+                                            let previosFourWeekScams = sortedScams.filter({($0.selectedDate > previosFourWeek) && ($0.selectedDate < previosThreeWeek)}).count
+                                            let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > previosFiveWeek) && ($0.selectedDate < previosFourWeek)}).count
+                                            let last30DayScams = sortedScams.filter({$0.selectedDate > monthAgoDate})
+                                            let sameTypeCount = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+                                            let last30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+                                            let currentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+                                            let currentWeekPower = Int((Double(currentWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
+                                            let last30dayPower = Int((Double(last30DayScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
+//                                            let previosOneWeekPower = Int((Double(previosOneWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
+//                                            let previosTwoWeekPower = Int((Double(previosTwoWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
+//                                            let previosThreeWeekPower = Int((Double(previosThreeWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
+//                                            let previosFourWeekPower = Int((Double(previosFourWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
+//                                            let previosFiveWeekPower = Int((Double(previosFiveWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
+//                                            self.showingMoreDetailed.toggle()
+//                                            print(previosOneWeekPower)
+//                                            print(previosTwoWeekPower)
+//                                            print(previosThreeWeekPower)
+//                                            print(previosFourWeekPower)
+//                                            print(previosFiveWeekPower)
                                         }
                             } .frame(maxWidth: .infinity)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
