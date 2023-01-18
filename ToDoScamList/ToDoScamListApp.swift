@@ -16,6 +16,9 @@ struct ToDoScamListApp: App {
             ContentView()
                 .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .onAppear(){
+                    
+                }
         }
     }
 }

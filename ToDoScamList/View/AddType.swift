@@ -48,7 +48,6 @@ struct AddType: View {
                 .font(.system(size: 18, weight: .bold, design: .default))
                 .foregroundColor(.red)
                 Button("Добавить") {
-//                    entity.contains(FetchedResults<Scam>.title) == true
                     if text.count > 30 || text.count == 0 {
                         self.alertTextCountError.toggle()
                     } else {

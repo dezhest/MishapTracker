@@ -11,27 +11,35 @@ import CoreData
 struct ContentView: View {
     // MARK: — Private properties
     @ObservedObject var scams = Scams()
-    @State private var showingAddExpense = false
+    @State private var showingNewSheet = false
+    @State private var showingMoreDetailed = false
     @State private var showingImage = false
     @State var pickerSelection: Int = 1
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var entity: FetchedResults<Scam>
     @State private var image: Data = .init(count: 0)
     @GestureState private var scale: CGFloat = 1.0
+    // MARK: — Properties for EditScam View
     @State private var editIsShown = false
     @State private var editIsCanceled = false
     @State private var editIsAdded = false
     @State private var editInput = ""
     @State private var editpower: Double = 0
     @State private var editOnChanged = false
-    @State private var indexOfEditScam = -1
+    @State private var indexOfEditScam = 0
     @State private var indexOfImage = 0
+    @State private var showImage = Image("Scam")
+    // MARK: — Properties for MoreDetailed View
+    @State var indexOfMoreDetailed: Int = 0
+    @State var moreDetailTitle = ""
+//    @State var sortedScamcMoreDetailed = sortedScams
+    
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateFormat = "dd MMM"
         return dateFormatter
     }()
+    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var entity: FetchedResults<Scam>
     var sortedScams: [Scam] {
         switch pickerSelection {
         case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
@@ -66,6 +74,7 @@ struct ContentView: View {
                                     .onTapGesture {
                                         if item.imageD != Data() {
                                             if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
+                                            showImage = Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
                                             self.showingImage.toggle()
                                         }
                                     }
@@ -96,6 +105,15 @@ struct ContentView: View {
                                     .foregroundColor(.gray)
                                     .opacity(0.7)
                                     .frame(maxWidth: .infinity, maxHeight: 60, alignment: .bottomTrailing)
+                                    Image(systemName: "square.and.pencil")
+                                        .opacity(0.7)
+                                        .frame(maxWidth: .infinity, maxHeight: 60, alignment: .trailing)
+                                        .padding(20)
+                                        .onTapGesture {
+                                            if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
+                                            moreDetailTitle = sortedScams[indexOfMoreDetailed].title
+                                            self.showingMoreDetailed.toggle()
+                                        }
                             } .frame(maxWidth: .infinity)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                     Button(role: .destructive, action: {
@@ -129,7 +147,7 @@ struct ContentView: View {
                 .navigationBarHidden(false)
                 .navigationBarItems(trailing:
                                         Button(action: {
-                    self.showingAddExpense = true
+                    self.showingNewSheet = true
                 }) {
                     Image(systemName: "plus")
                 })
@@ -141,14 +159,14 @@ struct ContentView: View {
                     Text("Сортировка по типу").tag(4)
                 }
                     .pickerStyle(.menu)
-                    .sheet(isPresented: $showingAddExpense) {
+                    .sheet(isPresented: $showingNewSheet) {
                         NewSheet()
                     }
+                    .sheet(isPresented: $showingMoreDetailed) {
+                        MoreDetailed(title: $moreDetailTitle)
+                    }
                     .sheet(isPresented: $showingImage, content: {
-                        Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .pinchToZoom()
+                        ShowImage(image: $showImage)
                     })
                 )}
             EditScam(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput, power: $editpower)
