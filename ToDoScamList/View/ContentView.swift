@@ -124,28 +124,23 @@ struct ContentView: View {
                                             let allPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
                                             let medianaOfAll = (allPower / Double(sortedScams.count)*100).rounded()/100
                                             let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
-                                            let previosOneWeekScams = sortedScams.filter({($0.selectedDate > previosOneWeek) && ($0.selectedDate < Date.today().previous(.monday))}).count
-                                            let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > previosTwoWeek) && ($0.selectedDate < previosOneWeek)}).count
-                                            let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > previosThreeWeek) && ($0.selectedDate < previosTwoWeek)}).count
-                                            let previosFourWeekScams = sortedScams.filter({($0.selectedDate > previosFourWeek) && ($0.selectedDate < previosThreeWeek)}).count
-                                            let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > previosFiveWeek) && ($0.selectedDate < previosFourWeek)}).count
+                                            let previosOneWeekScams = sortedScams.filter({($0.selectedDate > previosOneWeek) && ($0.selectedDate < Date.today().previous(.monday))})
+                                            let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > previosTwoWeek) && ($0.selectedDate < previosOneWeek)})
+                                            let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > previosThreeWeek) && ($0.selectedDate < previosTwoWeek)})
+                                            let previosFourWeekScams = sortedScams.filter({($0.selectedDate > previosFourWeek) && ($0.selectedDate < previosThreeWeek)})
+                                            let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > previosFiveWeek) && ($0.selectedDate < previosFourWeek)})
                                             let last30DayScams = sortedScams.filter({$0.selectedDate > monthAgoDate})
                                             let sameTypeCount = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
                                             let last30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
                                             let currentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
-                                            let currentWeekPower = Int((Double(currentWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
-                                            let last30dayPower = Int((Double(last30DayScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
-//                                            let previosOneWeekPower = Int((Double(previosOneWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
-//                                            let previosTwoWeekPower = Int((Double(previosTwoWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
-//                                            let previosThreeWeekPower = Int((Double(previosThreeWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
-//                                            let previosFourWeekPower = Int((Double(previosFourWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
-//                                            let previosFiveWeekPower = Int((Double(previosFiveWeekScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100)
-//                                            self.showingMoreDetailed.toggle()
-//                                            print(previosOneWeekPower)
-//                                            print(previosTwoWeekPower)
-//                                            print(previosThreeWeekPower)
-//                                            print(previosFourWeekPower)
-//                                            print(previosFiveWeekPower)
+                                            let currentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
+                                            let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
+                                            let previosOneWeekPower = previosOneWeekScams.map({Int($0.power)}).reduce(0, +)
+                                            let previosTwoWeekPower = previosTwoWeekScams.map({Int($0.power)}).reduce(0, +)
+                                            let previosThreeWeekPower = previosThreeWeekScams.map({Int($0.power)}).reduce(0, +)
+                                            let previosFourWeekPower = previosFourWeekScams.map({Int($0.power)}).reduce(0, +)
+                                            let previosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
+                                            self.showingMoreDetailed.toggle()
                                         }
                             } .frame(maxWidth: .infinity)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
