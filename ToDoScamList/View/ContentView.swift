@@ -115,26 +115,44 @@ struct ContentView: View {
                                         .opacity(0.7)
                                         .frame(maxWidth: .infinity, maxHeight: 60, alignment: .trailing)
                                         .padding(20)
-    // MARK: — Properties for MoreDetailed View
+                                            // MARK: — Properties for MoreDetailed View
                                         .onTapGesture {
                                             if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
                                             moreDetailTitle = sortedScams[indexOfMoreDetailed].title
                                             let arrayallPower = sortedScams.map({Int($0.power)})
                                             let currentpower = sortedScams.map({Int($0.power)})[indexOfMoreDetailed]
-                                            let allPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
-                                            let medianaOfAll = (allPower / Double(sortedScams.count)*100).rounded()/100
+                                            let arrayAllType = sortedScams.map({$0.type})
+                                            let last30DayScams = sortedScams.filter({$0.selectedDate > monthAgoDate})
                                             let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
                                             let previosOneWeekScams = sortedScams.filter({($0.selectedDate > previosOneWeek) && ($0.selectedDate < Date.today().previous(.monday))})
                                             let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > previosTwoWeek) && ($0.selectedDate < previosOneWeek)})
                                             let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > previosThreeWeek) && ($0.selectedDate < previosTwoWeek)})
                                             let previosFourWeekScams = sortedScams.filter({($0.selectedDate > previosFourWeek) && ($0.selectedDate < previosThreeWeek)})
                                             let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > previosFiveWeek) && ($0.selectedDate < previosFourWeek)})
-                                            let last30DayScams = sortedScams.filter({$0.selectedDate > monthAgoDate})
+                                            // MARK: — General Statistic
+                                            let allPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
+                                            let medianaPowerOfAll = (allPower / Double(sortedScams.count)*100).rounded()/100
                                             let sameTypeCount = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+                                            var mostFrequentTypeCount = 0
+                                            var mostFrequentType = ""
+                                            func mostFrequent<T: Hashable>(array: [T]) -> (value: T, count: Int)? {
+                                                let counts = array.reduce(into: [:]) { $0[$1, default: 0] += 1 }
+                                                if let (value, count) = counts.max(by: { $0.1 < $1.1 }) {
+                                                    return (value, count)
+                                                }
+                                                return nil
+                                            }
+                                            if let result = mostFrequent(array: arrayAllType) {
+                                                mostFrequentType = result.value
+                                                mostFrequentTypeCount = result.count
+                                            }
+                                            // MARK: — Month Statistic
+                                            let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
                                             let last30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+                                            let medianaPowerOfLast30day = (Double(last30dayPower) / Double(last30DayScams.count)*100).rounded()/100
+                                            // MARK: — Week Statistic
                                             let currentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
                                             let currentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
-                                            let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
                                             let previosOneWeekPower = previosOneWeekScams.map({Int($0.power)}).reduce(0, +)
                                             let previosTwoWeekPower = previosTwoWeekScams.map({Int($0.power)}).reduce(0, +)
                                             let previosThreeWeekPower = previosThreeWeekScams.map({Int($0.power)}).reduce(0, +)
