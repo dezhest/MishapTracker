@@ -30,8 +30,25 @@ struct ContentView: View {
     @State private var showImage = Image("Scam")
     // MARK: — Properties for MoreDetailed View
     @State private var indexOfMoreDetailed: Int = 0
-    @State private var moreDetailTitle = ""
-    @State private var countsOfScams = 0
+    @State private var mDTitle = ""
+   
+    @State private var mDallPower = 0.0
+    @State private var mDmedianaPowerOfAll = 0.0
+    @State private var mDmedianaPowerSameType = 0.0
+    @State private var mDmostFrequentTypeCount = 0
+    @State private var mDmostFrequentType = ""
+
+    @State private var mDlast30dayPower = 0
+    @State private var mDlast30daySameTypeCount = 0
+    @State private var mDmedianaPowerOfLast30day = 0.0
+ 
+    @State private var mDcurrentWeekSameTypeCount = 0
+    @State private var mDcurrentWeekPower = 0
+    @State private var mDpreviosOneWeekPower = 0
+    @State private var mDpreviosTwoWeekPower = 0
+    @State private var mDpreviosThreeWeekPower = 0
+    @State private var mDpreviosFourWeekPower = 0
+    @State private var mDpreviosFiveWeekPower = 0
     
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -118,7 +135,6 @@ struct ContentView: View {
                                             // MARK: — Properties for MoreDetailed View
                                         .onTapGesture {
                                             if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
-                                            moreDetailTitle = sortedScams[indexOfMoreDetailed].title
                                             let arrayallPower = sortedScams.map({Int($0.power)})
                                             let currentpower = sortedScams.map({Int($0.power)})[indexOfMoreDetailed]
                                             let arrayAllType = sortedScams.map({$0.type})
@@ -129,10 +145,13 @@ struct ContentView: View {
                                             let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > previosThreeWeek) && ($0.selectedDate < previosTwoWeek)})
                                             let previosFourWeekScams = sortedScams.filter({($0.selectedDate > previosFourWeek) && ($0.selectedDate < previosThreeWeek)})
                                             let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > previosFiveWeek) && ($0.selectedDate < previosFourWeek)})
+                                            let sameTypeScams = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type})
+                                            let sameTypeAllPower = (Double(sameTypeScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100
                                             // MARK: — General Statistic
                                             let allPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
                                             let medianaPowerOfAll = (allPower / Double(sortedScams.count)*100).rounded()/100
-                                            let sameTypeCount = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+                                            let sameTypeCount = sameTypeScams.count
+                                            let medianaPowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
                                             var mostFrequentTypeCount = 0
                                             var mostFrequentType = ""
                                             func mostFrequent<T: Hashable>(array: [T]) -> (value: T, count: Int)? {
@@ -158,7 +177,27 @@ struct ContentView: View {
                                             let previosThreeWeekPower = previosThreeWeekScams.map({Int($0.power)}).reduce(0, +)
                                             let previosFourWeekPower = previosFourWeekScams.map({Int($0.power)}).reduce(0, +)
                                             let previosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
+                                            // MARK: — State Properties for MoreDetailed View
+                                            mDTitle = sortedScams[indexOfMoreDetailed].title
+                                            mDallPower = allPower
+                                            mDmedianaPowerOfAll = medianaPowerOfAll
+                                            mDmedianaPowerSameType = medianaPowerSameType
+                                            mDmostFrequentTypeCount = mostFrequentTypeCount
+                                            mDmostFrequentType = mostFrequentType
+
+                                            mDlast30dayPower = last30dayPower
+                                            mDlast30daySameTypeCount = last30daySameTypeCount
+                                            mDmedianaPowerOfLast30day = medianaPowerOfLast30day
+                                        
+                                            mDcurrentWeekSameTypeCount = currentWeekSameTypeCount
+                                            mDcurrentWeekPower = currentWeekPower
+                                            mDpreviosOneWeekPower = previosOneWeekPower
+                                            mDpreviosTwoWeekPower = previosTwoWeekPower
+                                            mDpreviosThreeWeekPower = previosThreeWeekPower
+                                            mDpreviosFourWeekPower = previosFourWeekPower
+                                            mDpreviosFiveWeekPower = previosFiveWeekPower
                                             self.showingMoreDetailed.toggle()
+                                            
                                         }
                             } .frame(maxWidth: .infinity)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -209,7 +248,7 @@ struct ContentView: View {
                         NewSheet()
                     }
                     .sheet(isPresented: $showingMoreDetailed) {
-                        MoreDetailed(title: $moreDetailTitle)
+                        MoreDetailed(title: $mDTitle, allPower: $mDallPower, medianaPowerOfAll: $mDmedianaPowerOfAll, medianaPowerSameType: $mDmedianaPowerSameType, mostFrequentTypeCount: $mDmostFrequentTypeCount, mostFrequentType: $mDmostFrequentType, last30dayPower: $mDlast30dayPower, last30daySameTypeCount: $mDlast30daySameTypeCount, medianaPowerOfLast30day: $mDmedianaPowerOfLast30day, currentWeekSameTypeCount: $mDcurrentWeekSameTypeCount, currentWeekPower: $mDcurrentWeekPower, previosOneWeekPower: $mDpreviosOneWeekPower, previosTwoWeekPower: $mDpreviosTwoWeekPower, previosThreeWeekPower: $mDpreviosThreeWeekPower, previosFourWeekPower: $mDpreviosFourWeekPower, previosFiveWeekPower: $mDpreviosFiveWeekPower)
                     }
                     .sheet(isPresented: $showingImage, content: {
                         ShowImage(image: $showImage)
