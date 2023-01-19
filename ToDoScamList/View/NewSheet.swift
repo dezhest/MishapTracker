@@ -58,6 +58,21 @@ struct NewSheet: View {
                                             }
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                     }, alignment: .top)
+                                
+                                VStack {
+                                    Text("Max Scam")
+                                        .font(.system(size: 12, weight: .medium, design: .default))
+                                        .foregroundColor(.white)
+                                        .padding(3)
+                                        .background(Color(.red))
+                                        .cornerRadius(20)
+                                        .padding(.bottom, 3)
+                                        .offset(y: -50)
+                                    }
+                                        .frame(maxWidth: .infinity, alignment: .topTrailing)
+                                        .onTapGesture {
+                                            self.power = 10
+                                }
                             }
                         }
                         DatePicker("Когда был скам?", selection: $selectedDate, displayedComponents: .date)
@@ -145,8 +160,8 @@ struct NewSheet: View {
                     types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
                 }
                 .alert(isPresented: self.$showsAlertNameCount) {
-                            Alert(title: Text("Название скама не может превышать 30 символов"))
-                        }
+                    Alert(title: Text("Название скама не может превышать 30 символов"))
+                }
             }
             AddType(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
                 if alertInput != "" {
