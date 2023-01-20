@@ -31,6 +31,7 @@ struct ContentView: View {
     // MARK: — Properties for MoreDetailed View
     @State private var indexOfMoreDetailed: Int = 0
     @State private var mDTitle = ""
+    @State private var mDType = ""
     @State private var mDSameTypeCount = 0
     @State private var mDmedianaPowerSameType = 0.0
     
@@ -180,6 +181,8 @@ struct ContentView: View {
                                         let previosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
                                         // MARK: — State Properties for MoreDetailed View
                                         mDTitle = sortedScams[indexOfMoreDetailed].title
+                                        mDType = sortedScams[indexOfMoreDetailed].type
+                                        mDSameTypeCount = sameTypeScams.count
                                         mDallPower = allPower
                                         mDmedianaPowerOfAll = medianaPowerOfAll
                                         mDmedianaPowerSameType = medianaPowerSameType
@@ -244,7 +247,7 @@ struct ContentView: View {
                     NewSheet()
                 }
                 .sheet(isPresented: $showingMoreDetailed) {
-                    MoreDetailed(title: $mDTitle, allPower: $mDallPower, medianaPowerOfAll: $mDmedianaPowerOfAll, medianaPowerSameType: $mDmedianaPowerSameType, mostFrequentTypeCount: $mDmostFrequentTypeCount, mostFrequentType: $mDmostFrequentType, sameTypeCount: $mDSameTypeCount, last30dayPower: $mDlast30dayPower, last30daySameTypeCount: $mDlast30daySameTypeCount, medianaPowerOfLast30day: $mDmedianaPowerOfLast30day, currentWeekSameTypeCount: $mDcurrentWeekSameTypeCount, currentWeekPower: $mDcurrentWeekPower, previosOneWeekPower: $mDpreviosOneWeekPower, previosTwoWeekPower: $mDpreviosTwoWeekPower, previosThreeWeekPower: $mDpreviosThreeWeekPower, previosFourWeekPower: $mDpreviosFourWeekPower, previosFiveWeekPower: $mDpreviosFiveWeekPower)
+                    MoreDetailed(title: $mDTitle, type: $mDType, allPower: $mDallPower, medianaPowerOfAll: $mDmedianaPowerOfAll, medianaPowerSameType: $mDmedianaPowerSameType, mostFrequentTypeCount: $mDmostFrequentTypeCount, mostFrequentType: $mDmostFrequentType, sameTypeCount: $mDSameTypeCount, last30dayPower: $mDlast30dayPower, last30daySameTypeCount: $mDlast30daySameTypeCount, medianaPowerOfLast30day: $mDmedianaPowerOfLast30day, currentWeekSameTypeCount: $mDcurrentWeekSameTypeCount, currentWeekPower: $mDcurrentWeekPower, previosOneWeekPower: $mDpreviosOneWeekPower, previosTwoWeekPower: $mDpreviosTwoWeekPower, previosThreeWeekPower: $mDpreviosThreeWeekPower, previosFourWeekPower: $mDpreviosFourWeekPower, previosFiveWeekPower: $mDpreviosFiveWeekPower)
                 }
                 .sheet(isPresented: $showingImage, content: {
                     ShowImage(image: $showImage)

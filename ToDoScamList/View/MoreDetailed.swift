@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MoreDetailed: View {
     @Binding var title: String
+    @Binding var type: String
     @Binding var allPower: Double
     @Binding var medianaPowerOfAll: Double
     @Binding var medianaPowerSameType: Double
@@ -32,10 +33,15 @@ struct MoreDetailed: View {
         NavigationView {
             List {
                 HStack {
-                    Text("Количество скамов такого же типа")
-                    .font(.system(size: 18, weight: .bold, design: .default))
-                        .font(.system(size: 14, weight: .medium, design: .default))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Group {
+                        Text("Количество скамов типа ")
+                            .font(.system(size: 18, weight: .bold, design: .default))
+                            .font(.system(size: 14, weight: .medium, design: .default))
+                        + Text("#\(type)")
+                            .font(.system(size: 14, weight: .medium, design: .default))
+                            .foregroundColor(.orange)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text("\(sameTypeCount)")
                             .font(.system(size: 14, weight: .medium, design: .default))
@@ -48,10 +54,14 @@ struct MoreDetailed: View {
                     .frame(alignment: .trailing)
                 }
                 HStack {
-                    Text("Средняя сила скама такого же типа")
-                    .font(.system(size: 18, weight: .bold, design: .default))
-                        .font(.system(size: 14, weight: .medium, design: .default))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Group {
+                        Text("Средняя сила типа ")
+                            .font(.system(size: 18, weight: .bold, design: .default))
+                       + Text("#\(type)")
+                            .font(.system(size: 14, weight: .medium, design: .default))
+                            .foregroundColor(.orange)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text(String(format: "%.2f", medianaPowerSameType))
                             .font(.system(size: 14, weight: .medium, design: .default))
@@ -142,9 +152,15 @@ struct MoreDetailed: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                     HStack {
-                        Text("Количество скамов в этом типе")
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Group {
+                            Text("Количество скамов типа ")
+                                .font(.system(size: 18, weight: .bold, design: .default))
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                            + Text("#\(type)")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .foregroundColor(.orange)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         VStack {
                             Text("\(last30daySameTypeCount)")
                                 .font(.system(size: 14, weight: .medium, design: .default))
@@ -189,9 +205,15 @@ struct MoreDetailed: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                     HStack {
-                        Text("Количество скамов в этом типе")
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Group {
+                            Text("Количество скамов типа ")
+                                .font(.system(size: 18, weight: .bold, design: .default))
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                            + Text("#\(type)")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .foregroundColor(.orange)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         VStack {
                             Text("\(currentWeekSameTypeCount)")
                                 .font(.system(size: 14, weight: .medium, design: .default))
@@ -213,6 +235,6 @@ struct MoreDetailed: View {
 
 struct MoreDetailed_Previews: PreviewProvider {
     static var previews: some View {
-        MoreDetailed(title: .constant(""), allPower: .constant(0.0), medianaPowerOfAll: .constant(0.0), medianaPowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), medianaPowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0))
+        MoreDetailed(title: .constant(""), type: .constant(""), allPower: .constant(0.0), medianaPowerOfAll: .constant(0.0), medianaPowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), medianaPowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0))
     }
 }

@@ -137,7 +137,9 @@ struct NewSheet: View {
                     }
                 }
                 .navigationBarItems(trailing: Button("Сохранить") {
-                    if name.count <= 25 {
+                    if name.count >= 30 || name.isEmpty {
+                        self.showsAlertNameCount.toggle()
+                    } else {
                         let userInfo = Scam(context: self.moc)
                         userInfo.type = self.type
                         userInfo.power = self.power
@@ -151,8 +153,6 @@ struct NewSheet: View {
                         }
                         UserDefaults.standard.set(types, forKey: "types")
                         self.presentationMode.wrappedValue.dismiss()
-                    } else {
-                        self.showsAlertNameCount.toggle()
                     }
                 })
                 .navigationBarTitle("Добавить скам")
@@ -160,7 +160,7 @@ struct NewSheet: View {
                     types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
                 }
                 .alert(isPresented: self.$showsAlertNameCount) {
-                    Alert(title: Text("Название скама не может превышать 30 символов"))
+                    Alert(title: Text("Название скама не может быть пустым или превышать 30 символов"))
                 }
             }
             AddType(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
