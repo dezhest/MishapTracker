@@ -29,6 +29,7 @@
 		BBFA467C2954AB46009E9E9A /* AddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AddType.swift */; };
 		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
+		BBFA93F5297AEA21009F6C67 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BBFA93F4297AEA21009F6C67 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBFA93F5297AEA21009F6C67 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +254,7 @@
 			);
 			name = ToDoScamList;
 			packageProductDependencies = (
+				BBFA93F4297AEA21009F6C67 /* SwiftUICharts */,
 			);
 			productName = ToDoScamList;
 			productReference = BBF7061F294CF54B006DA73A /* ToDoScamList.app */;
@@ -291,6 +294,7 @@
 			);
 			mainGroup = BBF70616294CF54B006DA73A;
 			packageReferences = (
+				BBFA93F3297AEA20009F6C67 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = BBF70620294CF54B006DA73A /* Products */;
 			projectDirPath = "";
@@ -732,6 +736,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BBFA93F3297AEA20009F6C67 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willdale/SwiftUICharts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BBFA93F4297AEA21009F6C67 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBFA93F3297AEA20009F6C67 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */ = {

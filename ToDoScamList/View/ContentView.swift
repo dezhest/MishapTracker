@@ -46,7 +46,7 @@ struct ContentView: View {
     
     @State private var mDcurrentWeekSameTypeCount = 0
     @State private var mDcurrentWeekPower = 0
-    @State private var mDpreviosOneWeekPower = 0
+    @State var mDpreviosOneWeekPower = 0
     @State private var mDpreviosTwoWeekPower = 0
     @State private var mDpreviosThreeWeekPower = 0
     @State private var mDpreviosFourWeekPower = 0
