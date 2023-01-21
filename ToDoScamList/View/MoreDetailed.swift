@@ -31,14 +31,20 @@ struct MoreDetailed: View {
     @State private var month = false
     @State private var week = false
     let today = Date.today().getFormattedDate(format: "dd/MM")
+    let lastSunday = Date.today().previous(.sunday).getFormattedDate(format: "dd/MM")
+    let previosOneSunday = Date.today().previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
+    let previosTwoSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
+    let previosThreeSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
+    let previosFourSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
+    let previosFiveSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
     let lastMonday = Date.today().previous(.monday).getFormattedDate(format: "dd/MM")
     let previosOneWeekMonday = ContentView().previosOneWeek.getFormattedDate(format: "dd/MM")
     let previosTwoWeekMonday = ContentView().previosTwoWeek.getFormattedDate(format: "dd/MM")
     let previosThreeWeekMonday = ContentView().previosThreeWeek.getFormattedDate(format: "dd/MM")
     let previosFourWeekMonday = ContentView().previosFourWeek.getFormattedDate(format: "dd/MM")
     let previosFiveWeekMonday = ContentView().previosFiveWeek.getFormattedDate(format: "dd/MM")
-    
     let screenSize = UIScreen.main.bounds
+
     var body: some View {
         NavigationView {
                 List {
@@ -235,7 +241,7 @@ struct MoreDetailed: View {
                         }
                     }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
                     ZStack {
-                        BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourWeekMonday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeWeekMonday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoWeekMonday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneWeekMonday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastMonday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height:200))
+                        BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height:200))
                     }
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
