@@ -27,6 +27,8 @@ struct MoreDetailed: View {
     @Binding var previosThreeWeekPower: Int
     @Binding var previosFourWeekPower: Int
     @Binding var previosFiveWeekPower: Int
+    
+    
     @State private var general = false
     @State private var month = false
     @State private var week = false
@@ -44,7 +46,19 @@ struct MoreDetailed: View {
     let previosFourWeekMonday = ContentView().previosFourWeek.getFormattedDate(format: "dd/MM")
     let previosFiveWeekMonday = ContentView().previosFiveWeek.getFormattedDate(format: "dd/MM")
     let screenSize = UIScreen.main.bounds
+    let pieChartStyle = ChartStyle(backgroundColor: .black, accentColor: .orange, gradientColor: GradientColor(start: .orange, end: .red), textColor: .white, legendTextColor: .white, dropShadowColor: .gray)
 
+    @Binding var eachTypeCount: [Int]
+    @Binding var allTypes: [String]
+    
+//    func findPieChartData() -> [PieChartData] {
+//        var pieChartData = [PieChartData]()
+//        var pieChart: PieChartData
+//        for i in eachTypeCount {
+//            pieChart.value = Double(i)
+//        }
+//    }
+    
     var body: some View {
         NavigationView {
                 List {
@@ -245,6 +259,11 @@ struct MoreDetailed: View {
                     }
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
+                    ZStack {
+                        PieChartView(data: [PieChartData(label: "Q1", value: 8), PieChartData(label: "Q2", value: 23), PieChartData(label: "Q3", value: 0), PieChartData(label: "Q4", value: 32)], title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height:200))
+                    }
+                    .padding(.top, 15)
+                    .frame(maxWidth: .infinity, alignment: .bottom)
                     .navigationBarTitle(Text("Статистика"))
                 .navigationBarItems(leading: Text("\(title)"))
         }.environment(\.colorScheme, .dark)
@@ -255,6 +274,6 @@ struct MoreDetailed: View {
 
 struct MoreDetailed_Previews: PreviewProvider {
     static var previews: some View {
-        MoreDetailed(title: .constant(""), type: .constant(""), allPower: .constant(0.0), medianaPowerOfAll: .constant(0.0), medianaPowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), medianaPowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0))
+        MoreDetailed(title: .constant(""), type: .constant(""), allPower: .constant(0.0), medianaPowerOfAll: .constant(0.0), medianaPowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), medianaPowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
     }
 }

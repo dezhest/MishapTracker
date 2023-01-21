@@ -13,7 +13,8 @@
 		BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75876129761A79001D1FA0 /* MoreDetailed.swift */; };
 		BB7ACB8129782DB3008649E8 /* ShowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8029782DB3008649E8 /* ShowImage.swift */; };
 		BB7ACB8329785687008649E8 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8229785687008649E8 /* Calendar.swift */; };
-		BB8A3575297BDEB300AFBE44 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BB8A3574297BDEB300AFBE44 /* SwiftUICharts */; };
+		BB7D99AF297C294300442733 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BB7D99AE297C294300442733 /* SwiftUICharts */; };
+		BB7D99B1297C342800442733 /* UniqItemsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7D99B0297C342800442733 /* UniqItemsArray.swift */; };
 		BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF2AE829663EDE0066BD5A /* ScamItem.swift */; };
 		BBD34C09296C5736006ECC63 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = BBD34C08296C5736006ECC63 /* Preview Content */; };
 		BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */; };
@@ -56,6 +57,7 @@
 		BB75876129761A79001D1FA0 /* MoreDetailed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailed.swift; sourceTree = "<group>"; };
 		BB7ACB8029782DB3008649E8 /* ShowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImage.swift; sourceTree = "<group>"; };
 		BB7ACB8229785687008649E8 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		BB7D99B0297C342800442733 /* UniqItemsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqItemsArray.swift; sourceTree = "<group>"; };
 		BBBF2AE829663EDE0066BD5A /* ScamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamItem.swift; sourceTree = "<group>"; };
 		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
 		BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,13 +99,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB8A3575297BDEB300AFBE44 /* SwiftUICharts in Frameworks */,
+				BB7D99AF297C294300442733 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB8A357F297C1FF800AFBE44 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		BBD34C03296C4C41006ECC63 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +169,7 @@
 				BBD7FD5F2970C40B006679BF /* DismissKeyboard.swift */,
 				BBD7FD612970C4BB006679BF /* Placeholder.swift */,
 				BB7ACB8229785687008649E8 /* Calendar.swift */,
+				BB7D99B0297C342800442733 /* UniqItemsArray.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,6 +177,7 @@
 		BBF70616294CF54B006DA73A = {
 			isa = PBXGroup;
 			children = (
+				BB8A357F297C1FF800AFBE44 /* Packages */,
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
 				BBD34C10296D8379006ECC63 /* ToDoScamListTests */,
 				BBD34C1D296D9CE5006ECC63 /* ToDoScamListUITests */,
@@ -254,7 +265,7 @@
 			);
 			name = ToDoScamList;
 			packageProductDependencies = (
-				BB8A3574297BDEB300AFBE44 /* SwiftUICharts */,
+				BB7D99AE297C294300442733 /* SwiftUICharts */,
 			);
 			productName = ToDoScamList;
 			productReference = BBF7061F294CF54B006DA73A /* ToDoScamList.app */;
@@ -294,7 +305,7 @@
 			);
 			mainGroup = BBF70616294CF54B006DA73A;
 			packageReferences = (
-				BB8A3573297BDEB300AFBE44 /* XCRemoteSwiftPackageReference "ChartView" */,
+				BB7D99AD297C294300442733 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = BBF70620294CF54B006DA73A /* Products */;
 			projectDirPath = "";
@@ -377,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB705C3E295A07E6006585BB /* ZoomImage.swift in Sources */,
+				BB7D99B1297C342800442733 /* UniqItemsArray.swift in Sources */,
 				BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */,
 				BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */,
 				BB705C46295C891E006585BB /* EditScam.swift in Sources */,
@@ -738,20 +750,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BB8A3573297BDEB300AFBE44 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		BB7D99AD297C294300442733 /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView";
+			repositoryURL = "https://github.com/ar-rahimi/ChartView";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BB8A3574297BDEB300AFBE44 /* SwiftUICharts */ = {
+		BB7D99AE297C294300442733 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BB8A3573297BDEB300AFBE44 /* XCRemoteSwiftPackageReference "ChartView" */;
+			package = BB7D99AD297C294300442733 /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
