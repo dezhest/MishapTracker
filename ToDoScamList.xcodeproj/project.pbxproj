@@ -13,6 +13,7 @@
 		BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75876129761A79001D1FA0 /* MoreDetailed.swift */; };
 		BB7ACB8129782DB3008649E8 /* ShowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8029782DB3008649E8 /* ShowImage.swift */; };
 		BB7ACB8329785687008649E8 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8229785687008649E8 /* Calendar.swift */; };
+		BB8A3575297BDEB300AFBE44 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BB8A3574297BDEB300AFBE44 /* SwiftUICharts */; };
 		BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF2AE829663EDE0066BD5A /* ScamItem.swift */; };
 		BBD34C09296C5736006ECC63 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = BBD34C08296C5736006ECC63 /* Preview Content */; };
 		BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */; };
@@ -29,7 +30,6 @@
 		BBFA467C2954AB46009E9E9A /* AddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AddType.swift */; };
 		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
-		BBFA93F5297AEA21009F6C67 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BBFA93F4297AEA21009F6C67 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,7 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBFA93F5297AEA21009F6C67 /* SwiftUICharts in Frameworks */,
+				BB8A3575297BDEB300AFBE44 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +254,7 @@
 			);
 			name = ToDoScamList;
 			packageProductDependencies = (
-				BBFA93F4297AEA21009F6C67 /* SwiftUICharts */,
+				BB8A3574297BDEB300AFBE44 /* SwiftUICharts */,
 			);
 			productName = ToDoScamList;
 			productReference = BBF7061F294CF54B006DA73A /* ToDoScamList.app */;
@@ -294,7 +294,7 @@
 			);
 			mainGroup = BBF70616294CF54B006DA73A;
 			packageReferences = (
-				BBFA93F3297AEA20009F6C67 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
+				BB8A3573297BDEB300AFBE44 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = BBF70620294CF54B006DA73A /* Products */;
 			projectDirPath = "";
@@ -738,20 +738,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BBFA93F3297AEA20009F6C67 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+		BB8A3573297BDEB300AFBE44 /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/willdale/SwiftUICharts.git";
+			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BBFA93F4297AEA21009F6C67 /* SwiftUICharts */ = {
+		BB8A3574297BDEB300AFBE44 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BBFA93F3297AEA20009F6C67 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			package = BB8A3573297BDEB300AFBE44 /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */

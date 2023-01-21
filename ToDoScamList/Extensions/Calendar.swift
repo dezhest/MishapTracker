@@ -63,6 +63,11 @@ extension Date {
     calendar.locale = Locale(identifier: "en_US_POSIX")
     return calendar.weekdaySymbols
   }
+    func getFormattedDate(format: String) -> String {
+           let dateformat = DateFormatter()
+           dateformat.dateFormat = format
+           return dateformat.string(from: self)
+       }
 
   enum Weekday: String {
     case monday, tuesday, wednesday, thursday, friday, saturday, sunday

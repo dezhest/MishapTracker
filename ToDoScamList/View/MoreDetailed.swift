@@ -30,7 +30,14 @@ struct MoreDetailed: View {
     @State private var general = false
     @State private var month = false
     @State private var week = false
-    let data: BarChartData = weekOfData()
+    let today = Date.today().getFormattedDate(format: "dd/MM")
+    let lastMonday = Date.today().previous(.monday).getFormattedDate(format: "dd/MM")
+    let previosOneWeekMonday = ContentView().previosOneWeek.getFormattedDate(format: "dd/MM")
+    let previosTwoWeekMonday = ContentView().previosTwoWeek.getFormattedDate(format: "dd/MM")
+    let previosThreeWeekMonday = ContentView().previosThreeWeek.getFormattedDate(format: "dd/MM")
+    let previosFourWeekMonday = ContentView().previosFourWeek.getFormattedDate(format: "dd/MM")
+    let previosFiveWeekMonday = ContentView().previosFiveWeek.getFormattedDate(format: "dd/MM")
+    
     let screenSize = UIScreen.main.bounds
     var body: some View {
         NavigationView {
@@ -227,86 +234,16 @@ struct MoreDetailed: View {
                             .frame(alignment: .trailing)
                         }
                     }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
-                    BarChart(chartData: data)
-                        .extraLine(chartData: data,
-                                   legendTitle: "Test",
-                                   datapoints: extraLineData,
-                                   style: extraLineStyle)
-                        .touchOverlay(chartData: data)
-                        .xAxisGrid(chartData: data)
-                        .yAxisGrid(chartData: data)
-                        .xAxisLabels(chartData: data)
-                        .extraYAxisLabels(chartData: data, colourIndicator: .style(size: 12))
-                        .headerBox(chartData: data)
-                        .id(data.id)
-                        .frame(minWidth: screenSize.width * 0.9, maxWidth: screenSize.width * 0.9, minHeight: 150, idealHeight: 300, maxHeight: 300, alignment: .leading)
-                        
-                }
-            
-            .navigationBarTitle(Text("Статистика"))
-            .navigationBarItems(leading: Text("\(title)"))
+                    ZStack {
+                        BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourWeekMonday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeWeekMonday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoWeekMonday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneWeekMonday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastMonday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height:200))
+                    }
+                    .padding(.top, 15)
+                    .frame(maxWidth: .infinity, alignment: .bottom)
+                    .navigationBarTitle(Text("Статистика"))
+                .navigationBarItems(leading: Text("\(title)"))
         }.environment(\.colorScheme, .dark)
     }
-    private var extraLineData: [ExtraLineDataPoint] {
-        [
-            ExtraLineDataPoint(value: 200),
-            ExtraLineDataPoint(value: 90),
-            ExtraLineDataPoint(value: 700),
-            ExtraLineDataPoint(value: 175),
-            ExtraLineDataPoint(value: 60),
-            ExtraLineDataPoint(value: 100),
-            ExtraLineDataPoint(value: 600)
-        ]
-    }
 
-    private var extraLineStyle: ExtraLineStyle {
-        ExtraLineStyle(lineColour: ColourStyle(colour: .blue),
-                       lineType: .curvedLine,
-                       lineSpacing: .bar,
-                       yAxisTitle: "Bob",
-                       yAxisNumberOfLabels: 7,
-                       animationType: .raise,
-                       baseline: .zero)
-    }
-    
-    static func weekOfData() -> BarChartData {
-        let data: BarDataSet =
-            BarDataSet(dataPoints: [
-                BarChartDataPoint(value: 200, xAxisLabel: "Laptops"   , description: "Laptops"   , colour: ColourStyle(colour: .purple)),
-                BarChartDataPoint(value: 90 , xAxisLabel: "Desktops"  , description: "Desktops"  , colour: ColourStyle(colour: .blue)),
-                BarChartDataPoint(value: 700, xAxisLabel: "Phones"    , description: "Phones"    , colour: ColourStyle(colour: .green)),
-                BarChartDataPoint(value: 175, xAxisLabel: "Tablets"   , description: "Tablets"   , colour: ColourStyle(colour: .orange)),
-                BarChartDataPoint(value: 60 , xAxisLabel: "Watches"   , description: "Watches"   , colour: ColourStyle(colour: .yellow)),
-            ],
-            legendTitle: "Data")
-
-        let metadata = ChartMetadata(title: "Общая сила скама", subtitle: "по неделям")
-
-        let gridStyle = GridStyle(numberOfLines: 7,
-                                   lineColour: Color(.lightGray).opacity(0.25),
-                                   lineWidth: 1)
-
-        let chartStyle = BarChartStyle(infoBoxPlacement: .header,
-                                       markerType: .bottomLeading(),
-                                       xAxisGridStyle: gridStyle,
-                                       xAxisLabelPosition: .bottom,
-                                       xAxisLabelsFrom: .dataPoint(rotation: .degrees(-90)),
-                                       xAxisTitle: "Недели",
-                                       yAxisGridStyle: gridStyle,
-                                       yAxisLabelPosition: .leading,
-                                       yAxisNumberOfLabels: 5,
-                                       yAxisTitle: "Units sold (x 1000)",
-                                       baseline: .zero,
-                                       topLine: .maximumValue)
-
-        return BarChartData(dataSets: data,
-                            metadata: metadata,
-                            xAxisLabels: ["One", "Two", "Three"],
-                            barStyle: BarStyle(barWidth: 0.5,
-                                               cornerRadius: CornerRadius(top: 10, bottom: 0),
-                                               colourFrom: .dataPoints,
-                                               colour: ColourStyle(colour: .blue)),
-                            chartStyle: chartStyle)
     }
 }
 
