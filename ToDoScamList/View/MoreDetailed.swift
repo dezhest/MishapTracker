@@ -51,13 +51,16 @@ struct MoreDetailed: View {
     @Binding var eachTypeCount: [Int]
     @Binding var allTypes: [String]
     
-//    func findPieChartData() -> [PieChartData] {
-//        var pieChartData = [PieChartData]()
-//        var pieChart: PieChartData
-//        for i in eachTypeCount {
-//            pieChart.value = Double(i)
-//        }
-//    }
+    func findPieChartData() -> [PieChartData] {
+        var pieChartData = [PieChartData]()
+        var item = 0
+        repeat {
+            pieChartData.append(PieChartData(label: allTypes[item], value: Double(eachTypeCount[item])))
+            item += 1
+        }
+        while allTypes.count > item
+        return pieChartData
+    }
     
     var body: some View {
         NavigationView {
@@ -254,16 +257,14 @@ struct MoreDetailed: View {
                             .frame(alignment: .trailing)
                         }
                     }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
-                    ZStack {
-                        BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height:200))
-                    }
-                    .padding(.top, 15)
-                    .frame(maxWidth: .infinity, alignment: .bottom)
-                    ZStack {
-                        PieChartView(data: [PieChartData(label: "Q1", value: 8), PieChartData(label: "Q2", value: 23), PieChartData(label: "Q3", value: 0), PieChartData(label: "Q4", value: 32)], title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height:200))
-                    }
-                    .padding(.top, 15)
-                    .frame(maxWidth: .infinity, alignment: .bottom)
+//                        BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height:200))
+//
+//                    .padding(.top, 15)
+//                    .frame(maxWidth: .infinity, alignment: .bottom)
+//                        PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height:210))
+//
+//                    .padding(.top, 15)
+//                    .frame(maxWidth: .infinity, alignment: .bottom)
                     .navigationBarTitle(Text("Статистика"))
                 .navigationBarItems(leading: Text("\(title)"))
         }.environment(\.colorScheme, .dark)
