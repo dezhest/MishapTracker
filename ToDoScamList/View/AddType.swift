@@ -48,7 +48,7 @@ struct AddType: View {
                 .font(.system(size: 18, weight: .bold, design: .default))
                 .foregroundColor(.red)
                 Button("Добавить") {
-                    if text.count > 30 || text.count == 0 {
+                    if text.count > 20 || text.count == 0 {
                         self.alertTextCountError.toggle()
                     } else {
                         self.isShown = false
@@ -66,7 +66,7 @@ struct AddType: View {
         .offset(y: isShown ? 0 : screenSize.height)
         .shadow(radius: 6)
         .alert(isPresented: $alertTextCountError) {
-            Alert(title: Text("Длина типа не может быть пустой или превышать 30 символов"))
+            Alert(title: Text("Длина типа не может быть пустой или превышать 20 символов"))
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUICharts
+import SwiftUIGraphs
 
 struct MoreDetailed: View {
     @Binding var title: String
@@ -45,12 +46,10 @@ struct MoreDetailed: View {
     let previosThreeWeekMonday = ContentView().previosThreeWeek.getFormattedDate(format: "dd/MM")
     let previosFourWeekMonday = ContentView().previosFourWeek.getFormattedDate(format: "dd/MM")
     let previosFiveWeekMonday = ContentView().previosFiveWeek.getFormattedDate(format: "dd/MM")
-    let screenSize = UIScreen.main.bounds
-    let pieChartStyle = ChartStyle(backgroundColor: .black, accentColor: .orange, gradientColor: GradientColor(start: .orange, end: .red), textColor: .white, legendTextColor: .white, dropShadowColor: .gray)
-
     @Binding var eachTypeCount: [Int]
     @Binding var allTypes: [String]
-    
+    let screenSize = UIScreen.main.bounds
+    let pieChartStyle = ChartStyle(backgroundColor: .black, accentColor: .orange, gradientColor: GradientColor(start: .orange, end: .red), textColor: .white, legendTextColor: .white, dropShadowColor: .gray)   
     func findPieChartData() -> [PieChartData] {
         var pieChartData = [PieChartData]()
         var item = 0
@@ -61,7 +60,6 @@ struct MoreDetailed: View {
         while allTypes.count > item
         return pieChartData
     }
-    
     var body: some View {
         NavigationView {
                 List {
@@ -257,19 +255,18 @@ struct MoreDetailed: View {
                             .frame(alignment: .trailing)
                         }
                     }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
-//                        BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height:200))
-//
-//                    .padding(.top, 15)
-//                    .frame(maxWidth: .infinity, alignment: .bottom)
-//                        PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height:210))
-//
-//                    .padding(.top, 15)
-//                    .frame(maxWidth: .infinity, alignment: .bottom)
+                        BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
+                    .padding(.top, 15)
+                    .frame(maxWidth: .infinity, alignment: .bottom)
+                        PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
+
+                    .padding(.top, 15)
+                    .frame(maxWidth: .infinity, alignment: .bottom)
+
                     .navigationBarTitle(Text("Статистика"))
                 .navigationBarItems(leading: Text("\(title)"))
         }.environment(\.colorScheme, .dark)
     }
-
     }
 }
 

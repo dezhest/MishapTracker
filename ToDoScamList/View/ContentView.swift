@@ -34,7 +34,7 @@ struct ContentView: View {
     @State private var mDType = ""
     @State private var mDSameTypeCount = 0
     @State private var mDmedianaPowerSameType = 0.0
-    
+
     @State private var mDallPower = 0.0
     @State private var mDmedianaPowerOfAll = 0.0
     @State private var mDmostFrequentTypeCount = 0
@@ -211,7 +211,6 @@ struct ContentView: View {
                                         mDeachTypeCount = findEachTypeCount()
                                         mDallTypes = allTypes.removingDuplicates()
                                         self.showingMoreDetailed.toggle()
-                                       
                                     }
                             } .frame(maxWidth: .infinity)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {

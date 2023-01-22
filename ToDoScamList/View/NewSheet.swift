@@ -58,7 +58,6 @@ struct NewSheet: View {
                                             }
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                     }, alignment: .top)
-                                
                                 VStack {
                                     Text("Max Scam")
                                         .font(.system(size: 12, weight: .medium, design: .default))
@@ -164,10 +163,10 @@ struct NewSheet: View {
                 }
             }
             AddType(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
-                if alertInput != "" {
+                if alertInput != "" && {types.filter({$0 == alertInput}).count == 0}(){
                     types.insert(alertInput, at: 0)
+                    type = alertInput
                 }
-                type = alertInput
             })
         }.environment(\.colorScheme, .light)
     }

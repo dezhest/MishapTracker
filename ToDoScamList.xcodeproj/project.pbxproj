@@ -13,9 +13,10 @@
 		BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75876129761A79001D1FA0 /* MoreDetailed.swift */; };
 		BB7ACB8129782DB3008649E8 /* ShowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8029782DB3008649E8 /* ShowImage.swift */; };
 		BB7ACB8329785687008649E8 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8229785687008649E8 /* Calendar.swift */; };
-		BB7D99AF297C294300442733 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BB7D99AE297C294300442733 /* SwiftUICharts */; };
 		BB7D99B1297C342800442733 /* UniqItemsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7D99B0297C342800442733 /* UniqItemsArray.swift */; };
 		BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF2AE829663EDE0066BD5A /* ScamItem.swift */; };
+		BBCD9DA1297D729000746FDC /* ChartView in Resources */ = {isa = PBXBuildFile; fileRef = BBCD9DA0297D728F00746FDC /* ChartView */; };
+		BBCD9DA4297D72AD00746FDC /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BBCD9DA3297D72AD00746FDC /* SwiftUICharts */; };
 		BBD34C09296C5736006ECC63 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = BBD34C08296C5736006ECC63 /* Preview Content */; };
 		BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */; };
 		BBD34C1F296D9CE5006ECC63 /* ToDoScamListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */; };
@@ -59,6 +60,7 @@
 		BB7ACB8229785687008649E8 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		BB7D99B0297C342800442733 /* UniqItemsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqItemsArray.swift; sourceTree = "<group>"; };
 		BBBF2AE829663EDE0066BD5A /* ScamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamItem.swift; sourceTree = "<group>"; };
+		BBCD9DA0297D728F00746FDC /* ChartView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ChartView; sourceTree = "<group>"; };
 		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
 		BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListTests.swift; sourceTree = "<group>"; };
@@ -99,20 +101,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB7D99AF297C294300442733 /* SwiftUICharts in Frameworks */,
+				BBCD9DA4297D72AD00746FDC /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BB8A357F297C1FF800AFBE44 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		BBD34C03296C4C41006ECC63 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +172,7 @@
 		BBF70616294CF54B006DA73A = {
 			isa = PBXGroup;
 			children = (
-				BB8A357F297C1FF800AFBE44 /* Packages */,
+				BBCD9DA0297D728F00746FDC /* ChartView */,
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
 				BBD34C10296D8379006ECC63 /* ToDoScamListTests */,
 				BBD34C1D296D9CE5006ECC63 /* ToDoScamListUITests */,
@@ -265,7 +260,7 @@
 			);
 			name = ToDoScamList;
 			packageProductDependencies = (
-				BB7D99AE297C294300442733 /* SwiftUICharts */,
+				BBCD9DA3297D72AD00746FDC /* SwiftUICharts */,
 			);
 			productName = ToDoScamList;
 			productReference = BBF7061F294CF54B006DA73A /* ToDoScamList.app */;
@@ -305,7 +300,7 @@
 			);
 			mainGroup = BBF70616294CF54B006DA73A;
 			packageReferences = (
-				BB7D99AD297C294300442733 /* XCRemoteSwiftPackageReference "ChartView" */,
+				BBCD9DA2297D72AD00746FDC /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = BBF70620294CF54B006DA73A /* Products */;
 			projectDirPath = "";
@@ -337,6 +332,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBCD9DA1297D729000746FDC /* ChartView in Resources */,
 				BBD34C09296C5736006ECC63 /* Preview Content in Resources */,
 				BB75873E297407D3001D1FA0 /* Image.xcassets in Resources */,
 			);
@@ -750,7 +746,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BB7D99AD297C294300442733 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		BBCD9DA2297D72AD00746FDC /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ar-rahimi/ChartView";
 			requirement = {
@@ -761,9 +757,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BB7D99AE297C294300442733 /* SwiftUICharts */ = {
+		BBCD9DA3297D72AD00746FDC /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BB7D99AD297C294300442733 /* XCRemoteSwiftPackageReference "ChartView" */;
+			package = BBCD9DA2297D72AD00746FDC /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */

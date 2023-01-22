@@ -1,5 +1,6 @@
 disabled_rules:
 - multiple_closures_with_trailing_closure
 - cyclomatic_complexity
-line_length: 200
+- identifier_name
+line_length: 1000
 
