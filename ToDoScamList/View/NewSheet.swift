@@ -25,7 +25,7 @@ struct NewSheet: View {
     @State private var selection = "None"
     @Environment(\.managedObjectContext) private var moc
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
-    @State var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип"]
+    @State var types: [String] = [""]
     @State private var type = "Финансовый"
     var body: some View {
         ZStack {
@@ -50,7 +50,7 @@ struct NewSheet: View {
                                     .padding(.top)
                                     .overlay(GeometryReader { geom in
                                         Text("\(power, specifier: "%.f")")
-                                            .offset(y: -10)
+                                            .offset(y: -7)
                                             .font(.system(size: 18, weight: .bold))
                                             .foregroundColor(.black)
                                             .alignmentGuide(HorizontalAlignment.leading) {
@@ -86,6 +86,7 @@ struct NewSheet: View {
                         Picker("Тип", selection: $type) {
                             ForEach(types, id: \.self) {
                                 Text($0)
+                                    .foregroundColor($0 == "Свой тип" ? .blue : $0 == "Очистить типы" ? .red : .black)
                             }
                         }
                         .onChange(of: type) { _ in
@@ -94,8 +95,13 @@ struct NewSheet: View {
                                     self.showsAlert.toggle()
                                 }
                             }
+                            if type == "Очистить типы" {
+                                types = ["Эмоциональный", "Финансовый", "Свой тип", "Очистить типы"]
+                                UserDefaults.standard.set(types, forKey: "types")
+                                type = "Финансовый"
+                                }
+                            }
                         }
-                    }
                     HStack {
                         Text("Фото скама")
                             .fullScreenCover(isPresented: $imagePicker) {
@@ -156,17 +162,21 @@ struct NewSheet: View {
                 })
                 .navigationBarTitle("Добавить скам")
                 .onAppear {
-                    types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип"]
+                    types = UserDefaults.standard.stringArray(forKey: "types") ?? ["Эмоциональный", "Финансовый", "Свой тип", "Очистить типы"]
                 }
                 .alert(isPresented: self.$showsAlertNameCount) {
                     Alert(title: Text("Название скама не может быть пустым или превышать 30 символов"))
                 }
             }
             AddType(title: "Добавьте тип", isShown: $showsAlert, text: $alertInput, onDone: {_ in
-                if alertInput != "" && {types.filter({$0 == alertInput}).count == 0}(){
+                if types.filter({$0 == alertInput}).count == 0 {
                     types.insert(alertInput, at: 0)
                     type = alertInput
+                } else {
+                    type = alertInput
                 }
+            }, onCancel: {
+                type = types[types.count - 3]
             })
         }.environment(\.colorScheme, .light)
     }

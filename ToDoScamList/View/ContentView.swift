@@ -34,16 +34,13 @@ struct ContentView: View {
     @State private var mDType = ""
     @State private var mDSameTypeCount = 0
     @State private var mDmedianaPowerSameType = 0.0
-
     @State private var mDallPower = 0.0
     @State private var mDmedianaPowerOfAll = 0.0
     @State private var mDmostFrequentTypeCount = 0
     @State private var mDmostFrequentType = ""
-    
     @State private var mDlast30dayPower = 0
     @State private var mDlast30daySameTypeCount = 0
     @State private var mDmedianaPowerOfLast30day = 0.0
-    
     @State private var mDcurrentWeekSameTypeCount = 0
     @State private var mDcurrentWeekPower = 0
     @State private var mDpreviosOneWeekPower = 0
@@ -51,7 +48,6 @@ struct ContentView: View {
     @State private var mDpreviosThreeWeekPower = 0
     @State private var mDpreviosFourWeekPower = 0
     @State private var mDpreviosFiveWeekPower = 0
-    
     @State private var mDeachTypeCount = [Int]()
     @State private var mDallTypes = [String]()
     let dateFormatter: DateFormatter = {
@@ -65,7 +61,6 @@ struct ContentView: View {
     let previosThreeWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday)
     let previosFourWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
     let previosFiveWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
-    
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var entity: FetchedResults<Scam>
     var sortedScams: [Scam] {
         switch pickerSelection {
@@ -140,7 +135,6 @@ struct ContentView: View {
                                     .onTapGesture {
                                         if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
                                         let arrayallPower = sortedScams.map({Int($0.power)})
-                                        let currentpower = sortedScams.map({Int($0.power)})[indexOfMoreDetailed]
                                         let arrayAllType = sortedScams.map({$0.type})
                                         let last30DayScams = sortedScams.filter({$0.selectedDate > monthAgoDate})
                                         let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
@@ -162,7 +156,6 @@ struct ContentView: View {
                                         // MARK: — General Statistic
                                         let allPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
                                         let medianaPowerOfAll = (allPower / Double(sortedScams.count)*100).rounded()/100
-                                        let sameTypeCount = sameTypeScams.count
                                         let medianaPowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
                                         var mostFrequentTypeCount = 0
                                         var mostFrequentType = ""
