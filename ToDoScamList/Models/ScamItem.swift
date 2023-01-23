@@ -14,7 +14,7 @@ struct ScamItem: Identifiable, Hashable {
     let power: Double
     let selectedDate: Date
     let image: Date
-
+    let description: String
 }
 
 final class Scams: ObservableObject {

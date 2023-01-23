@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct NewSheet: View {
     @Environment(\.presentationMode) private var presentationMode
@@ -23,18 +24,32 @@ struct NewSheet: View {
     @State private var imagePicker = false
     @State private var source: UIImagePickerController.SourceType = .photoLibrary
     @State private var selection = "None"
+    @State private var description = ""
     @Environment(\.managedObjectContext) private var moc
     @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
     @State var types: [String] = [""]
     @State private var type = "Финансовый"
+    let textLimit = 280
     var body: some View {
         ZStack {
             NavigationView {
                 Form {
                     VStack {
-                        TextField("Как вы заскамились?", text: $name)
+                        TextField("Название скама", text: $name)
                             .padding(10)
                         Spacer()
+                        ZStack(alignment: .leading) {
+                            if description.isEmpty {
+                                Text("Введите описание")
+                                    .font(.custom("Helvetica", size: 16))
+                                    .opacity(0.25)
+                                    .padding(.leading, 10)
+                            }
+                            TextEditor(text: $description)
+                                .onReceive(Just(description)) { _ in limitText(textLimit) }
+                                .font(.custom("Helvetica", size: 16))
+                                .padding(.leading, 10)
+                        }
                         VStack(alignment: .leading) {
                             Text("Сила скама:")
                             ZStack {
@@ -67,23 +82,21 @@ struct NewSheet: View {
                                         .cornerRadius(20)
                                         .padding(.bottom, 3)
                                         .offset(y: -50)
-                                    }
-                                        .frame(maxWidth: .infinity, alignment: .topTrailing)
-                                        .onTapGesture {
-                                            self.power = 10
+                                }
+                                .frame(maxWidth: .infinity, alignment: .topTrailing)
+                                .onTapGesture {
+                                    self.power = 10
                                 }
                             }
                         }
-                        DatePicker("Когда был скам?", selection: $selectedDate, displayedComponents: .date)
+                        DatePicker("Дата скама", selection: $selectedDate, displayedComponents: .date)
                             .datePickerStyle(.automatic)
                             .id(calendarId)
                             .onChange(of: selectedDate, perform: { _ in
                                 calendarId += 1
                             })
                         Spacer()
-                    }
-                    VStack {
-                        Picker("Тип", selection: $type) {
+                        Picker("Тип скама", selection: $type) {
                             ForEach(types, id: \.self) {
                                 Text($0)
                                     .foregroundColor($0 == "Свой тип" ? .blue : $0 == "Очистить типы" ? .red : .black)
@@ -99,43 +112,43 @@ struct NewSheet: View {
                                 types = ["Эмоциональный", "Финансовый", "Свой тип", "Очистить типы"]
                                 UserDefaults.standard.set(types, forKey: "types")
                                 type = "Финансовый"
-                                }
                             }
                         }
-                    HStack {
-                        Text("Фото скама")
-                            .fullScreenCover(isPresented: $imagePicker) {
-                                ImagePicker(show: $imagePicker, image: $imageData, source: source)
-                            }
-                        Spacer()
-                        if imageData.count != 0 {
-                            Button(action: {
-                                self.show.toggle()
-                            }) {
-                                Image(uiImage: UIImage(data: self.imageData)!)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 50, height: 50)
-                                    .clipShape(Circle())
-                            }
-                        } else {
-                            Button(action: {
-                                self.show.toggle()
-                            }) {
-                                Image(systemName: "photo.fill")
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                    .cornerRadius(5)
-                                    .foregroundColor(.gray)
-                            }
-                            .confirmationDialog("Выберите фото скама", isPresented: self.$show, titleVisibility: .visible) {
-                                Button("Камера") {
-                                    self.source = .camera
-                                    self.imagePicker.toggle()
+                        HStack {
+                            Text("Фото скама")
+                                .fullScreenCover(isPresented: $imagePicker) {
+                                    ImagePicker(show: $imagePicker, image: $imageData, source: source)
                                 }
-                                Button("Галерея") {
-                                    self.source = .photoLibrary
-                                    self.imagePicker.toggle()
+                            Spacer()
+                            if imageData.count != 0 {
+                                Button(action: {
+                                    self.show.toggle()
+                                }) {
+                                    Image(uiImage: UIImage(data: self.imageData)!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 50, height: 50)
+                                        .clipShape(Circle())
+                                }
+                            } else {
+                                Button(action: {
+                                    self.show.toggle()
+                                }) {
+                                    Image(systemName: "photo.fill")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                        .cornerRadius(5)
+                                        .foregroundColor(.gray)
+                                }
+                                .confirmationDialog("Выберите фото скама", isPresented: self.$show, titleVisibility: .visible) {
+                                    Button("Камера") {
+                                        self.source = .camera
+                                        self.imagePicker.toggle()
+                                    }
+                                    Button("Галерея") {
+                                        self.source = .photoLibrary
+                                        self.imagePicker.toggle()
+                                    }
                                 }
                             }
                         }
@@ -151,6 +164,7 @@ struct NewSheet: View {
                         userInfo.selectedDate = self.selectedDate
                         userInfo.imageD = self.imageData
                         userInfo.title = self.name
+                        userInfo.scamDescription = self.description
                         do {
                             try self.moc.save()
                         } catch {
@@ -182,6 +196,11 @@ struct NewSheet: View {
     }
     private func endEditing() {
         UIApplication.shared.endEditing()
+    }
+    func limitText(_ upper: Int) {
+        if description.count > upper {
+            description = String(description.prefix(upper))
+        }
     }
 }
 

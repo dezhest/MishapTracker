@@ -33,6 +33,7 @@ struct ContentView: View {
     @State private var indexOfMoreDetailed: Int = 0
     @State private var mDTitle = ""
     @State private var mDType = ""
+    @State private var mDDescription = ""
     @State private var mDSameTypeCount = 0
     @State private var mDmedianaPowerSameType = 0.0
     @State private var mDallPower = 0.0
@@ -183,7 +184,7 @@ struct ContentView: View {
                     NewSheet()
                 }
                 .sheet(isPresented: $showingMoreDetailed) {
-                    MoreDetailed(title: $mDTitle, type: $mDType, allPower: $mDallPower, medianaPowerOfAll: $mDmedianaPowerOfAll, medianaPowerSameType: $mDmedianaPowerSameType, mostFrequentTypeCount: $mDmostFrequentTypeCount, mostFrequentType: $mDmostFrequentType, sameTypeCount: $mDSameTypeCount, last30dayPower: $mDlast30dayPower, last30daySameTypeCount: $mDlast30daySameTypeCount, medianaPowerOfLast30day: $mDmedianaPowerOfLast30day, currentWeekSameTypeCount: $mDcurrentWeekSameTypeCount, currentWeekPower: $mDcurrentWeekPower, previosOneWeekPower: $mDpreviosOneWeekPower, previosTwoWeekPower: $mDpreviosTwoWeekPower, previosThreeWeekPower: $mDpreviosThreeWeekPower, previosFourWeekPower: $mDpreviosFourWeekPower, previosFiveWeekPower: $mDpreviosFiveWeekPower, eachTypeCount: $mDeachTypeCount, allTypes: $mDallTypes)
+                    MoreDetailed(title: $mDTitle, type: $mDType, description: $mDDescription, allPower: $mDallPower, medianaPowerOfAll: $mDmedianaPowerOfAll, medianaPowerSameType: $mDmedianaPowerSameType, mostFrequentTypeCount: $mDmostFrequentTypeCount, mostFrequentType: $mDmostFrequentType, sameTypeCount: $mDSameTypeCount, last30dayPower: $mDlast30dayPower, last30daySameTypeCount: $mDlast30daySameTypeCount, medianaPowerOfLast30day: $mDmedianaPowerOfLast30day, currentWeekSameTypeCount: $mDcurrentWeekSameTypeCount, currentWeekPower: $mDcurrentWeekPower, previosOneWeekPower: $mDpreviosOneWeekPower, previosTwoWeekPower: $mDpreviosTwoWeekPower, previosThreeWeekPower: $mDpreviosThreeWeekPower, previosFourWeekPower: $mDpreviosFourWeekPower, previosFiveWeekPower: $mDpreviosFiveWeekPower, eachTypeCount: $mDeachTypeCount, allTypes: $mDallTypes)
                 }
                 .sheet(isPresented: $showingImage, content: {
                     ShowImage(image: $showImage)
@@ -291,6 +292,7 @@ struct ContentView: View {
         // MARK: — State Properties for MoreDetailed View
         mDTitle = sortedScams[indexOfMoreDetailed].title
         mDType = sortedScams[indexOfMoreDetailed].type
+        mDDescription = sortedScams[indexOfMoreDetailed].scamDescription
         mDSameTypeCount = sameTypeScams.count
         mDallPower = allPower
         mDmedianaPowerOfAll = medianaPowerOfAll
@@ -309,8 +311,7 @@ struct ContentView: View {
         mDpreviosFiveWeekPower = previosFiveWeekPower
         mDeachTypeCount = findEachTypeCount()
         mDallTypes = allTypes.removingDuplicates()
-        print(Date.today().previous(.monday).previous(.monday))
-        print(Date.today())
+        print(sortedScams[indexOfMoreDetailed].description)
     }
 }
 

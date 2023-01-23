@@ -21,6 +21,7 @@ extension Scam {
     @NSManaged public var selectedDate: Date
     @NSManaged public var type: String
     @NSManaged public var typeArray: String
+    @NSManaged public var scamDescription: String
 
 }
 

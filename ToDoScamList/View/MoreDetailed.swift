@@ -11,6 +11,7 @@ import SwiftUICharts
 struct MoreDetailed: View {
     @Binding var title: String
     @Binding var type: String
+    @Binding var description: String
     @Binding var allPower: Double
     @Binding var medianaPowerOfAll: Double
     @Binding var medianaPowerSameType: Double
@@ -60,11 +61,130 @@ struct MoreDetailed: View {
     var body: some View {
         NavigationView {
             VStack {
-                          List {
+                Text(description)
+                List {
+                    HStack {
+                        Group {
+                            Text("Количество скамов типа ")
+                                .font(.system(size: 18, weight: .bold, design: .default))
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                            + Text("#\(type)")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .foregroundColor(.orange)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        VStack {
+                            Text("\(sameTypeCount)")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .foregroundColor(.white)
+                                .padding(7)
+                                .background(Color(.orange))
+                                .cornerRadius(20)
+                                .padding(.bottom, 3)
+                        }
+                        .frame(alignment: .trailing)
+                    }
+                    HStack {
+                        Group {
+                            Text("Средняя сила типа ")
+                                .font(.system(size: 18, weight: .bold, design: .default))
+                            + Text("#\(type)")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .foregroundColor(.orange)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        VStack {
+                            Text(String(format: "%.2f", medianaPowerSameType))
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .foregroundColor(.white)
+                                .padding(7)
+                                .background(Color(.orange))
+                                .cornerRadius(20)
+                                .padding(.bottom, 3)
+                        }
+                        .frame(alignment: .trailing)
+                    }
+                    DisclosureGroup(isExpanded: $general, content: {
+                        ZStack {
+                            Text("Общая сила скама")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            VStack {
+                                Text("\(Int(allPower))")
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                                    .foregroundColor(.white)
+                                    .padding(7)
+                                    .background(Color(.orange))
+                                    .cornerRadius(20)
+                                    .padding(.bottom, 3)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                        }
+                        ZStack {
+                            Text("Средняя сила")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            VStack {
+                                Text(String(format: "%.2f", medianaPowerOfAll))
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                                    .foregroundColor(.white)
+                                    .padding(7)
+                                    .background(Color(.orange))
+                                    .cornerRadius(20)
+                                    .padding(.bottom, 3)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                        }
+                        ZStack {
+                            VStack(alignment: .leading, spacing: 60) {
+                                Text("Самый популярный тип:")
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                                    .padding(0)
+                                Text("Встречается")
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                                    .padding(0)
+                                    .offset(y: -7)
+                            }.frame(maxWidth: .infinity, alignment: .leading)
+                            VStack {
+                                Text(mostFrequentType)
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                                    .foregroundColor(.white)
+                                    .padding(7)
+                                    .background(Color(.orange))
+                                    .cornerRadius(20)
+                                    .padding(.bottom, 3)
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                    .offset(y: 22.5)
+                                Text("\(mostFrequentTypeCount)")
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                                    .foregroundColor(.white)
+                                    .padding(7)
+                                    .background(Color(.orange))
+                                    .cornerRadius(20)
+                                    .padding(.bottom, 3)
+                                    .frame(maxWidth: .infinity, maxHeight: 80, alignment: .bottomTrailing)
+                            }
+                        }
+                    }, label: {Text("За все время").font(.system(size: 18, weight: .bold, design: .default))})
+                    DisclosureGroup(isExpanded: $month, content: {
+                        ZStack {
+                            Text("Общая сила")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            VStack {
+                                Text("\(last30dayPower)")
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                                    .foregroundColor(.white)
+                                    .padding(7)
+                                    .background(Color(.orange))
+                                    .cornerRadius(20)
+                                    .padding(.bottom, 3)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                        }
                         HStack {
                             Group {
                                 Text("Количество скамов типа ")
-                                    .font(.system(size: 18, weight: .bold, design: .default))
                                     .font(.system(size: 14, weight: .medium, design: .default))
                                 + Text("#\(type)")
                                     .font(.system(size: 14, weight: .medium, design: .default))
@@ -72,7 +192,7 @@ struct MoreDetailed: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             VStack {
-                                Text("\(sameTypeCount)")
+                                Text("\(last30daySameTypeCount)")
                                     .font(.system(size: 14, weight: .medium, design: .default))
                                     .foregroundColor(.white)
                                     .padding(7)
@@ -81,18 +201,50 @@ struct MoreDetailed: View {
                                     .padding(.bottom, 3)
                             }
                             .frame(alignment: .trailing)
+                        }
+                        ZStack {
+                            Text("Средняя сила")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            VStack {
+                                Text(String(format: "%.2f", medianaPowerOfLast30day))
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                                    .foregroundColor(.white)
+                                    .padding(7)
+                                    .background(Color(.orange))
+                                    .cornerRadius(20)
+                                    .padding(.bottom, 3)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                        }
+                    }, label: {Text("За месяц").font(.system(size: 18, weight: .bold, design: .default))})
+                    DisclosureGroup(isExpanded: $week, content: {
+                        ZStack {
+                            Text("Общая сила")
+                                .font(.system(size: 14, weight: .medium, design: .default))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            VStack {
+                                Text("\(currentWeekPower)")
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                                    .foregroundColor(.white)
+                                    .padding(7)
+                                    .background(Color(.orange))
+                                    .cornerRadius(20)
+                                    .padding(.bottom, 3)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                         HStack {
                             Group {
-                                Text("Средняя сила типа ")
-                                    .font(.system(size: 18, weight: .bold, design: .default))
+                                Text("Количество скамов типа ")
+                                    .font(.system(size: 14, weight: .medium, design: .default))
                                 + Text("#\(type)")
                                     .font(.system(size: 14, weight: .medium, design: .default))
                                     .foregroundColor(.orange)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             VStack {
-                                Text(String(format: "%.2f", medianaPowerSameType))
+                                Text("\(currentWeekSameTypeCount)")
                                     .font(.system(size: 14, weight: .medium, design: .default))
                                     .foregroundColor(.white)
                                     .padding(7)
@@ -102,174 +254,24 @@ struct MoreDetailed: View {
                             }
                             .frame(alignment: .trailing)
                         }
-                        DisclosureGroup(isExpanded: $general, content: {
-                            ZStack {
-                                Text("Общая сила скама")
-                                    .font(.system(size: 14, weight: .medium, design: .default))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                VStack {
-                                    Text("\(Int(allPower))")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(7)
-                                        .background(Color(.orange))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                            }
-                            ZStack {
-                                Text("Средняя сила")
-                                    .font(.system(size: 14, weight: .medium, design: .default))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                VStack {
-                                    Text(String(format: "%.2f", medianaPowerOfAll))
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(7)
-                                        .background(Color(.orange))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                            }
-                            ZStack {
-                                VStack(alignment: .leading, spacing: 60) {
-                                    Text("Самый популярный тип:")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .padding(0)
-                                    Text("Встречается")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .padding(0)
-                                        .offset(y: -7)
-                                }.frame(maxWidth: .infinity, alignment: .leading)
-                                VStack {
-                                    Text(mostFrequentType)
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(7)
-                                        .background(Color(.orange))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
-                                        .frame(maxWidth: .infinity, alignment: .trailing)
-                                        .offset(y: 22.5)
-                                    Text("\(mostFrequentTypeCount)")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(7)
-                                        .background(Color(.orange))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
-                                        .frame(maxWidth: .infinity, maxHeight: 80, alignment: .bottomTrailing)
-                                }
-                            }
-                        }, label: {Text("За все время").font(.system(size: 18, weight: .bold, design: .default))})
-                        DisclosureGroup(isExpanded: $month, content: {
-                            ZStack {
-                                Text("Общая сила")
-                                    .font(.system(size: 14, weight: .medium, design: .default))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                VStack {
-                                    Text("\(last30dayPower)")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(7)
-                                        .background(Color(.orange))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                            }
-                            HStack {
-                                Group {
-                                    Text("Количество скамов типа ")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                    + Text("#\(type)")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.orange)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                VStack {
-                                    Text("\(last30daySameTypeCount)")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(7)
-                                        .background(Color(.orange))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
-                                }
-                                .frame(alignment: .trailing)
-                            }
-                            ZStack {
-                                Text("Средняя сила")
-                                    .font(.system(size: 14, weight: .medium, design: .default))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                VStack {
-                                    Text(String(format: "%.2f", medianaPowerOfLast30day))
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(7)
-                                        .background(Color(.orange))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                            }
-                        }, label: {Text("За месяц").font(.system(size: 18, weight: .bold, design: .default))})
-                        DisclosureGroup(isExpanded: $week, content: {
-                            ZStack {
-                                Text("Общая сила")
-                                    .font(.system(size: 14, weight: .medium, design: .default))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                VStack {
-                                    Text("\(currentWeekPower)")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(7)
-                                        .background(Color(.orange))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                            }
-                            HStack {
-                                Group {
-                                    Text("Количество скамов типа ")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                    + Text("#\(type)")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.orange)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                VStack {
-                                    Text("\(currentWeekSameTypeCount)")
-                                        .font(.system(size: 14, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(7)
-                                        .background(Color(.orange))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
-                                }
-                                .frame(alignment: .trailing)
-                            }
-                        }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
-                        VStack {
-                            BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
-                                .padding(.top, 15)
-                                .frame(maxWidth: .infinity, alignment: .bottom)
-                            PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
-                                .padding(.top, 15)
-                                .frame(maxWidth: .infinity, alignment: .bottom)
-                        }
-                        .navigationBarItems(leading: Text("\(title)"))
-                    }.environment(\.colorScheme, .dark)
+                    }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
+                    VStack {
+                        BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
+                            .padding(.top, 15)
+                            .frame(maxWidth: .infinity, alignment: .bottom)
+                        PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
+                            .padding(.top, 15)
+                            .frame(maxWidth: .infinity, alignment: .bottom)
+                    }
+                    .navigationBarItems(leading: Text("\(title)"))
+                }.environment(\.colorScheme, .dark)
             }
             .navigationBarTitle("Статистика")
         }
     }
 }
-                          struct MoreDetailed_Previews: PreviewProvider {
-                        static var previews: some View {
-                            MoreDetailed(title: .constant(""), type: .constant(""), allPower: .constant(0.0), medianaPowerOfAll: .constant(0.0), medianaPowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), medianaPowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
-                        }
-                    }
+struct MoreDetailed_Previews: PreviewProvider {
+    static var previews: some View {
+        MoreDetailed(title: .constant(""), type: .constant(""), description: .constant(""), allPower: .constant(0.0), medianaPowerOfAll: .constant(0.0), medianaPowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), medianaPowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
+    }
+}
