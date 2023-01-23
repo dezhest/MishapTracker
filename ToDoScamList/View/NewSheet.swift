@@ -121,25 +121,34 @@ struct NewSheet: View {
                                 }
                             Spacer()
                             if imageData.count != 0 {
-                                Button(action: {
-                                    self.show.toggle()
-                                }) {
-                                    Image(uiImage: UIImage(data: self.imageData)!)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 50, height: 50)
-                                        .clipShape(Circle())
-                                }
+                                Image(uiImage: UIImage(data: self.imageData)!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(Circle())
+                                    .onTapGesture {
+                                        self.show.toggle()
+                                    }
+                                    .confirmationDialog("Выберите фото скама", isPresented: self.$show, titleVisibility: .visible) {
+                                        Button("Камера") {
+                                            self.source = .camera
+                                            self.imagePicker.toggle()
+                                        }
+                                        Button("Галерея") {
+                                            self.source = .photoLibrary
+                                            self.imagePicker.toggle()
+                                        }
+                                    }
+
                             } else {
-                                Button(action: {
-                                    self.show.toggle()
-                                }) {
-                                    Image(systemName: "photo.fill")
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                        .cornerRadius(5)
-                                        .foregroundColor(.gray)
-                                }
+                                Image(systemName: "photo.fill")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .cornerRadius(5)
+                                    .foregroundColor(.gray)
+                                    .onTapGesture {
+                                        self.show.toggle()
+                                    }
                                 .confirmationDialog("Выберите фото скама", isPresented: self.$show, titleVisibility: .visible) {
                                     Button("Камера") {
                                         self.source = .camera
