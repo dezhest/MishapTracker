@@ -194,9 +194,7 @@ struct ContentView: View {
     }
     // MARK: — Swipe to delete from list
     func deleteScam(item: Scam) {
-        var scam = sortedScams[sortedScams.firstIndex(of: item)!]
-        var entityIndex = entity.firstIndex(of: scam)
-        viewContext.delete(entity[entityIndex!])
+        viewContext.delete(item)
         try? viewContext.save()
     }
     func colorOfPower(power: Int) -> Color {
