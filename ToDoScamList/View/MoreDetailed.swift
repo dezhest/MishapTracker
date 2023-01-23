@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftUICharts
-import SwiftUIGraphs
 
 struct MoreDetailed: View {
     @Binding var title: String

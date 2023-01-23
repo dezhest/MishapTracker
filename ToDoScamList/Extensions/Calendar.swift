@@ -8,10 +8,18 @@
 import Foundation
 
 extension Date {
-
+    func localDate() -> Date {
+            let nowUTC = Date()
+            let timeZoneOffset = Double(TimeZone.current.secondsFromGMT(for: nowUTC))
+            guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: nowUTC) else {return Date()}
+            return localDate
+        }
   static func today() -> Date {
-      return Date()
+      return Date().localDate().startOfDay
   }
+    var startOfDay: Date {
+            return Calendar.current.startOfDay(for: self)
+        }
 
   func next(_ weekday: Weekday, considerToday: Bool = false) -> Date {
     return get(.next,

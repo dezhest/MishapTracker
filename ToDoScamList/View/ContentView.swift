@@ -268,8 +268,13 @@ struct ContentView: View {
             return nil
         }
         if let result = mostFrequent(array: arrayAllType) {
-            mostFrequentType = result.value
-            mostFrequentTypeCount = result.count
+            if result.count == 1 && arrayAllType.count != 1 {
+                mostFrequentType = "-"
+                mostFrequentTypeCount = 0
+            } else {
+                mostFrequentType = result.value
+                mostFrequentTypeCount = result.count
+            }
         }
         // MARK: — Month Statistic
         let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
@@ -304,6 +309,8 @@ struct ContentView: View {
         mDpreviosFiveWeekPower = previosFiveWeekPower
         mDeachTypeCount = findEachTypeCount()
         mDallTypes = allTypes.removingDuplicates()
+        print(Date.today().previous(.monday).previous(.monday))
+        print(Date.today())
     }
 }
 
