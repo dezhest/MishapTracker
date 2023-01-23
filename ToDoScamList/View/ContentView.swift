@@ -9,15 +9,16 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    // MARK: — Private properties
+    // MARK: — Main properties
     @ObservedObject var scams = Scams()
     @State private var showingNewSheet = false
     @State private var showingMoreDetailed = false
     @State private var showingImage = false
     @State var pickerSelection: Int = 1
-    @Environment(\.managedObjectContext) private var viewContext
     @State private var image: Data = .init(count: 0)
     @GestureState private var scale: CGFloat = 1.0
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var entity: FetchedResults<Scam>
     // MARK: — Properties for EditScam View
     @State private var editIsShown = false
     @State private var editIsCanceled = false
@@ -61,7 +62,6 @@ struct ContentView: View {
     let previosThreeWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday)
     let previosFourWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
     let previosFiveWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var entity: FetchedResults<Scam>
     var sortedScams: [Scam] {
         switch pickerSelection {
         case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
@@ -131,83 +131,14 @@ struct ContentView: View {
                                     .opacity(0.7)
                                     .frame(maxWidth: .infinity, maxHeight: 60, alignment: .trailing)
                                     .padding(20)
-                                // MARK: — Properties for MoreDetailed View
                                     .onTapGesture {
-                                        if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
-                                        let arrayallPower = sortedScams.map({Int($0.power)})
-                                        let arrayAllType = sortedScams.map({$0.type})
-                                        let last30DayScams = sortedScams.filter({$0.selectedDate > monthAgoDate})
-                                        let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
-                                        let previosOneWeekScams = sortedScams.filter({($0.selectedDate > previosOneWeek) && ($0.selectedDate < Date.today().previous(.monday))})
-                                        let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > previosTwoWeek) && ($0.selectedDate < previosOneWeek)})
-                                        let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > previosThreeWeek) && ($0.selectedDate < previosTwoWeek)})
-                                        let previosFourWeekScams = sortedScams.filter({($0.selectedDate > previosFourWeek) && ($0.selectedDate < previosThreeWeek)})
-                                        let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > previosFiveWeek) && ($0.selectedDate < previosFourWeek)})
-                                        let sameTypeScams = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type})
-                                        let sameTypeAllPower = (Double(sameTypeScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100
-                                        let allTypes = sortedScams.map({$0.type})
-                                        func findEachTypeCount() -> [Int] {
-                                            var eachTypeCount = [Int]()
-                                            for item in allTypes.removingDuplicates() {
-                                                eachTypeCount.append(allTypes.filter({$0 == item}).count)
-                                            }
-                                            return(eachTypeCount)
-                                        }
-                                        // MARK: — General Statistic
-                                        let allPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
-                                        let medianaPowerOfAll = (allPower / Double(sortedScams.count)*100).rounded()/100
-                                        let medianaPowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
-                                        var mostFrequentTypeCount = 0
-                                        var mostFrequentType = ""
-                                        func mostFrequent<T: Hashable>(array: [T]) -> (value: T, count: Int)? {
-                                            let counts = array.reduce(into: [:]) { $0[$1, default: 0] += 1 }
-                                            if let (value, count) = counts.max(by: { $0.1 < $1.1 }) {
-                                                return (value, count)
-                                            }
-                                            return nil
-                                        }
-                                        if let result = mostFrequent(array: arrayAllType) {
-                                            mostFrequentType = result.value
-                                            mostFrequentTypeCount = result.count
-                                        }
-                                        // MARK: — Month Statistic
-                                        let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
-                                        let last30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
-                                        let medianaPowerOfLast30day = (Double(last30dayPower) / Double(last30DayScams.count)*100).rounded()/100
-                                        // MARK: — Week Statistic
-                                        let currentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
-                                        let currentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
-                                        let previosOneWeekPower = previosOneWeekScams.map({Int($0.power)}).reduce(0, +)
-                                        let previosTwoWeekPower = previosTwoWeekScams.map({Int($0.power)}).reduce(0, +)
-                                        let previosThreeWeekPower = previosThreeWeekScams.map({Int($0.power)}).reduce(0, +)
-                                        let previosFourWeekPower = previosFourWeekScams.map({Int($0.power)}).reduce(0, +)
-                                        let previosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
-                                        // MARK: — State Properties for MoreDetailed View
-                                        mDTitle = sortedScams[indexOfMoreDetailed].title
-                                        mDType = sortedScams[indexOfMoreDetailed].type
-                                        mDSameTypeCount = sameTypeScams.count
-                                        mDallPower = allPower
-                                        mDmedianaPowerOfAll = medianaPowerOfAll
-                                        mDmedianaPowerSameType = medianaPowerSameType
-                                        mDmostFrequentTypeCount = mostFrequentTypeCount
-                                        mDmostFrequentType = mostFrequentType
-                                        mDlast30dayPower = last30dayPower
-                                        mDlast30daySameTypeCount = last30daySameTypeCount
-                                        mDmedianaPowerOfLast30day = medianaPowerOfLast30day
-                                        mDcurrentWeekSameTypeCount = currentWeekSameTypeCount
-                                        mDcurrentWeekPower = currentWeekPower
-                                        mDpreviosOneWeekPower = previosOneWeekPower
-                                        mDpreviosTwoWeekPower = previosTwoWeekPower
-                                        mDpreviosThreeWeekPower = previosThreeWeekPower
-                                        mDpreviosFourWeekPower = previosFourWeekPower
-                                        mDpreviosFiveWeekPower = previosFiveWeekPower
-                                        mDeachTypeCount = findEachTypeCount()
-                                        mDallTypes = allTypes.removingDuplicates()
+                                        moreDetailedComputing(item: item)
                                         self.showingMoreDetailed.toggle()
                                     }
                             } .frame(maxWidth: .infinity)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                     Button(role: .destructive, action: {
+                                        if let unwrapped = sortedScams.firstIndex(of: item) {indexOfEditScam = unwrapped}
                                         deleteScam(item: item)
                                     }) {
                                         Label("Delete", systemImage: "trash")
@@ -263,7 +194,9 @@ struct ContentView: View {
     }
     // MARK: — Swipe to delete from list
     func deleteScam(item: Scam) {
-        viewContext.delete(entity[sortedScams.firstIndex(of: item)!])
+        var scam = sortedScams[sortedScams.firstIndex(of: item)!]
+        var entityIndex = entity.firstIndex(of: scam)
+        viewContext.delete(entity[entityIndex!])
         try? viewContext.save()
     }
     func colorOfPower(power: Int) -> Color {
@@ -300,6 +233,79 @@ struct ContentView: View {
         } else {
             return Image("Scam")
         }
+    }
+    // MARK: — Properties for MoreDetailed View
+    func moreDetailedComputing(item: Scam) {
+        if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
+        let arrayallPower = sortedScams.map({Int($0.power)})
+        let arrayAllType = sortedScams.map({$0.type})
+        let last30DayScams = sortedScams.filter({$0.selectedDate > monthAgoDate})
+        let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
+        let previosOneWeekScams = sortedScams.filter({($0.selectedDate > previosOneWeek) && ($0.selectedDate < Date.today().previous(.monday))})
+        let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > previosTwoWeek) && ($0.selectedDate < previosOneWeek)})
+        let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > previosThreeWeek) && ($0.selectedDate < previosTwoWeek)})
+        let previosFourWeekScams = sortedScams.filter({($0.selectedDate > previosFourWeek) && ($0.selectedDate < previosThreeWeek)})
+        let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > previosFiveWeek) && ($0.selectedDate < previosFourWeek)})
+        let sameTypeScams = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type})
+        let sameTypeAllPower = (Double(sameTypeScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100
+        let allTypes = sortedScams.map({$0.type})
+        func findEachTypeCount() -> [Int] {
+            var eachTypeCount = [Int]()
+            for item in allTypes.removingDuplicates() {
+                eachTypeCount.append(allTypes.filter({$0 == item}).count)
+            }
+            return(eachTypeCount)
+        }
+        // MARK: — General Statistic
+        let allPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
+        let medianaPowerOfAll = (allPower / Double(sortedScams.count)*100).rounded()/100
+        let medianaPowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
+        var mostFrequentTypeCount = 0
+        var mostFrequentType = ""
+        func mostFrequent<T: Hashable>(array: [T]) -> (value: T, count: Int)? {
+            let counts = array.reduce(into: [:]) { $0[$1, default: 0] += 1 }
+            if let (value, count) = counts.max(by: { $0.1 < $1.1 }) {
+                return (value, count)
+            }
+            return nil
+        }
+        if let result = mostFrequent(array: arrayAllType) {
+            mostFrequentType = result.value
+            mostFrequentTypeCount = result.count
+        }
+        // MARK: — Month Statistic
+        let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
+        let last30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+        let medianaPowerOfLast30day = (Double(last30dayPower) / Double(last30DayScams.count)*100).rounded()/100
+        // MARK: — Week Statistic
+        let currentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+        let currentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
+        let previosOneWeekPower = previosOneWeekScams.map({Int($0.power)}).reduce(0, +)
+        let previosTwoWeekPower = previosTwoWeekScams.map({Int($0.power)}).reduce(0, +)
+        let previosThreeWeekPower = previosThreeWeekScams.map({Int($0.power)}).reduce(0, +)
+        let previosFourWeekPower = previosFourWeekScams.map({Int($0.power)}).reduce(0, +)
+        let previosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
+        // MARK: — State Properties for MoreDetailed View
+        mDTitle = sortedScams[indexOfMoreDetailed].title
+        mDType = sortedScams[indexOfMoreDetailed].type
+        mDSameTypeCount = sameTypeScams.count
+        mDallPower = allPower
+        mDmedianaPowerOfAll = medianaPowerOfAll
+        mDmedianaPowerSameType = medianaPowerSameType
+        mDmostFrequentTypeCount = mostFrequentTypeCount
+        mDmostFrequentType = mostFrequentType
+        mDlast30dayPower = last30dayPower
+        mDlast30daySameTypeCount = last30daySameTypeCount
+        mDmedianaPowerOfLast30day = medianaPowerOfLast30day
+        mDcurrentWeekSameTypeCount = currentWeekSameTypeCount
+        mDcurrentWeekPower = currentWeekPower
+        mDpreviosOneWeekPower = previosOneWeekPower
+        mDpreviosTwoWeekPower = previosTwoWeekPower
+        mDpreviosThreeWeekPower = previosThreeWeekPower
+        mDpreviosFourWeekPower = previosFourWeekPower
+        mDpreviosFiveWeekPower = previosFiveWeekPower
+        mDeachTypeCount = findEachTypeCount()
+        mDallTypes = allTypes.removingDuplicates()
     }
 }
 
