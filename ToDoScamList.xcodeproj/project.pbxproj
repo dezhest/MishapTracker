@@ -17,6 +17,8 @@
 		BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF2AE829663EDE0066BD5A /* ScamItem.swift */; };
 		BBCD9DA1297D729000746FDC /* ChartView in Resources */ = {isa = PBXBuildFile; fileRef = BBCD9DA0297D728F00746FDC /* ChartView */; };
 		BBCD9DA4297D72AD00746FDC /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BBCD9DA3297D72AD00746FDC /* SwiftUICharts */; };
+		BBCD9DCD297FBC8900746FDC /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = BBCD9DCC297FBC8900746FDC /* FancyScrollView */; };
+		BBCD9DEE297FD6A600746FDC /* FancyScrollView in Resources */ = {isa = PBXBuildFile; fileRef = BBCD9DED297FD6A500746FDC /* FancyScrollView */; };
 		BBD34C09296C5736006ECC63 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = BBD34C08296C5736006ECC63 /* Preview Content */; };
 		BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */; };
 		BBD34C1F296D9CE5006ECC63 /* ToDoScamListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */; };
@@ -61,6 +63,7 @@
 		BB7D99B0297C342800442733 /* UniqItemsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqItemsArray.swift; sourceTree = "<group>"; };
 		BBBF2AE829663EDE0066BD5A /* ScamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamItem.swift; sourceTree = "<group>"; };
 		BBCD9DA0297D728F00746FDC /* ChartView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ChartView; sourceTree = "<group>"; };
+		BBCD9DED297FD6A500746FDC /* FancyScrollView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FancyScrollView; sourceTree = "<group>"; };
 		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
 		BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListTests.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBCD9DCD297FBC8900746FDC /* FancyScrollView in Frameworks */,
 				BBCD9DA4297D72AD00746FDC /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,6 +176,7 @@
 		BBF70616294CF54B006DA73A = {
 			isa = PBXGroup;
 			children = (
+				BBCD9DED297FD6A500746FDC /* FancyScrollView */,
 				BBCD9DA0297D728F00746FDC /* ChartView */,
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
 				BBD34C10296D8379006ECC63 /* ToDoScamListTests */,
@@ -261,6 +266,7 @@
 			name = ToDoScamList;
 			packageProductDependencies = (
 				BBCD9DA3297D72AD00746FDC /* SwiftUICharts */,
+				BBCD9DCC297FBC8900746FDC /* FancyScrollView */,
 			);
 			productName = ToDoScamList;
 			productReference = BBF7061F294CF54B006DA73A /* ToDoScamList.app */;
@@ -301,6 +307,7 @@
 			mainGroup = BBF70616294CF54B006DA73A;
 			packageReferences = (
 				BBCD9DA2297D72AD00746FDC /* XCRemoteSwiftPackageReference "ChartView" */,
+				BBCD9DCB297FBC8800746FDC /* XCRemoteSwiftPackageReference "FancyScrollView" */,
 			);
 			productRefGroup = BBF70620294CF54B006DA73A /* Products */;
 			projectDirPath = "";
@@ -334,6 +341,7 @@
 			files = (
 				BBCD9DA1297D729000746FDC /* ChartView in Resources */,
 				BBD34C09296C5736006ECC63 /* Preview Content in Resources */,
+				BBCD9DEE297FD6A600746FDC /* FancyScrollView in Resources */,
 				BB75873E297407D3001D1FA0 /* Image.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -754,6 +762,14 @@
 				kind = branch;
 			};
 		};
+		BBCD9DCB297FBC8800746FDC /* XCRemoteSwiftPackageReference "FancyScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nerdsupremacist/FancyScrollView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -761,6 +777,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BBCD9DA2297D72AD00746FDC /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
+		};
+		BBCD9DCC297FBC8900746FDC /* FancyScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBCD9DCB297FBC8800746FDC /* XCRemoteSwiftPackageReference "FancyScrollView" */;
+			productName = FancyScrollView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

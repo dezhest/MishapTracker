@@ -12,7 +12,6 @@ struct ContentView: View {
     // MARK: — Main properties
     @ObservedObject var scams = Scams()
     @State private var showingNewSheet = false
-    @State private var showingMoreDetailed = false
     @State private var showingImage = false
     @State var pickerSelection: Int = 1
     @State private var image: Data = .init(count: 0)
@@ -97,38 +96,45 @@ struct ContentView: View {
                                             self.showingImage.toggle()
                                         }
                                     }
-                                VStack(alignment: .leading, spacing: 0) {
-                                    Text(item.title)
-                                        .font(.system(size: 13, weight: .bold, design: .default))
-                                    Text("#\(item.type)")
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        Text(item.title)
+                                            .font(.system(size: 13, weight: .bold, design: .default))
+                                        Text("#\(item.type)")
+                                            .font(.system(size: 10, weight: .medium, design: .default))
+                                            .opacity(0.6)
+                                            .padding(5)
+                                            .padding(.bottom, 3)
+                                            .padding(.leading, -5)
+                                        Text("\(Int(item.power))/10 скамов")
+                                            .font(.system(size: 12, weight: .medium, design: .default))
+                                            .foregroundColor(.white)
+                                            .padding(3)
+                                            .background(colorOfPower(power: Int(item.power)))
+                                            .cornerRadius(20)
+                                            .padding(.bottom, 3)
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
+                                    .padding(.leading, 65)
+                                    .offset(x: 8)
+                                    Text("\(item.selectedDate, format: Date.FormatStyle(date: .numeric, time: .omitted))")
                                         .font(.system(size: 10, weight: .medium, design: .default))
-                                        .opacity(0.6)
-                                        .padding(5)
-                                        .padding(.bottom, 3)
-                                        .padding(.leading, -5)
-                                    Text("\(Int(item.power))/10 скамов")
-                                        .font(.system(size: 12, weight: .medium, design: .default))
-                                        .foregroundColor(.white)
                                         .padding(3)
-                                        .background(colorOfPower(power: Int(item.power)))
-                                        .cornerRadius(20)
-                                        .padding(.bottom, 3)
+                                        .padding(.bottom, -1)
+                                        .foregroundColor(.gray)
+                                        .opacity(0.7)
+                                        .frame(maxWidth: .infinity, maxHeight: 60, alignment: .bottomTrailing)
+                                VStack {
+                                    Image(systemName: "arrow.right.square")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                        .opacity(0.35)
+                                        .offset(x: -1)
+                                        .padding(10)
+                                        .onAppear {moreDetailedComputing(item: item)}
                                 }
-                                .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
-                                .padding(.leading, 65)
-                                .offset(x: 8)
-                                Text("\(item.selectedDate, format: Date.FormatStyle(date: .numeric, time: .omitted))")
-                                    .font(.system(size: 10, weight: .medium, design: .default))
-                                    .padding(3)
-                                    .padding(.bottom, -1)
-                                    .foregroundColor(.gray)
-                                    .opacity(0.7)
-                                    .frame(maxWidth: .infinity, maxHeight: 60, alignment: .bottomTrailing)
+                                    .background( NavigationLink("", destination: MoreDetailed(title: $mDTitle, type: $mDType, image: $mDImage, description: $mDDescription, allPower: $mDallPower, medianaPowerOfAll: $mDmedianaPowerOfAll, medianaPowerSameType: $mDmedianaPowerSameType, mostFrequentTypeCount: $mDmostFrequentTypeCount, mostFrequentType: $mDmostFrequentType, sameTypeCount: $mDSameTypeCount, last30dayPower: $mDlast30dayPower, last30daySameTypeCount: $mDlast30daySameTypeCount, medianaPowerOfLast30day: $mDmedianaPowerOfLast30day, currentWeekSameTypeCount: $mDcurrentWeekSameTypeCount, currentWeekPower: $mDcurrentWeekPower, previosOneWeekPower: $mDpreviosOneWeekPower, previosTwoWeekPower: $mDpreviosTwoWeekPower, previosThreeWeekPower: $mDpreviosThreeWeekPower, previosFourWeekPower: $mDpreviosFourWeekPower, previosFiveWeekPower: $mDpreviosFiveWeekPower, eachTypeCount: $mDeachTypeCount, allTypes: $mDallTypes)).opacity(0) )
                             } .frame(maxWidth: .infinity)
-                                .onTapGesture {
-                                    moreDetailedComputing(item: item)
-                                    self.showingMoreDetailed.toggle()
-                                }
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                     Button(role: .destructive, action: {
                                         if let unwrapped = sortedScams.firstIndex(of: item) {indexOfEditScam = unwrapped}
@@ -174,9 +180,6 @@ struct ContentView: View {
                 })
                 .sheet(isPresented: $showingNewSheet) {
                     NewSheet()
-                }
-                .sheet(isPresented: $showingMoreDetailed) {
-                    MoreDetailed(title: $mDTitle, type: $mDType, image: $mDImage, description: $mDDescription, allPower: $mDallPower, medianaPowerOfAll: $mDmedianaPowerOfAll, medianaPowerSameType: $mDmedianaPowerSameType, mostFrequentTypeCount: $mDmostFrequentTypeCount, mostFrequentType: $mDmostFrequentType, sameTypeCount: $mDSameTypeCount, last30dayPower: $mDlast30dayPower, last30daySameTypeCount: $mDlast30daySameTypeCount, medianaPowerOfLast30day: $mDmedianaPowerOfLast30day, currentWeekSameTypeCount: $mDcurrentWeekSameTypeCount, currentWeekPower: $mDcurrentWeekPower, previosOneWeekPower: $mDpreviosOneWeekPower, previosTwoWeekPower: $mDpreviosTwoWeekPower, previosThreeWeekPower: $mDpreviosThreeWeekPower, previosFourWeekPower: $mDpreviosFourWeekPower, previosFiveWeekPower: $mDpreviosFiveWeekPower, eachTypeCount: $mDeachTypeCount, allTypes: $mDallTypes)
                 }
                 .sheet(isPresented: $showingImage, content: {
                     ShowImage(image: $showImage)
