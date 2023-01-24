@@ -44,16 +44,16 @@ struct NewSheet: View {
                             if description.isEmpty {
                                 Text("Введите описание")
                                     .font(.custom("Helvetica", size: 16))
-                                    .opacity(0.25)
-                                    .padding(.leading, 10)
-                                    .padding(.top, 16)
-                                    .padding(.bottom, 16)
+                                    .opacity(0.22)
                             }
                             TextEditor(text: $description)
                                 .onReceive(Just(description)) { _ in limitText(textLimit) }
                                 .font(.custom("Helvetica", size: 16))
-                                .padding(.leading, 10)
+                                .offset(x: 10)
+                                .offset(x: -14)
                         }
+                        .padding(15)
+                        .offset(x: -4)
                     }
                         VStack(alignment: .leading) {
                             Text("Сила скама:")
