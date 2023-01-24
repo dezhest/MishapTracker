@@ -11,6 +11,7 @@ import SwiftUICharts
 struct MoreDetailed: View {
     @Binding var title: String
     @Binding var type: String
+    @Binding var image: Data
     @Binding var description: String
     @Binding var allPower: Double
     @Binding var medianaPowerOfAll: Double
@@ -28,6 +29,7 @@ struct MoreDetailed: View {
     @Binding var previosThreeWeekPower: Int
     @Binding var previosFourWeekPower: Int
     @Binding var previosFiveWeekPower: Int
+    @State private var statistic = false
     @State private var general = false
     @State private var month = false
     @State private var week = false
@@ -62,7 +64,14 @@ struct MoreDetailed: View {
         NavigationView {
             VStack {
                 Text(description)
+                newOrSystemImage()
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 List {
+                    DisclosureGroup(isExpanded: $statistic, content: {
                     HStack {
                         Group {
                             Text("Количество скамов типа ")
@@ -263,15 +272,23 @@ struct MoreDetailed: View {
                             .padding(.top, 15)
                             .frame(maxWidth: .infinity, alignment: .bottom)
                     }
+                    }, label: {Text("Cтатистика").font(.system(size: 18, weight: .bold, design: .default))})
                     .navigationBarItems(leading: Text("\(title)"))
                 }.environment(\.colorScheme, .dark)
             }
             .navigationBarTitle("Статистика")
         }
     }
+    func newOrSystemImage() -> Image {
+        if image != Data() {
+            return Image(uiImage: UIImage(data: imagels) ?? UIImage())
+        } else {
+            return Image("Scam")
+        }
+    }
 }
 struct MoreDetailed_Previews: PreviewProvider {
     static var previews: some View {
-        MoreDetailed(title: .constant(""), type: .constant(""), description: .constant(""), allPower: .constant(0.0), medianaPowerOfAll: .constant(0.0), medianaPowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), medianaPowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
+        MoreDetailed(title: .constant(""), type: .constant(""), image: .constant(Data()), description: .constant(""), allPower: .constant(0.0), medianaPowerOfAll: .constant(0.0), medianaPowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), medianaPowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
     }
 }

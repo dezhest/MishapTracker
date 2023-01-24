@@ -38,18 +38,23 @@ struct NewSheet: View {
                         TextField("Название скама", text: $name)
                             .padding(10)
                         Spacer()
+                    }
+                    VStack {
                         ZStack(alignment: .leading) {
                             if description.isEmpty {
                                 Text("Введите описание")
                                     .font(.custom("Helvetica", size: 16))
                                     .opacity(0.25)
                                     .padding(.leading, 10)
+                                    .padding(.top, 16)
+                                    .padding(.bottom, 16)
                             }
                             TextEditor(text: $description)
                                 .onReceive(Just(description)) { _ in limitText(textLimit) }
                                 .font(.custom("Helvetica", size: 16))
                                 .padding(.leading, 10)
                         }
+                    }
                         VStack(alignment: .leading) {
                             Text("Сила скама:")
                             ZStack {
@@ -89,13 +94,16 @@ struct NewSheet: View {
                                 }
                             }
                         }
+                        .padding(.top, 7)
+                    VStack {
                         DatePicker("Дата скама", selection: $selectedDate, displayedComponents: .date)
                             .datePickerStyle(.automatic)
                             .id(calendarId)
                             .onChange(of: selectedDate, perform: { _ in
                                 calendarId += 1
                             })
-                        Spacer()
+                    }
+                    VStack {
                         Picker("Тип скама", selection: $type) {
                             ForEach(types, id: \.self) {
                                 Text($0)
@@ -114,6 +122,8 @@ struct NewSheet: View {
                                 type = "Финансовый"
                             }
                         }
+                    }
+                    VStack {
                         HStack {
                             Text("Фото скама")
                                 .fullScreenCover(isPresented: $imagePicker) {
@@ -139,7 +149,6 @@ struct NewSheet: View {
                                             self.imagePicker.toggle()
                                         }
                                     }
-
                             } else {
                                 Image(systemName: "photo.fill")
                                     .resizable()
@@ -149,16 +158,16 @@ struct NewSheet: View {
                                     .onTapGesture {
                                         self.show.toggle()
                                     }
-                                .confirmationDialog("Выберите фото скама", isPresented: self.$show, titleVisibility: .visible) {
-                                    Button("Камера") {
-                                        self.source = .camera
-                                        self.imagePicker.toggle()
+                                    .confirmationDialog("Выберите фото скама", isPresented: self.$show, titleVisibility: .visible) {
+                                        Button("Камера") {
+                                            self.source = .camera
+                                            self.imagePicker.toggle()
+                                        }
+                                        Button("Галерея") {
+                                            self.source = .photoLibrary
+                                            self.imagePicker.toggle()
+                                        }
                                     }
-                                    Button("Галерея") {
-                                        self.source = .photoLibrary
-                                        self.imagePicker.toggle()
-                                    }
-                                }
                             }
                         }
                     }

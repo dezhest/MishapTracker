@@ -33,6 +33,7 @@ struct ContentView: View {
     @State private var indexOfMoreDetailed: Int = 0
     @State private var mDTitle = ""
     @State private var mDType = ""
+    @State private var mDImage = Data()
     @State private var mDDescription = ""
     @State private var mDSameTypeCount = 0
     @State private var mDmedianaPowerSameType = 0.0
@@ -52,17 +53,12 @@ struct ContentView: View {
     @State private var mDpreviosFiveWeekPower = 0
     @State private var mDeachTypeCount = [Int]()
     @State private var mDallTypes = [String]()
-    let dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM"
-        return dateFormatter
-    }()
-    let monthAgoDate = Calendar(identifier: .iso8601).date(byAdding: .day, value: -30, to: Date())!
     let previosOneWeek = Date.today().previous(.monday).previous(.monday)
     let previosTwoWeek = Date.today().previous(.monday).previous(.monday).previous(.monday)
     let previosThreeWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday)
     let previosFourWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
     let previosFiveWeek = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
+    let monthAgoDate = Calendar(identifier: .iso8601).date(byAdding: .day, value: -30, to: Date())!
     var sortedScams: [Scam] {
         switch pickerSelection {
         case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
@@ -103,7 +99,7 @@ struct ContentView: View {
                                     }
                                 VStack(alignment: .leading, spacing: 0) {
                                     Text(item.title)
-                                        .font(.system(size: 14, weight: .bold, design: .default))
+                                        .font(.system(size: 13, weight: .bold, design: .default))
                                     Text("#\(item.type)")
                                         .font(.system(size: 10, weight: .medium, design: .default))
                                         .opacity(0.6)
@@ -121,22 +117,18 @@ struct ContentView: View {
                                 .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
                                 .padding(.leading, 65)
                                 .offset(x: 8)
-                                Text("\(item.selectedDate, formatter: dateFormatter)")
+                                Text("\(item.selectedDate, format: Date.FormatStyle(date: .numeric, time: .omitted))")
                                     .font(.system(size: 10, weight: .medium, design: .default))
                                     .padding(3)
                                     .padding(.bottom, -1)
                                     .foregroundColor(.gray)
                                     .opacity(0.7)
                                     .frame(maxWidth: .infinity, maxHeight: 60, alignment: .bottomTrailing)
-                                Image(systemName: "square.and.pencil")
-                                    .opacity(0.7)
-                                    .frame(maxWidth: .infinity, maxHeight: 60, alignment: .trailing)
-                                    .padding(20)
-                                    .onTapGesture {
-                                        moreDetailedComputing(item: item)
-                                        self.showingMoreDetailed.toggle()
-                                    }
                             } .frame(maxWidth: .infinity)
+                                .onTapGesture {
+                                    moreDetailedComputing(item: item)
+                                    self.showingMoreDetailed.toggle()
+                                }
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                     Button(role: .destructive, action: {
                                         if let unwrapped = sortedScams.firstIndex(of: item) {indexOfEditScam = unwrapped}
@@ -184,7 +176,7 @@ struct ContentView: View {
                     NewSheet()
                 }
                 .sheet(isPresented: $showingMoreDetailed) {
-                    MoreDetailed(title: $mDTitle, type: $mDType, description: $mDDescription, allPower: $mDallPower, medianaPowerOfAll: $mDmedianaPowerOfAll, medianaPowerSameType: $mDmedianaPowerSameType, mostFrequentTypeCount: $mDmostFrequentTypeCount, mostFrequentType: $mDmostFrequentType, sameTypeCount: $mDSameTypeCount, last30dayPower: $mDlast30dayPower, last30daySameTypeCount: $mDlast30daySameTypeCount, medianaPowerOfLast30day: $mDmedianaPowerOfLast30day, currentWeekSameTypeCount: $mDcurrentWeekSameTypeCount, currentWeekPower: $mDcurrentWeekPower, previosOneWeekPower: $mDpreviosOneWeekPower, previosTwoWeekPower: $mDpreviosTwoWeekPower, previosThreeWeekPower: $mDpreviosThreeWeekPower, previosFourWeekPower: $mDpreviosFourWeekPower, previosFiveWeekPower: $mDpreviosFiveWeekPower, eachTypeCount: $mDeachTypeCount, allTypes: $mDallTypes)
+                    MoreDetailed(title: $mDTitle, type: $mDType, image: $mDImage, description: $mDDescription, allPower: $mDallPower, medianaPowerOfAll: $mDmedianaPowerOfAll, medianaPowerSameType: $mDmedianaPowerSameType, mostFrequentTypeCount: $mDmostFrequentTypeCount, mostFrequentType: $mDmostFrequentType, sameTypeCount: $mDSameTypeCount, last30dayPower: $mDlast30dayPower, last30daySameTypeCount: $mDlast30daySameTypeCount, medianaPowerOfLast30day: $mDmedianaPowerOfLast30day, currentWeekSameTypeCount: $mDcurrentWeekSameTypeCount, currentWeekPower: $mDcurrentWeekPower, previosOneWeekPower: $mDpreviosOneWeekPower, previosTwoWeekPower: $mDpreviosTwoWeekPower, previosThreeWeekPower: $mDpreviosThreeWeekPower, previosFourWeekPower: $mDpreviosFourWeekPower, previosFiveWeekPower: $mDpreviosFiveWeekPower, eachTypeCount: $mDeachTypeCount, allTypes: $mDallTypes)
                 }
                 .sheet(isPresented: $showingImage, content: {
                     ShowImage(image: $showImage)
@@ -200,30 +192,18 @@ struct ContentView: View {
     }
     func colorOfPower(power: Int) -> Color {
         switch power {
-        case 0:
-            return Color(UIColor(red: 252/255, green: 191/255, blue: 41/255, alpha: 1.0))
-        case 1:
-            return Color(UIColor(red: 252/255, green: 178/255, blue: 43/255, alpha: 1.0))
-        case 2:
-            return Color(UIColor(red: 252/255, green: 164/255, blue: 45/255, alpha: 1.0))
-        case 3:
-            return Color(UIColor(red: 252/255, green: 153/255, blue: 47/255, alpha: 1.0))
-        case 4:
-            return Color(UIColor(red: 252/255, green: 141/255, blue: 48/255, alpha: 1.0))
-        case 5:
-            return Color(UIColor(red: 252/255, green: 127/255, blue: 49/255, alpha: 1.0))
-        case 6:
-            return Color(UIColor(red: 252/255, green: 114/255, blue: 50/255, alpha: 1.0))
-        case 7:
-            return Color(UIColor(red: 252/255, green: 102/255, blue: 51/255, alpha: 1.0))
-        case 8:
-            return Color(UIColor(red: 252/255, green: 88/255, blue: 51/255, alpha: 1.0))
-        case 9:
-            return Color(UIColor(red: 252/255, green: 72/255, blue: 51/255, alpha: 1.0))
-        case 10:
-            return Color(UIColor(red: 252/255, green: 55/255, blue: 51/255, alpha: 1.0))
-        default:
-            return Color(.black)
+        case 0: return Color(UIColor(red: 252/255, green: 191/255, blue: 41/255, alpha: 1.0))
+        case 1: return Color(UIColor(red: 252/255, green: 178/255, blue: 43/255, alpha: 1.0))
+        case 2: return Color(UIColor(red: 252/255, green: 164/255, blue: 45/255, alpha: 1.0))
+        case 3: return Color(UIColor(red: 252/255, green: 153/255, blue: 47/255, alpha: 1.0))
+        case 4: return Color(UIColor(red: 252/255, green: 141/255, blue: 48/255, alpha: 1.0))
+        case 5: return Color(UIColor(red: 252/255, green: 127/255, blue: 49/255, alpha: 1.0))
+        case 6: return Color(UIColor(red: 252/255, green: 114/255, blue: 50/255, alpha: 1.0))
+        case 7: return Color(UIColor(red: 252/255, green: 102/255, blue: 51/255, alpha: 1.0))
+        case 8: return Color(UIColor(red: 252/255, green: 88/255, blue: 51/255, alpha: 1.0))
+        case 9: return Color(UIColor(red: 252/255, green: 72/255, blue: 51/255, alpha: 1.0))
+        case 10: return Color(UIColor(red: 252/255, green: 55/255, blue: 51/255, alpha: 1.0))
+        default: return Color(.black)
         }
     }
     func newOrSystemImage(item: Scam) -> Image {
@@ -292,6 +272,7 @@ struct ContentView: View {
         // MARK: — State Properties for MoreDetailed View
         mDTitle = sortedScams[indexOfMoreDetailed].title
         mDType = sortedScams[indexOfMoreDetailed].type
+        if let unwrapped = sortedScams[indexOfMoreDetailed].imageD {mDImage = unwrapped}
         mDDescription = sortedScams[indexOfMoreDetailed].scamDescription
         mDSameTypeCount = sameTypeScams.count
         mDallPower = allPower
