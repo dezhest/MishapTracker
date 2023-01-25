@@ -62,6 +62,7 @@ struct MoreDetailed: View {
     }
     var body: some View {        
         List {
+            Text("ssds")
             DisclosureGroup(isExpanded: $statistic, content: {
                 HStack {
                     Group {
