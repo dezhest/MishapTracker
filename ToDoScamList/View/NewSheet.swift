@@ -26,8 +26,7 @@ struct NewSheet: View {
     @State private var selection = "None"
     @State private var description = ""
     @Environment(\.managedObjectContext) private var moc
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var users: FetchedResults<Scam>
-    @State var types: [String] = [""]
+    @State private var types: [String] = [""]
     @State private var type = "Финансовый"
     let textLimit = 280
     var body: some View {
@@ -37,18 +36,20 @@ struct NewSheet: View {
                     VStack {
                         TextField("Название скама", text: $name)
                             .padding(10)
+                            .padding(.top, 12)
                         Spacer()
                     }
                     VStack {
                         ZStack(alignment: .leading) {
                             if description.isEmpty {
                                 Text("Введите описание")
-                                    .font(.custom("Helvetica", size: 16))
+                                    .font(.custom("Helvetica", size: 17))
                                     .opacity(0.22)
+                                    .foregroundColor(.black)
                             }
                             TextEditor(text: $description)
                                 .onReceive(Just(description)) { _ in limitText(textLimit) }
-                                .font(.custom("Helvetica", size: 16))
+                                .font(.custom("Helvetica", size: 17))
                                 .offset(x: 10)
                                 .offset(x: -14)
                         }
@@ -80,7 +81,6 @@ struct NewSheet: View {
                                     }, alignment: .top)
                                 VStack {
                                     Text("Max Scam")
-                                        .font(.system(size: 12, weight: .medium, design: .default))
                                         .foregroundColor(.white)
                                         .padding(3)
                                         .background(Color(.red))
@@ -176,13 +176,13 @@ struct NewSheet: View {
                     if name.count >= 30 || name.isEmpty {
                         self.showsAlertNameCount.toggle()
                     } else {
-                        let userInfo = Scam(context: self.moc)
-                        userInfo.type = self.type
-                        userInfo.power = self.power
-                        userInfo.selectedDate = self.selectedDate
-                        userInfo.imageD = self.imageData
-                        userInfo.title = self.name
-                        userInfo.scamDescription = self.description
+                        let scamInfo = Scam(context: self.moc)
+                        scamInfo.type = self.type
+                        scamInfo.power = self.power
+                        scamInfo.selectedDate = self.selectedDate
+                        scamInfo.imageD = self.imageData
+                        scamInfo.title = self.name
+                        scamInfo.scamDescription = self.description
                         do {
                             try self.moc.save()
                         } catch {

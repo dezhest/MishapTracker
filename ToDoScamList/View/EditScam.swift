@@ -10,7 +10,6 @@ import SwiftUI
 
 struct EditScam: View {
     let screenSize = UIScreen.main.bounds
-    var title: String = ""
     @Binding var isShown: Bool
     @Binding var isCanceled: Bool
     @Binding var text: String
@@ -94,6 +93,6 @@ struct EditScam: View {
 
 struct EditScam_Previews: PreviewProvider {
     static var previews: some View {
-        EditScam(title: "", isShown: .constant(true), isCanceled: .constant(false), text: .constant(""), power: .constant(0.00))
+        EditScam(isShown: .constant(true), isCanceled: .constant(false), text: .constant(""), power: .constant(0.00))
     }
 }

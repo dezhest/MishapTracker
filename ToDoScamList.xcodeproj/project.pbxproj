@@ -34,6 +34,8 @@
 		BBFA467C2954AB46009E9E9A /* AddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AddType.swift */; };
 		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
+		C39356612982E7410006DCAF /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* Statistics.swift */; };
+		C3F905AF2983366B00C2E649 /* DescriptionEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F905AE2983366B00C2E649 /* DescriptionEdit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		BBFA467B2954AB46009E9E9A /* AddType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddType.swift; sourceTree = "<group>"; };
 		BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Scam+CoreDataProperties.swift"; path = "ToDoScamList/CoreDate/Scam+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		BBFA46812954E8A3009E9E9A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C39356602982E7410006DCAF /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		C3F905AE2983366B00C2E649 /* DescriptionEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionEdit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,8 @@
 				BB75876129761A79001D1FA0 /* MoreDetailed.swift */,
 				BBFA467B2954AB46009E9E9A /* AddType.swift */,
 				BB705C45295C891E006585BB /* EditScam.swift */,
+				C3F905AE2983366B00C2E649 /* DescriptionEdit.swift */,
+				C39356602982E7410006DCAF /* Statistics.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -398,8 +404,10 @@
 				BB705C46295C891E006585BB /* EditScam.swift in Sources */,
 				BBF70625294CF54B006DA73A /* Persistence.swift in Sources */,
 				BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */,
+				C39356612982E7410006DCAF /* Statistics.swift in Sources */,
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AddType.swift in Sources */,
+				C3F905AF2983366B00C2E649 /* DescriptionEdit.swift in Sources */,
 				BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */,
 				BBD7FD602970C40B006679BF /* DismissKeyboard.swift in Sources */,
 				BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */,
