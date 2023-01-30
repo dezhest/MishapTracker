@@ -35,6 +35,7 @@
 		C3F2F5AF2987FCC9005436CB /* AddNewScamForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */; };
 		C3F2F5B329881C2E005436CB /* EditScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B229881C2E005436CB /* EditScamModel.swift */; };
 		C3F2F5B529882039005436CB /* StatisticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B429882039005436CB /* StatisticModel.swift */; };
+		C3F2F5B729885DD4005436CB /* NavigationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B629885DD4005436CB /* NavigationTheme.swift */; };
 		C3F905AF2983366B00C2E649 /* EditDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F905AE2983366B00C2E649 /* EditDescription.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewScamForm.swift; sourceTree = "<group>"; };
 		C3F2F5B229881C2E005436CB /* EditScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScamModel.swift; sourceTree = "<group>"; };
 		C3F2F5B429882039005436CB /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
+		C3F2F5B629885DD4005436CB /* NavigationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTheme.swift; sourceTree = "<group>"; };
 		C3F905AE2983366B00C2E649 /* EditDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDescription.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 				C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */,
 				C3F2F5B229881C2E005436CB /* EditScamModel.swift */,
 				C3F2F5B429882039005436CB /* StatisticModel.swift */,
+				C3F2F5B629885DD4005436CB /* NavigationTheme.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3F2F5B729885DD4005436CB /* NavigationTheme.swift in Sources */,
 				BB705C3E295A07E6006585BB /* ZoomImage.swift in Sources */,
 				BB7D99B1297C342800442733 /* UniqItemsArray.swift in Sources */,
 				BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */,

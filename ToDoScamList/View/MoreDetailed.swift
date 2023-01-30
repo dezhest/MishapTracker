@@ -99,20 +99,10 @@ struct MoreDetailed: View {
                         }
                         .padding(.top, 120)
                     }
-
+Text("Yo")
+                        .opacity(0)
+                        .padding(.top, 550)
             }
-                Text("Статистика")
-                    .foregroundColor(.white)
-                    .font(.system(size: 18, weight: .bold, design: .default))
-                    .frame(width: 180, height: 5)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color(.orange))
-                    .cornerRadius(20)
-                    .onTapGesture {
-                        statIsShown.toggle()
-                    }
-                    .padding(.top, 550)
             }
             .frame(maxHeight: .infinity)
             .onChange(of: editIsShown) {_ in
@@ -127,7 +117,19 @@ struct MoreDetailed: View {
                             Statistics(type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, previosOneWeekPower: $previosOneWeekPower, previosTwoWeekPower: $previosTwoWeekPower, previosThreeWeekPower: $previosThreeWeekPower, previosFourWeekPower: $previosFourWeekPower, previosFiveWeekPower: $previosFiveWeekPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)
                         }
             EditDescription(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput)
-
+            Text("Статистика")
+                .foregroundColor(.white)
+                .font(.system(size: 18, weight: .bold, design: .default))
+                .frame(width: 180, height: 5)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color(.orange))
+                .cornerRadius(20)
+                .onTapGesture {
+                    statIsShown.toggle()
+                }
+                .frame(maxHeight: screenSize.height, alignment: .bottom)
+                .offset(y: -20)
     }
     }
     func newOrSystemImage() -> Image {

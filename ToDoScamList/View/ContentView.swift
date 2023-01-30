@@ -32,9 +32,7 @@ struct ContentView: View {
         }
     }
     init() {
-        UITableView.appearance().backgroundColor = .clear
-        UITableViewCell.appearance().backgroundColor = .clear
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.orange]
+        NavigationTheme.navigationBarColors(background: .systemOrange, titleColor: .white)
     }
     var body: some View {
         ZStack {
@@ -53,6 +51,7 @@ struct ContentView: View {
                         }
                     })
                 .navigationBarTitle(Text("Scam List"))
+                
                 .navigationBarItems(leading: Picker("Select number", selection: $pickerSelection) {
                     Text("Сортировка по дате").tag(1)
                     Text("Сортировка по алфавиту").tag(2)
@@ -73,7 +72,8 @@ struct ContentView: View {
                     MoreDetailed(id: $stat.mDID, title: $stat.mDTitle, type: $stat.mDType, image: $stat.mDImage, description: $stat.mDDescription, allPower: $stat.mDallPower, averagePowerOfAll: $stat.mDaveragePowerOfAll, averagePowerSameType: $stat.mDaveragePowerSameType, mostFrequentTypeCount: $stat.mDmostFrequentTypeCount, mostFrequentType: $stat.mDmostFrequentType, sameTypeCount: $stat.mDSameTypeCount, last30dayPower: $stat.mDlast30dayPower, last30daySameTypeCount: $stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $stat.mDcurrentWeekSameTypeCount, currentWeekPower: $stat.mDcurrentWeekPower, previosOneWeekPower: $stat.mDpreviosOneWeekPower, previosTwoWeekPower: $stat.mDpreviosTwoWeekPower, previosThreeWeekPower: $stat.mDpreviosThreeWeekPower, previosFourWeekPower: $stat.mDpreviosFourWeekPower, previosFiveWeekPower: $stat.mDpreviosFiveWeekPower, eachTypeCount: $stat.mDeachTypeCount, allTypes: $stat.mDallTypes)})
             }
             EditScam(isShown: $editIsShown, isCanceled: $edit.editIsCanceled, text: $edit.editInput, power: $edit.editpower)
-        } .environment(\.colorScheme, .light)
+        }
+        .environment(\.colorScheme, .light)
     }
     func newOrSystemImage(item: Scam) -> Image {
         if item.imageD != Data() {
