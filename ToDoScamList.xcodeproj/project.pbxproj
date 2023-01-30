@@ -33,6 +33,7 @@
 		C39356612982E7410006DCAF /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* Statistics.swift */; };
 		C3F2F5862986CDCD005436CB /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F5852986CDCD005436CB /* FancyScrollView */; };
 		C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F58B2987D552005436CB /* SwiftUICharts */; };
+		C3F2F5AF2987FCC9005436CB /* AddNewScamForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */; };
 		C3F905AF2983366B00C2E649 /* DescriptionEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F905AE2983366B00C2E649 /* DescriptionEdit.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Scam+CoreDataProperties.swift"; path = "ToDoScamList/CoreDate/Scam+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		BBFA46812954E8A3009E9E9A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewScamForm.swift; sourceTree = "<group>"; };
 		C3F905AE2983366B00C2E649 /* DescriptionEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionEdit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +120,7 @@
 				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
 				BB705C3D295A07E6006585BB /* ZoomImage.swift */,
 				BBBF2AE829663EDE0066BD5A /* ScamItem.swift */,
+				C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -363,7 +366,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -397,6 +400,7 @@
 				BBF70625294CF54B006DA73A /* Persistence.swift in Sources */,
 				BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */,
 				C39356612982E7410006DCAF /* Statistics.swift in Sources */,
+				C3F2F5AF2987FCC9005436CB /* AddNewScamForm.swift in Sources */,
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AddType.swift in Sources */,
 				C3F905AF2983366B00C2E649 /* DescriptionEdit.swift in Sources */,
