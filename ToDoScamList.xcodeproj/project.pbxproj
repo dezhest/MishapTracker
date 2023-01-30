@@ -15,10 +15,6 @@
 		BB7ACB8329785687008649E8 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8229785687008649E8 /* Calendar.swift */; };
 		BB7D99B1297C342800442733 /* UniqItemsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7D99B0297C342800442733 /* UniqItemsArray.swift */; };
 		BBBF2AE929663EDE0066BD5A /* ScamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF2AE829663EDE0066BD5A /* ScamItem.swift */; };
-		BBCD9DA1297D729000746FDC /* ChartView in Resources */ = {isa = PBXBuildFile; fileRef = BBCD9DA0297D728F00746FDC /* ChartView */; };
-		BBCD9DA4297D72AD00746FDC /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = BBCD9DA3297D72AD00746FDC /* SwiftUICharts */; };
-		BBCD9DCD297FBC8900746FDC /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = BBCD9DCC297FBC8900746FDC /* FancyScrollView */; };
-		BBCD9DEE297FD6A600746FDC /* FancyScrollView in Resources */ = {isa = PBXBuildFile; fileRef = BBCD9DED297FD6A500746FDC /* FancyScrollView */; };
 		BBD34C09296C5736006ECC63 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = BBD34C08296C5736006ECC63 /* Preview Content */; };
 		BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */; };
 		BBD34C1F296D9CE5006ECC63 /* ToDoScamListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */; };
@@ -35,6 +31,8 @@
 		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
 		C39356612982E7410006DCAF /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* Statistics.swift */; };
+		C3F2F5862986CDCD005436CB /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F5852986CDCD005436CB /* FancyScrollView */; };
+		C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F58B2987D552005436CB /* SwiftUICharts */; };
 		C3F905AF2983366B00C2E649 /* DescriptionEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F905AE2983366B00C2E649 /* DescriptionEdit.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,8 +62,6 @@
 		BB7ACB8229785687008649E8 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		BB7D99B0297C342800442733 /* UniqItemsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqItemsArray.swift; sourceTree = "<group>"; };
 		BBBF2AE829663EDE0066BD5A /* ScamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamItem.swift; sourceTree = "<group>"; };
-		BBCD9DA0297D728F00746FDC /* ChartView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ChartView; sourceTree = "<group>"; };
-		BBCD9DED297FD6A500746FDC /* FancyScrollView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FancyScrollView; sourceTree = "<group>"; };
 		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
 		BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListTests.swift; sourceTree = "<group>"; };
@@ -108,8 +104,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBCD9DCD297FBC8900746FDC /* FancyScrollView in Frameworks */,
-				BBCD9DA4297D72AD00746FDC /* SwiftUICharts in Frameworks */,
+				C3F2F5862986CDCD005436CB /* FancyScrollView in Frameworks */,
+				C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,8 +178,6 @@
 		BBF70616294CF54B006DA73A = {
 			isa = PBXGroup;
 			children = (
-				BBCD9DED297FD6A500746FDC /* FancyScrollView */,
-				BBCD9DA0297D728F00746FDC /* ChartView */,
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
 				BBD34C10296D8379006ECC63 /* ToDoScamListTests */,
 				BBD34C1D296D9CE5006ECC63 /* ToDoScamListUITests */,
@@ -271,8 +265,8 @@
 			);
 			name = ToDoScamList;
 			packageProductDependencies = (
-				BBCD9DA3297D72AD00746FDC /* SwiftUICharts */,
-				BBCD9DCC297FBC8900746FDC /* FancyScrollView */,
+				C3F2F5852986CDCD005436CB /* FancyScrollView */,
+				C3F2F58B2987D552005436CB /* SwiftUICharts */,
 			);
 			productName = ToDoScamList;
 			productReference = BBF7061F294CF54B006DA73A /* ToDoScamList.app */;
@@ -312,8 +306,8 @@
 			);
 			mainGroup = BBF70616294CF54B006DA73A;
 			packageReferences = (
-				BBCD9DA2297D72AD00746FDC /* XCRemoteSwiftPackageReference "ChartView" */,
-				BBCD9DCB297FBC8800746FDC /* XCRemoteSwiftPackageReference "FancyScrollView" */,
+				C3F2F5842986CDCD005436CB /* XCRemoteSwiftPackageReference "FancyScrollView" */,
+				C3F2F58A2987D552005436CB /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = BBF70620294CF54B006DA73A /* Products */;
 			projectDirPath = "";
@@ -345,9 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBCD9DA1297D729000746FDC /* ChartView in Resources */,
 				BBD34C09296C5736006ECC63 /* Preview Content in Resources */,
-				BBCD9DEE297FD6A600746FDC /* FancyScrollView in Resources */,
 				BB75873E297407D3001D1FA0 /* Image.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -762,34 +754,34 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BBCD9DA2297D72AD00746FDC /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		C3F2F5842986CDCD005436CB /* XCRemoteSwiftPackageReference "FancyScrollView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ar-rahimi/ChartView";
+			repositoryURL = "https://github.com/dezhest/FancyScrollView";
 			requirement = {
-				branch = master;
+				branch = main;
 				kind = branch;
 			};
 		};
-		BBCD9DCB297FBC8800746FDC /* XCRemoteSwiftPackageReference "FancyScrollView" */ = {
+		C3F2F58A2987D552005436CB /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nerdsupremacist/FancyScrollView";
+			repositoryURL = "https://github.com/dezhest/ChartView";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.4;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BBCD9DA3297D72AD00746FDC /* SwiftUICharts */ = {
+		C3F2F5852986CDCD005436CB /* FancyScrollView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BBCD9DA2297D72AD00746FDC /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
-		};
-		BBCD9DCC297FBC8900746FDC /* FancyScrollView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BBCD9DCB297FBC8800746FDC /* XCRemoteSwiftPackageReference "FancyScrollView" */;
+			package = C3F2F5842986CDCD005436CB /* XCRemoteSwiftPackageReference "FancyScrollView" */;
 			productName = FancyScrollView;
+		};
+		C3F2F58B2987D552005436CB /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3F2F58A2987D552005436CB /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 
