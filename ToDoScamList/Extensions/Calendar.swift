@@ -95,3 +95,11 @@ extension Date {
     }
   }
 }
+struct CalendarWeeksAgo {
+    let oneWeekAgoDate = Date.today().previous(.monday).previous(.monday)
+    let twoWeeksAgoDate = Date.today().previous(.monday).previous(.monday).previous(.monday)
+    let threeWeeksAgoDate = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday)
+    let fourWeeksAgoDate = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
+    let fiveWeeksAgoDate = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
+    let monthAgoDate = Calendar(identifier: .iso8601).date(byAdding: .day, value: -30, to: Date())!
+}

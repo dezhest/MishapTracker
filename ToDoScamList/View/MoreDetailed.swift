@@ -126,7 +126,7 @@ struct MoreDetailed: View {
                         .sheet(isPresented: $statIsShown) {
                             Statistics(type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, previosOneWeekPower: $previosOneWeekPower, previosTwoWeekPower: $previosTwoWeekPower, previosThreeWeekPower: $previosThreeWeekPower, previosFourWeekPower: $previosFourWeekPower, previosFiveWeekPower: $previosFiveWeekPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)
                         }
-            DescriptionEdit(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput)
+            EditDescription(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput)
 
     }
     }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class AddNewScamForm: ObservableObject {
+final class AddNewScamForm: ObservableObject {
     @Published var name = ""
     @Published var power: Double = 0
     @Published var selectedDate = Date()

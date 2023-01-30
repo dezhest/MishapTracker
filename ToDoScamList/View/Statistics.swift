@@ -41,11 +41,11 @@ struct Statistics: View {
     let previosFourSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
     let previosFiveSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
     let lastMonday = Date.today().previous(.monday).getFormattedDate(format: "dd/MM")
-    let previosOneWeekMonday = ContentView().previosOneWeek.getFormattedDate(format: "dd/MM")
-    let previosTwoWeekMonday = ContentView().previosTwoWeek.getFormattedDate(format: "dd/MM")
-    let previosThreeWeekMonday = ContentView().previosThreeWeek.getFormattedDate(format: "dd/MM")
-    let previosFourWeekMonday = ContentView().previosFourWeek.getFormattedDate(format: "dd/MM")
-    let previosFiveWeekMonday = ContentView().previosFiveWeek.getFormattedDate(format: "dd/MM")
+    let previosOneWeekMonday = CalendarWeeksAgo().oneWeekAgoDate.getFormattedDate(format: "dd/MM")
+    let previosTwoWeekMonday = CalendarWeeksAgo().twoWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let previosThreeWeekMonday = CalendarWeeksAgo().threeWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let previosFourWeekMonday = CalendarWeeksAgo().fourWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let previosFiveWeekMonday = CalendarWeeksAgo().fiveWeeksAgoDate.getFormattedDate(format: "dd/MM")
     let screenSize = UIScreen.main.bounds
     let pieChartStyle = ChartStyle(backgroundColor: .black, accentColor: .orange, gradientColor: GradientColor(start: .orange, end: .red), textColor: .white, legendTextColor: .white, dropShadowColor: .gray)
     func findPieChartData() -> [PieChartData] {
