@@ -37,11 +37,6 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             NavigationView {
-                LinearGradient(gradient: Gradient(colors: [Color(UIColor(red: 255/255, green: 254/255, blue: 215/255, alpha: 1.0)),
-                                                           Color(UIColor(red: 255/255, green: 223/255, blue: 226/255, alpha: 1.0))]),
-                               startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.vertical)
-                .overlay(
                     List {
                         listScamView()
                         .onChange(of: editIsShown) { _ in
@@ -49,7 +44,7 @@ struct ContentView: View {
                             sortedScams[edit.indexOfEditScam].power = edit.editpower
                             try? viewContext.save()
                         }
-                    })
+                    }
                 .navigationBarTitle(Text("Scam List"))
                 
                 .navigationBarItems(leading: Picker("Select number", selection: $pickerSelection) {
@@ -232,6 +227,7 @@ struct ContentView: View {
                                     moreDetailedComputing(item: item)
                                 }
                         }
+                        .padding(.trailing, 10)
                     }
                 } .frame(maxWidth: .infinity)
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {

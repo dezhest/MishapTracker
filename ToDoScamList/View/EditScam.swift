@@ -80,10 +80,10 @@ struct EditScam: View {
             }
         }
         .padding()
-        .frame(width: screenSize.width * 0.92, height: 250)
+        .frame(width: 300, height: 250)
         .background(Color(.white))
         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-        .offset(y: isShown ? 0 : screenSize.height)
+        .offset(y: isShown ? 0 : screenSize.height * 2)
         .shadow(radius: 6)
         .alert(isPresented: $alertTextCountError) {
             Alert(title: Text("Длина типа не может превышать 30 символов"))

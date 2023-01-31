@@ -59,7 +59,7 @@ struct Statistics: View {
                 return pieChartData
     }
     var body: some View {
-        Text(type)
+        NavigationView {
         List {
             HStack {
                 Group {
@@ -261,8 +261,23 @@ struct Statistics: View {
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
             }
-
+            
         }
+        .navigationBarItems(leading: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
+            Image(systemName: "chevron.left")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 20, alignment: .leading)
+                .foregroundColor(.white)
+                .padding(.horizontal, 16)
+                .font(Font.body.bold())
+                .frame(height: 30)
+                .background(
+                    Circle().fill(Color.orange)
+                )
+        }, trailing: Text(type))
+    }
+        .environment(\.colorScheme, .dark)
     }
 }
 

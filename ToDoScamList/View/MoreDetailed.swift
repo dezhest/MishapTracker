@@ -46,76 +46,81 @@ struct MoreDetailed: View {
     @FetchRequest(entity: Scam.entity(), sortDescriptors: []) var entity: FetchedResults<Scam>
     let screenSize = UIScreen.main.bounds
     let textLimit = 280
+    let coloredNavAppearance = UINavigationBarAppearance()
     var body: some View {
         ZStack {
-        FancyScrollView(title: title,
-                        headerHeight: 350,
-                        scrollUpHeaderBehavior: .sticky,
-                        scrollDownHeaderBehavior: .sticky,
-                        header: { newOrSystemImage().resizable().aspectRatio(contentMode: .fill) }) {
-            ZStack(alignment: .top) {
+            Text(" ")
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                .background(Color.black)
+                .edgesIgnoringSafeArea(.all)
+            FancyScrollView(title: title,
+                            headerHeight: 350,
+                            scrollUpHeaderBehavior: .sticky,
+                            scrollDownHeaderBehavior: .sticky,
+                            header: { newOrSystemImage().resizable().aspectRatio(contentMode: .fill) }) {
                 ZStack(alignment: .top) {
-                    Text("Описание:")
-                        .font(.system(size: 35, weight: .medium, design: .default))
-                        .frame(maxWidth: .infinity, maxHeight: 0, alignment: .leading)
-                        .padding(.leading, 20)
-                        .padding(.top, 70)
-                    if description.isEmpty {
-                        ZStack(alignment: .top) {
-                            Text("Добавить описание")
-                                .font(.system(size: 20, weight: .medium, design: .default))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.gray)
-                                .padding(.leading, 20)
-                            Image(systemName: "pencil")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.blue)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                                .padding(.trailing, 20)
+                    ZStack(alignment: .top) {
+                        Text("Описание:")
+                            .font(.system(size: 35, weight: .medium, design: .default))
+                            .frame(maxWidth: .infinity, maxHeight: 0, alignment: .leading)
+                            .padding(.leading, 20)
+                            .padding(.top, 70)
+                        if description.isEmpty {
+                            ZStack(alignment: .top) {
+                                Text("Добавить описание")
+                                    .font(.system(size: 20, weight: .medium, design: .default))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundColor(.gray)
+                                    .padding(.leading, 20)
+                                Image(systemName: "pencil")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.blue)
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                    .padding(.trailing, 20)
+                            }
+                            .padding(.top, 120)
+                            .onTapGesture {
+                                editIsShown.toggle()
+                            }
+                        } else {
+                            ZStack(alignment: .top) {
+                                Text(description)
+                                    .font(.system(size: 19, weight: .medium, design: .default))
+                                    .foregroundColor(.gray)
+                                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    .padding(.leading, 20)
+                                Image(systemName: "pencil")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.blue)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                                    .padding(.trailing, 30)
+                                    .offset(y: -30)
+                                    .onTapGesture {
+                                        editInput = description
+                                        editIsShown.toggle()
+                                    }
+                            }
+                            .padding(.top, 120)
                         }
-                        .padding(.top, 120)
-                        .onTapGesture {
-                            editIsShown.toggle()
-                        }
-                    } else {
-                        ZStack(alignment: .top) {
-                            Text(description)
-                                .font(.system(size: 19, weight: .medium, design: .default))
-                                .foregroundColor(.gray)
-                                .frame(maxWidth: .infinity, alignment: .topLeading)
-                                .padding(.leading, 20)
-                            Image(systemName: "pencil")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.blue)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                                .padding(.trailing, 30)
-                                .offset(y: -30)
-                                .onTapGesture {
-                                    editInput = description
-                                    editIsShown.toggle()
-                                }
-                        }
-                        .padding(.top, 120)
+                        Text("Yo")
+                            .opacity(0)
+                            .padding(.top, 750)
                     }
-Text("Yo")
-                        .opacity(0)
-                        .padding(.top, 550)
+                }
+                .frame(maxHeight: .infinity)
+                .onChange(of: editIsShown) {_ in
+                    description = editInput
+                    entity[findIndex()].scamDescription = description
+                    try? viewContext.save()
+                }
+                .frame(maxWidth: .infinity)
             }
-            }
-            .frame(maxHeight: .infinity)
-            .onChange(of: editIsShown) {_ in
-                description = editInput
-                entity[findIndex()].scamDescription = description
-                try? viewContext.save()
-            }
-            .frame(maxWidth: .infinity)
-        }
-                        .environment(\.colorScheme, .dark)
-                        .sheet(isPresented: $statIsShown) {
-                            Statistics(type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, previosOneWeekPower: $previosOneWeekPower, previosTwoWeekPower: $previosTwoWeekPower, previosThreeWeekPower: $previosThreeWeekPower, previosFourWeekPower: $previosFourWeekPower, previosFiveWeekPower: $previosFiveWeekPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)
-                        }
+                            .environment(\.colorScheme, .dark)
+                            .sheet(isPresented: $statIsShown) {
+                                Statistics(type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, previosOneWeekPower: $previosOneWeekPower, previosTwoWeekPower: $previosTwoWeekPower, previosThreeWeekPower: $previosThreeWeekPower, previosFourWeekPower: $previosFourWeekPower, previosFiveWeekPower: $previosFiveWeekPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)
+                            }
             EditDescription(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput)
             Text("Статистика")
                 .foregroundColor(.white)
@@ -130,7 +135,8 @@ Text("Yo")
                 }
                 .frame(maxHeight: screenSize.height, alignment: .bottom)
                 .offset(y: -20)
-    }
+        }
+        .environment(\.colorScheme, .dark)
     }
     func newOrSystemImage() -> Image {
         if image != Data() {
@@ -142,7 +148,7 @@ Text("Yo")
     func findIndex() -> Int {
         var index = 0
         for scam in entity where scam.id == id {
-                if let unwrapped = entity.firstIndex(of: scam) {index = unwrapped}
+            if let unwrapped = entity.firstIndex(of: scam) {index = unwrapped}
         }
         return index
     }
