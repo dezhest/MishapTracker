@@ -171,7 +171,6 @@ struct ContentView: View {
         stat.mDpreviosThreeWeekPower = previosThreeWeekScams.map({Int($0.power)}).reduce(0, +)
         stat.mDpreviosFourWeekPower = previosFourWeekScams.map({Int($0.power)}).reduce(0, +)
         stat.mDpreviosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
-      
     }
     // MARK: — View Builder
     @ViewBuilder
@@ -190,7 +189,6 @@ struct ContentView: View {
                                 showImage = Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
                                 self.showingImage.toggle()
                             }
-                            print(print(type(of: sortedScams[stat.indexOfMoreDetailed].id)))
                         }
                     ZStack {
                         VStack(alignment: .leading, spacing: 0) {

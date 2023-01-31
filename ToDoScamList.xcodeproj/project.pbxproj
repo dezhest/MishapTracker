@@ -15,9 +15,6 @@
 		BB7ACB8329785687008649E8 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8229785687008649E8 /* Calendar.swift */; };
 		BB7D99B1297C342800442733 /* UniqItemsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7D99B0297C342800442733 /* UniqItemsArray.swift */; };
 		BBD34C09296C5736006ECC63 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = BBD34C08296C5736006ECC63 /* Preview Content */; };
-		BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */; };
-		BBD34C1F296D9CE5006ECC63 /* ToDoScamListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */; };
-		BBD34C21296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */; };
 		BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */; };
 		BBD7FD602970C40B006679BF /* DismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD5F2970C40B006679BF /* DismissKeyboard.swift */; };
 		BBD7FD622970C4BB006679BF /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD612970C4BB006679BF /* Placeholder.swift */; };
@@ -39,23 +36,6 @@
 		C3F905AF2983366B00C2E649 /* EditDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F905AE2983366B00C2E649 /* EditDescription.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		BBD34C13296D8379006ECC63 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBF70617294CF54B006DA73A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BBF7061E294CF54B006DA73A;
-			remoteInfo = ToDoScamList;
-		};
-		BBD34C22296D9CE5006ECC63 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBF70617294CF54B006DA73A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BBF7061E294CF54B006DA73A;
-			remoteInfo = ToDoScamList;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		BB705C3D295A07E6006585BB /* ZoomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImage.swift; sourceTree = "<group>"; };
 		BB705C45295C891E006585BB /* EditScam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScam.swift; sourceTree = "<group>"; };
@@ -65,11 +45,6 @@
 		BB7ACB8229785687008649E8 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		BB7D99B0297C342800442733 /* UniqItemsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqItemsArray.swift; sourceTree = "<group>"; };
 		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
-		BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListTests.swift; sourceTree = "<group>"; };
-		BBD34C1C296D9CE4006ECC63 /* ToDoScamListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoScamListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListUITests.swift; sourceTree = "<group>"; };
-		BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchToZoom.swift; sourceTree = "<group>"; };
 		BBD7FD5F2970C40B006679BF /* DismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboard.swift; sourceTree = "<group>"; };
 		BBD7FD612970C4BB006679BF /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
@@ -92,20 +67,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		BBD34C0C296D8378006ECC63 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BBD34C19296D9CE4006ECC63 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BBF7061C294CF54B006DA73A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -118,7 +79,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BBD34C03296C4C41006ECC63 /* Models */ = {
+		BBD34C03296C4C41006ECC63 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
@@ -128,7 +89,7 @@
 				C3F2F5B429882039005436CB /* StatisticModel.swift */,
 				C3F2F5B629885DD4005436CB /* NavigationTheme.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		BBD34C04296C4C93006ECC63 /* View */ = {
@@ -139,8 +100,8 @@
 				BBF70636294CF835006DA73A /* NewScam.swift */,
 				BB75876129761A79001D1FA0 /* MoreDetailed.swift */,
 				BBFA467B2954AB46009E9E9A /* AddCustomType.swift */,
-				BB705C45295C891E006585BB /* EditScam.swift */,
 				C3F905AE2983366B00C2E649 /* EditDescription.swift */,
+				BB705C45295C891E006585BB /* EditScam.swift */,
 				C39356602982E7410006DCAF /* Statistics.swift */,
 			);
 			path = View;
@@ -153,23 +114,6 @@
 				BBF70626294CF54B006DA73A /* ToDoScamList.xcdatamodeld */,
 			);
 			path = CoreDate;
-			sourceTree = "<group>";
-		};
-		BBD34C10296D8379006ECC63 /* ToDoScamListTests */ = {
-			isa = PBXGroup;
-			children = (
-				BBD34C11296D8379006ECC63 /* ToDoScamListTests.swift */,
-			);
-			path = ToDoScamListTests;
-			sourceTree = "<group>";
-		};
-		BBD34C1D296D9CE5006ECC63 /* ToDoScamListUITests */ = {
-			isa = PBXGroup;
-			children = (
-				BBD34C1E296D9CE5006ECC63 /* ToDoScamListUITests.swift */,
-				BBD34C20296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift */,
-			);
-			path = ToDoScamListUITests;
 			sourceTree = "<group>";
 		};
 		BBD7FD5C2970C3AF006679BF /* Extensions */ = {
@@ -188,8 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
-				BBD34C10296D8379006ECC63 /* ToDoScamListTests */,
-				BBD34C1D296D9CE5006ECC63 /* ToDoScamListUITests */,
 				BBF70620294CF54B006DA73A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -198,8 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				BBF7061F294CF54B006DA73A /* ToDoScamList.app */,
-				BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */,
-				BBD34C1C296D9CE4006ECC63 /* ToDoScamListUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,12 +149,12 @@
 			children = (
 				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
 				BBF70624294CF54B006DA73A /* Persistence.swift */,
-				BB75873D297407D3001D1FA0 /* Image.xcassets */,
 				BBD34C04296C4C93006ECC63 /* View */,
-				BBD34C03296C4C41006ECC63 /* Models */,
+				BBD34C03296C4C41006ECC63 /* Model */,
 				BBD7FD5C2970C3AF006679BF /* Extensions */,
-				BBD34C08296C5736006ECC63 /* Preview Content */,
 				BBD34C05296C4CB5006ECC63 /* CoreDate */,
+				BB75873D297407D3001D1FA0 /* Image.xcassets */,
+				BBD34C08296C5736006ECC63 /* Preview Content */,
 				BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */,
 			);
 			path = ToDoScamList;
@@ -223,42 +163,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BBD34C0E296D8378006ECC63 /* ToDoScamListTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BBD34C15296D8379006ECC63 /* Build configuration list for PBXNativeTarget "ToDoScamListTests" */;
-			buildPhases = (
-				BBD34C0B296D8378006ECC63 /* Sources */,
-				BBD34C0C296D8378006ECC63 /* Frameworks */,
-				BBD34C0D296D8378006ECC63 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BBD34C14296D8379006ECC63 /* PBXTargetDependency */,
-			);
-			name = ToDoScamListTests;
-			productName = ToDoScamListTests;
-			productReference = BBD34C0F296D8379006ECC63 /* ToDoScamListTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		BBD34C1B296D9CE4006ECC63 /* ToDoScamListUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BBD34C24296D9CE5006ECC63 /* Build configuration list for PBXNativeTarget "ToDoScamListUITests" */;
-			buildPhases = (
-				BBD34C18296D9CE4006ECC63 /* Sources */,
-				BBD34C19296D9CE4006ECC63 /* Frameworks */,
-				BBD34C1A296D9CE4006ECC63 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BBD34C23296D9CE5006ECC63 /* PBXTargetDependency */,
-			);
-			name = ToDoScamListUITests;
-			productName = ToDoScamListUITests;
-			productReference = BBD34C1C296D9CE4006ECC63 /* ToDoScamListUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		BBF7061E294CF54B006DA73A /* ToDoScamList */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBF70633294CF54F006DA73A /* Build configuration list for PBXNativeTarget "ToDoScamList" */;
@@ -291,14 +195,6 @@
 				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
-					BBD34C0E296D8378006ECC63 = {
-						CreatedOnToolsVersion = 14.1;
-						TestTargetID = BBF7061E294CF54B006DA73A;
-					};
-					BBD34C1B296D9CE4006ECC63 = {
-						CreatedOnToolsVersion = 14.1;
-						TestTargetID = BBF7061E294CF54B006DA73A;
-					};
 					BBF7061E294CF54B006DA73A = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -323,27 +219,11 @@
 			projectRoot = "";
 			targets = (
 				BBF7061E294CF54B006DA73A /* ToDoScamList */,
-				BBD34C0E296D8378006ECC63 /* ToDoScamListTests */,
-				BBD34C1B296D9CE4006ECC63 /* ToDoScamListUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		BBD34C0D296D8378006ECC63 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BBD34C1A296D9CE4006ECC63 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BBF7061D294CF54B006DA73A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,23 +257,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		BBD34C0B296D8378006ECC63 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BBD34C12296D8379006ECC63 /* ToDoScamListTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BBD34C18296D9CE4006ECC63 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BBD34C21296D9CE5006ECC63 /* ToDoScamListUITestsLaunchTests.swift in Sources */,
-				BBD34C1F296D9CE5006ECC63 /* ToDoScamListUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BBF7061B294CF54B006DA73A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -426,103 +289,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		BBD34C14296D8379006ECC63 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BBF7061E294CF54B006DA73A /* ToDoScamList */;
-			targetProxy = BBD34C13296D8379006ECC63 /* PBXContainerItemProxy */;
-		};
-		BBD34C23296D9CE5006ECC63 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BBF7061E294CF54B006DA73A /* ToDoScamList */;
-			targetProxy = BBD34C22296D9CE5006ECC63 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		BBD34C16296D8379006ECC63 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V3DND9277P;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MACOSX_DEPLOYMENT_TARGET = 12.6;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dezhest.ToDoScamListTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDoScamList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ToDoScamList";
-			};
-			name = Debug;
-		};
-		BBD34C17296D8379006ECC63 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V3DND9277P;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MACOSX_DEPLOYMENT_TARGET = 12.6;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dezhest.ToDoScamListTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDoScamList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ToDoScamList";
-			};
-			name = Release;
-		};
-		BBD34C25296D9CE5006ECC63 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V3DND9277P;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dezhest.ToDoScamListUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ToDoScamList;
-			};
-			name = Debug;
-		};
-		BBD34C26296D9CE5006ECC63 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V3DND9277P;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dezhest.ToDoScamListUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ToDoScamList;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		BBF70631294CF54F006DA73A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -575,6 +342,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -629,6 +397,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -649,6 +418,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ScamList;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -657,12 +428,11 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -676,7 +446,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -693,6 +463,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ScamList;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -701,12 +473,11 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -720,31 +491,13 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BBD34C15296D8379006ECC63 /* Build configuration list for PBXNativeTarget "ToDoScamListTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BBD34C16296D8379006ECC63 /* Debug */,
-				BBD34C17296D8379006ECC63 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BBD34C24296D9CE5006ECC63 /* Build configuration list for PBXNativeTarget "ToDoScamListUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BBD34C25296D9CE5006ECC63 /* Debug */,
-				BBD34C26296D9CE5006ECC63 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		BBF7061A294CF54B006DA73A /* Build configuration list for PBXProject "ToDoScamList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -41,7 +41,7 @@ struct MoreDetailed: View {
     @State private var editIsShown = false
     @State private var editIsCanceled = false
     @State private var editInput = ""
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Scam.entity(), sortDescriptors: []) var entity: FetchedResults<Scam>
     let screenSize = UIScreen.main.bounds

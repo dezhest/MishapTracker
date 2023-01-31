@@ -32,7 +32,7 @@ struct Statistics: View {
     @State private var general = false
     @State private var month = false
     @State private var week = false
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     let today = Date.today().getFormattedDate(format: "dd/MM")
     let lastSunday = Date.today().previous(.sunday).getFormattedDate(format: "dd/MM")
     let previosOneSunday = Date.today().previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
