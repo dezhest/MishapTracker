@@ -263,6 +263,7 @@ struct Statistics: View {
             }
             
         }
+        .navigationBarTitle("Статистика")
         .navigationBarItems(leading: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
             Image(systemName: "chevron.left")
                 .resizable()
