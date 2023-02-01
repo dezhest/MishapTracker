@@ -9,7 +9,7 @@ import SwiftUI
 import FancyScrollView
 import Combine
 
-@MainActor struct MoreDetailed: View {
+struct MoreDetailed: View {
     @Binding var id: ObjectIdentifier
     @Binding var title: String
     @Binding var type: String
@@ -26,11 +26,11 @@ import Combine
     @Binding var averagePowerOfLast30day: Double
     @Binding var currentWeekSameTypeCount: Int
     @Binding var currentWeekPower: Int
-    @Binding var previosOneWeekPower: Int
-    @Binding var previosTwoWeekPower: Int
-    @Binding var previosThreeWeekPower: Int
-    @Binding var previosFourWeekPower: Int
-    @Binding var previosFiveWeekPower: Int
+    @Binding var oneWeekAgoPower: Int
+    @Binding var twoWeeksAgoPower: Int
+    @Binding var threeWeeksAgoPower: Int
+    @Binding var fourWeeksAgoPower: Int
+    @Binding var fiveWeeksAgoPower: Int
     @Binding var eachTypeCount: [Int]
     @Binding var allTypes: [String]
     @State private var statIsShown = false
@@ -119,7 +119,7 @@ import Combine
             }
                             .environment(\.colorScheme, .dark)
                             .sheet(isPresented: $statIsShown) {
-                                Statistics(type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, previosOneWeekPower: $previosOneWeekPower, previosTwoWeekPower: $previosTwoWeekPower, previosThreeWeekPower: $previosThreeWeekPower, previosFourWeekPower: $previosFourWeekPower, previosFiveWeekPower: $previosFiveWeekPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)
+                                Statistics(type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, oneWeekAgoPower: $oneWeekAgoPower, twoWeeksAgoPower: $twoWeeksAgoPower, threeWeeksAgoPower: $threeWeeksAgoPower, fourWeeksAgoPower: $fourWeeksAgoPower, fiveWeeksAgoPower: $fiveWeeksAgoPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)
                             }
             EditDescription(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput)
             Text("Статистика")
@@ -156,7 +156,7 @@ import Combine
 
 struct MoreDetailed_Previews: PreviewProvider {
     static var previews: some View {
-        MoreDetailed(id: .constant(ObjectIdentifier(AnyObject.self)), title: .constant(""), type: .constant(""), image: .constant(Data()), description: .constant(""), allPower: .constant(0.0), averagePowerOfAll: .constant(0.0), averagePowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), averagePowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
+        MoreDetailed(id: .constant(ObjectIdentifier(AnyObject.self)), title: .constant(""), type: .constant(""), image: .constant(Data()), description: .constant(""), allPower: .constant(0.0), averagePowerOfAll: .constant(0.0), averagePowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), averagePowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), oneWeekAgoPower: .constant(0), twoWeeksAgoPower: .constant(0), threeWeeksAgoPower: .constant(0), fourWeeksAgoPower: .constant(0), fiveWeeksAgoPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

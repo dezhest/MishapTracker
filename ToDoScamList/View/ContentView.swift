@@ -18,6 +18,7 @@ struct ContentView: View {
     @State private var image: Data = .init(count: 0)
     @State private var indexOfImage = 0
     @State private var showImage = Image("Scam")
+    @State private var indexOfMoreDetailed = 0
     @GestureState private var scale: CGFloat = 1.0
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Scam.entity(), sortDescriptors: []) var entity: FetchedResults<Scam>
@@ -66,7 +67,7 @@ struct ContentView: View {
                     ShowImage(image: $showImage)
                 })
                 .fullScreenCover(isPresented: $mdIsShown, content: {
-                    MoreDetailed(id: $stat.mDID, title: $stat.mDTitle, type: $stat.mDType, image: $stat.mDImage, description: $stat.mDDescription, allPower: $stat.mDallPower, averagePowerOfAll: $stat.mDaveragePowerOfAll, averagePowerSameType: $stat.mDaveragePowerSameType, mostFrequentTypeCount: $stat.mDmostFrequentTypeCount, mostFrequentType: $stat.mDmostFrequentType, sameTypeCount: $stat.mDSameTypeCount, last30dayPower: $stat.mDlast30dayPower, last30daySameTypeCount: $stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $stat.mDcurrentWeekSameTypeCount, currentWeekPower: $stat.mDcurrentWeekPower, previosOneWeekPower: $stat.mDpreviosOneWeekPower, previosTwoWeekPower: $stat.mDpreviosTwoWeekPower, previosThreeWeekPower: $stat.mDpreviosThreeWeekPower, previosFourWeekPower: $stat.mDpreviosFourWeekPower, previosFiveWeekPower: $stat.mDpreviosFiveWeekPower, eachTypeCount: $stat.mDeachTypeCount, allTypes: $stat.mDallTypes)})
+                    MoreDetailed(id: $stat.mDID, title: $stat.mDTitle, type: $stat.mDType, image: $stat.mDImage, description: $stat.mDDescription, allPower: $stat.mDallPower, averagePowerOfAll: $stat.mDaveragePowerOfAll, averagePowerSameType: $stat.mDaveragePowerSameType, mostFrequentTypeCount: $stat.mDmostFrequentTypeCount, mostFrequentType: $stat.mDmostFrequentType, sameTypeCount: $stat.mDSameTypeCount, last30dayPower: $stat.mDlast30dayPower, last30daySameTypeCount: $stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $stat.mDcurrentWeekSameTypeCount, currentWeekPower: $stat.mDcurrentWeekPower, oneWeekAgoPower: $stat.mDoneWeekAgoPower, twoWeeksAgoPower: $stat.mDtwoWeeksAgoPower, threeWeeksAgoPower: $stat.mDthreeWeeksAgoPower, fourWeeksAgoPower: $stat.mDfourWeeksAgoPower, fiveWeeksAgoPower: $stat.mDfiveWeeksAgoPower, eachTypeCount: $stat.mDeachTypeCount, allTypes: $stat.mDallTypes)})
             }
             EditScam(isShown: $editIsShown, isCanceled: $edit.editIsCanceled, text: $edit.editInput, power: $edit.editpower)
         }
@@ -103,12 +104,21 @@ struct ContentView: View {
     }
     // MARK: — Properties for MoreDetailed View
     func mDGlobalStat(item: Scam) {
-        if let unwrapped = sortedScams.firstIndex(of: item) {stat.indexOfMoreDetailed = unwrapped}
         let allTypes = sortedScams.map({$0.type})
         let arrayallPower = sortedScams.map({Int($0.power)})
-        let sameTypeScams = sortedScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type})
+        let sameTypeScams = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type})
         let sameTypeAllPower = (Double(sameTypeScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100
         let arrayAllType = sortedScams.map({$0.type})
+        let mDID = sortedScams[indexOfMoreDetailed].id
+        let mDTitle = sortedScams[indexOfMoreDetailed].title
+        let mDType = sortedScams[indexOfMoreDetailed].type
+        let mDDescription = sortedScams[indexOfMoreDetailed].scamDescription
+        let mDSameTypeCount = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+        let mDallPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
+        let mDaveragePowerOfAll = (stat.mDallPower / Double(sortedScams.count)*100).rounded()/100
+        let mDaveragePowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
+        let mDeachTypeCount = findEachTypeCount()
+        let mDallTypes = allTypes.removingDuplicates()
         var mostFrequentTypeCount = 0
         var mostFrequentType = ""
         func mostFrequent<T: Hashable>(array: [T]) -> (value: T, count: Int)? {
@@ -134,112 +144,56 @@ struct ContentView: View {
             }
             return(eachTypeCount)
         }
-        stat.mDID = sortedScams[stat.indexOfMoreDetailed].id
-        stat.mDTitle = sortedScams[stat.indexOfMoreDetailed].title
-        stat.mDType = sortedScams[stat.indexOfMoreDetailed].type
-        if let unwrapped = sortedScams[stat.indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
-        stat.mDDescription = sortedScams[stat.indexOfMoreDetailed].scamDescription
-        stat.mDSameTypeCount = sortedScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
-        stat.mDallPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
-        stat.mDaveragePowerOfAll = (stat.mDallPower / Double(sortedScams.count)*100).rounded()/100
-        stat.mDaveragePowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
-        stat.mDmostFrequentTypeCount = mostFrequentTypeCount
-        stat.mDmostFrequentType = mostFrequentType
-        stat.mDeachTypeCount = findEachTypeCount()
-        stat.mDallTypes = allTypes.removingDuplicates()
+        DispatchQueue.main.async{
+            stat.mDID = mDID
+            stat.mDTitle = mDTitle
+            stat.mDType = mDType
+            stat.mDDescription = mDDescription
+            stat.mDSameTypeCount = mDSameTypeCount
+            stat.mDallPower = mDallPower
+            stat.mDaveragePowerOfAll = mDaveragePowerOfAll
+            stat.mDaveragePowerSameType = mDaveragePowerSameType
+            stat.mDmostFrequentTypeCount = mostFrequentTypeCount
+            stat.mDmostFrequentType = mostFrequentType
+            stat.mDeachTypeCount = mDeachTypeCount
+            stat.mDallTypes = mDallTypes
+        }
     }
     func mDMonthStat(item: Scam) {
-        if let unwrapped = sortedScams.firstIndex(of: item) {stat.indexOfMoreDetailed = unwrapped}
         let last30DayScams = sortedScams.filter({$0.selectedDate > CalendarWeeksAgo().monthAgoDate})
-        stat.mDlast30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
-        stat.mDlast30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
-        stat.mDaveragePowerOfLast30day = (Double(stat.mDlast30dayPower) / Double(last30DayScams.count)*100).rounded()/100
+        let mDlast30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
+        let mDlast30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+        let mDaveragePowerOfLast30day = (Double(stat.mDlast30dayPower) / Double(last30DayScams.count)*100).rounded()/100
+        DispatchQueue.main.async {
+            stat.mDlast30dayPower = mDlast30dayPower
+            stat.mDlast30daySameTypeCount = mDlast30daySameTypeCount
+            stat.mDaveragePowerOfLast30day = mDaveragePowerOfLast30day
+        }
     }
     func mDWeekStat(item: Scam) {
-        if let unwrapped = sortedScams.firstIndex(of: item) {stat.indexOfMoreDetailed = unwrapped}
         let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
-        let previosOneWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
-        let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().twoWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().oneWeekAgoDate)})
-        let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().threeWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().twoWeeksAgoDate)})
-        let previosFourWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fourWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().threeWeeksAgoDate)})
-        let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fiveWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().fourWeeksAgoDate)})
-        stat.mDcurrentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
-        stat.mDcurrentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
-        stat.mDpreviosOneWeekPower = previosOneWeekScams.map({Int($0.power)}).reduce(0, +)
-        stat.mDpreviosTwoWeekPower = previosTwoWeekScams.map({Int($0.power)}).reduce(0, +)
-        stat.mDpreviosThreeWeekPower = previosThreeWeekScams.map({Int($0.power)}).reduce(0, +)
-        stat.mDpreviosFourWeekPower = previosFourWeekScams.map({Int($0.power)}).reduce(0, +)
-        stat.mDpreviosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
+        let oneWeekAgoScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
+        let twoWeeksAgoScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().twoWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().oneWeekAgoDate)})
+        let threeWeeksAgoScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().threeWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().twoWeeksAgoDate)})
+        let fourWeeksAgoScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fourWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().threeWeeksAgoDate)})
+        let fiveWeeksAgoScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fiveWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().fourWeeksAgoDate)})
+       let mDcurrentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
+       let mDcurrentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
+       let mDoneWeekAgoPower = oneWeekAgoScams.map({Int($0.power)}).reduce(0, +)
+       let mDtwoWeeksAgoPower = twoWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
+       let mDthreeWeeksAgoPower = threeWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
+       let mDfourWeeksAgoPower = fourWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
+       let mDfiveWeeksAgoPower = fiveWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
+        DispatchQueue.main.async {
+            stat.mDcurrentWeekSameTypeCount = mDcurrentWeekSameTypeCount
+            stat.mDcurrentWeekPower = mDcurrentWeekPower
+            stat.mDoneWeekAgoPower = mDoneWeekAgoPower
+            stat.mDtwoWeeksAgoPower = mDtwoWeeksAgoPower
+            stat.mDthreeWeeksAgoPower = mDthreeWeeksAgoPower
+            stat.mDfourWeeksAgoPower = mDfourWeeksAgoPower
+            stat.mDfiveWeeksAgoPower = mDfiveWeeksAgoPower
+        }
     }
-    
-    func moreDetailedComputing(item: Scam) {
-        // MARK: — intermediate data for statistics
-        //        if let unwrapped = sortedScams.firstIndex(of: item) {stat.indexOfMoreDetailed = unwrapped}
-        //        let arrayallPower = sortedScams.map({Int($0.power)})
-        //        let arrayAllType = sortedScams.map({$0.type})
-        //        let last30DayScams = sortedScams.filter({$0.selectedDate > CalendarWeeksAgo().monthAgoDate})
-        //        let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
-        //        let previosOneWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
-        //        let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().twoWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().oneWeekAgoDate)})
-        //        let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().threeWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().twoWeeksAgoDate)})
-        //        let previosFourWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fourWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().threeWeeksAgoDate)})
-        //        let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fiveWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().fourWeeksAgoDate)})
-        //        let sameTypeScams = sortedScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type})
-        //        let sameTypeAllPower = (Double(sameTypeScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100
-        //        let allTypes = sortedScams.map({$0.type})
-        //        func findEachTypeCount() -> [Int] {
-        //            var eachTypeCount = [Int]()
-        //            for item in allTypes.removingDuplicates() {
-        //                eachTypeCount.append(allTypes.filter({$0 == item}).count)
-        //            }
-        //            return(eachTypeCount)
-        //        }
-        //        var mostFrequentTypeCount = 0
-        //        var mostFrequentType = ""
-        //        func mostFrequent<T: Hashable>(array: [T]) -> (value: T, count: Int)? {
-        //            let counts = array.reduce(into: [:]) { $0[$1, default: 0] += 1 }
-        //            if let (value, count) = counts.max(by: { $0.1 < $1.1 }) {
-        //                return (value, count)
-        //            }
-        //            return nil
-        //        }
-        //        if let result = mostFrequent(array: arrayAllType) {
-        //            if result.count == 1 && arrayAllType.count != 1 {
-        //                mostFrequentType = "-"
-        //                mostFrequentTypeCount = 0
-        //            } else {
-        //                mostFrequentType = result.value
-        //                mostFrequentTypeCount = result.count
-        //            }
-        //        }
-        // MARK: — GLobal Stat
-        //        stat.mDID = sortedScams[stat.indexOfMoreDetailed].id
-        //        stat.mDTitle = sortedScams[stat.indexOfMoreDetailed].title
-        //        stat.mDType = sortedScams[stat.indexOfMoreDetailed].type
-        //        if let unwrapped = sortedScams[stat.indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
-        //        stat.mDDescription = sortedScams[stat.indexOfMoreDetailed].scamDescription
-        //        stat.mDSameTypeCount = sortedScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
-        //        stat.mDallPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
-        //        stat.mDaveragePowerOfAll = (stat.mDallPower / Double(sortedScams.count)*100).rounded()/100
-        //        stat.mDaveragePowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
-        //        stat.mDmostFrequentTypeCount = mostFrequentTypeCount
-        //        stat.mDmostFrequentType = mostFrequentType
-        //        stat.mDeachTypeCount = findEachTypeCount()
-        //        stat.mDallTypes = allTypes.removingDuplicates()
-        // MARK: — Month Stat
-        //        stat.mDlast30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
-        //        stat.mDlast30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
-        //        stat.mDaveragePowerOfLast30day = (Double(stat.mDlast30dayPower) / Double(last30DayScams.count)*100).rounded()/100
-        // MARK: — Week Stat
-        //        stat.mDcurrentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
-        //        stat.mDcurrentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
-        //        stat.mDpreviosOneWeekPower = previosOneWeekScams.map({Int($0.power)}).reduce(0, +)
-        //        stat.mDpreviosTwoWeekPower = previosTwoWeekScams.map({Int($0.power)}).reduce(0, +)
-        //        stat.mDpreviosThreeWeekPower = previosThreeWeekScams.map({Int($0.power)}).reduce(0, +)
-        //        stat.mDpreviosFourWeekPower = previosFourWeekScams.map({Int($0.power)}).reduce(0, +)
-        //        stat.mDpreviosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
-    }
-    // MARK: — View Builder
     @ViewBuilder
     private func listScamView() -> some View {
         ForEach(sortedScams, id: \.self) { item in
@@ -295,8 +249,9 @@ struct ContentView: View {
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .opacity(0.35)
                             .onTapGesture {
+                                if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
+                                if let unwrapped = sortedScams[indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
                                 mdIsShown.toggle()
-                                //                                moreDetailedComputing(item: item)
                                 concurrentQueue.async {
                                     mDGlobalStat(item: item)
                                 }

@@ -21,11 +21,11 @@ struct Statistics: View {
     @Binding var last30daySameTypeCount: Int
     @Binding var currentWeekSameTypeCount: Int
     @Binding var currentWeekPower: Int
-    @Binding var previosOneWeekPower: Int
-    @Binding var previosTwoWeekPower: Int
-    @Binding var previosThreeWeekPower: Int
-    @Binding var previosFourWeekPower: Int
-    @Binding var previosFiveWeekPower: Int
+    @Binding var oneWeekAgoPower: Int
+    @Binding var twoWeeksAgoPower: Int
+    @Binding var threeWeeksAgoPower: Int
+    @Binding var fourWeeksAgoPower: Int
+    @Binding var fiveWeeksAgoPower: Int
     @Binding var eachTypeCount: [Int]
     @Binding var allTypes: [String]
     @State private var statistic = false
@@ -254,7 +254,7 @@ struct Statistics: View {
                 }
             }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
             VStack {
-                BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(previosFiveWeekPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(previosFourWeekPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(previosThreeWeekPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(previosTwoWeekPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(previosOneWeekPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
+                BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(fiveWeeksAgoPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(fourWeeksAgoPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(threeWeeksAgoPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(twoWeeksAgoPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(oneWeekAgoPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
                 PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
@@ -284,6 +284,6 @@ struct Statistics: View {
 
 struct Statistics_Previews: PreviewProvider {
     static var previews: some View {
-        Statistics(type: .constant(""), allPower: .constant(0.0), averagePowerOfAll: .constant(0.0), averagePowerSameType: .constant(0.0), averagePowerOfLast30day: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), previosOneWeekPower: .constant(0), previosTwoWeekPower: .constant(0), previosThreeWeekPower: .constant(0), previosFourWeekPower: .constant(0), previosFiveWeekPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
+        Statistics(type: .constant(""), allPower: .constant(0.0), averagePowerOfAll: .constant(0.0), averagePowerSameType: .constant(0.0), averagePowerOfLast30day: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), oneWeekAgoPower: .constant(0), twoWeeksAgoPower: .constant(0), threeWeeksAgoPower: .constant(0), fourWeeksAgoPower: .constant(0), fiveWeeksAgoPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
     }
 }

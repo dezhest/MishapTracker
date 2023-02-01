@@ -15,7 +15,7 @@ final class StatisticModel: ObservableObject {
     @Published var imageData: Data = .init(capacity: 0)
     @Published var types: [String] = [""]
     @Published var type = "Финансовый"
-    @Published var indexOfMoreDetailed: Int = 0
+//    @Published var indexOfMoreDetailed: Int = 0
     @Published var mDID = ObjectIdentifier(AnyObject.self)
     @Published var mDTitle = ""
     @Published var mDType = ""
@@ -32,11 +32,11 @@ final class StatisticModel: ObservableObject {
     @Published var mDaveragePowerOfLast30day = 0.0
     @Published var mDcurrentWeekSameTypeCount = 0
     @Published var mDcurrentWeekPower = 0
-    @Published var mDpreviosOneWeekPower = 0
-    @Published var mDpreviosTwoWeekPower = 0
-    @Published var mDpreviosThreeWeekPower = 0
-    @Published var mDpreviosFourWeekPower = 0
-    @Published var mDpreviosFiveWeekPower = 0
+    @Published var mDoneWeekAgoPower = 0
+    @Published var mDtwoWeeksAgoPower = 0
+    @Published var mDthreeWeeksAgoPower = 0
+    @Published var mDfourWeeksAgoPower = 0
+    @Published var mDfiveWeeksAgoPower = 0
     @Published var mDeachTypeCount = [Int]()
     @Published var mDallTypes = [String]()
 }
