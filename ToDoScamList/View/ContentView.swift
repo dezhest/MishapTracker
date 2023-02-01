@@ -31,20 +31,22 @@ struct ContentView: View {
         default: return []
         }
     }
+    let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
+    
     init() {
         NavigationTheme.navigationBarColors(background: .systemOrange, titleColor: .white)
     }
     var body: some View {
         ZStack {
             NavigationView {
-                    List {
-                        listScamView()
+                List {
+                    listScamView()
                         .onChange(of: editIsShown) { _ in
                             sortedScams[edit.indexOfEditScam].title = edit.editInput
                             sortedScams[edit.indexOfEditScam].power = edit.editpower
                             try? viewContext.save()
                         }
-                    }
+                }
                 .navigationBarTitle(Text("Scam List"))
                 
                 .navigationBarItems(leading: Picker("Select number", selection: $pickerSelection) {
@@ -100,28 +102,13 @@ struct ContentView: View {
         }
     }
     // MARK: — Properties for MoreDetailed View
-    func moreDetailedComputing(item: Scam) {
-        // MARK: — intermediate data for statistics
+    func mDGlobalStat(item: Scam) {
         if let unwrapped = sortedScams.firstIndex(of: item) {stat.indexOfMoreDetailed = unwrapped}
+        let allTypes = sortedScams.map({$0.type})
         let arrayallPower = sortedScams.map({Int($0.power)})
-        let arrayAllType = sortedScams.map({$0.type})
-        let last30DayScams = sortedScams.filter({$0.selectedDate > CalendarWeeksAgo().monthAgoDate})
-        let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
-        let previosOneWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
-        let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().twoWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().oneWeekAgoDate)})
-        let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().threeWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().twoWeeksAgoDate)})
-        let previosFourWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fourWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().threeWeeksAgoDate)})
-        let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fiveWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().fourWeeksAgoDate)})
         let sameTypeScams = sortedScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type})
         let sameTypeAllPower = (Double(sameTypeScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100
-        let allTypes = sortedScams.map({$0.type})
-        func findEachTypeCount() -> [Int] {
-            var eachTypeCount = [Int]()
-            for item in allTypes.removingDuplicates() {
-                eachTypeCount.append(allTypes.filter({$0 == item}).count)
-            }
-            return(eachTypeCount)
-        }
+        let arrayAllType = sortedScams.map({$0.type})
         var mostFrequentTypeCount = 0
         var mostFrequentType = ""
         func mostFrequent<T: Hashable>(array: [T]) -> (value: T, count: Int)? {
@@ -140,7 +127,13 @@ struct ContentView: View {
                 mostFrequentTypeCount = result.count
             }
         }
-        // MARK: — GLobal Stat
+        func findEachTypeCount() -> [Int] {
+            var eachTypeCount = [Int]()
+            for item in allTypes.removingDuplicates() {
+                eachTypeCount.append(allTypes.filter({$0 == item}).count)
+            }
+            return(eachTypeCount)
+        }
         stat.mDID = sortedScams[stat.indexOfMoreDetailed].id
         stat.mDTitle = sortedScams[stat.indexOfMoreDetailed].title
         stat.mDType = sortedScams[stat.indexOfMoreDetailed].type
@@ -154,11 +147,22 @@ struct ContentView: View {
         stat.mDmostFrequentType = mostFrequentType
         stat.mDeachTypeCount = findEachTypeCount()
         stat.mDallTypes = allTypes.removingDuplicates()
-        // MARK: — Month Stat
+    }
+    func mDMonthStat(item: Scam) {
+        if let unwrapped = sortedScams.firstIndex(of: item) {stat.indexOfMoreDetailed = unwrapped}
+        let last30DayScams = sortedScams.filter({$0.selectedDate > CalendarWeeksAgo().monthAgoDate})
         stat.mDlast30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
         stat.mDlast30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
         stat.mDaveragePowerOfLast30day = (Double(stat.mDlast30dayPower) / Double(last30DayScams.count)*100).rounded()/100
-        // MARK: — Week Stat
+    }
+    func mDWeekStat(item: Scam) {
+        if let unwrapped = sortedScams.firstIndex(of: item) {stat.indexOfMoreDetailed = unwrapped}
+        let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
+        let previosOneWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
+        let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().twoWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().oneWeekAgoDate)})
+        let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().threeWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().twoWeeksAgoDate)})
+        let previosFourWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fourWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().threeWeeksAgoDate)})
+        let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fiveWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().fourWeeksAgoDate)})
         stat.mDcurrentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
         stat.mDcurrentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
         stat.mDpreviosOneWeekPower = previosOneWeekScams.map({Int($0.power)}).reduce(0, +)
@@ -167,69 +171,146 @@ struct ContentView: View {
         stat.mDpreviosFourWeekPower = previosFourWeekScams.map({Int($0.power)}).reduce(0, +)
         stat.mDpreviosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
     }
+    
+    func moreDetailedComputing(item: Scam) {
+        // MARK: — intermediate data for statistics
+        //        if let unwrapped = sortedScams.firstIndex(of: item) {stat.indexOfMoreDetailed = unwrapped}
+        //        let arrayallPower = sortedScams.map({Int($0.power)})
+        //        let arrayAllType = sortedScams.map({$0.type})
+        //        let last30DayScams = sortedScams.filter({$0.selectedDate > CalendarWeeksAgo().monthAgoDate})
+        //        let currentWeekScams = sortedScams.filter({$0.selectedDate > Date.today().previous(.monday)})
+        //        let previosOneWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
+        //        let previosTwoWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().twoWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().oneWeekAgoDate)})
+        //        let previosThreeWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().threeWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().twoWeeksAgoDate)})
+        //        let previosFourWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fourWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().threeWeeksAgoDate)})
+        //        let previosFiveWeekScams = sortedScams.filter({($0.selectedDate > CalendarWeeksAgo().fiveWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().fourWeeksAgoDate)})
+        //        let sameTypeScams = sortedScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type})
+        //        let sameTypeAllPower = (Double(sameTypeScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100
+        //        let allTypes = sortedScams.map({$0.type})
+        //        func findEachTypeCount() -> [Int] {
+        //            var eachTypeCount = [Int]()
+        //            for item in allTypes.removingDuplicates() {
+        //                eachTypeCount.append(allTypes.filter({$0 == item}).count)
+        //            }
+        //            return(eachTypeCount)
+        //        }
+        //        var mostFrequentTypeCount = 0
+        //        var mostFrequentType = ""
+        //        func mostFrequent<T: Hashable>(array: [T]) -> (value: T, count: Int)? {
+        //            let counts = array.reduce(into: [:]) { $0[$1, default: 0] += 1 }
+        //            if let (value, count) = counts.max(by: { $0.1 < $1.1 }) {
+        //                return (value, count)
+        //            }
+        //            return nil
+        //        }
+        //        if let result = mostFrequent(array: arrayAllType) {
+        //            if result.count == 1 && arrayAllType.count != 1 {
+        //                mostFrequentType = "-"
+        //                mostFrequentTypeCount = 0
+        //            } else {
+        //                mostFrequentType = result.value
+        //                mostFrequentTypeCount = result.count
+        //            }
+        //        }
+        // MARK: — GLobal Stat
+        //        stat.mDID = sortedScams[stat.indexOfMoreDetailed].id
+        //        stat.mDTitle = sortedScams[stat.indexOfMoreDetailed].title
+        //        stat.mDType = sortedScams[stat.indexOfMoreDetailed].type
+        //        if let unwrapped = sortedScams[stat.indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
+        //        stat.mDDescription = sortedScams[stat.indexOfMoreDetailed].scamDescription
+        //        stat.mDSameTypeCount = sortedScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
+        //        stat.mDallPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
+        //        stat.mDaveragePowerOfAll = (stat.mDallPower / Double(sortedScams.count)*100).rounded()/100
+        //        stat.mDaveragePowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
+        //        stat.mDmostFrequentTypeCount = mostFrequentTypeCount
+        //        stat.mDmostFrequentType = mostFrequentType
+        //        stat.mDeachTypeCount = findEachTypeCount()
+        //        stat.mDallTypes = allTypes.removingDuplicates()
+        // MARK: — Month Stat
+        //        stat.mDlast30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
+        //        stat.mDlast30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
+        //        stat.mDaveragePowerOfLast30day = (Double(stat.mDlast30dayPower) / Double(last30DayScams.count)*100).rounded()/100
+        // MARK: — Week Stat
+        //        stat.mDcurrentWeekSameTypeCount = currentWeekScams.filter({$0.type == sortedScams[stat.indexOfMoreDetailed].type}).count
+        //        stat.mDcurrentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
+        //        stat.mDpreviosOneWeekPower = previosOneWeekScams.map({Int($0.power)}).reduce(0, +)
+        //        stat.mDpreviosTwoWeekPower = previosTwoWeekScams.map({Int($0.power)}).reduce(0, +)
+        //        stat.mDpreviosThreeWeekPower = previosThreeWeekScams.map({Int($0.power)}).reduce(0, +)
+        //        stat.mDpreviosFourWeekPower = previosFourWeekScams.map({Int($0.power)}).reduce(0, +)
+        //        stat.mDpreviosFiveWeekPower = previosFiveWeekScams.map({Int($0.power)}).reduce(0, +)
+    }
     // MARK: — View Builder
     @ViewBuilder
     private func listScamView() -> some View {
         ForEach(sortedScams, id: \.self) { item in
-                ZStack {
-                    newOrSystemImage(item: item)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 60, height: 60)
-                        .clipShape(Circle())
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .onTapGesture {
-                            if item.imageD != Data() {
-                                if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
-                                showImage = Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
-                                self.showingImage.toggle()
-                            }
+            ZStack {
+                newOrSystemImage(item: item)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .onTapGesture {
+                        if item.imageD != Data() {
+                            if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
+                            showImage = Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
+                            self.showingImage.toggle()
                         }
-                    ZStack {
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text(item.title)
-                                .font(.system(size: 13, weight: .bold, design: .default))
-                            Text("#\(item.type)")
-                                .font(.system(size: 10, weight: .medium, design: .default))
-                                .opacity(0.6)
-                                .padding(5)
-                                .padding(.bottom, 3)
-                                .padding(.leading, -5)
-                            HStack {
-                                Text("\(Int(item.power))/10 скамов")
-                                    .font(.system(size: 12, weight: .medium, design: .default))
-                                    .foregroundColor(.white)
-                                    .padding(3)
-                                    .background(colorOfPower(power: Int(item.power)))
-                                    .cornerRadius(20)
-                                    .padding(.bottom, 3)
-                                Text("\(item.selectedDate, format: Date.FormatStyle(date: .numeric, time: .omitted))")
-                                    .font(.system(size: 10, weight: .medium, design: .default))
-                                    .padding(3)
-                                    .padding(.bottom, -1)
-                                    .foregroundColor(.gray)
-                                    .opacity(0.7)
-                                    .frame(alignment: .bottomLeading)
-                                    .offset(y: -1)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
-                        .padding(.leading, 65)
-                        .offset(x: 8)
-                        VStack {
-                            Image(systemName: "arrow.right.square")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                                .opacity(0.35)
-                                .onTapGesture {
-                                    mdIsShown.toggle()
-                                    moreDetailedComputing(item: item)
-                                }
-                        }
-                        .padding(.trailing, 10)
                     }
-                } .frame(maxWidth: .infinity)
+                ZStack {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(item.title)
+                            .font(.system(size: 13, weight: .bold, design: .default))
+                        Text("#\(item.type)")
+                            .font(.system(size: 10, weight: .medium, design: .default))
+                            .opacity(0.6)
+                            .padding(5)
+                            .padding(.bottom, 3)
+                            .padding(.leading, -5)
+                        HStack {
+                            Text("\(Int(item.power))/10 скамов")
+                                .font(.system(size: 12, weight: .medium, design: .default))
+                                .foregroundColor(.white)
+                                .padding(3)
+                                .background(colorOfPower(power: Int(item.power)))
+                                .cornerRadius(20)
+                                .padding(.bottom, 3)
+                            Text("\(item.selectedDate, format: Date.FormatStyle(date: .numeric, time: .omitted))")
+                                .font(.system(size: 10, weight: .medium, design: .default))
+                                .padding(3)
+                                .padding(.bottom, -1)
+                                .foregroundColor(.gray)
+                                .opacity(0.7)
+                                .frame(alignment: .bottomLeading)
+                                .offset(y: -1)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
+                    .padding(.leading, 65)
+                    .offset(x: 8)
+                    VStack {
+                        Image(systemName: "arrow.right.square")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .opacity(0.35)
+                            .onTapGesture {
+                                mdIsShown.toggle()
+                                //                                moreDetailedComputing(item: item)
+                                concurrentQueue.async {
+                                    mDGlobalStat(item: item)
+                                }
+                                concurrentQueue.async {
+                                    mDMonthStat(item: item)
+                                }
+                                concurrentQueue.async {
+                                    mDWeekStat(item: item)
+                                }
+                            }
+                    }
+                    .padding(.trailing, 10)
+                }
+            } .frame(maxWidth: .infinity)
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     Button(role: .destructive, action: {
                         if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}

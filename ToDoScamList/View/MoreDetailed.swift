@@ -9,7 +9,7 @@ import SwiftUI
 import FancyScrollView
 import Combine
 
-struct MoreDetailed: View {
+@MainActor struct MoreDetailed: View {
     @Binding var id: ObjectIdentifier
     @Binding var title: String
     @Binding var type: String
