@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  ToDoScamList
+
+  Created by Denis Zhesterev on 02.02.2023.
+  
+*/
+"Добавить скам" = "New Scam" ;
+"Сохранить" = "Save" ;
+"Название скама" = "Scam name";
+"Сила скама:" = "Scam power";
+"Введите описание" = "Enter description";
+"Дата скама" = "Scam date" ;
+"Тип скама" = "Scam type" ;
+"Фото скама" = "Scam photo";
+"Эмоциональный" = "Emotional" ;
+"Финансовый" = "Financial";
+"Свой тип" = "Custom type";
+"Очистить типы" = "Delete types";
+
