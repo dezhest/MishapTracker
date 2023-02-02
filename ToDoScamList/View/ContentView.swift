@@ -33,7 +33,6 @@ struct ContentView: View {
         }
     }
     let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
-    
     init() {
         NavigationTheme.navigationBarColors(background: .systemOrange, titleColor: .white)
     }
@@ -41,7 +40,59 @@ struct ContentView: View {
         ZStack {
             NavigationView {
                 List {
-                    listScamView()
+                    ForEach(sortedScams, id: \.self) { item in
+                        ZStack {
+                            newOrSystemImage(item: item)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 60, height: 60)
+                                .clipShape(Circle())
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .onTapGesture {
+                                    if item.imageD != Data() {
+                                        if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
+                                        showImage = Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
+                                        self.showingImage.toggle()
+                                    }
+                                }
+                            cardScamView(item: item)
+                            .onTapGesture {
+                                if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
+                                if let unwrapped = sortedScams[indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
+                                mdIsShown.toggle()
+                                concurrentQueue.async {
+                                    mDGlobalStat(item: item)
+                                }
+                                concurrentQueue.async {
+                                    mDMonthStat(item: item)
+                                }
+                                concurrentQueue.async {
+                                    mDWeekStat(item: item)
+                                }
+                            }
+                        } .frame(maxWidth: .infinity)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button(role: .destructive, action: {
+                                    if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
+                                    deleteScam(item: item)
+                                }) {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    edit.editInput = item.title
+                                    edit.editpower = item.power
+                                    if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
+                                    withAnimation(.spring()) {
+                                        editIsShown.toggle()
+                                    }
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+                                .tint(.green)
+                            }
+                    }
                         .onChange(of: editIsShown) { _ in
                             sortedScams[edit.indexOfEditScam].title = edit.editInput
                             sortedScams[edit.indexOfEditScam].power = edit.editpower
@@ -195,98 +246,46 @@ struct ContentView: View {
         }
     }
     @ViewBuilder
-    private func listScamView() -> some View {
-        ForEach(sortedScams, id: \.self) { item in
-            ZStack {
-                newOrSystemImage(item: item)
+    private func cardScamView(item: Scam) -> some View {
+        ZStack {
+            VStack(alignment: .leading, spacing: 0) {
+                Text(item.title)
+                    .font(.system(size: 13, weight: .bold, design: .default))
+                Text("#\(item.type)")
+                    .font(.system(size: 10, weight: .medium, design: .default))
+                    .opacity(0.6)
+                    .padding(5)
+                    .padding(.bottom, 3)
+                    .padding(.leading, -5)
+                HStack {
+                    Text("\(Int(item.power))/10 скамов")
+                        .font(.system(size: 12, weight: .medium, design: .default))
+                        .foregroundColor(.white)
+                        .padding(3)
+                        .background(colorOfPower(power: Int(item.power)))
+                        .cornerRadius(20)
+                        .padding(.bottom, 3)
+                    Text("\(item.selectedDate, format: Date.FormatStyle(date: .numeric, time: .omitted))")
+                        .font(.system(size: 10, weight: .medium, design: .default))
+                        .padding(3)
+                        .padding(.bottom, -1)
+                        .foregroundColor(.gray)
+                        .opacity(0.7)
+                        .frame(alignment: .bottomLeading)
+                        .offset(y: -1)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
+            .padding(.leading, 65)
+            .offset(x: 8)
+            VStack {
+                Image(systemName: "arrow.right.square")
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 60, height: 60)
-                    .clipShape(Circle())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .onTapGesture {
-                        if item.imageD != Data() {
-                            if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
-                            showImage = Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
-                            self.showingImage.toggle()
-                        }
-                    }
-                ZStack {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(item.title)
-                            .font(.system(size: 13, weight: .bold, design: .default))
-                        Text("#\(item.type)")
-                            .font(.system(size: 10, weight: .medium, design: .default))
-                            .opacity(0.6)
-                            .padding(5)
-                            .padding(.bottom, 3)
-                            .padding(.leading, -5)
-                        HStack {
-                            Text("\(Int(item.power))/10 скамов")
-                                .font(.system(size: 12, weight: .medium, design: .default))
-                                .foregroundColor(.white)
-                                .padding(3)
-                                .background(colorOfPower(power: Int(item.power)))
-                                .cornerRadius(20)
-                                .padding(.bottom, 3)
-                            Text("\(item.selectedDate, format: Date.FormatStyle(date: .numeric, time: .omitted))")
-                                .font(.system(size: 10, weight: .medium, design: .default))
-                                .padding(3)
-                                .padding(.bottom, -1)
-                                .foregroundColor(.gray)
-                                .opacity(0.7)
-                                .frame(alignment: .bottomLeading)
-                                .offset(y: -1)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
-                    .padding(.leading, 65)
-                    .offset(x: 8)
-                    VStack {
-                        Image(systemName: "arrow.right.square")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .opacity(0.35)
-                            .onTapGesture {
-                                if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
-                                if let unwrapped = sortedScams[indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
-                                mdIsShown.toggle()
-                                concurrentQueue.async {
-                                    mDGlobalStat(item: item)
-                                }
-                                concurrentQueue.async {
-                                    mDMonthStat(item: item)
-                                }
-                                concurrentQueue.async {
-                                    mDWeekStat(item: item)
-                                }
-                            }
-                    }
-                    .padding(.trailing, 10)
-                }
-            } .frame(maxWidth: .infinity)
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button(role: .destructive, action: {
-                        if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
-                        deleteScam(item: item)
-                    }) {
-                        Label("Delete", systemImage: "trash")
-                    }
-                }
-                .swipeActions(edge: .leading) {
-                    Button {
-                        edit.editInput = item.title
-                        edit.editpower = item.power
-                        if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
-                        withAnimation(.spring()) {
-                            editIsShown.toggle()
-                        }
-                    } label: {
-                        Label("Edit", systemImage: "pencil")
-                    }
-                    .tint(.green)
-                }
+                    .frame(width: 20, height: 20)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .opacity(0.35)
+            }
+            .padding(.trailing, 10)
         }
     }
 }

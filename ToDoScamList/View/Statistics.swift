@@ -33,19 +33,19 @@ struct Statistics: View {
     @State private var month = false
     @State private var week = false
     @Environment(\.presentationMode) var presentationMode
-    let today = Date.today().getFormattedDate(format: "dd/MM")
+    let today = Date.today().localDate().getFormattedDate(format: "dd/MM")
     let lastSunday = Date.today().previous(.sunday).getFormattedDate(format: "dd/MM")
-    let previosOneSunday = Date.today().previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
-    let previosTwoSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
-    let previosThreeSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
-    let previosFourSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
-    let previosFiveSunday = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
+    let oneSundayAgo = Date.today().previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
+    let twoSundayAgo = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
+    let threeSundayAgo = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
+    let fourSundayAgo = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
+    let fiveSundayAgo = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
     let lastMonday = Date.today().previous(.monday).getFormattedDate(format: "dd/MM")
-    let previosOneWeekMonday = CalendarWeeksAgo().oneWeekAgoDate.getFormattedDate(format: "dd/MM")
-    let previosTwoWeekMonday = CalendarWeeksAgo().twoWeeksAgoDate.getFormattedDate(format: "dd/MM")
-    let previosThreeWeekMonday = CalendarWeeksAgo().threeWeeksAgoDate.getFormattedDate(format: "dd/MM")
-    let previosFourWeekMonday = CalendarWeeksAgo().fourWeeksAgoDate.getFormattedDate(format: "dd/MM")
-    let previosFiveWeekMonday = CalendarWeeksAgo().fiveWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let oneMondayAgo = CalendarWeeksAgo().oneWeekAgoDate.getFormattedDate(format: "dd/MM")
+    let twoMondayAgo = CalendarWeeksAgo().twoWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let threeMondayAgo = CalendarWeeksAgo().threeWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let fourMondayAgo = CalendarWeeksAgo().fourWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let fiveMondayAgo = CalendarWeeksAgo().fiveWeeksAgoDate.getFormattedDate(format: "dd/MM")
     let screenSize = UIScreen.main.bounds
     let pieChartStyle = ChartStyle(backgroundColor: .black, accentColor: .orange, gradientColor: GradientColor(start: .orange, end: .red), textColor: .white, legendTextColor: .white, dropShadowColor: .gray)
     func findPieChartData() -> [PieChartData] {
@@ -254,7 +254,7 @@ struct Statistics: View {
                 }
             }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
             VStack {
-                BarChartView(data: ChartData(values: [("\(previosFiveWeekMonday) - \(previosFourSunday)", Double(fiveWeeksAgoPower)), ("\(previosFourWeekMonday) - \(previosThreeSunday)", Double(fourWeeksAgoPower)), ("\(previosThreeWeekMonday) - \(previosTwoSunday)", Double(threeWeeksAgoPower)), ("\(previosTwoWeekMonday) - \(previosOneSunday)", Double(twoWeeksAgoPower)), ("\(previosOneWeekMonday) - \(lastSunday)", Double(oneWeekAgoPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
+                BarChartView(data: ChartData(values: [("\(fiveMondayAgo) - \(fourSundayAgo)", Double(fiveWeeksAgoPower)), ("\(fourMondayAgo) - \(threeSundayAgo)", Double(fourWeeksAgoPower)), ("\(threeMondayAgo) - \(fourSundayAgo)", Double(threeWeeksAgoPower)), ("\(twoMondayAgo) - \(oneSundayAgo)", Double(twoWeeksAgoPower)), ("\(oneMondayAgo) - \(lastSunday)", Double(oneWeekAgoPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
                 PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
