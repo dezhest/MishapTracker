@@ -104,7 +104,7 @@ struct ContentView: View {
                 .navigationBarItems(leading: Picker("Select number", selection: $pickerSelection) {
                     Text("Сортировка по дате").tag(1)
                     Text("Сортировка по алфавиту").tag(2)
-                    Text("Сортировка по силе скама").tag(3)
+                    Text("Сортировка по силе").tag(3)
                     Text("Сортировка по типу").tag(4)
                 } .pickerStyle(.menu), trailing: Button(action: {
                     self.newScamIsShown = true
@@ -176,7 +176,7 @@ struct ContentView: View {
         let mDDescription = sortedScams[indexOfMoreDetailed].scamDescription
         let mDSameTypeCount = sortedScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
         let mDallPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
-        let mDaveragePowerOfAll = (stat.mDallPower / Double(sortedScams.count)*100).rounded()/100
+        let mDaveragePowerOfAll = (mDallPower / Double(sortedScams.count)*100).rounded()/100
         let mDaveragePowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
         let mDeachTypeCount = findEachTypeCount()
         let mDallTypes = allTypes.removingDuplicates()
@@ -224,7 +224,7 @@ struct ContentView: View {
         let last30DayScams = sortedScams.filter({$0.selectedDate > CalendarWeeksAgo().monthAgoDate})
         let mDlast30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
         let mDlast30daySameTypeCount = last30DayScams.filter({$0.type == sortedScams[indexOfMoreDetailed].type}).count
-        let mDaveragePowerOfLast30day = (Double(stat.mDlast30dayPower) / Double(last30DayScams.count)*100).rounded()/100
+        let mDaveragePowerOfLast30day = (Double(mDlast30dayPower) / Double(last30DayScams.count)*100).rounded()/100
         DispatchQueue.main.async {
             stat.mDlast30dayPower = mDlast30dayPower
             stat.mDlast30daySameTypeCount = mDlast30daySameTypeCount

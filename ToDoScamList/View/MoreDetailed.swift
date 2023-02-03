@@ -118,23 +118,35 @@ struct MoreDetailed: View {
                 .frame(maxWidth: .infinity)
             }
                             .environment(\.colorScheme, .dark)
-                            .sheet(isPresented: $statIsShown) {
+                            .fullScreenCover(isPresented: $statIsShown) {
                                 Statistics(type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, oneWeekAgoPower: $oneWeekAgoPower, twoWeeksAgoPower: $twoWeeksAgoPower, threeWeeksAgoPower: $threeWeeksAgoPower, fourWeeksAgoPower: $fourWeeksAgoPower, fiveWeeksAgoPower: $fiveWeeksAgoPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)
                             }
+            if editIsShown == true {
+                Text(" ")
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                    .background(Color.black)
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(0.8)
+                    .onTapGesture{
+                        editIsShown = false
+                    }
+            }
             EditDescription(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput)
-            Text("Статистика")
-                .foregroundColor(.white)
-                .font(.system(size: 18, weight: .bold, design: .default))
-                .frame(width: 180, height: 5)
-                .foregroundColor(.white)
-                .padding()
-                .background(Color(.orange))
-                .cornerRadius(20)
-                .onTapGesture {
-                    statIsShown.toggle()
-                }
-                .frame(maxHeight: screenSize.height, alignment: .bottom)
-                .offset(y: -20)
+            if !editIsShown {
+                Text("Статистика")
+                    .foregroundColor(.white)
+                    .font(.system(size: 18, weight: .bold, design: .default))
+                    .frame(width: 180, height: 5)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color(.orange))
+                    .cornerRadius(20)
+                    .onTapGesture {
+                        statIsShown.toggle()
+                    }
+                    .frame(maxHeight: screenSize.height, alignment: .bottom)
+                    .offset(y: -20)
+            }
         }
         .environment(\.colorScheme, .dark)
     }

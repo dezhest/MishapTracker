@@ -37,17 +37,21 @@ struct EditDescription: View {
                         .onReceive(Just(text)) { _ in limitText(textLimit) }
                         .font(.custom("Helvetica", size: 17))
                         .offset(x: 10)
-                        .offset(x: -14)
+                        .padding(5)
+
                     if text.isEmpty {
                         Text("Введите описание")
                             .font(.custom("Helvetica", size: 17))
                             .opacity(0.22)
                             .foregroundColor(.black)
-                            .offset(y: -40)
+                            .offset(x: 20, y: -45)
                     }
                 }
-                .padding(15)
-                .offset(x: -4)
+                .overlay(
+                         RoundedRectangle(cornerRadius: 25)
+                           .stroke(Color.gray)
+                         )
+                .padding(5)
             }
             VStack {
                 Button("Сохранить и выйти") {
@@ -61,7 +65,6 @@ struct EditDescription: View {
                 .padding()
                 .background(Color(.orange))
                 .cornerRadius(20)
-                .shadow(color: .gray, radius: 5, x: 5, y: 5)
             }
         }
         .environment(\.colorScheme, .light)

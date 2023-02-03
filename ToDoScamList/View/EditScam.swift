@@ -76,7 +76,6 @@ struct EditScam: View {
                 .padding()
                 .background(Color(.orange))
                 .cornerRadius(20)
-                .shadow(color: .gray, radius: 5, x: 5, y: 5)
             }
         }
         .padding()
