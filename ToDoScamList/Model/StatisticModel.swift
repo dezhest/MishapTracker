@@ -15,7 +15,6 @@ final class StatisticModel: ObservableObject {
     @Published var imageData: Data = .init(capacity: 0)
     @Published var types: [String] = [""]
     @Published var type = "Финансовый"
-//    @Published var indexOfMoreDetailed: Int = 0
     @Published var mDID = ObjectIdentifier(AnyObject.self)
     @Published var mDTitle = ""
     @Published var mDType = ""

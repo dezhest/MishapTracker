@@ -11,8 +11,8 @@ import CoreData
 struct ContentView: View {
     @ObservedObject var stat = StatisticModel()
     @ObservedObject var edit = EditScamModel()
-    @State private var showingNewSheet = false
-    @State private var showingImage = false
+    @State private var newScamIsShown = false
+    @State private var imageIsShown = false
     @State private var mdIsShown = false
     @State private var editIsShown = false
     @State private var image: Data = .init(count: 0)
@@ -52,7 +52,7 @@ struct ContentView: View {
                                     if item.imageD != Data() {
                                         if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
                                         showImage = Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
-                                        self.showingImage.toggle()
+                                        self.imageIsShown.toggle()
                                     }
                                 }
                             cardScamView(item: item)
@@ -107,18 +107,28 @@ struct ContentView: View {
                     Text("Сортировка по силе скама").tag(3)
                     Text("Сортировка по типу").tag(4)
                 } .pickerStyle(.menu), trailing: Button(action: {
-                    self.showingNewSheet = true
+                    self.newScamIsShown = true
                 }) {
                     Image(systemName: "plus")
                 })
-                .sheet(isPresented: $showingNewSheet) {
+                .sheet(isPresented: $newScamIsShown) {
                     NewScam()
                 }
-                .sheet(isPresented: $showingImage, content: {
+                .sheet(isPresented: $imageIsShown, content: {
                     ShowImage(image: $showImage)
                 })
                 .fullScreenCover(isPresented: $mdIsShown, content: {
                     MoreDetailed(id: $stat.mDID, title: $stat.mDTitle, type: $stat.mDType, image: $stat.mDImage, description: $stat.mDDescription, allPower: $stat.mDallPower, averagePowerOfAll: $stat.mDaveragePowerOfAll, averagePowerSameType: $stat.mDaveragePowerSameType, mostFrequentTypeCount: $stat.mDmostFrequentTypeCount, mostFrequentType: $stat.mDmostFrequentType, sameTypeCount: $stat.mDSameTypeCount, last30dayPower: $stat.mDlast30dayPower, last30daySameTypeCount: $stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $stat.mDcurrentWeekSameTypeCount, currentWeekPower: $stat.mDcurrentWeekPower, oneWeekAgoPower: $stat.mDoneWeekAgoPower, twoWeeksAgoPower: $stat.mDtwoWeeksAgoPower, threeWeeksAgoPower: $stat.mDthreeWeeksAgoPower, fourWeeksAgoPower: $stat.mDfourWeeksAgoPower, fiveWeeksAgoPower: $stat.mDfiveWeeksAgoPower, eachTypeCount: $stat.mDeachTypeCount, allTypes: $stat.mDallTypes)})
+            }
+            if editIsShown == true {
+                Text(" ")
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                    .background(Color.black)
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(0.8)
+                    .onTapGesture{
+                        editIsShown = false
+                    }
             }
             EditScam(isShown: $editIsShown, isCanceled: $edit.editIsCanceled, text: $edit.editInput, power: $edit.editpower)
         }

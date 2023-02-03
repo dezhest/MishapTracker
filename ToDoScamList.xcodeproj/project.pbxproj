@@ -27,6 +27,7 @@
 		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
 		C39356612982E7410006DCAF /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* Statistics.swift */; };
+		C3A77BB7298D229F00138274 /* AlertControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A77BB6298D229F00138274 /* AlertControllerView.swift */; };
 		C3F2F5862986CDCD005436CB /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F5852986CDCD005436CB /* FancyScrollView */; };
 		C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F58B2987D552005436CB /* SwiftUICharts */; };
 		C3F2F5AF2987FCC9005436CB /* AddNewScamForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */; };
@@ -60,6 +61,7 @@
 		BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Scam+CoreDataProperties.swift"; path = "ToDoScamList/CoreDate/Scam+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		BBFA46812954E8A3009E9E9A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		C3A77BB6298D229F00138274 /* AlertControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControllerView.swift; sourceTree = "<group>"; };
 		C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewScamForm.swift; sourceTree = "<group>"; };
 		C3F2F5B229881C2E005436CB /* EditScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScamModel.swift; sourceTree = "<group>"; };
 		C3F2F5B429882039005436CB /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				C3F905AE2983366B00C2E649 /* EditDescription.swift */,
 				BB705C45295C891E006585BB /* EditScam.swift */,
 				C39356602982E7410006DCAF /* Statistics.swift */,
+				C3A77BB6298D229F00138274 /* AlertControllerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				BBD7FD602970C40B006679BF /* DismissKeyboard.swift in Sources */,
 				BBF70637294CF835006DA73A /* NewScam.swift in Sources */,
 				BBF7062A294CF54B006DA73A /* ContentView.swift in Sources */,
+				C3A77BB7298D229F00138274 /* AlertControllerView.swift in Sources */,
 				BBF70628294CF54B006DA73A /* ToDoScamList.xcdatamodeld in Sources */,
 				BB7ACB8329785687008649E8 /* Calendar.swift in Sources */,
 				BB7ACB8129782DB3008649E8 /* ShowImage.swift in Sources */,
