@@ -53,6 +53,16 @@ struct NewScam: View {
                     Alert(title: Text("Название скама не может быть пустым или превышать 30 символов"))
                 }
             }
+            if showsAlertCustomType == true {
+                Text(" ")
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                    .background(Color.black)
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(0.8)
+                    .onTapGesture{
+                        showsAlertCustomType = false
+                    }
+            }
             AddCustomType(title: "Добавьте тип", isShown: $showsAlertCustomType, text: $alertInput, onDone: {_ in
                 if form.types.filter({$0 == alertInput}).count == 0 {
                     form.types.insert(alertInput, at: 0)
@@ -230,6 +240,7 @@ struct NewScam: View {
             }
         }
     }
+    
 }
 
 struct AddView_Previews: PreviewProvider {

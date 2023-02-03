@@ -111,7 +111,7 @@ struct ContentView: View {
                 }) {
                     Image(systemName: "plus")
                 })
-                .sheet(isPresented: $newScamIsShown) {
+                .fullScreenCover(isPresented: $newScamIsShown) {
                     NewScam()
                 }
                 .sheet(isPresented: $imageIsShown, content: {
