@@ -1,6 +1,6 @@
 //
 //  AddView.swift
-//  MyCash
+//  ToDoScamList
 //
 //  Created by Денис Жестерев on 26.09.2022.
 //

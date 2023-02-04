@@ -64,7 +64,6 @@ extension Date {
 
 }
 
-// MARK: Helper methods
 extension Date {
   func getWeekDaysInEnglish() -> [String] {
     var calendar = Calendar(identifier: .gregorian)
