@@ -27,16 +27,7 @@ struct NewScam: View {
                 }
                 .navigationBarItems(leading:  Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                     Image(systemName: "chevron.left")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 20, alignment: .leading)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 16)
-                        .font(Font.body.bold())
-                        .frame(height: 30)
-                        .background(
-                            Circle().fill(Color.orange)
-                        )
+                        .backButton()
                 }, trailing: Button("Сохранить") {
                     if form.name.count >= 30 || form.name.isEmpty {
                         self.showsAlertNameCount.toggle()

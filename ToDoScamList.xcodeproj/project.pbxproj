@@ -26,6 +26,10 @@
 		BBFA467C2954AB46009E9E9A /* AddCustomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AddCustomType.swift */; };
 		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
+		C3372A6D29919F52008DF8DE /* PowerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A6C29919F52008DF8DE /* PowerColor.swift */; };
+		C3372A712991AC97008DF8DE /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A702991AC97008DF8DE /* Sorting.swift */; };
+		C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A722991BFA6008DF8DE /* TextModifiers.swift */; };
+		C3372A752991C4F5008DF8DE /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A742991C4F5008DF8DE /* ImageModifier.swift */; };
 		C39356612982E7410006DCAF /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* Statistics.swift */; };
 		C3F2F5862986CDCD005436CB /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F5852986CDCD005436CB /* FancyScrollView */; };
 		C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F58B2987D552005436CB /* SwiftUICharts */; };
@@ -59,6 +63,10 @@
 		BBFA467B2954AB46009E9E9A /* AddCustomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomType.swift; sourceTree = "<group>"; };
 		BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Scam+CoreDataProperties.swift"; path = "ToDoScamList/CoreDate/Scam+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		BBFA46812954E8A3009E9E9A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C3372A6C29919F52008DF8DE /* PowerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerColor.swift; sourceTree = "<group>"; };
+		C3372A702991AC97008DF8DE /* Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
+		C3372A722991BFA6008DF8DE /* TextModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifiers.swift; sourceTree = "<group>"; };
+		C3372A742991C4F5008DF8DE /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewScamForm.swift; sourceTree = "<group>"; };
 		C3F2F5B229881C2E005436CB /* EditScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScamModel.swift; sourceTree = "<group>"; };
@@ -91,6 +99,8 @@
 				C3F2F5B229881C2E005436CB /* EditScamModel.swift */,
 				C3F2F5B429882039005436CB /* StatisticModel.swift */,
 				C3F2F5B629885DD4005436CB /* NavigationTheme.swift */,
+				C3372A6C29919F52008DF8DE /* PowerColor.swift */,
+				C3372A702991AC97008DF8DE /* Sorting.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,6 +137,8 @@
 				BBD7FD612970C4BB006679BF /* Placeholder.swift */,
 				BB7ACB8229785687008649E8 /* Calendar.swift */,
 				BB7D99B0297C342800442733 /* UniqItemsArray.swift */,
+				C3372A722991BFA6008DF8DE /* TextModifiers.swift */,
+				C3372A742991C4F5008DF8DE /* ImageModifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -275,9 +287,12 @@
 				BBF70625294CF54B006DA73A /* Persistence.swift in Sources */,
 				BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */,
 				C39356612982E7410006DCAF /* Statistics.swift in Sources */,
+				C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */,
+				C3372A712991AC97008DF8DE /* Sorting.swift in Sources */,
 				C3F2F5AF2987FCC9005436CB /* AddNewScamForm.swift in Sources */,
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AddCustomType.swift in Sources */,
+				C3372A752991C4F5008DF8DE /* ImageModifier.swift in Sources */,
 				C3F2F5B329881C2E005436CB /* EditScamModel.swift in Sources */,
 				C3F2F5B529882039005436CB /* StatisticModel.swift in Sources */,
 				C3F905AF2983366B00C2E649 /* EditDescription.swift in Sources */,
@@ -289,6 +304,7 @@
 				BB7ACB8329785687008649E8 /* Calendar.swift in Sources */,
 				BB7ACB8129782DB3008649E8 /* ShowImage.swift in Sources */,
 				BBD7FD622970C4BB006679BF /* Placeholder.swift in Sources */,
+				C3372A6D29919F52008DF8DE /* PowerColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

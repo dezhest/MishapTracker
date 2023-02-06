@@ -65,7 +65,6 @@ struct Statistics: View {
                 Group {
                     Text("Количество скамов типа ")
                         .font(.system(size: 18, weight: .bold, design: .default))
-                        .font(.system(size: 14, weight: .medium, design: .default))
                     + Text("#\(type)")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .foregroundColor(.orange)
@@ -73,12 +72,7 @@ struct Statistics: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 VStack {
                     Text("\(sameTypeCount)")
-                        .font(.system(size: 14, weight: .medium, design: .default))
-                        .foregroundColor(.white)
-                        .padding(7)
-                        .background(Color(.orange))
-                        .cornerRadius(20)
-                        .padding(.bottom, 3)
+                        .medium14()
                 }
                 .frame(alignment: .trailing)
             }
@@ -93,12 +87,7 @@ struct Statistics: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 VStack {
                     Text(String(format: "%.2f", averagePowerSameType))
-                        .font(.system(size: 14, weight: .medium, design: .default))
-                        .foregroundColor(.white)
-                        .padding(7)
-                        .background(Color(.orange))
-                        .cornerRadius(20)
-                        .padding(.bottom, 3)
+                        .medium14()
                 }
                 .frame(alignment: .trailing)
             }
@@ -109,12 +98,7 @@ struct Statistics: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text("\(Int(allPower))")
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .foregroundColor(.white)
-                            .padding(7)
-                            .background(Color(.orange))
-                            .cornerRadius(20)
-                            .padding(.bottom, 3)
+                            .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -124,12 +108,7 @@ struct Statistics: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text(String(format: "%.2f", averagePowerOfAll))
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .foregroundColor(.white)
-                            .padding(7)
-                            .background(Color(.orange))
-                            .cornerRadius(20)
-                            .padding(.bottom, 3)
+                            .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -145,21 +124,11 @@ struct Statistics: View {
                     }.frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text(mostFrequentType)
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .foregroundColor(.white)
-                            .padding(7)
-                            .background(Color(.orange))
-                            .cornerRadius(20)
-                            .padding(.bottom, 3)
+                            .medium14()
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .offset(y: 22.5)
                         Text("\(mostFrequentTypeCount)")
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .foregroundColor(.white)
-                            .padding(7)
-                            .background(Color(.orange))
-                            .cornerRadius(20)
-                            .padding(.bottom, 3)
+                            .medium14()
                             .frame(maxWidth: .infinity, maxHeight: 80, alignment: .bottomTrailing)
                     }
                 }
@@ -171,12 +140,7 @@ struct Statistics: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text("\(last30dayPower)")
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .foregroundColor(.white)
-                            .padding(7)
-                            .background(Color(.orange))
-                            .cornerRadius(20)
-                            .padding(.bottom, 3)
+                            .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -191,12 +155,7 @@ struct Statistics: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text("\(last30daySameTypeCount)")
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .foregroundColor(.white)
-                            .padding(7)
-                            .background(Color(.orange))
-                            .cornerRadius(20)
-                            .padding(.bottom, 3)
+                            .medium14()
                     }
                     .frame(alignment: .trailing)
                 }
@@ -206,12 +165,7 @@ struct Statistics: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text(String(format: "%.2f", averagePowerOfLast30day))
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .foregroundColor(.white)
-                            .padding(7)
-                            .background(Color(.orange))
-                            .cornerRadius(20)
-                            .padding(.bottom, 3)
+                            .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -223,12 +177,7 @@ struct Statistics: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text("\(currentWeekPower)")
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .foregroundColor(.white)
-                            .padding(7)
-                            .background(Color(.orange))
-                            .cornerRadius(20)
-                            .padding(.bottom, 3)
+                            .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -243,12 +192,7 @@ struct Statistics: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
                         Text("\(currentWeekSameTypeCount)")
-                            .font(.system(size: 14, weight: .medium, design: .default))
-                            .foregroundColor(.white)
-                            .padding(7)
-                            .background(Color(.orange))
-                            .cornerRadius(20)
-                            .padding(.bottom, 3)
+                            .medium14()
                     }
                     .frame(alignment: .trailing)
                 }
@@ -266,16 +210,7 @@ struct Statistics: View {
         .navigationBarTitle("Статистика")
         .navigationBarItems(leading: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
             Image(systemName: "chevron.left")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 20, alignment: .leading)
-                .foregroundColor(.white)
-                .padding(.horizontal, 16)
-                .font(Font.body.bold())
-                .frame(height: 30)
-                .background(
-                    Circle().fill(Color.orange)
-                )
+                .backButton()
         }, trailing: Text(type))
     }
         .environment(\.colorScheme, .dark)
