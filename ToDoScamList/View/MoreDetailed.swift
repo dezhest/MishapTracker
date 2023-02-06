@@ -7,7 +7,6 @@
 
 import SwiftUI
 import FancyScrollView
-import Combine
 
 struct MoreDetailed: View {
     @Binding var id: ObjectIdentifier
