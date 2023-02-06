@@ -1,17 +1,17 @@
 # ScamList
-ScamList - Easy-to-use app that helps you to create or maintain your everyday scams. Keeping a list of your scams and tracking their statistics.
+ScamList - Easy-to-use meme app that helps you to create and maintain your everyday scams. It enables to keep a list of your scams and track their statistics.
 
 Scam - any unpleasant event that can happen to anyone.
  
 **Add your new scam:** 
-- Enter a description and strength on a ten-point scale
+- Enter a description and intensity on a ten-point scale
 - Specify the date and attach a photo
-- Choose the appropriate type of scam or add your own
+- Choose the relevant type of scam or add your own
 
 ![Date](https://user-images.githubusercontent.com/99794753/216851710-b287023b-3d2a-4314-9bf8-80c6465bc992.jpg)![camera](https://user-images.githubusercontent.com/99794753/216851723-b5a35388-e275-42de-b50f-db2f049bc5d1.jpg)![IMG_0621 (1) (2)](https://user-images.githubusercontent.com/99794753/216847851-f74355ef-cdba-4b60-b5a1-ebc0d8ea686a.gif)
 
 **Work with scams in the main menu:** 
- - Sort your scams by date, alphabet, strength and type.
+ - Sort your scams by date, alphabet, intensity and type
  - View photos
  - Swipe to the right to make changes or delete your scam by swiping left
  
@@ -20,8 +20,8 @@ Scam - any unpleasant event that can happen to anyone.
 
  **Go to a specific scam:**
  - View and edit the description
- - View statistics for all time, current month or week.
- - Work with the chart of the overall strength of the scam for the last few weeks and a circular diagram of the types of your scams.
+ - View statistics for the entire time period, current month or week
+ - Work with the chart of the overall intensity of the scam for the last few weeks and a circular diagram of the types of your scams
  
  ![stat](https://user-images.githubusercontent.com/99794753/216851898-ff65eb20-5881-42ce-aacc-b97d4568acb8.jpg)![IMG_0626 (1) (2)](https://user-images.githubusercontent.com/99794753/216847859-f1341d34-0769-4a55-813f-70e6de92a4b9.gif) 
  
@@ -32,7 +32,7 @@ Scam - any unpleasant event that can happen to anyone.
  
  # Tech stacks
  - **SwiftUI** iOS 15 functions are applied for support for a larger number of devices
- - **Combine** Combine is used for validation of the number of characters in the entered data, if criteria are not met - corresponding alerts appear.
+ - **Combine** is used to validate the number of characters in the entered data. If the criteria are not met, corresponding alerts appear.
  - **CoreDate** Core data for storing card data, UserDefaults for storing the array of editable types
  - **UIImagePickerController** UIImagePickerController for photo selection
  - **GCD** Statistics are calculated by independent functions - total, monthly, and weekly, working on parallel threads 
