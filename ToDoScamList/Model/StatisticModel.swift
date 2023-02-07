@@ -40,7 +40,7 @@ final class StatisticModel: ObservableObject {
     @Published var mDeachTypeCount = [Int]()
     @Published var mDallTypes = [String]()
     
-    func mDGlobalStat(scam: [Scam], index: Int) {
+    func globalStat(scam: [Scam], index: Int) {
         let allTypes = scam.map({$0.type}).removingDuplicates()
         let arrayallPower = scam.map({Int($0.power)})
         let sameTypeScams = scam.filter({$0.type == scam[index].type})
@@ -95,7 +95,7 @@ final class StatisticModel: ObservableObject {
             self.mDallTypes = allTypes
         }
     }
-    func mDMonthStat(scam: [Scam], index: Int) {
+    func monthStat(scam: [Scam], index: Int) {
         let last30DayScams = scam.filter({$0.selectedDate > CalendarWeeksAgo().monthAgoDate})
         let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
         let last30daySameTypeCount = last30DayScams.filter({$0.type == scam[index].type}).count
@@ -106,7 +106,7 @@ final class StatisticModel: ObservableObject {
             self.mDaveragePowerOfLast30day = averagePowerOfLast30day
         }
     }
-    func mDWeekStat(scam: [Scam], index: Int) {
+    func weekStat(scam: [Scam], index: Int) {
         let currentWeekScams = scam.filter({$0.selectedDate > Date.today().previous(.monday)})
         let oneWeekAgoScams = scam.filter({($0.selectedDate > CalendarWeeksAgo().oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
         let twoWeeksAgoScams = scam.filter({($0.selectedDate > CalendarWeeksAgo().twoWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().oneWeekAgoDate)})

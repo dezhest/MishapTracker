@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var imageIsShown = false
     @State private var mdIsShown = false
     @State private var editIsShown = false
+    @State private var pickerSelection = 1
     @State private var image: Data = .init(count: 0)
     @State private var indexOfImage = 0
     @State private var showImage = Image("Scam")
@@ -22,8 +23,6 @@ struct ContentView: View {
     @GestureState private var scale: CGFloat = 1.0
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Scam.entity(), sortDescriptors: []) var entity: FetchedResults<Scam>
-    @State var pickerSelection: Int = 1
-    lazy var sorting = Sorting(pickerSelection: $pickerSelection)
     var sortedScams: [Scam] {
         switch pickerSelection {
         case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
@@ -58,51 +57,51 @@ struct ContentView: View {
                                     }
                                 }
                             cardScamView(item: item)
-                            .onTapGesture {
-                                if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
-                                if let unwrapped = sortedScams[indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
-                                mdIsShown.toggle()
-                                concurrentQueue.async {
-                                    stat.mDGlobalStat(scam: sortedScams, index: indexOfMoreDetailed)
-                                }
-                                concurrentQueue.async {
-                                    stat.mDMonthStat(scam: sortedScams, index: indexOfMoreDetailed)
-                                }
-                                concurrentQueue.async {
-                                    stat.mDWeekStat(scam: sortedScams, index: indexOfMoreDetailed)
-                                }
-                            }
-                        } .frame(maxWidth: .infinity)
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                Button(role: .destructive, action: {
-                                    if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
-                                    deleteScam(item: item)
-                                }) {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }
-                            .swipeActions(edge: .leading) {
-                                Button {
-                                    edit.editInput = item.title
-                                    edit.editpower = item.power
-                                    if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
-                                    withAnimation(.spring()) {
-                                        editIsShown.toggle()
+                                .onTapGesture {
+                                    if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
+                                    if let unwrapped = sortedScams[indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
+                                    mdIsShown.toggle()
+                                    concurrentQueue.async {
+                                        stat.globalStat(scam: sortedScams, index: indexOfMoreDetailed)
                                     }
-                                } label: {
-                                    Label("Edit", systemImage: "pencil")
+                                    concurrentQueue.async {
+                                        stat.monthStat(scam: sortedScams, index: indexOfMoreDetailed)
+                                    }
+                                    concurrentQueue.async {
+                                        stat.weekStat(scam: sortedScams, index: indexOfMoreDetailed)
+                                    }
                                 }
-                                .tint(.green)
-                            }
-                    }
-                        .onChange(of: editIsShown) { _ in
-                            sortedScams[edit.indexOfEditScam].title = edit.editInput
-                            sortedScams[edit.indexOfEditScam].power = edit.editpower
-                            try? viewContext.save()
                         }
+                        .frame(maxWidth: .infinity)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            Button(role: .destructive, action: {
+                                if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
+                                deleteScam(item: item)
+                            }) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                edit.editInput = item.title
+                                edit.editpower = item.power
+                                if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
+                                withAnimation(.spring()) {
+                                    editIsShown.toggle()
+                                }
+                            } label: {
+                                Label("Edit", systemImage: "pencil")
+                            }
+                            .tint(.green)
+                        }
+                    }
+                    .onChange(of: editIsShown) { _ in
+                        sortedScams[edit.indexOfEditScam].title = edit.editInput
+                        sortedScams[edit.indexOfEditScam].power = edit.editpower
+                        try? viewContext.save()
+                    }
                 }
                 .navigationBarTitle(Text("Scam List"))
-                
                 .navigationBarItems(leading: Picker("Select number", selection: $pickerSelection) {
                     Text("Сортировка по дате").tag(1)
                     Text("Сортировка по алфавиту").tag(2)
