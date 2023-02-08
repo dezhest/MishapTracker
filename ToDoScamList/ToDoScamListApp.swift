@@ -13,7 +13,7 @@ struct ToDoScamListApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Main()
                 .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
 

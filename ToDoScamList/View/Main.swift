@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  Main.swift
 //  ToDoScamList
 //
 //  Created by Денис Жестерев on 16.12.2022.
@@ -8,10 +8,10 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct Main: View {
     @ObservedObject var stat = StatisticModel()
     @ObservedObject var edit = EditScamModel()
-    @State private var newScamIsShown = false
+    @ObservedObject var newScamView = NewScamViewModel()
     @State private var imageIsShown = false
     @State private var mdIsShown = false
     @State private var editIsShown = false
@@ -32,6 +32,7 @@ struct ContentView: View {
         default: return []
         }
     }
+    
     let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
     var powerColor = PowerColor()
     init() {
@@ -108,11 +109,11 @@ struct ContentView: View {
                     Text("Сортировка по силе").tag(3)
                     Text("Сортировка по типу").tag(4)
                 } .pickerStyle(.menu), trailing: Button(action: {
-                    self.newScamIsShown = true
+                    newScamView.newScamModel.newScamIsShown.toggle()
                 }) {
                     Image(systemName: "plus")
                 })
-                .fullScreenCover(isPresented: $newScamIsShown) {
+                .fullScreenCover(isPresented: $newScamView.newScamModel.newScamIsShown) {
                     NewScam()
                 }
                 .sheet(isPresented: $imageIsShown, content: {
@@ -191,9 +192,9 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct Main_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Main()
             .previewInterfaceOrientation(.portrait)
     }
 }

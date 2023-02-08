@@ -21,7 +21,7 @@
 		BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */; };
 		BBF70625294CF54B006DA73A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70624294CF54B006DA73A /* Persistence.swift */; };
 		BBF70628294CF54B006DA73A /* Scam.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBF70626294CF54B006DA73A /* Scam.xcdatamodeld */; };
-		BBF7062A294CF54B006DA73A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70629294CF54B006DA73A /* ContentView.swift */; };
+		BBF7062A294CF54B006DA73A /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70629294CF54B006DA73A /* Main.swift */; };
 		BBF70637294CF835006DA73A /* NewScam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70636294CF835006DA73A /* NewScam.swift */; };
 		BBFA467C2954AB46009E9E9A /* AddCustomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AddCustomType.swift */; };
 		BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467E2954DECE009E9E9A /* Scam+CoreDataProperties.swift */; };
@@ -30,11 +30,14 @@
 		C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A722991BFA6008DF8DE /* TextModifiers.swift */; };
 		C3372A752991C4F5008DF8DE /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A742991C4F5008DF8DE /* ImageModifier.swift */; };
 		C39356612982E7410006DCAF /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* Statistics.swift */; };
+		C3C8423D2993E5A90068BB15 /* NewScamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */; };
+		C3C8423F2993F6940068BB15 /* NewScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423E2993F6940068BB15 /* NewScamModel.swift */; };
+		C3C8424129940A450068BB15 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8424029940A450068BB15 /* MainViewModel.swift */; };
+		C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8424229940A5A0068BB15 /* MainModel.swift */; };
 		C3F2F5862986CDCD005436CB /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F5852986CDCD005436CB /* FancyScrollView */; };
 		C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F58B2987D552005436CB /* SwiftUICharts */; };
-		C3F2F5AF2987FCC9005436CB /* AddNewScamForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */; };
-		C3F2F5B329881C2E005436CB /* EditScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B229881C2E005436CB /* EditScamModel.swift */; };
-		C3F2F5B529882039005436CB /* StatisticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B429882039005436CB /* StatisticModel.swift */; };
+		C3F2F5B329881C2E005436CB /* EditScamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B229881C2E005436CB /* EditScamViewModel.swift */; };
+		C3F2F5B529882039005436CB /* StatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B429882039005436CB /* StatisticViewModel.swift */; };
 		C3F2F5B729885DD4005436CB /* NavigationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B629885DD4005436CB /* NavigationTheme.swift */; };
 		C3F2F5D8298B3C9D005436CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F2F5DA298B3C9D005436CB /* Localizable.strings */; };
 		C3F905AF2983366B00C2E649 /* EditDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F905AE2983366B00C2E649 /* EditDescription.swift */; };
@@ -56,7 +59,7 @@
 		BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListApp.swift; sourceTree = "<group>"; };
 		BBF70624294CF54B006DA73A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BBF70627294CF54B006DA73A /* ToDoScamList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoScamList.xcdatamodel; sourceTree = "<group>"; };
-		BBF70629294CF54B006DA73A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BBF70629294CF54B006DA73A /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoScamList.entitlements; sourceTree = "<group>"; };
 		BBF70636294CF835006DA73A /* NewScam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScam.swift; sourceTree = "<group>"; };
 		BBFA467B2954AB46009E9E9A /* AddCustomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomType.swift; sourceTree = "<group>"; };
@@ -66,9 +69,12 @@
 		C3372A722991BFA6008DF8DE /* TextModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifiers.swift; sourceTree = "<group>"; };
 		C3372A742991C4F5008DF8DE /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
-		C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewScamForm.swift; sourceTree = "<group>"; };
-		C3F2F5B229881C2E005436CB /* EditScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScamModel.swift; sourceTree = "<group>"; };
-		C3F2F5B429882039005436CB /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
+		C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamViewModel.swift; sourceTree = "<group>"; };
+		C3C8423E2993F6940068BB15 /* NewScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamModel.swift; sourceTree = "<group>"; };
+		C3C8424029940A450068BB15 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		C3C8424229940A5A0068BB15 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		C3F2F5B229881C2E005436CB /* EditScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScamViewModel.swift; sourceTree = "<group>"; };
+		C3F2F5B429882039005436CB /* StatisticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
 		C3F2F5B629885DD4005436CB /* NavigationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTheme.swift; sourceTree = "<group>"; };
 		C3F2F5D9298B3C9D005436CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C3F2F5DB298B3C9F005436CB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -91,13 +97,8 @@
 		BBD34C03296C4C41006ECC63 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
-				BB705C3D295A07E6006585BB /* PinchZoomView.swift */,
-				C3F2F5AE2987FCC9005436CB /* AddNewScamForm.swift */,
-				C3F2F5B229881C2E005436CB /* EditScamModel.swift */,
-				C3F2F5B429882039005436CB /* StatisticModel.swift */,
-				C3F2F5B629885DD4005436CB /* NavigationTheme.swift */,
-				C3372A6C29919F52008DF8DE /* PowerColor.swift */,
+				C3C8423E2993F6940068BB15 /* NewScamModel.swift */,
+				C3C8424229940A5A0068BB15 /* MainModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -105,7 +106,7 @@
 		BBD34C04296C4C93006ECC63 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BBF70629294CF54B006DA73A /* ContentView.swift */,
+				BBF70629294CF54B006DA73A /* Main.swift */,
 				BB7ACB8029782DB3008649E8 /* ShowImage.swift */,
 				BBF70636294CF835006DA73A /* NewScam.swift */,
 				BB75876129761A79001D1FA0 /* MoreDetailed.swift */,
@@ -113,6 +114,7 @@
 				C3F905AE2983366B00C2E649 /* EditDescription.swift */,
 				BB705C45295C891E006585BB /* EditScam.swift */,
 				C39356602982E7410006DCAF /* Statistics.swift */,
+				C3F2F5B229881C2E005436CB /* EditScamViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,8 +163,13 @@
 			children = (
 				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
 				BBF70624294CF54B006DA73A /* Persistence.swift */,
-				BBD34C04296C4C93006ECC63 /* View */,
+				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
+				BB705C3D295A07E6006585BB /* PinchZoomView.swift */,
+				C3372A6C29919F52008DF8DE /* PowerColor.swift */,
+				C3F2F5B629885DD4005436CB /* NavigationTheme.swift */,
 				BBD34C03296C4C41006ECC63 /* Model */,
+				BBD34C04296C4C93006ECC63 /* View */,
+				C3C8423B2993E3F60068BB15 /* ViewModel */,
 				BBD7FD5C2970C3AF006679BF /* Extensions */,
 				BBD34C05296C4CB5006ECC63 /* CoreDate */,
 				BB75873D297407D3001D1FA0 /* Image.xcassets */,
@@ -171,6 +178,16 @@
 				C3F2F5DA298B3C9D005436CB /* Localizable.strings */,
 			);
 			path = ToDoScamList;
+			sourceTree = "<group>";
+		};
+		C3C8423B2993E3F60068BB15 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C3F2F5B429882039005436CB /* StatisticViewModel.swift */,
+				C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */,
+				C3C8424029940A450068BB15 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,26 +293,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F2F5B729885DD4005436CB /* NavigationTheme.swift in Sources */,
+				C3C8423F2993F6940068BB15 /* NewScamModel.swift in Sources */,
 				BB705C3E295A07E6006585BB /* PinchZoomView.swift in Sources */,
 				BB7D99B1297C342800442733 /* UniqItemsArray.swift in Sources */,
+				C3C8423D2993E5A90068BB15 /* NewScamViewModel.swift in Sources */,
 				BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */,
 				BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */,
+				C3C8424129940A450068BB15 /* MainViewModel.swift in Sources */,
 				BB705C46295C891E006585BB /* EditScam.swift in Sources */,
 				BBF70625294CF54B006DA73A /* Persistence.swift in Sources */,
 				BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */,
 				C39356612982E7410006DCAF /* Statistics.swift in Sources */,
+				C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */,
 				C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */,
-				C3F2F5AF2987FCC9005436CB /* AddNewScamForm.swift in Sources */,
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AddCustomType.swift in Sources */,
 				C3372A752991C4F5008DF8DE /* ImageModifier.swift in Sources */,
-				C3F2F5B329881C2E005436CB /* EditScamModel.swift in Sources */,
-				C3F2F5B529882039005436CB /* StatisticModel.swift in Sources */,
+				C3F2F5B329881C2E005436CB /* EditScamViewModel.swift in Sources */,
+				C3F2F5B529882039005436CB /* StatisticViewModel.swift in Sources */,
 				C3F905AF2983366B00C2E649 /* EditDescription.swift in Sources */,
 				BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */,
 				BBD7FD602970C40B006679BF /* DismissKeyboard.swift in Sources */,
 				BBF70637294CF835006DA73A /* NewScam.swift in Sources */,
-				BBF7062A294CF54B006DA73A /* ContentView.swift in Sources */,
+				BBF7062A294CF54B006DA73A /* Main.swift in Sources */,
 				BBF70628294CF54B006DA73A /* Scam.xcdatamodeld in Sources */,
 				BB7ACB8329785687008649E8 /* Calendar.swift in Sources */,
 				BB7ACB8129782DB3008649E8 /* ShowImage.swift in Sources */,
