@@ -11,7 +11,7 @@ import CoreData
 struct MainView: View {
     @ObservedObject var stat = StatisticModel()
     @ObservedObject var edit = EditScamModel()
-    @ObservedObject var newScamView = NewScamViewModel()
+    @StateObject var newScamViewModel = NewScamViewModel()
     @State private var imageIsShown = false
     @State private var mdIsShown = false
     @State private var editIsShown = false
@@ -109,11 +109,11 @@ struct MainView: View {
                     Text("Сортировка по силе").tag(3)
                     Text("Сортировка по типу").tag(4)
                 } .pickerStyle(.menu), trailing: Button(action: {
-                    newScamView.newScamModel.newScamIsShown.toggle()
+                    newScamViewModel.toggleNewScamIsShown()
                 }) {
                     Image(systemName: "plus")
                 })
-                .fullScreenCover(isPresented: $newScamView.newScamModel.newScamIsShown) {
+                .fullScreenCover(isPresented: $newScamViewModel.newScamModel.newScamIsShown) {
                     NewScam()
                 }
                 .sheet(isPresented: $imageIsShown, content: {

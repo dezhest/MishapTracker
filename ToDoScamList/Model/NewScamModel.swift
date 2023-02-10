@@ -15,10 +15,10 @@ struct NewScamModel {
     var calendarId: Int = 0
     var description: String = ""
     var imageData: Data = .init(capacity: 0)
-    var types: [String] = ["Эмоциональный", "Финансовый", "Свой тип", "Очистить типы"]
-    var type: String = "Финансовый"
+    var types: [String] = NewScamModel.typesArrayDefaultValues
+    var type: String = NewScamModel.typeDefaultValue
     var alertInput = ""
-    var showsAlertCustomType = false
+    var showsAddCustomType = false
     var showsAlertNameCount = false
     var showImageDialog = false
     var showsImagePicker = false
