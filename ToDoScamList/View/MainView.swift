@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct Main: View {
+struct MainView: View {
     @ObservedObject var stat = StatisticModel()
     @ObservedObject var edit = EditScamModel()
     @ObservedObject var newScamView = NewScamViewModel()
@@ -192,9 +192,9 @@ struct Main: View {
     }
 }
 
-struct Main_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        Main()
+        MainView()
             .previewInterfaceOrientation(.portrait)
     }
 }
