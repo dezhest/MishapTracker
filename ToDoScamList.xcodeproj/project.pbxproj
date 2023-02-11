@@ -29,15 +29,14 @@
 		C3372A6D29919F52008DF8DE /* PowerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A6C29919F52008DF8DE /* PowerColor.swift */; };
 		C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A722991BFA6008DF8DE /* TextModifiers.swift */; };
 		C3372A752991C4F5008DF8DE /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A742991C4F5008DF8DE /* ImageModifier.swift */; };
+		C357F438299841D0007CE050 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F437299841D0007CE050 /* MainViewModel.swift */; };
 		C39356612982E7410006DCAF /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* Statistics.swift */; };
 		C3C8423D2993E5A90068BB15 /* NewScamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */; };
 		C3C8423F2993F6940068BB15 /* NewScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423E2993F6940068BB15 /* NewScamModel.swift */; };
-		C3C8424129940A450068BB15 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8424029940A450068BB15 /* MainViewModel.swift */; };
 		C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8424229940A5A0068BB15 /* MainModel.swift */; };
 		C3C842452996797C0068BB15 /* NewScamModelDefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C842442996797C0068BB15 /* NewScamModelDefaultValues.swift */; };
 		C3F2F5862986CDCD005436CB /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F5852986CDCD005436CB /* FancyScrollView */; };
 		C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F58B2987D552005436CB /* SwiftUICharts */; };
-		C3F2F5B329881C2E005436CB /* EditScamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B229881C2E005436CB /* EditScamViewModel.swift */; };
 		C3F2F5B529882039005436CB /* StatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B429882039005436CB /* StatisticViewModel.swift */; };
 		C3F2F5B729885DD4005436CB /* NavigationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B629885DD4005436CB /* NavigationTheme.swift */; };
 		C3F2F5D8298B3C9D005436CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F2F5DA298B3C9D005436CB /* Localizable.strings */; };
@@ -69,13 +68,12 @@
 		C3372A6C29919F52008DF8DE /* PowerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerColor.swift; sourceTree = "<group>"; };
 		C3372A722991BFA6008DF8DE /* TextModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifiers.swift; sourceTree = "<group>"; };
 		C3372A742991C4F5008DF8DE /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
+		C357F437299841D0007CE050 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamViewModel.swift; sourceTree = "<group>"; };
 		C3C8423E2993F6940068BB15 /* NewScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamModel.swift; sourceTree = "<group>"; };
-		C3C8424029940A450068BB15 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C3C8424229940A5A0068BB15 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		C3C842442996797C0068BB15 /* NewScamModelDefaultValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamModelDefaultValues.swift; sourceTree = "<group>"; };
-		C3F2F5B229881C2E005436CB /* EditScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScamViewModel.swift; sourceTree = "<group>"; };
 		C3F2F5B429882039005436CB /* StatisticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
 		C3F2F5B629885DD4005436CB /* NavigationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTheme.swift; sourceTree = "<group>"; };
 		C3F2F5D9298B3C9D005436CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 				C3F905AE2983366B00C2E649 /* EditDescription.swift */,
 				BB705C45295C891E006585BB /* EditScam.swift */,
 				C39356602982E7410006DCAF /* Statistics.swift */,
-				C3F2F5B229881C2E005436CB /* EditScamViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,9 +183,9 @@
 		C3C8423B2993E3F60068BB15 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C3F2F5B429882039005436CB /* StatisticViewModel.swift */,
+				C357F437299841D0007CE050 /* MainViewModel.swift */,
 				C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */,
-				C3C8424029940A450068BB15 /* MainViewModel.swift */,
+				C3F2F5B429882039005436CB /* StatisticViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -303,7 +300,6 @@
 				BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */,
 				C3C842452996797C0068BB15 /* NewScamModelDefaultValues.swift in Sources */,
 				BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */,
-				C3C8424129940A450068BB15 /* MainViewModel.swift in Sources */,
 				BB705C46295C891E006585BB /* EditScam.swift in Sources */,
 				BBF70625294CF54B006DA73A /* Persistence.swift in Sources */,
 				BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */,
@@ -313,10 +309,10 @@
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AddCustomType.swift in Sources */,
 				C3372A752991C4F5008DF8DE /* ImageModifier.swift in Sources */,
-				C3F2F5B329881C2E005436CB /* EditScamViewModel.swift in Sources */,
 				C3F2F5B529882039005436CB /* StatisticViewModel.swift in Sources */,
 				C3F905AF2983366B00C2E649 /* EditDescription.swift in Sources */,
 				BBFA46802954DECE009E9E9A /* Scam+CoreDataProperties.swift in Sources */,
+				C357F438299841D0007CE050 /* MainViewModel.swift in Sources */,
 				BBD7FD602970C40B006679BF /* DismissKeyboard.swift in Sources */,
 				BBF70637294CF835006DA73A /* NewScam.swift in Sources */,
 				BBF7062A294CF54B006DA73A /* MainView.swift in Sources */,

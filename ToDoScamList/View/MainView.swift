@@ -10,12 +10,11 @@ import CoreData
 
 struct MainView: View {
     @ObservedObject var stat = StatisticModel()
-    @ObservedObject var edit = EditScamModel()
     @StateObject var newScamViewModel = NewScamViewModel()
+    @StateObject var sort = MainViewModel()
     @State private var imageIsShown = false
     @State private var mdIsShown = false
     @State private var editIsShown = false
-    @State private var pickerSelection = 1
     @State private var image: Data = .init(count: 0)
     @State private var indexOfImage = 0
     @State private var showImage = Image("Scam")
@@ -24,7 +23,7 @@ struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Scam.entity(), sortDescriptors: []) var entity: FetchedResults<Scam>
     var sortedScams: [Scam] {
-        switch pickerSelection {
+        switch sort.pickerSelection {
         case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
         case(2): return entity.sorted(by: {$0.title < $1.title})
         case(3): return entity.sorted(by: {$0.power > $1.power})
@@ -42,7 +41,7 @@ struct MainView: View {
         ZStack {
             NavigationView {
                 List {
-                    ForEach(sortedScams, id: \.self) { item in
+                    ForEach(sortedScams) { item in
                         ZStack {
                             newOrSystemImage(item: item)
                                 .resizable()
@@ -76,7 +75,7 @@ struct MainView: View {
                         .frame(maxWidth: .infinity)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive, action: {
-                                if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
+                                if let unwrapped = sortedScams.firstIndex(of: item) {sort.indexOfEditScam = unwrapped}
                                 deleteScam(item: item)
                             }) {
                                 Label("Delete", systemImage: "trash")
@@ -84,9 +83,9 @@ struct MainView: View {
                         }
                         .swipeActions(edge: .leading) {
                             Button {
-                                edit.editInput = item.title
-                                edit.editpower = item.power
-                                if let unwrapped = sortedScams.firstIndex(of: item) {edit.indexOfEditScam = unwrapped}
+                                sort.editInput = item.title
+                                sort.editpower = item.power
+                                if let unwrapped = sortedScams.firstIndex(of: item) {sort.indexOfEditScam = unwrapped}
                                 withAnimation(.spring()) {
                                     editIsShown.toggle()
                                 }
@@ -97,13 +96,11 @@ struct MainView: View {
                         }
                     }
                     .onChange(of: editIsShown) { _ in
-                        sortedScams[edit.indexOfEditScam].title = edit.editInput
-                        sortedScams[edit.indexOfEditScam].power = edit.editpower
-                        try? viewContext.save()
+                        sort.onChangeEditScam()
                     }
                 }
                 .navigationBarTitle(Text("Scam List"))
-                .navigationBarItems(leading: Picker("Select number", selection: $pickerSelection) {
+                .navigationBarItems(leading: Picker("Select number", selection: $sort.pickerSelection) {
                     Text("Сортировка по дате").tag(1)
                     Text("Сортировка по алфавиту").tag(2)
                     Text("Сортировка по силе").tag(3)
@@ -132,7 +129,7 @@ struct MainView: View {
                         editIsShown = false
                     }
             }
-            EditScam(isShown: $editIsShown, isCanceled: $edit.editIsCanceled, text: $edit.editInput, power: $edit.editpower)
+            EditScam(isShown: $editIsShown, isCanceled: $sort.editIsCanceled, text: $sort.editInput, power: $sort.editpower)
         }
         .environment(\.colorScheme, .light)
     }
@@ -196,5 +193,6 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
             .previewInterfaceOrientation(.portrait)
+            .environmentObject(MainViewModel())
     }
 }
