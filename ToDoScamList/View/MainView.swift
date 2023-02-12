@@ -9,15 +9,20 @@ import SwiftUI
 import CoreData
 
 struct MainView: View {
-    @ObservedObject var stat = StatisticModel()
+    
     @StateObject var newScamViewModel = NewScamViewModel()
     @StateObject var viewModel = MainViewModel()
-    @State private var mdIsShown = false
-    @State private var image: Data = .init(count: 0)
-    @State private var indexOfMoreDetailed = 0
     @GestureState private var scale: CGFloat = 1.0
 //    let viewContext = PersistenceController.shared.container.viewContext
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Scam")
+//    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Scam")
+    
+    var powerColor = PowerColor()
+    init() {
+        NavigationTheme.navigationBarColors(background: .systemOrange, titleColor: .white)
+    }
+    
+    
+    
     @FetchRequest(entity: Scam.entity(), sortDescriptors: []) var entity: FetchedResults<Scam>
     var sortedScams: [Scam] {
         switch viewModel.pickerSelection {
@@ -27,12 +32,6 @@ struct MainView: View {
         case(4): return entity.sorted(by: {$0.type > $1.type})
         default: return []
         }
-    }
-    
-    let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
-    var powerColor = PowerColor()
-    init() {
-        NavigationTheme.navigationBarColors(background: .systemOrange, titleColor: .white)
     }
     var body: some View {
         ZStack {
@@ -51,18 +50,9 @@ struct MainView: View {
                                 }
                             cardScamView(item: item)
                                 .onTapGesture {
-                                    if let unwrapped = sortedScams.firstIndex(of: item) {indexOfMoreDetailed = unwrapped}
-                                    if let unwrapped = sortedScams[indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
-                                    mdIsShown.toggle()
-                                    concurrentQueue.async {
-                                        stat.globalStat(scam: viewModel.sortedScams(), index: indexOfMoreDetailed)
-                                    }
-                                    concurrentQueue.async {
-                                        stat.monthStat(scam: viewModel.sortedScams(), index: indexOfMoreDetailed)
-                                    }
-                                    concurrentQueue.async {
-                                        stat.weekStat(scam: viewModel.sortedScams(), index: indexOfMoreDetailed)
-                                    }
+                                    viewModel.findIndexForMdView(item: item)
+                                    viewModel.toggleMdIsShown()
+                                   
                                 }
                         }
                         .frame(maxWidth: .infinity)
@@ -106,8 +96,8 @@ struct MainView: View {
                 .sheet(isPresented: $viewModel.imageIsShown, content: {
                     ShowImage(image: $viewModel.showImage)
                 })
-                .fullScreenCover(isPresented: $mdIsShown, content: {
-                    MoreDetailed(id: $stat.mDID, title: $stat.mDTitle, type: $stat.mDType, image: $stat.mDImage, description: $stat.mDDescription, allPower: $stat.mDallPower, averagePowerOfAll: $stat.mDaveragePowerOfAll, averagePowerSameType: $stat.mDaveragePowerSameType, mostFrequentTypeCount: $stat.mDmostFrequentTypeCount, mostFrequentType: $stat.mDmostFrequentType, sameTypeCount: $stat.mDSameTypeCount, last30dayPower: $stat.mDlast30dayPower, last30daySameTypeCount: $stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $stat.mDcurrentWeekSameTypeCount, currentWeekPower: $stat.mDcurrentWeekPower, oneWeekAgoPower: $stat.mDoneWeekAgoPower, twoWeeksAgoPower: $stat.mDtwoWeeksAgoPower, threeWeeksAgoPower: $stat.mDthreeWeeksAgoPower, fourWeeksAgoPower: $stat.mDfourWeeksAgoPower, fiveWeeksAgoPower: $stat.mDfiveWeeksAgoPower, eachTypeCount: $stat.mDeachTypeCount, allTypes: $stat.mDallTypes)})
+                .fullScreenCover(isPresented: $viewModel.model.mdIsShown, content: {
+                    MoreDetailed(id: $viewModel.stat.mDID, title: $viewModel.stat.mDTitle, type: $viewModel.stat.mDType, image: $viewModel.stat.mDImage, description: $viewModel.stat.mDDescription, allPower: $viewModel.stat.mDallPower, averagePowerOfAll: $viewModel.stat.mDaveragePowerOfAll, averagePowerSameType: $viewModel.stat.mDaveragePowerSameType, mostFrequentTypeCount: $viewModel.stat.mDmostFrequentTypeCount, mostFrequentType: $viewModel.stat.mDmostFrequentType, sameTypeCount: $viewModel.stat.mDSameTypeCount, last30dayPower: $viewModel.stat.mDlast30dayPower, last30daySameTypeCount: $viewModel.stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $viewModel.stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $viewModel.stat.mDcurrentWeekSameTypeCount, currentWeekPower: $viewModel.stat.mDcurrentWeekPower, oneWeekAgoPower: $viewModel.stat.mDoneWeekAgoPower, twoWeeksAgoPower: $viewModel.stat.mDtwoWeeksAgoPower, threeWeeksAgoPower: $viewModel.stat.mDthreeWeeksAgoPower, fourWeeksAgoPower: $viewModel.stat.mDfourWeeksAgoPower, fiveWeeksAgoPower: $viewModel.stat.mDfiveWeeksAgoPower, eachTypeCount: $viewModel.stat.mDeachTypeCount, allTypes: $viewModel.stat.mDallTypes)})
             }
             if viewModel.model.editIsShown == true {
                 Text(" ")

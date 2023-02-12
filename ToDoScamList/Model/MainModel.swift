@@ -8,4 +8,6 @@
 import Foundation
 struct MainModel {
     var editIsShown = false
+    var mdIsShown = false
+    var indexOfMoreDetailed = 0
 }
