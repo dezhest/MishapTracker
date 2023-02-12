@@ -6,4 +6,6 @@
 //
 
 import Foundation
-
+struct MainModel {
+    var editIsShown = false
+}

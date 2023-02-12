@@ -11,19 +11,16 @@ import CoreData
 struct MainView: View {
     @ObservedObject var stat = StatisticModel()
     @StateObject var newScamViewModel = NewScamViewModel()
-    @StateObject var sort = MainViewModel()
-    @State private var imageIsShown = false
+    @StateObject var viewModel = MainViewModel()
     @State private var mdIsShown = false
-    @State private var editIsShown = false
     @State private var image: Data = .init(count: 0)
-    @State private var indexOfImage = 0
-    @State private var showImage = Image("Scam")
     @State private var indexOfMoreDetailed = 0
     @GestureState private var scale: CGFloat = 1.0
-    @Environment(\.managedObjectContext) private var viewContext
+//    let viewContext = PersistenceController.shared.container.viewContext
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Scam")
     @FetchRequest(entity: Scam.entity(), sortDescriptors: []) var entity: FetchedResults<Scam>
     var sortedScams: [Scam] {
-        switch sort.pickerSelection {
+        switch viewModel.pickerSelection {
         case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
         case(2): return entity.sorted(by: {$0.title < $1.title})
         case(3): return entity.sorted(by: {$0.power > $1.power})
@@ -43,18 +40,14 @@ struct MainView: View {
                 List {
                     ForEach(sortedScams) { item in
                         ZStack {
-                            newOrSystemImage(item: item)
+                            viewModel.newOrSystemImage(item: item)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 60, height: 60)
                                 .clipShape(Circle())
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .onTapGesture {
-                                    if item.imageD != Data() {
-                                        if let unwrapped = sortedScams.firstIndex(of: item) {indexOfImage = unwrapped}
-                                        showImage = Image(uiImage: UIImage(data: sortedScams[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
-                                        self.imageIsShown.toggle()
-                                    }
+                                    viewModel.showImage(item: item)
                                 }
                             cardScamView(item: item)
                                 .onTapGesture {
@@ -62,32 +55,29 @@ struct MainView: View {
                                     if let unwrapped = sortedScams[indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
                                     mdIsShown.toggle()
                                     concurrentQueue.async {
-                                        stat.globalStat(scam: sortedScams, index: indexOfMoreDetailed)
+                                        stat.globalStat(scam: viewModel.sortedScams(), index: indexOfMoreDetailed)
                                     }
                                     concurrentQueue.async {
-                                        stat.monthStat(scam: sortedScams, index: indexOfMoreDetailed)
+                                        stat.monthStat(scam: viewModel.sortedScams(), index: indexOfMoreDetailed)
                                     }
                                     concurrentQueue.async {
-                                        stat.weekStat(scam: sortedScams, index: indexOfMoreDetailed)
+                                        stat.weekStat(scam: viewModel.sortedScams(), index: indexOfMoreDetailed)
                                     }
                                 }
                         }
                         .frame(maxWidth: .infinity)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive, action: {
-                                if let unwrapped = sortedScams.firstIndex(of: item) {sort.indexOfEditScam = unwrapped}
-                                deleteScam(item: item)
+                                viewModel.deleteScam(item: item)
                             }) {
                                 Label("Delete", systemImage: "trash")
                             }
                         }
                         .swipeActions(edge: .leading) {
                             Button {
-                                sort.editInput = item.title
-                                sort.editpower = item.power
-                                if let unwrapped = sortedScams.firstIndex(of: item) {sort.indexOfEditScam = unwrapped}
+                                viewModel.placeholderTextField(item: item)
                                 withAnimation(.spring()) {
-                                    editIsShown.toggle()
+                                    viewModel.toggleEditIsShown()
                                 }
                             } label: {
                                 Label("Edit", systemImage: "pencil")
@@ -95,12 +85,12 @@ struct MainView: View {
                             .tint(.green)
                         }
                     }
-                    .onChange(of: editIsShown) { _ in
-                        sort.onChangeEditScam()
+                    .onChange(of: viewModel.model.editIsShown) { _ in
+                            viewModel.onChangeEditScam()
                     }
                 }
                 .navigationBarTitle(Text("Scam List"))
-                .navigationBarItems(leading: Picker("Select number", selection: $sort.pickerSelection) {
+                .navigationBarItems(leading: Picker("Select number", selection: $viewModel.pickerSelection) {
                     Text("Сортировка по дате").tag(1)
                     Text("Сортировка по алфавиту").tag(2)
                     Text("Сортировка по силе").tag(3)
@@ -113,37 +103,27 @@ struct MainView: View {
                 .fullScreenCover(isPresented: $newScamViewModel.newScamModel.newScamIsShown) {
                     NewScam()
                 }
-                .sheet(isPresented: $imageIsShown, content: {
-                    ShowImage(image: $showImage)
+                .sheet(isPresented: $viewModel.imageIsShown, content: {
+                    ShowImage(image: $viewModel.showImage)
                 })
                 .fullScreenCover(isPresented: $mdIsShown, content: {
                     MoreDetailed(id: $stat.mDID, title: $stat.mDTitle, type: $stat.mDType, image: $stat.mDImage, description: $stat.mDDescription, allPower: $stat.mDallPower, averagePowerOfAll: $stat.mDaveragePowerOfAll, averagePowerSameType: $stat.mDaveragePowerSameType, mostFrequentTypeCount: $stat.mDmostFrequentTypeCount, mostFrequentType: $stat.mDmostFrequentType, sameTypeCount: $stat.mDSameTypeCount, last30dayPower: $stat.mDlast30dayPower, last30daySameTypeCount: $stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $stat.mDcurrentWeekSameTypeCount, currentWeekPower: $stat.mDcurrentWeekPower, oneWeekAgoPower: $stat.mDoneWeekAgoPower, twoWeeksAgoPower: $stat.mDtwoWeeksAgoPower, threeWeeksAgoPower: $stat.mDthreeWeeksAgoPower, fourWeeksAgoPower: $stat.mDfourWeeksAgoPower, fiveWeeksAgoPower: $stat.mDfiveWeeksAgoPower, eachTypeCount: $stat.mDeachTypeCount, allTypes: $stat.mDallTypes)})
             }
-            if editIsShown == true {
+            if viewModel.model.editIsShown == true {
                 Text(" ")
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                     .background(Color.black)
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.8)
                     .onTapGesture{
-                        editIsShown = false
+                        viewModel.model.editIsShown = false
                     }
             }
-            EditScam(isShown: $editIsShown, isCanceled: $sort.editIsCanceled, text: $sort.editInput, power: $sort.editpower)
+            EditScam(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.editIsCanceled, text: $viewModel.editInput, power: $viewModel.editpower)
         }
         .environment(\.colorScheme, .light)
     }
-    func newOrSystemImage(item: Scam) -> Image {
-        if item.imageD != Data() {
-            return Image(uiImage: UIImage(data: item.imageD ?? Data()) ?? UIImage())
-        } else {
-            return Image("Scam")
-        }
-    }
-    func deleteScam(item: Scam) {
-        viewContext.delete(item)
-        try? viewContext.save()
-    }
+
     @ViewBuilder
     private func cardScamView(item: Scam) -> some View {
         ZStack {
