@@ -9,18 +9,15 @@ import CoreData
 import Foundation
 
 class CoreDataManager {
-    
-    // Singleton
+
     static let instance = CoreDataManager()
     
     private init() {}
     
-    // Entity for Name
     func entityForName(entityName: String) -> NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: entityName, in: self.managedObjectContext)!
     }
 
-    // Fetched Results Controller for Entity NameNSManageObjectContext
     func fetchedResultsController(entityName: String, keyForSort: String) -> NSFetchedResultsController<NSFetchRequestResult> {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)

@@ -12,7 +12,7 @@ import CoreData
 
 class MainViewModel: ObservableObject {
     @Published var model = MainModel()
-    @ObservedObject var stat = StatisticModel()
+    @ObservedObject var stat = StatisticComputing()
     let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
     let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
     

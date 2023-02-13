@@ -186,6 +186,5 @@ struct MoreDetailed: View {
 struct MoreDetailed_Previews: PreviewProvider {
     static var previews: some View {
         MoreDetailed(id: .constant(ObjectIdentifier(AnyObject.self)), title: .constant(""), type: .constant(""), image: .constant(Data()), description: .constant(""), allPower: .constant(0.0), averagePowerOfAll: .constant(0.0), averagePowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), averagePowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), oneWeekAgoPower: .constant(0), twoWeeksAgoPower: .constant(0), threeWeeksAgoPower: .constant(0), fourWeeksAgoPower: .constant(0), fiveWeeksAgoPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

@@ -10,7 +10,6 @@ import CoreData
 
 @main
 struct ToDoScamListApp: App {
-    let persistenceController = PersistenceController.shared
     @StateObject var main = MainViewModel()
     var body: some Scene {
         WindowGroup {

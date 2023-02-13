@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class StatisticModel: ObservableObject {
+final class StatisticComputing: ObservableObject {
     @Published var name = ""
     @Published var power: Double = 0
     @Published var selectedDate = Date()
