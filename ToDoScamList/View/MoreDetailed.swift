@@ -117,7 +117,6 @@ struct MoreDetailed: View {
                             let editScam = results[findIndex()] as NSManagedObject
                             editScam.setValue(description, forKey: "scamDescription")
                             CoreDataManager.instance.saveContext()
-                            print(editScam)
                         } catch {
                             let saveError = error as NSError
                             print(saveError)

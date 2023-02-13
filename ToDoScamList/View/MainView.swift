@@ -21,7 +21,7 @@ struct MainView: View {
         ZStack {
             NavigationView {
                 List {
-                    ForEach(viewModel.sortedScams(), id: \.self) { item in
+                    ForEach(viewModel.sortedScams, id: \.self) { item in
                         ZStack {
                             viewModel.newOrSystemImage(item: item)
                                 .resizable()
@@ -60,7 +60,9 @@ struct MainView: View {
                         }
                     }
                     .onChange(of: viewModel.model.editIsShown) { _ in
+                        if !viewModel.model.editIsShown {
                             viewModel.onChangeEditScam()
+                        }
                     }
                 }
                 .navigationBarTitle(Text("Scam List"))

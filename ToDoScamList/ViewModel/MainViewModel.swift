@@ -19,15 +19,14 @@ class MainViewModel: ObservableObject {
     func fetchData() -> [ScamCoreData] {
         do {
             let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
-            return results.sorted(by: {$0.selectedDate > $1.selectedDate})
+            return results
         }
         catch {
             print("Error fetching data")
             return []
         }
     }
-                                              
-    func sortedScams() -> [ScamCoreData] {
+        var sortedScams: [ScamCoreData] {
         switch model.pickerSelection {
         case(1): return fetchData().sorted(by: {$0.selectedDate > $1.selectedDate})
         case(2): return fetchData().sorted(by: {$0.title < $1.title})
@@ -37,29 +36,29 @@ class MainViewModel: ObservableObject {
         }
     }
 
-    
     func onChangeEditScam() {
-        sortedScams()[model.indexOfEditScam].title = model.editInput
-        sortedScams()[model.indexOfEditScam].power = model.editpower
-        CoreDataManager.instance.saveContext()
+            let editScam = sortedScams[model.indexOfEditScam] as NSManagedObject
+            editScam.setValue(model.editInput, forKey: "title")
+            editScam.setValue(model.editpower, forKey: "power")
+            CoreDataManager.instance.saveContext()
     }
     
     func placeholderTextField(item: ScamCoreData) {
         model.editInput = item.title
         model.editpower = item.power
-        if let unwrapped = sortedScams().firstIndex(of: item) {model.indexOfEditScam = unwrapped}
+        if let unwrapped = sortedScams.firstIndex(of: item) {model.indexOfEditScam = unwrapped}
     }
     
     func deleteScam(item: ScamCoreData) {
-        if let unwrapped = sortedScams().firstIndex(of: item) {model.indexOfEditScam = unwrapped}
+        if let unwrapped = sortedScams.firstIndex(of: item) {model.indexOfEditScam = unwrapped}
         CoreDataManager.instance.managedObjectContext.delete(item)
         CoreDataManager.instance.saveContext()
     }
     
     func showImage(item: ScamCoreData) {
         if item.imageD != Data() {
-            if let unwrapped = sortedScams().firstIndex(of: item) {model.indexOfImage = unwrapped}
-            model.showImage = Image(uiImage: UIImage(data: sortedScams()[model.indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
+            if let unwrapped = sortedScams.firstIndex(of: item) {model.indexOfImage = unwrapped}
+            model.showImage = Image(uiImage: UIImage(data: sortedScams[model.indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
             model.imageIsShown.toggle()
         }
     }
@@ -85,19 +84,19 @@ class MainViewModel: ObservableObject {
     }
     
     func findIndexForMdView(item: ScamCoreData) {
-        if let unwrapped = sortedScams().firstIndex(of: item) {model.indexOfMoreDetailed = unwrapped}
-        if let unwrapped = sortedScams()[model.indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
+        if let unwrapped = sortedScams.firstIndex(of: item) {model.indexOfMoreDetailed = unwrapped}
+        if let unwrapped = sortedScams[model.indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
     }
     
     func computedStatistic() {
         concurrentQueue.async {
-            self.stat.globalStat(scam: self.sortedScams(), index: self.model.indexOfMoreDetailed)
+            self.stat.globalStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
-            self.stat.monthStat(scam: self.sortedScams(), index: self.model.indexOfMoreDetailed)
+            self.stat.monthStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
-            self.stat.weekStat(scam: self.sortedScams(), index: self.model.indexOfMoreDetailed)
+            self.stat.weekStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
     }
 }
