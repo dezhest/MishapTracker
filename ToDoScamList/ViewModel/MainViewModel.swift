@@ -26,7 +26,7 @@ class MainViewModel: ObservableObject {
             return []
         }
     }
-        var sortedScams: [ScamCoreData] {
+    var sortedScams: [ScamCoreData] {
         switch model.pickerSelection {
         case(1): return fetchData().sorted(by: {$0.selectedDate > $1.selectedDate})
         case(2): return fetchData().sorted(by: {$0.title < $1.title})
@@ -35,12 +35,17 @@ class MainViewModel: ObservableObject {
         default: return []
         }
     }
+    func updateView() {
+        model.pickerSelection += 1
+        model.pickerSelection -= 1
+    }
 
     func onChangeEditScam() {
             let editScam = sortedScams[model.indexOfEditScam] as NSManagedObject
             editScam.setValue(model.editInput, forKey: "title")
             editScam.setValue(model.editpower, forKey: "power")
             CoreDataManager.instance.saveContext()
+            updateView()
     }
     
     func placeholderTextField(item: ScamCoreData) {

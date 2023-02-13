@@ -42,6 +42,7 @@ struct MoreDetailed: View {
     @State private var editIsCanceled = false
     @State private var editInput = ""
     @Environment(\.presentationMode) var presentationMode
+    @StateObject var mainViewModel = MainViewModel()
     let screenSize = UIScreen.main.bounds
     let textLimit = 280
     let coloredNavAppearance = UINavigationBarAppearance()
@@ -117,6 +118,7 @@ struct MoreDetailed: View {
                             let editScam = results[findIndex()] as NSManagedObject
                             editScam.setValue(description, forKey: "scamDescription")
                             CoreDataManager.instance.saveContext()
+                            mainViewModel.updateView()
                         } catch {
                             let saveError = error as NSError
                             print(saveError)
