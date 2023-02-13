@@ -18,7 +18,6 @@ struct AddCustomType: View {
     var onDone: (String) -> Void = { _ in }
     var onCancel: () -> Void = { }
     @State private var alertTextCountError = false
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Scam.selectedDate, ascending: false)]) var entity: FetchedResults<Scam>
     var body: some View {
         VStack(spacing: 5) {
             ZStack {

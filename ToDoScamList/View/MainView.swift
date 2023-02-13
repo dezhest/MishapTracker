@@ -13,30 +13,15 @@ struct MainView: View {
     @StateObject var newScamViewModel = NewScamViewModel()
     @StateObject var viewModel = MainViewModel()
     @GestureState private var scale: CGFloat = 1.0
-    @ObservedObject var coreModel = CoreDataViewModel()
-    
     var powerColor = PowerColor()
     init() {
         NavigationTheme.navigationBarColors(background: .systemOrange, titleColor: .white)
-    }
-    
-    
-    
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: []) var entity: FetchedResults<Scam>
-    var sortedScams: [Scam] {
-        switch viewModel.pickerSelection {
-        case(1): return entity.sorted(by: {$0.selectedDate > $1.selectedDate})
-        case(2): return entity.sorted(by: {$0.title < $1.title})
-        case(3): return entity.sorted(by: {$0.power > $1.power})
-        case(4): return entity.sorted(by: {$0.type > $1.type})
-        default: return []
-        }
     }
     var body: some View {
         ZStack {
             NavigationView {
                 List {
-                    ForEach(sortedScams) { item in
+                    ForEach(viewModel.sortedScams(), id: \.self) { item in
                         ZStack {
                             viewModel.newOrSystemImage(item: item)
                                 .resizable()
@@ -52,8 +37,6 @@ struct MainView: View {
                                     viewModel.findIndexForMdView(item: item)
                                     viewModel.toggleMdIsShown()
                                     viewModel.computedStatistic()
-                                    coreModel.unsortedScams()
-                                    print(coreModel.scams)
                                 }
                         }
                         .frame(maxWidth: .infinity)
@@ -81,7 +64,7 @@ struct MainView: View {
                     }
                 }
                 .navigationBarTitle(Text("Scam List"))
-                .navigationBarItems(leading: Picker("Select number", selection: $viewModel.pickerSelection) {
+                .navigationBarItems(leading: Picker("Select number", selection: $viewModel.model.pickerSelection) {
                     Text("Сортировка по дате").tag(1)
                     Text("Сортировка по алфавиту").tag(2)
                     Text("Сортировка по силе").tag(3)
@@ -94,8 +77,8 @@ struct MainView: View {
                 .fullScreenCover(isPresented: $newScamViewModel.newScamModel.newScamIsShown) {
                     NewScam()
                 }
-                .sheet(isPresented: $viewModel.imageIsShown, content: {
-                    ShowImage(image: $viewModel.showImage)
+                .sheet(isPresented: $viewModel.model.imageIsShown, content: {
+                    ShowImage(image: $viewModel.model.showImage)
                 })
                 .fullScreenCover(isPresented: $viewModel.model.mdIsShown, content: {
                     MoreDetailed(id: $viewModel.stat.mDID, title: $viewModel.stat.mDTitle, type: $viewModel.stat.mDType, image: $viewModel.stat.mDImage, description: $viewModel.stat.mDDescription, allPower: $viewModel.stat.mDallPower, averagePowerOfAll: $viewModel.stat.mDaveragePowerOfAll, averagePowerSameType: $viewModel.stat.mDaveragePowerSameType, mostFrequentTypeCount: $viewModel.stat.mDmostFrequentTypeCount, mostFrequentType: $viewModel.stat.mDmostFrequentType, sameTypeCount: $viewModel.stat.mDSameTypeCount, last30dayPower: $viewModel.stat.mDlast30dayPower, last30daySameTypeCount: $viewModel.stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $viewModel.stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $viewModel.stat.mDcurrentWeekSameTypeCount, currentWeekPower: $viewModel.stat.mDcurrentWeekPower, oneWeekAgoPower: $viewModel.stat.mDoneWeekAgoPower, twoWeeksAgoPower: $viewModel.stat.mDtwoWeeksAgoPower, threeWeeksAgoPower: $viewModel.stat.mDthreeWeeksAgoPower, fourWeeksAgoPower: $viewModel.stat.mDfourWeeksAgoPower, fiveWeeksAgoPower: $viewModel.stat.mDfiveWeeksAgoPower, eachTypeCount: $viewModel.stat.mDeachTypeCount, allTypes: $viewModel.stat.mDallTypes)})
@@ -110,13 +93,13 @@ struct MainView: View {
                         viewModel.model.editIsShown = false
                     }
             }
-            EditScam(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.editIsCanceled, text: $viewModel.editInput, power: $viewModel.editpower)
+            EditScam(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.model.editIsCanceled, text: $viewModel.model.editInput, power: $viewModel.model.editpower)
         }
         .environment(\.colorScheme, .light)
     }
 
     @ViewBuilder
-    private func cardScamView(item: Scam) -> some View {
+    private func cardScamView(item: ScamCoreData) -> some View {
         ZStack {
             VStack(alignment: .leading, spacing: 0) {
                 Text(item.title)

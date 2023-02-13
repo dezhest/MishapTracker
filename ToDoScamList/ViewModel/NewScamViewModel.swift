@@ -12,7 +12,6 @@ import SwiftUI
 
 final class NewScamViewModel: ObservableObject {
     @Published var newScamModel = NewScamModel()
-    private var viewContext: NSManagedObjectContext = PersistenceController.shared.container.viewContext
     let textLimit = 280
     var viewDismissal = PassthroughSubject<Bool, Never>()
     private var shouldDismissView = false {
@@ -65,18 +64,14 @@ final class NewScamViewModel: ObservableObject {
     }
     
     func saveToCoreData() {
-        let scamInfo = Scam(context: viewContext)
+        let scamInfo = ScamCoreData()
         scamInfo.type = newScamModel.type
         scamInfo.power = newScamModel.power
         scamInfo.selectedDate = newScamModel.selectedDate
         scamInfo.imageD = newScamModel.imageData
         scamInfo.title = newScamModel.name
         scamInfo.scamDescription = newScamModel.description
-        do {
-            try viewContext.save()
-        } catch {
-            print("whoops \(error.localizedDescription)")
-        }
+        CoreDataManager.instance.saveContext()
     }
     
     func checkNameCount() -> Bool {

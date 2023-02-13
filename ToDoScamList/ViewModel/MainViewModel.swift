@@ -11,66 +11,60 @@ import CoreData
 
 
 class MainViewModel: ObservableObject {
-    @Published var editIsCanceled = false
-    @Published var editInput = ""
-    @Published var editpower: Double = 0
-    @Published var indexOfEditScam = 0
-    @Published var pickerSelection = 1
-    @Published var indexOfImage = 0
-    @Published var showImage = Image("Scam")
-    @Published var imageIsShown = false
     @Published var model = MainModel()
     @ObservedObject var stat = StatisticModel()
     let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
+    let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
     
-    
-    let viewContext = PersistenceController.shared.container.viewContext
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Scam")
-    func unsortedScams() -> [Scam] {
+    func fetchData() -> [ScamCoreData] {
         do {
-            let results = try viewContext.fetch(fetchRequest)
-            let entities = results as! [Scam]
-            switch pickerSelection {
-            case(1): return entities.sorted(by: {$0.selectedDate > $1.selectedDate})
-            case(2): return entities.sorted(by: {$0.title < $1.title})
-            case(3): return entities.sorted(by: {$0.power > $1.power})
-            case(4): return entities.sorted(by: {$0.type > $1.type})
-            default: return []
-            }
+            let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
+            return results.sorted(by: {$0.selectedDate > $1.selectedDate})
         }
         catch {
-            print("error")
+            print("Error fetching data")
             return []
         }
     }
+                                              
+    func sortedScams() -> [ScamCoreData] {
+        switch model.pickerSelection {
+        case(1): return fetchData().sorted(by: {$0.selectedDate > $1.selectedDate})
+        case(2): return fetchData().sorted(by: {$0.title < $1.title})
+        case(3): return fetchData().sorted(by: {$0.power > $1.power})
+        case(4): return fetchData().sorted(by: {$0.type > $1.type})
+        default: return []
+        }
+    }
+
     
     func onChangeEditScam() {
-        unsortedScams()[indexOfEditScam].title = editInput
-        unsortedScams()[indexOfEditScam].power = editpower
-        try? viewContext.save()
+        sortedScams()[model.indexOfEditScam].title = model.editInput
+        sortedScams()[model.indexOfEditScam].power = model.editpower
+        CoreDataManager.instance.saveContext()
     }
     
-    func placeholderTextField(item: Scam) {
-        editInput = item.title
-        editpower = item.power
-        if let unwrapped = unsortedScams().firstIndex(of: item) {indexOfEditScam = unwrapped}
+    func placeholderTextField(item: ScamCoreData) {
+        model.editInput = item.title
+        model.editpower = item.power
+        if let unwrapped = sortedScams().firstIndex(of: item) {model.indexOfEditScam = unwrapped}
     }
     
-    func deleteScam(item: Scam) {
-        if let unwrapped = unsortedScams().firstIndex(of: item) {indexOfEditScam = unwrapped}
-        viewContext.delete(item)
-        try? viewContext.save()
+    func deleteScam(item: ScamCoreData) {
+        if let unwrapped = sortedScams().firstIndex(of: item) {model.indexOfEditScam = unwrapped}
+        CoreDataManager.instance.managedObjectContext.delete(item)
+        CoreDataManager.instance.saveContext()
     }
     
-    func showImage(item: Scam) {
+    func showImage(item: ScamCoreData) {
         if item.imageD != Data() {
-            if let unwrapped = unsortedScams().firstIndex(of: item) {indexOfImage = unwrapped}
-            showImage = Image(uiImage: UIImage(data: unsortedScams()[indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
-            self.imageIsShown.toggle()
+            if let unwrapped = sortedScams().firstIndex(of: item) {model.indexOfImage = unwrapped}
+            model.showImage = Image(uiImage: UIImage(data: sortedScams()[model.indexOfImage].imageD ?? Data()) ?? UIImage(imageLiteralResourceName: "Scam"))
+            model.imageIsShown.toggle()
         }
     }
     
-    func newOrSystemImage(item: Scam) -> Image {
+    func newOrSystemImage(item: ScamCoreData) -> Image {
         if item.imageD != Data() {
             return Image(uiImage: UIImage(data: item.imageD ?? Data()) ?? UIImage())
         } else {
@@ -90,20 +84,20 @@ class MainViewModel: ObservableObject {
         model.mdIsShown.toggle()
     }
     
-    func findIndexForMdView(item: Scam) {
-        if let unwrapped = unsortedScams().firstIndex(of: item) {model.indexOfMoreDetailed = unwrapped}
-        if let unwrapped = unsortedScams()[model.indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
+    func findIndexForMdView(item: ScamCoreData) {
+        if let unwrapped = sortedScams().firstIndex(of: item) {model.indexOfMoreDetailed = unwrapped}
+        if let unwrapped = sortedScams()[model.indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
     }
     
     func computedStatistic() {
         concurrentQueue.async {
-            self.stat.globalStat(scam: self.unsortedScams(), index: self.model.indexOfMoreDetailed)
+            self.stat.globalStat(scam: self.sortedScams(), index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
-            self.stat.monthStat(scam: self.unsortedScams(), index: self.model.indexOfMoreDetailed)
+            self.stat.monthStat(scam: self.sortedScams(), index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
-            self.stat.weekStat(scam: self.unsortedScams(), index: self.model.indexOfMoreDetailed)
+            self.stat.weekStat(scam: self.sortedScams(), index: self.model.indexOfMoreDetailed)
         }
     }
 }

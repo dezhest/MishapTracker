@@ -9,26 +9,26 @@
 import Foundation
 import CoreData
 
-extension Scam {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Scam> {
-        return NSFetchRequest<Scam>(entityName: "Scam")
-    }
-
-    @NSManaged public var power: Double
-    @NSManaged public var imageD: Data?
-    @NSManaged public var title: String
-    @NSManaged public var selectedDate: Date
-    @NSManaged public var type: String
-    @NSManaged public var typeArray: String
-    @NSManaged public var scamDescription: String
-
-}
-
-extension Scam: Identifiable {
-}
-
-@objc(Scam)
-public class Scam: NSManagedObject {
-    
-}
+//extension Scam {
+//
+//    @nonobjc public class func fetchRequest() -> NSFetchRequest<Scam> {
+//        return NSFetchRequest<Scam>(entityName: "Scam")
+//    }
+//
+//    @NSManaged public var power: Double
+//    @NSManaged public var imageD: Data?
+//    @NSManaged public var title: String
+//    @NSManaged public var selectedDate: Date
+//    @NSManaged public var type: String
+//    @NSManaged public var typeArray: String
+//    @NSManaged public var scamDescription: String
+//
+//}
+//
+//extension Scam: Identifiable {
+//}
+//
+//@objc(Scam)
+//public class Scam: NSManagedObject {
+//
+//}

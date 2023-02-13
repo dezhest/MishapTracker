@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct ToDoScamListApp: App {
@@ -15,9 +16,7 @@ struct ToDoScamListApp: App {
         WindowGroup {
             MainView()
                 .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(main)
-
+                .environment(\.managedObjectContext, CoreDataManager.instance.managedObjectContext)
         }
     }
 }

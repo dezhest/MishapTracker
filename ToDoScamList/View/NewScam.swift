@@ -47,9 +47,6 @@ struct NewScam: View {
                 viewModel.newScamModel.type = viewModel.newScamModel.types[viewModel.newScamModel.types.count - 3]
             })
         }.environment(\.colorScheme, .light)
-//            .onAppear {
-//                self.viewModel.performBusinessLogic()
-//            }
             .onReceive(viewModel.viewDismissal) { shouldDismiss in
                 if shouldDismiss {
                     dismiss()

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FancyScrollView
+import CoreData
 
 struct MoreDetailed: View {
     @Binding var id: ObjectIdentifier
@@ -41,11 +42,10 @@ struct MoreDetailed: View {
     @State private var editIsCanceled = false
     @State private var editInput = ""
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(entity: Scam.entity(), sortDescriptors: []) var entity: FetchedResults<Scam>
     let screenSize = UIScreen.main.bounds
     let textLimit = 280
     let coloredNavAppearance = UINavigationBarAppearance()
+    let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
     var body: some View {
         ZStack {
             Text(" ")
@@ -109,10 +109,20 @@ struct MoreDetailed: View {
                     }
                 }
                 .frame(maxHeight: .infinity)
-                .onChange(of: editIsShown) {_ in
+                .onChange(of: editIsShown) { _ in
                     description = editInput
-                    entity[findIndex()].scamDescription = description
-                    try? viewContext.save()
+                    if !editIsShown {
+                        do {
+                            let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
+                            let editScam = results[findIndex()] as NSManagedObject
+                            editScam.setValue(description, forKey: "scamDescription")
+                            CoreDataManager.instance.saveContext()
+                            print(editScam)
+                        } catch {
+                            let saveError = error as NSError
+                            print(saveError)
+                        }
+                    }
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -157,9 +167,16 @@ struct MoreDetailed: View {
         }
     }
     func findIndex() -> Int {
+        let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
         var index = 0
-        for scam in entity where scam.id == id {
-            if let unwrapped = entity.firstIndex(of: scam) {index = unwrapped}
+        do {
+            let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest) 
+            for scam in results where scam.id == id {
+                if let unwrapped = results.firstIndex(of: scam) {index = unwrapped}
+            }
+        }
+        catch {
+            print("Error fetching data")
         }
         return index
     }
