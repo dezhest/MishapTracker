@@ -13,8 +13,7 @@ struct MainView: View {
     @StateObject var newScamViewModel = NewScamViewModel()
     @StateObject var viewModel = MainViewModel()
     @GestureState private var scale: CGFloat = 1.0
-//    let viewContext = PersistenceController.shared.container.viewContext
-//    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Scam")
+    @ObservedObject var coreModel = CoreDataViewModel()
     
     var powerColor = PowerColor()
     init() {
@@ -52,7 +51,9 @@ struct MainView: View {
                                 .onTapGesture {
                                     viewModel.findIndexForMdView(item: item)
                                     viewModel.toggleMdIsShown()
-                                   
+                                    viewModel.computedStatistic()
+                                    coreModel.unsortedScams()
+                                    print(coreModel.scams)
                                 }
                         }
                         .frame(maxWidth: .infinity)

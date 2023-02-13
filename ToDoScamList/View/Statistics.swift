@@ -201,9 +201,9 @@ struct Statistics: View {
                 BarChartView(data: ChartData(values: [("\(fiveMondayAgo) - \(fourSundayAgo)", Double(fiveWeeksAgoPower)), ("\(fourMondayAgo) - \(threeSundayAgo)", Double(fourWeeksAgoPower)), ("\(threeMondayAgo) - \(twoSundayAgo)", Double(threeWeeksAgoPower)), ("\(twoMondayAgo) - \(oneSundayAgo)", Double(twoWeeksAgoPower)), ("\(oneMondayAgo) - \(lastSunday)", Double(oneWeekAgoPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
-//                PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
-//                    .padding(.top, 15)
-//                    .frame(maxWidth: .infinity, alignment: .bottom)
+                PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
+                    .padding(.top, 15)
+                    .frame(maxWidth: .infinity, alignment: .bottom)
             }
             
         }
