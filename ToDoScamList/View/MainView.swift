@@ -92,7 +92,7 @@ struct MainView: View {
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.8)
                     .onTapGesture{
-                        viewModel.model.editIsShown = false
+                        viewModel.toggleEditIsShown()
                     }
             }
             EditScam(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.model.editIsCanceled, text: $viewModel.model.editInput, power: $viewModel.model.editpower)

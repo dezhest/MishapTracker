@@ -33,20 +33,47 @@ struct MoreDetailed: View {
     @Binding var fiveWeeksAgoPower: Int
     @Binding var eachTypeCount: [Int]
     @Binding var allTypes: [String]
-    @State private var statIsShown = false
-    @State private var statistic = false
-    @State private var general = false
-    @State private var month = false
-    @State private var week = false
-    @State private var editIsShown = false
-    @State private var editIsCanceled = false
-    @State private var editInput = ""
-    @Environment(\.presentationMode) var presentationMode
+    @StateObject var viewModel = MoreDetailedViewModel()
     @StateObject var mainViewModel = MainViewModel()
     let screenSize = UIScreen.main.bounds
     let textLimit = 280
     let coloredNavAppearance = UINavigationBarAppearance()
     let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
+    func saveToData() {
+        if !viewModel.model.editIsShown {
+            do {
+                let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
+                let editScam = results[findIndex()] as NSManagedObject
+                editScam.setValue(description, forKey: "scamDescription")
+                CoreDataManager.instance.saveContext()
+                mainViewModel.updateView()
+            } catch {
+                let saveError = error as NSError
+                print(saveError)
+            }
+        }
+    }
+    func newOrSystemImage() -> Image {
+        if image != Data() {
+            return Image(uiImage: UIImage(data: image) ?? UIImage())
+        } else {
+            return Image("Scam")
+        }
+    }
+    func findIndex() -> Int {
+        let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
+        var index = 0
+        do {
+            let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
+            for scam in results where scam.id == id {
+                if let unwrapped = results.firstIndex(of: scam) {index = unwrapped}
+            }
+        }
+        catch {
+            print("Error fetching data")
+        }
+        return index
+    }
     var body: some View {
         ZStack {
             Text(" ")
@@ -81,7 +108,7 @@ struct MoreDetailed: View {
                             }
                             .padding(.top, 120)
                             .onTapGesture {
-                                editIsShown.toggle()
+                                viewModel.toggleEditIsShown()
                             }
                         } else {
                             ZStack(alignment: .top) {
@@ -98,8 +125,8 @@ struct MoreDetailed: View {
                                     .padding(.trailing, 30)
                                     .offset(y: -30)
                                     .onTapGesture {
-                                        editInput = description
-                                        editIsShown.toggle()
+                                        viewModel.model.editInput = description
+                                        viewModel.toggleEditIsShown()
                                     }
                             }
                             .padding(.top, 120)
@@ -110,39 +137,28 @@ struct MoreDetailed: View {
                     }
                 }
                 .frame(maxHeight: .infinity)
-                .onChange(of: editIsShown) { _ in
-                    description = editInput
-                    if !editIsShown {
-                        do {
-                            let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
-                            let editScam = results[findIndex()] as NSManagedObject
-                            editScam.setValue(description, forKey: "scamDescription")
-                            CoreDataManager.instance.saveContext()
-                            mainViewModel.updateView()
-                        } catch {
-                            let saveError = error as NSError
-                            print(saveError)
-                        }
-                    }
+                .onChange(of: viewModel.model.editIsShown) { _ in
+                    description = viewModel.model.editInput
+                    saveToData()
                 }
                 .frame(maxWidth: .infinity)
             }
                             .environment(\.colorScheme, .dark)
-                            .fullScreenCover(isPresented: $statIsShown) {
+                            .fullScreenCover(isPresented: $viewModel.model.statIsShown) {
                                 Statistics(type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, oneWeekAgoPower: $oneWeekAgoPower, twoWeeksAgoPower: $twoWeeksAgoPower, threeWeeksAgoPower: $threeWeeksAgoPower, fourWeeksAgoPower: $fourWeeksAgoPower, fiveWeeksAgoPower: $fiveWeeksAgoPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)
                             }
-            if editIsShown == true {
+            if viewModel.model.editIsShown == true {
                 Text(" ")
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                     .background(Color.black)
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.8)
                     .onTapGesture{
-                        editIsShown = false
+                        viewModel.model.editIsShown = false
                     }
             }
-            EditDescription(isShown: $editIsShown, isCanceled: $editIsCanceled, text: $editInput)
-            if !editIsShown {
+            EditDescription(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.model.editIsCanceled, text: $viewModel.model.editInput)
+            if !viewModel.model.editIsShown {
                 Text("Статистика")
                     .foregroundColor(.white)
                     .font(.system(size: 18, weight: .bold, design: .default))
@@ -152,34 +168,13 @@ struct MoreDetailed: View {
                     .background(Color(.orange))
                     .cornerRadius(20)
                     .onTapGesture {
-                        statIsShown.toggle()
+                        viewModel.model.statIsShown.toggle()
                     }
                     .frame(maxHeight: screenSize.height, alignment: .bottom)
                     .offset(y: -20)
             }
         }
         .environment(\.colorScheme, .dark)
-    }
-    func newOrSystemImage() -> Image {
-        if image != Data() {
-            return Image(uiImage: UIImage(data: image) ?? UIImage())
-        } else {
-            return Image("Scam")
-        }
-    }
-    func findIndex() -> Int {
-        let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
-        var index = 0
-        do {
-            let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest) 
-            for scam in results where scam.id == id {
-                if let unwrapped = results.firstIndex(of: scam) {index = unwrapped}
-            }
-        }
-        catch {
-            print("Error fetching data")
-        }
-        return index
     }
 }
 

@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct MoreDetailedModel {
+    var statIsShown = false
+    var statistic = false
+    var general = false
+    var month = false
+    var week = false
+    var editIsShown = false
+    var editIsCanceled = false
+    var editInput = ""
+}
