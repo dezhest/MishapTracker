@@ -13,7 +13,7 @@ struct MainView: View {
     @StateObject var newScamViewModel = NewScamViewModel()
     @StateObject var viewModel = MainViewModel()
     @GestureState private var scale: CGFloat = 1.0
-    var powerColor = PowerColor()
+    let powerColor = PowerColor()
     init() {
         NavigationTheme.navigationBarColors(background: .systemOrange, titleColor: .white)
     }

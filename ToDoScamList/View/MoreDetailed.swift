@@ -36,7 +36,6 @@ struct MoreDetailed: View {
     @StateObject var viewModel = MoreDetailedViewModel()
     @StateObject var mainViewModel = MainViewModel()
     let screenSize = UIScreen.main.bounds
-    let textLimit = 280
     let coloredNavAppearance = UINavigationBarAppearance()
     let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
     func saveToData() {

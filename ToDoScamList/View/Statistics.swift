@@ -33,14 +33,14 @@ struct Statistics: View {
     @State private var month = false
     @State private var week = false
     @Environment(\.presentationMode) var presentationMode
-    let today = Date().localDate().getFormattedDate(format: "dd/MM")
-    let lastSunday = Date.today().previous(.sunday).getFormattedDate(format: "dd/MM")
-    let oneSundayAgo = Date.today().previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
-    let twoSundayAgo = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
-    let threeSundayAgo = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
-    let fourSundayAgo = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
-    let fiveSundayAgo = Date.today().previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).previous(.sunday).getFormattedDate(format: "dd/MM")
-    let lastMonday = Date.today().previous(.monday).getFormattedDate(format: "dd/MM")
+    let today = Date.todayDate
+    let lastSunday = Date.lastSunday
+    let oneSundayAgo = Date.oneSundayAgo
+    let twoSundayAgo = Date.twoSundayAgo
+    let threeSundayAgo = Date.threeSundayAgo
+    let fourSundayAgo = Date.fourSundayAgo
+    let fiveSundayAgo = Date.fiveSundayAgo
+    let lastMonday = Date.lastMonday
     let oneMondayAgo = CalendarWeeksAgo().oneWeekAgoDate.getFormattedDate(format: "dd/MM")
     let twoMondayAgo = CalendarWeeksAgo().twoWeeksAgoDate.getFormattedDate(format: "dd/MM")
     let threeMondayAgo = CalendarWeeksAgo().threeWeeksAgoDate.getFormattedDate(format: "dd/MM")

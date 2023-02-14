@@ -14,6 +14,7 @@ final class NewScamViewModel: ObservableObject {
     @Published var newScamModel = NewScamModel()
     let textLimit = 280
     var viewDismissal = PassthroughSubject<Bool, Never>()
+    
     private var shouldDismissView = false {
         didSet {
             viewDismissal.send(shouldDismissView)

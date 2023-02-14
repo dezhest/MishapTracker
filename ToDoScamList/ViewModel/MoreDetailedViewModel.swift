@@ -9,10 +9,11 @@ import Foundation
 import CoreData
 import SwiftUI
 
-class MoreDetailedViewModel: ObservableObject {
+final class MoreDetailedViewModel: ObservableObject {
     @Published var model = MoreDetailedModel()
     @Published var mainViewModel = MainViewModel()
     let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
+    let textLimit = 280
     
     func toggleEditIsShown() {
         model.editIsShown.toggle()
