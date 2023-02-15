@@ -41,11 +41,12 @@ struct Statistics: View {
     let fourSundayAgo = Date.fourSundayAgo
     let fiveSundayAgo = Date.fiveSundayAgo
     let lastMonday = Date.lastMonday
-    let oneMondayAgo = CalendarWeeksAgo().oneWeekAgoDate.getFormattedDate(format: "dd/MM")
-    let twoMondayAgo = CalendarWeeksAgo().twoWeeksAgoDate.getFormattedDate(format: "dd/MM")
-    let threeMondayAgo = CalendarWeeksAgo().threeWeeksAgoDate.getFormattedDate(format: "dd/MM")
-    let fourMondayAgo = CalendarWeeksAgo().fourWeeksAgoDate.getFormattedDate(format: "dd/MM")
-    let fiveMondayAgo = CalendarWeeksAgo().fiveWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    
+    let oneMondayAgo = Date.oneWeekAgoDate.getFormattedDate(format: "dd/MM")
+    let twoMondayAgo = Date.twoWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let threeMondayAgo = Date.threeWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let fourMondayAgo = Date.fourWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let fiveMondayAgo = Date.fiveWeeksAgoDate.getFormattedDate(format: "dd/MM")
     let screenSize = UIScreen.main.bounds
     let pieChartStyle = ChartStyle(backgroundColor: .black, accentColor: .orange, gradientColor: GradientColor(start: .orange, end: .red), textColor: .white, legendTextColor: .white, dropShadowColor: .gray)
     func findPieChartData() -> [PieChartData] {

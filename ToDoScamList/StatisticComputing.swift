@@ -96,7 +96,7 @@ final class StatisticComputing: ObservableObject {
         }
     }
     func monthStat(scam: [ScamCoreData], index: Int) {
-        let last30DayScams = scam.filter({$0.selectedDate > CalendarWeeksAgo().monthAgoDate})
+        let last30DayScams = scam.filter({$0.selectedDate > Date.monthAgoDate})
         let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
         let last30daySameTypeCount = last30DayScams.filter({$0.type == scam[index].type}).count
         let averagePowerOfLast30day = (Double(last30dayPower) / Double(last30DayScams.count)*100).rounded()/100
@@ -108,11 +108,11 @@ final class StatisticComputing: ObservableObject {
     }
     func weekStat(scam: [ScamCoreData], index: Int) {
         let currentWeekScams = scam.filter({$0.selectedDate > Date.today().previous(.monday)})
-        let oneWeekAgoScams = scam.filter({($0.selectedDate > CalendarWeeksAgo().oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
-        let twoWeeksAgoScams = scam.filter({($0.selectedDate > CalendarWeeksAgo().twoWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().oneWeekAgoDate)})
-        let threeWeeksAgoScams = scam.filter({($0.selectedDate > CalendarWeeksAgo().threeWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().twoWeeksAgoDate)})
-        let fourWeeksAgoScams = scam.filter({($0.selectedDate > CalendarWeeksAgo().fourWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().threeWeeksAgoDate)})
-        let fiveWeeksAgoScams = scam.filter({($0.selectedDate > CalendarWeeksAgo().fiveWeeksAgoDate) && ($0.selectedDate < CalendarWeeksAgo().fourWeeksAgoDate)})
+        let oneWeekAgoScams = scam.filter({($0.selectedDate > Date.oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
+        let twoWeeksAgoScams = scam.filter({($0.selectedDate > Date.twoWeeksAgoDate) && ($0.selectedDate < Date.oneWeekAgoDate)})
+        let threeWeeksAgoScams = scam.filter({($0.selectedDate > Date.threeWeeksAgoDate) && ($0.selectedDate < Date.twoWeeksAgoDate)})
+        let fourWeeksAgoScams = scam.filter({($0.selectedDate > Date.fourWeeksAgoDate) && ($0.selectedDate < Date.threeWeeksAgoDate)})
+        let fiveWeeksAgoScams = scam.filter({($0.selectedDate > Date.fiveWeeksAgoDate) && ($0.selectedDate < Date.fourWeeksAgoDate)})
         let currentWeekSameTypeCount = currentWeekScams.filter({$0.type == scam[index].type}).count
         let currentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
         let oneWeekAgoPower = oneWeekAgoScams.map({Int($0.power)}).reduce(0, +)
