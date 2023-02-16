@@ -12,7 +12,6 @@ import CoreData
 
 class MainViewModel: ObservableObject {
     @Published var model = MainModel()
-    @ObservedObject var stat = StatisticComputing()
     let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
     let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
     
@@ -90,18 +89,115 @@ class MainViewModel: ObservableObject {
     
     func findIndexForMdView(item: ScamCoreData) {
         if let unwrapped = sortedScams.firstIndex(of: item) {model.indexOfMoreDetailed = unwrapped}
-        if let unwrapped = sortedScams[model.indexOfMoreDetailed].imageD {stat.mDImage = unwrapped}
+        if let unwrapped = sortedScams[model.indexOfMoreDetailed].imageD {model.image = unwrapped}
     }
     
     func computedStatistic() {
         concurrentQueue.async {
-            self.stat.globalStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
+            self.globalStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
-            self.stat.monthStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
+            self.monthStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
-            self.stat.weekStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
+            self.weekStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
+    }
+    
+    func monthStat(scam: [ScamCoreData], index: Int) {
+        let last30DayScams = scam.filter({$0.selectedDate > Date.monthAgoDate})
+        let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
+        let last30daySameTypeCount = last30DayScams.filter({$0.type == scam[index].type}).count
+        let averagePowerOfLast30day = (Double(last30dayPower) / Double(last30DayScams.count)*100).rounded()/100
+        DispatchQueue.main.async {
+            self.model.last30dayPower = last30dayPower
+            self.model.last30daySameTypeCount = last30daySameTypeCount
+            self.model.averagePowerOfLast30day = averagePowerOfLast30day
+        }
+    }
+    
+    func globalStat(scam: [ScamCoreData], index: Int) {
+        let allTypes = scam.map({$0.type}).removingDuplicates()
+        let arrayallPower = scam.map({Int($0.power)})
+        let sameTypeScams = scam.filter({$0.type == scam[index].type})
+        let sameTypeAllPower = (Double(sameTypeScams.map({Int($0.power)}).reduce(0, +))*100).rounded()/100
+        let arrayAllType = scam.map({$0.type})
+        let iD = scam[index].id
+        let title = scam[index].title
+        let type = scam[index].type
+        let description = scam[index].scamDescription
+        let sameTypeCount = scam.filter({$0.type == scam[index].type}).count
+        let allPower = (Double(arrayallPower.reduce(0, +))*100).rounded()/100
+        let averagePowerOfAll = (allPower / Double(scam.count)*100).rounded()/100
+        let averagePowerSameType = (sameTypeAllPower / Double(sameTypeScams.count)*100).rounded()/100
+        let eachTypeCount = findEachTypeCount()
+        var mostFrequentTypeCount = 0
+        var mostFrequentType = ""
+        func mostFrequent<T: Hashable>(array: [T]) -> (value: T, count: Int)? {
+            let counts = array.reduce(into: [:]) { $0[$1, default: 0] += 1 }
+            if let (value, count) = counts.max(by: { $0.1 < $1.1 }) {
+                return (value, count)
+            }
+            return nil
+        }
+        if let result = mostFrequent(array: arrayAllType) {
+            if result.count == 1 && arrayAllType.count != 1 {
+                mostFrequentType = "-"
+                mostFrequentTypeCount = 0
+            } else {
+                mostFrequentType = result.value
+                mostFrequentTypeCount = result.count
+            }
+        }
+        func findEachTypeCount() -> [Int] {
+            var eachTypeCount = [Int]()
+            for item in allTypes.removingDuplicates() {
+                eachTypeCount.append(allTypes.filter({$0 == item}).count)
+            }
+            return(eachTypeCount)
+        }
+        DispatchQueue.main.async{
+            self.model.id = iD
+            self.model.title = title
+            self.model.type = type
+            self.model.description = description
+            self.model.sameTypeCount = sameTypeCount
+            self.model.allPower = allPower
+            self.model.averagePowerOfAll = averagePowerOfAll
+            self.model.averagePowerSameType = averagePowerSameType
+            self.model.mostFrequentTypeCount = mostFrequentTypeCount
+            self.model.mostFrequentType = mostFrequentType
+            self.model.eachTypeCount = eachTypeCount
+            self.model.allTypes = allTypes
+        }
+    }
+  
+    func weekStat(scam: [ScamCoreData], index: Int) {
+        let currentWeekScams = scam.filter({$0.selectedDate > Date.today().previous(.monday)})
+        let oneWeekAgoScams = scam.filter({($0.selectedDate > Date.oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
+        let twoWeeksAgoScams = scam.filter({($0.selectedDate > Date.twoWeeksAgoDate) && ($0.selectedDate < Date.oneWeekAgoDate)})
+        let threeWeeksAgoScams = scam.filter({($0.selectedDate > Date.threeWeeksAgoDate) && ($0.selectedDate < Date.twoWeeksAgoDate)})
+        let fourWeeksAgoScams = scam.filter({($0.selectedDate > Date.fourWeeksAgoDate) && ($0.selectedDate < Date.threeWeeksAgoDate)})
+        let fiveWeeksAgoScams = scam.filter({($0.selectedDate > Date.fiveWeeksAgoDate) && ($0.selectedDate < Date.fourWeeksAgoDate)})
+        let currentWeekSameTypeCount = currentWeekScams.filter({$0.type == scam[index].type}).count
+        let currentWeekPower = currentWeekScams.map({Int($0.power)}).reduce(0, +)
+        let oneWeekAgoPower = oneWeekAgoScams.map({Int($0.power)}).reduce(0, +)
+        let twoWeeksAgoPower = twoWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
+        let threeWeeksAgoPower = threeWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
+        let fourWeeksAgoPower = fourWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
+        let fiveWeeksAgoPower = fiveWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
+        DispatchQueue.main.async {
+            self.model.currentWeekSameTypeCount = currentWeekSameTypeCount
+            self.model.currentWeekPower = currentWeekPower
+            self.model.oneWeekAgoPower = oneWeekAgoPower
+            self.model.twoWeeksAgoPower = twoWeeksAgoPower
+            self.model.threeWeeksAgoPower = threeWeeksAgoPower
+            self.model.fourWeeksAgoPower = fourWeeksAgoPower
+            self.model.fiveWeeksAgoPower = fiveWeeksAgoPower
+        }
+    }
+    
+    func mDtoggleEditIsShown() {
+        model.mDeditIsShown.toggle()
     }
 }

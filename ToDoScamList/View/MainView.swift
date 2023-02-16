@@ -83,7 +83,8 @@ struct MainView: View {
                     ShowImage(image: $viewModel.model.showImage)
                 })
                 .fullScreenCover(isPresented: $viewModel.model.mdIsShown, content: {
-                    MoreDetailed(id: $viewModel.stat.mDID, title: $viewModel.stat.mDTitle, type: $viewModel.stat.mDType, image: $viewModel.stat.mDImage, description: $viewModel.stat.mDDescription, allPower: $viewModel.stat.mDallPower, averagePowerOfAll: $viewModel.stat.mDaveragePowerOfAll, averagePowerSameType: $viewModel.stat.mDaveragePowerSameType, mostFrequentTypeCount: $viewModel.stat.mDmostFrequentTypeCount, mostFrequentType: $viewModel.stat.mDmostFrequentType, sameTypeCount: $viewModel.stat.mDSameTypeCount, last30dayPower: $viewModel.stat.mDlast30dayPower, last30daySameTypeCount: $viewModel.stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $viewModel.stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $viewModel.stat.mDcurrentWeekSameTypeCount, currentWeekPower: $viewModel.stat.mDcurrentWeekPower, oneWeekAgoPower: $viewModel.stat.mDoneWeekAgoPower, twoWeeksAgoPower: $viewModel.stat.mDtwoWeeksAgoPower, threeWeeksAgoPower: $viewModel.stat.mDthreeWeeksAgoPower, fourWeeksAgoPower: $viewModel.stat.mDfourWeeksAgoPower, fiveWeeksAgoPower: $viewModel.stat.mDfiveWeeksAgoPower, eachTypeCount: $viewModel.stat.mDeachTypeCount, allTypes: $viewModel.stat.mDallTypes)})
+                    MoreDetailed()})
+//                        id: $viewModel.stat.mDID, title: $viewModel.stat.mDTitle, type: $viewModel.stat.mDType, image: $viewModel.stat.mDImage, description: $viewModel.stat.mDDescription, allPower: $viewModel.stat.mDallPower, averagePowerOfAll: $viewModel.stat.mDaveragePowerOfAll, averagePowerSameType: $viewModel.stat.mDaveragePowerSameType, mostFrequentTypeCount: $viewModel.stat.mDmostFrequentTypeCount, mostFrequentType: $viewModel.stat.mDmostFrequentType, sameTypeCount: $viewModel.stat.mDSameTypeCount, last30dayPower: $viewModel.stat.mDlast30dayPower, last30daySameTypeCount: $viewModel.stat.mDlast30daySameTypeCount, averagePowerOfLast30day: $viewModel.stat.mDaveragePowerOfLast30day, currentWeekSameTypeCount: $viewModel.stat.mDcurrentWeekSameTypeCount, currentWeekPower: $viewModel.stat.mDcurrentWeekPower, oneWeekAgoPower: $viewModel.stat.mDoneWeekAgoPower, twoWeeksAgoPower: $viewModel.stat.mDtwoWeeksAgoPower, threeWeeksAgoPower: $viewModel.stat.mDthreeWeeksAgoPower, fourWeeksAgoPower: $viewModel.stat.mDfourWeeksAgoPower, fiveWeeksAgoPower: $viewModel.stat.mDfiveWeeksAgoPower, eachTypeCount: $viewModel.stat.mDeachTypeCount, allTypes: $viewModel.stat.mDallTypes)})
             }
             if viewModel.model.editIsShown == true {
                 Text(" ")
@@ -97,7 +98,7 @@ struct MainView: View {
             }
             EditScam(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.model.editIsCanceled, text: $viewModel.model.editInput, power: $viewModel.model.editpower)
         }
-        .environment(\.colorScheme, .light)
+        .environmentObject(viewModel)
     }
 
     @ViewBuilder
@@ -149,6 +150,6 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
             .previewInterfaceOrientation(.portrait)
-            .environmentObject(MainViewModel())
+//            .environmentObject(MainViewModel())
     }
 }

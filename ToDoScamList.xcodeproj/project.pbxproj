@@ -30,8 +30,6 @@
 		C357F438299841D0007CE050 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F437299841D0007CE050 /* MainViewModel.swift */; };
 		C357F442299A6BF2007CE050 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F441299A6BF2007CE050 /* CoreDataManager.swift */; };
 		C357F444299A6EA5007CE050 /* ScamCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F443299A6EA5007CE050 /* ScamCoreData.swift */; };
-		C357F463299AE818007CE050 /* MoreDetailedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F462299AE818007CE050 /* MoreDetailedModel.swift */; };
-		C357F465299AE82E007CE050 /* MoreDetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F464299AE82E007CE050 /* MoreDetailedViewModel.swift */; };
 		C39356612982E7410006DCAF /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* Statistics.swift */; };
 		C3C8423D2993E5A90068BB15 /* NewScamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */; };
 		C3C8423F2993F6940068BB15 /* NewScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423E2993F6940068BB15 /* NewScamModel.swift */; };
@@ -71,8 +69,6 @@
 		C357F437299841D0007CE050 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C357F441299A6BF2007CE050 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C357F443299A6EA5007CE050 /* ScamCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamCoreData.swift; sourceTree = "<group>"; };
-		C357F462299AE818007CE050 /* MoreDetailedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailedModel.swift; sourceTree = "<group>"; };
-		C357F464299AE82E007CE050 /* MoreDetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailedViewModel.swift; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamViewModel.swift; sourceTree = "<group>"; };
 		C3C8423E2993F6940068BB15 /* NewScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamModel.swift; sourceTree = "<group>"; };
@@ -103,7 +99,6 @@
 			children = (
 				C3C8424229940A5A0068BB15 /* MainModel.swift */,
 				C3C8423E2993F6940068BB15 /* NewScamModel.swift */,
-				C357F462299AE818007CE050 /* MoreDetailedModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,7 +186,6 @@
 			children = (
 				C357F437299841D0007CE050 /* MainViewModel.swift */,
 				C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */,
-				C357F464299AE82E007CE050 /* MoreDetailedViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -306,12 +300,10 @@
 				BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */,
 				C3C842452996797C0068BB15 /* NewScamModelDefaultValues.swift in Sources */,
 				BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */,
-				C357F463299AE818007CE050 /* MoreDetailedModel.swift in Sources */,
 				C357F444299A6EA5007CE050 /* ScamCoreData.swift in Sources */,
 				BB705C46295C891E006585BB /* EditScam.swift in Sources */,
 				C357F442299A6BF2007CE050 /* CoreDataManager.swift in Sources */,
 				BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */,
-				C357F465299AE82E007CE050 /* MoreDetailedViewModel.swift in Sources */,
 				C39356612982E7410006DCAF /* Statistics.swift in Sources */,
 				C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */,
 				C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */,

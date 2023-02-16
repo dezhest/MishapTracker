@@ -9,25 +9,26 @@ import SwiftUI
 import SwiftUICharts
 
 struct Statistics: View {
-    @Binding var type: String
-    @Binding var allPower: Double
-    @Binding var averagePowerOfAll: Double
-    @Binding var averagePowerSameType: Double
-    @Binding var averagePowerOfLast30day: Double
-    @Binding var mostFrequentTypeCount: Int
-    @Binding var mostFrequentType: String
-    @Binding var sameTypeCount: Int
-    @Binding var last30dayPower: Int
-    @Binding var last30daySameTypeCount: Int
-    @Binding var currentWeekSameTypeCount: Int
-    @Binding var currentWeekPower: Int
-    @Binding var oneWeekAgoPower: Int
-    @Binding var twoWeeksAgoPower: Int
-    @Binding var threeWeeksAgoPower: Int
-    @Binding var fourWeeksAgoPower: Int
-    @Binding var fiveWeeksAgoPower: Int
-    @Binding var eachTypeCount: [Int]
-    @Binding var allTypes: [String]
+//    @Binding var type: String
+//    @Binding var allPower: Double
+//    @Binding var averagePowerOfAll: Double
+//    @Binding var averagePowerSameType: Double
+//    @Binding var averagePowerOfLast30day: Double
+//    @Binding var mostFrequentTypeCount: Int
+//    @Binding var mostFrequentType: String
+//    @Binding var sameTypeCount: Int
+//    @Binding var last30dayPower: Int
+//    @Binding var last30daySameTypeCount: Int
+//    @Binding var currentWeekSameTypeCount: Int
+//    @Binding var currentWeekPower: Int
+//    @Binding var oneWeekAgoPower: Int
+//    @Binding var twoWeeksAgoPower: Int
+//    @Binding var threeWeeksAgoPower: Int
+//    @Binding var fourWeeksAgoPower: Int
+//    @Binding var fiveWeeksAgoPower: Int
+//    @Binding var eachTypeCount: [Int]
+//    @Binding var allTypes: [String]
+    @EnvironmentObject var mainViewModel: MainViewModel
     @State private var statistic = false
     @State private var general = false
     @State private var month = false
@@ -41,7 +42,6 @@ struct Statistics: View {
     let fourSundayAgo = Date.fourSundayAgo
     let fiveSundayAgo = Date.fiveSundayAgo
     let lastMonday = Date.lastMonday
-    
     let oneMondayAgo = Date.oneWeekAgoDate.getFormattedDate(format: "dd/MM")
     let twoMondayAgo = Date.twoWeeksAgoDate.getFormattedDate(format: "dd/MM")
     let threeMondayAgo = Date.threeWeeksAgoDate.getFormattedDate(format: "dd/MM")
@@ -49,16 +49,18 @@ struct Statistics: View {
     let fiveMondayAgo = Date.fiveWeeksAgoDate.getFormattedDate(format: "dd/MM")
     let screenSize = UIScreen.main.bounds
     let pieChartStyle = ChartStyle(backgroundColor: .black, accentColor: .orange, gradientColor: GradientColor(start: .orange, end: .red), textColor: .white, legendTextColor: .white, dropShadowColor: .gray)
+    
     func findPieChartData() -> [PieChartData] {
         var pieChartData = [PieChartData]()
         var item = 0
         repeat {
-            pieChartData.append(PieChartData(label: allTypes[item], value: Double(eachTypeCount[item])))
+            pieChartData.append(PieChartData(label: mainViewModel.model.allTypes[item], value: Double(mainViewModel.model.eachTypeCount[item])))
             item += 1
         }
-        while allTypes.count > item
+        while mainViewModel.model.allTypes.count > item
                 return pieChartData
     }
+    
     var body: some View {
         NavigationView {
         List {
@@ -66,13 +68,13 @@ struct Statistics: View {
                 Group {
                     Text("Количество скамов типа ")
                         .font(.system(size: 18, weight: .bold, design: .default))
-                    + Text("#\(type)")
+                    + Text("#\(mainViewModel.model.type)")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .foregroundColor(.orange)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 VStack {
-                    Text("\(sameTypeCount)")
+                    Text("\(mainViewModel.model.sameTypeCount)")
                         .medium14()
                 }
                 .frame(alignment: .trailing)
@@ -81,13 +83,13 @@ struct Statistics: View {
                 Group {
                     Text("Средняя сила типа ")
                         .font(.system(size: 18, weight: .bold, design: .default))
-                    + Text("#\(type)")
+                    + Text("#\(mainViewModel.model.type)")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .foregroundColor(.orange)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 VStack {
-                    Text(String(format: "%.2f", averagePowerSameType))
+                    Text(String(format: "%.2f", mainViewModel.model.averagePowerSameType))
                         .medium14()
                 }
                 .frame(alignment: .trailing)
@@ -98,7 +100,7 @@ struct Statistics: View {
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(Int(allPower))")
+                        Text("\(Int(mainViewModel.model.allPower))")
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -108,7 +110,7 @@ struct Statistics: View {
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text(String(format: "%.2f", averagePowerOfAll))
+                        Text(String(format: "%.2f", mainViewModel.model.averagePowerOfAll))
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -124,11 +126,11 @@ struct Statistics: View {
                             .offset(y: -7)
                     }.frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text(mostFrequentType)
+                        Text(mainViewModel.model.mostFrequentType)
                             .medium14()
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .offset(y: 22.5)
-                        Text("\(mostFrequentTypeCount)")
+                        Text("\(mainViewModel.model.mostFrequentTypeCount)")
                             .medium14()
                             .frame(maxWidth: .infinity, maxHeight: 80, alignment: .bottomTrailing)
                     }
@@ -140,7 +142,7 @@ struct Statistics: View {
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(last30dayPower)")
+                        Text("\(mainViewModel.model.last30dayPower)")
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -149,13 +151,13 @@ struct Statistics: View {
                     Group {
                         Text("Количество скамов типа ")
                             .font(.system(size: 14, weight: .medium, design: .default))
-                        + Text("#\(type)")
+                        + Text("#\(mainViewModel.model.type)")
                             .font(.system(size: 14, weight: .medium, design: .default))
                             .foregroundColor(.orange)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(last30daySameTypeCount)")
+                        Text("\(mainViewModel.model.last30daySameTypeCount)")
                             .medium14()
                     }
                     .frame(alignment: .trailing)
@@ -165,7 +167,7 @@ struct Statistics: View {
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text(String(format: "%.2f", averagePowerOfLast30day))
+                        Text(String(format: "%.2f", mainViewModel.model.averagePowerOfLast30day))
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -177,7 +179,7 @@ struct Statistics: View {
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(currentWeekPower)")
+                        Text("\(mainViewModel.model.currentWeekPower)")
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -186,20 +188,20 @@ struct Statistics: View {
                     Group {
                         Text("Количество скамов типа ")
                             .font(.system(size: 14, weight: .medium, design: .default))
-                        + Text("#\(type)")
+                        + Text("#\(mainViewModel.model.type)")
                             .font(.system(size: 14, weight: .medium, design: .default))
                             .foregroundColor(.orange)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(currentWeekSameTypeCount)")
+                        Text("\(mainViewModel.model.currentWeekSameTypeCount)")
                             .medium14()
                     }
                     .frame(alignment: .trailing)
                 }
             }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
             VStack {
-                BarChartView(data: ChartData(values: [("\(fiveMondayAgo) - \(fourSundayAgo)", Double(fiveWeeksAgoPower)), ("\(fourMondayAgo) - \(threeSundayAgo)", Double(fourWeeksAgoPower)), ("\(threeMondayAgo) - \(twoSundayAgo)", Double(threeWeeksAgoPower)), ("\(twoMondayAgo) - \(oneSundayAgo)", Double(twoWeeksAgoPower)), ("\(oneMondayAgo) - \(lastSunday)", Double(oneWeekAgoPower)), ("\(lastMonday) - \(today)", Double(currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
+                BarChartView(data: ChartData(values: [("\(fiveMondayAgo) - \(fourSundayAgo)", Double(mainViewModel.model.fiveWeeksAgoPower)), ("\(fourMondayAgo) - \(threeSundayAgo)", Double(mainViewModel.model.fourWeeksAgoPower)), ("\(threeMondayAgo) - \(twoSundayAgo)", Double(mainViewModel.model.threeWeeksAgoPower)), ("\(twoMondayAgo) - \(oneSundayAgo)", Double(mainViewModel.model.twoWeeksAgoPower)), ("\(oneMondayAgo) - \(lastSunday)", Double(mainViewModel.model.oneWeekAgoPower)), ("\(lastMonday) - \(today)", Double(mainViewModel.model.currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
                 PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
@@ -212,7 +214,7 @@ struct Statistics: View {
         .navigationBarItems(leading: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
             Image(systemName: "chevron.left")
                 .backButton()
-        }, trailing: Text(type))
+        }, trailing: Text(mainViewModel.model.type))
     }
         .environment(\.colorScheme, .dark)
     }
@@ -220,6 +222,6 @@ struct Statistics: View {
 
 struct Statistics_Previews: PreviewProvider {
     static var previews: some View {
-        Statistics(type: .constant(""), allPower: .constant(0.0), averagePowerOfAll: .constant(0.0), averagePowerSameType: .constant(0.0), averagePowerOfLast30day: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), oneWeekAgoPower: .constant(0), twoWeeksAgoPower: .constant(0), threeWeeksAgoPower: .constant(0), fourWeeksAgoPower: .constant(0), fiveWeeksAgoPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
+        Statistics()
     }
 }

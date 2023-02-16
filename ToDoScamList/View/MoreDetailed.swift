@@ -10,42 +10,19 @@ import FancyScrollView
 import CoreData
 
 struct MoreDetailed: View {
-    @Binding var id: ObjectIdentifier
-    @Binding var title: String
-    @Binding var type: String
-    @Binding var image: Data
-    @Binding var description: String
-    @Binding var allPower: Double
-    @Binding var averagePowerOfAll: Double
-    @Binding var averagePowerSameType: Double
-    @Binding var mostFrequentTypeCount: Int
-    @Binding var mostFrequentType: String
-    @Binding var sameTypeCount: Int
-    @Binding var last30dayPower: Int
-    @Binding var last30daySameTypeCount: Int
-    @Binding var averagePowerOfLast30day: Double
-    @Binding var currentWeekSameTypeCount: Int
-    @Binding var currentWeekPower: Int
-    @Binding var oneWeekAgoPower: Int
-    @Binding var twoWeeksAgoPower: Int
-    @Binding var threeWeeksAgoPower: Int
-    @Binding var fourWeeksAgoPower: Int
-    @Binding var fiveWeeksAgoPower: Int
-    @Binding var eachTypeCount: [Int]
-    @Binding var allTypes: [String]
-    @StateObject var viewModel = MoreDetailedViewModel()
-    @StateObject var mainViewModel = MainViewModel()
+    @EnvironmentObject var viewModel: MainViewModel
+    let textLimit = 280
     let screenSize = UIScreen.main.bounds
     let coloredNavAppearance = UINavigationBarAppearance()
     let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
     func saveToData() {
-        if !viewModel.model.editIsShown {
+        if !viewModel.model.mDeditIsShown {
             do {
                 let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
                 let editScam = results[findIndex()] as NSManagedObject
-                editScam.setValue(description, forKey: "scamDescription")
+                editScam.setValue(viewModel.model.description, forKey: "scamDescription")
                 CoreDataManager.instance.saveContext()
-                mainViewModel.updateView()
+                viewModel.updateView()
             } catch {
                 let saveError = error as NSError
                 print(saveError)
@@ -53,8 +30,8 @@ struct MoreDetailed: View {
         }
     }
     func newOrSystemImage() -> Image {
-        if image != Data() {
-            return Image(uiImage: UIImage(data: image) ?? UIImage())
+        if viewModel.model.image != Data() {
+            return Image(uiImage: UIImage(data: viewModel.model.image) ?? UIImage())
         } else {
             return Image("Scam")
         }
@@ -64,7 +41,7 @@ struct MoreDetailed: View {
         var index = 0
         do {
             let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
-            for scam in results where scam.id == id {
+            for scam in results where scam.id == viewModel.model.id {
                 if let unwrapped = results.firstIndex(of: scam) {index = unwrapped}
             }
         }
@@ -79,7 +56,7 @@ struct MoreDetailed: View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 .background(Color.black)
                 .edgesIgnoringSafeArea(.all)
-            FancyScrollView(title: title,
+            FancyScrollView(title: viewModel.model.title,
                             headerHeight: 350,
                             scrollUpHeaderBehavior: .sticky,
                             scrollDownHeaderBehavior: .sticky,
@@ -91,7 +68,7 @@ struct MoreDetailed: View {
                             .frame(maxWidth: .infinity, maxHeight: 0, alignment: .leading)
                             .padding(.leading, 20)
                             .padding(.top, 70)
-                        if description.isEmpty {
+                        if viewModel.model.description.isEmpty {
                             ZStack(alignment: .top) {
                                 Text("Добавить описание")
                                     .font(.system(size: 20, weight: .medium, design: .default))
@@ -107,11 +84,11 @@ struct MoreDetailed: View {
                             }
                             .padding(.top, 120)
                             .onTapGesture {
-                                viewModel.toggleEditIsShown()
+                                viewModel.mDtoggleEditIsShown()
                             }
                         } else {
                             ZStack(alignment: .top) {
-                                Text(description)
+                                Text(viewModel.model.description)
                                     .font(.system(size: 19, weight: .medium, design: .default))
                                     .foregroundColor(.gray)
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -124,8 +101,8 @@ struct MoreDetailed: View {
                                     .padding(.trailing, 30)
                                     .offset(y: -30)
                                     .onTapGesture {
-                                        viewModel.model.editInput = description
-                                        viewModel.toggleEditIsShown()
+                                        viewModel.model.mDeditInput = viewModel.model.description
+                                        viewModel.mDtoggleEditIsShown()
                                     }
                             }
                             .padding(.top, 120)
@@ -136,28 +113,27 @@ struct MoreDetailed: View {
                     }
                 }
                 .frame(maxHeight: .infinity)
-                .onChange(of: viewModel.model.editIsShown) { _ in
-                    description = viewModel.model.editInput
+                .onChange(of: viewModel.model.mDeditIsShown) { _ in
+                    viewModel.model.description = viewModel.model.mDeditInput
                     saveToData()
                 }
                 .frame(maxWidth: .infinity)
             }
-                            .environment(\.colorScheme, .dark)
                             .fullScreenCover(isPresented: $viewModel.model.statIsShown) {
-                                Statistics(type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, oneWeekAgoPower: $oneWeekAgoPower, twoWeeksAgoPower: $twoWeeksAgoPower, threeWeeksAgoPower: $threeWeeksAgoPower, fourWeeksAgoPower: $fourWeeksAgoPower, fiveWeeksAgoPower: $fiveWeeksAgoPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)
-                            }
-            if viewModel.model.editIsShown == true {
+                                Statistics()}
+//                                    type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, oneWeekAgoPower: $oneWeekAgoPower, twoWeeksAgoPower: $twoWeeksAgoPower, threeWeeksAgoPower: $threeWeeksAgoPower, fourWeeksAgoPower: $fourWeeksAgoPower, fiveWeeksAgoPower: $fiveWeeksAgoPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)}
+            if viewModel.model.mDeditIsShown == true {
                 Text(" ")
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                     .background(Color.black)
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.8)
                     .onTapGesture{
-                        viewModel.model.editIsShown = false
+                        viewModel.model.mDeditIsShown = false
                     }
             }
-            EditDescription(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.model.editIsCanceled, text: $viewModel.model.editInput)
-            if !viewModel.model.editIsShown {
+            EditDescription(isShown: $viewModel.model.mDeditIsShown, isCanceled: $viewModel.model.mDeditIsCanceled, text: $viewModel.model.mDeditInput)
+            if !viewModel.model.mDeditIsShown {
                 Text("Статистика")
                     .foregroundColor(.white)
                     .font(.system(size: 18, weight: .bold, design: .default))
@@ -179,6 +155,6 @@ struct MoreDetailed: View {
 
 struct MoreDetailed_Previews: PreviewProvider {
     static var previews: some View {
-        MoreDetailed(id: .constant(ObjectIdentifier(AnyObject.self)), title: .constant(""), type: .constant(""), image: .constant(Data()), description: .constant(""), allPower: .constant(0.0), averagePowerOfAll: .constant(0.0), averagePowerSameType: .constant(0.0), mostFrequentTypeCount: .constant(0), mostFrequentType: .constant(""), sameTypeCount: .constant(0), last30dayPower: .constant(0), last30daySameTypeCount: .constant(0), averagePowerOfLast30day: .constant(0.0), currentWeekSameTypeCount: .constant(0), currentWeekPower: .constant(0), oneWeekAgoPower: .constant(0), twoWeeksAgoPower: .constant(0), threeWeeksAgoPower: .constant(0), fourWeeksAgoPower: .constant(0), fiveWeeksAgoPower: .constant(0), eachTypeCount: .constant([0]), allTypes: .constant([""]))
+        MoreDetailed()
     }
 }

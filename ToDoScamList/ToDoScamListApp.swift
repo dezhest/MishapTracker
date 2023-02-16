@@ -16,6 +16,7 @@ struct ToDoScamListApp: App {
             MainView()
                 .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
                 .environment(\.managedObjectContext, CoreDataManager.instance.managedObjectContext)
+                .environment(\.colorScheme, .light)
         }
     }
 }
