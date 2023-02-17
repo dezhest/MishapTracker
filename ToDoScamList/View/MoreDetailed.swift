@@ -121,7 +121,6 @@ struct MoreDetailed: View {
             }
                             .fullScreenCover(isPresented: $viewModel.model.statIsShown) {
                                 Statistics()}
-//                                    type: $type, allPower: $allPower, averagePowerOfAll: $averagePowerOfAll, averagePowerSameType: $averagePowerSameType, averagePowerOfLast30day: $averagePowerOfLast30day, mostFrequentTypeCount: $mostFrequentTypeCount, mostFrequentType: $mostFrequentType, sameTypeCount: $sameTypeCount, last30dayPower: $last30dayPower, last30daySameTypeCount: $last30daySameTypeCount, currentWeekSameTypeCount: $currentWeekSameTypeCount, currentWeekPower: $currentWeekPower, oneWeekAgoPower: $oneWeekAgoPower, twoWeeksAgoPower: $twoWeeksAgoPower, threeWeeksAgoPower: $threeWeeksAgoPower, fourWeeksAgoPower: $fourWeeksAgoPower, fiveWeeksAgoPower: $fiveWeeksAgoPower, eachTypeCount: $eachTypeCount, allTypes: $allTypes)}
             if viewModel.model.mDeditIsShown == true {
                 Text(" ")
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

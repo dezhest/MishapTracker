@@ -53,4 +53,18 @@ struct MainModel {
     var fiveWeeksAgoPower: Int = 0
     var eachTypeCount: [Int] = []
     var allTypes: [String] = []
+    
+    let today = Date.todayDate
+    let lastSunday = Date.lastSunday
+    let oneSundayAgo = Date.oneSundayAgo
+    let twoSundayAgo = Date.twoSundayAgo
+    let threeSundayAgo = Date.threeSundayAgo
+    let fourSundayAgo = Date.fourSundayAgo
+    let fiveSundayAgo = Date.fiveSundayAgo
+    let lastMonday = Date.lastMonday
+    let oneMondayAgo = Date.oneWeekAgoDate.getFormattedDate(format: "dd/MM")
+    let twoMondayAgo = Date.twoWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let threeMondayAgo = Date.threeWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let fourMondayAgo = Date.fourWeeksAgoDate.getFormattedDate(format: "dd/MM")
+    let fiveMondayAgo = Date.fiveWeeksAgoDate.getFormattedDate(format: "dd/MM")
 }

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreData
+import SwiftUICharts
 
 
 class MainViewModel: ObservableObject {
@@ -153,11 +154,11 @@ class MainViewModel: ObservableObject {
         }
         
         func findEachTypeCount() -> [Int] {
-            var eachTypeCount = [Int]()
+            var funceachTypeCount = [Int]()
             for item in allTypes.removingDuplicates() {
-                eachTypeCount.append(allTypes.filter({$0 == item}).count)
+                funceachTypeCount.append(scam.map({$0.type}).filter({$0 == item}).count)
             }
-            return(eachTypeCount)
+            return(funceachTypeCount)
         }
         
         DispatchQueue.main.async{
@@ -203,5 +204,16 @@ class MainViewModel: ObservableObject {
     
     func mDtoggleEditIsShown() {
         model.mDeditIsShown.toggle()
+    }
+    
+    func findPieChartData() -> [PieChartData] {
+        var pieChartData = [PieChartData]()
+        var item = 0
+        repeat {
+            pieChartData.append(PieChartData(label: model.allTypes[item], value: Double(model.eachTypeCount[item])))
+            item += 1
+        }
+        while model.allTypes.count > item
+                return pieChartData
     }
 }

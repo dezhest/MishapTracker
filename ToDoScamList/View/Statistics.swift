@@ -10,37 +10,9 @@ import SwiftUICharts
 
 struct Statistics: View {
     @EnvironmentObject var mainViewModel: MainViewModel
-    @State private var statistic = false
-    @State private var general = false
-    @State private var month = false
-    @State private var week = false
     @Environment(\.presentationMode) var presentationMode
-    let today = Date.todayDate
-    let lastSunday = Date.lastSunday
-    let oneSundayAgo = Date.oneSundayAgo
-    let twoSundayAgo = Date.twoSundayAgo
-    let threeSundayAgo = Date.threeSundayAgo
-    let fourSundayAgo = Date.fourSundayAgo
-    let fiveSundayAgo = Date.fiveSundayAgo
-    let lastMonday = Date.lastMonday
-    let oneMondayAgo = Date.oneWeekAgoDate.getFormattedDate(format: "dd/MM")
-    let twoMondayAgo = Date.twoWeeksAgoDate.getFormattedDate(format: "dd/MM")
-    let threeMondayAgo = Date.threeWeeksAgoDate.getFormattedDate(format: "dd/MM")
-    let fourMondayAgo = Date.fourWeeksAgoDate.getFormattedDate(format: "dd/MM")
-    let fiveMondayAgo = Date.fiveWeeksAgoDate.getFormattedDate(format: "dd/MM")
     let screenSize = UIScreen.main.bounds
     let pieChartStyle = ChartStyle(backgroundColor: .black, accentColor: .orange, gradientColor: GradientColor(start: .orange, end: .red), textColor: .white, legendTextColor: .white, dropShadowColor: .gray)
-    
-    func findPieChartData() -> [PieChartData] {
-        var pieChartData = [PieChartData]()
-        var item = 0
-        repeat {
-            pieChartData.append(PieChartData(label: mainViewModel.model.allTypes[item], value: Double(mainViewModel.model.eachTypeCount[item])))
-            item += 1
-        }
-        while mainViewModel.model.allTypes.count > item
-                return pieChartData
-    }
     
     var body: some View {
         NavigationView {
@@ -75,7 +47,7 @@ struct Statistics: View {
                 }
                 .frame(alignment: .trailing)
             }
-            DisclosureGroup(isExpanded: $general, content: {
+            DisclosureGroup(isExpanded: $mainViewModel.model.general, content: {
                 ZStack {
                     Text("Общая сила скама")
                         .font(.system(size: 14, weight: .medium, design: .default))
@@ -117,7 +89,7 @@ struct Statistics: View {
                     }
                 }
             }, label: {Text("За все время").font(.system(size: 18, weight: .bold, design: .default))})
-            DisclosureGroup(isExpanded: $month, content: {
+            DisclosureGroup(isExpanded: $mainViewModel.model.month, content: {
                 ZStack {
                     Text("Общая сила")
                         .font(.system(size: 14, weight: .medium, design: .default))
@@ -154,7 +126,7 @@ struct Statistics: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }, label: {Text("За месяц").font(.system(size: 18, weight: .bold, design: .default))})
-            DisclosureGroup(isExpanded: $week, content: {
+            DisclosureGroup(isExpanded: $mainViewModel.model.week, content: {
                 ZStack {
                     Text("Общая сила")
                         .font(.system(size: 14, weight: .medium, design: .default))
@@ -182,10 +154,10 @@ struct Statistics: View {
                 }
             }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
             VStack {
-                BarChartView(data: ChartData(values: [("\(fiveMondayAgo) - \(fourSundayAgo)", Double(mainViewModel.model.fiveWeeksAgoPower)), ("\(fourMondayAgo) - \(threeSundayAgo)", Double(mainViewModel.model.fourWeeksAgoPower)), ("\(threeMondayAgo) - \(twoSundayAgo)", Double(mainViewModel.model.threeWeeksAgoPower)), ("\(twoMondayAgo) - \(oneSundayAgo)", Double(mainViewModel.model.twoWeeksAgoPower)), ("\(oneMondayAgo) - \(lastSunday)", Double(mainViewModel.model.oneWeekAgoPower)), ("\(lastMonday) - \(today)", Double(mainViewModel.model.currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
+                BarChartView(data: ChartData(values: [("\(mainViewModel.model.fiveMondayAgo) - \(mainViewModel.model.fourSundayAgo)", Double(mainViewModel.model.fiveWeeksAgoPower)), ("\(mainViewModel.model.fourMondayAgo) - \(mainViewModel.model.threeSundayAgo)", Double(mainViewModel.model.fourWeeksAgoPower)), ("\(mainViewModel.model.threeMondayAgo) - \(mainViewModel.model.twoSundayAgo)", Double(mainViewModel.model.threeWeeksAgoPower)), ("\(mainViewModel.model.twoMondayAgo) - \(mainViewModel.model.oneSundayAgo)", Double(mainViewModel.model.twoWeeksAgoPower)), ("\(mainViewModel.model.oneMondayAgo) - \(mainViewModel.model.lastSunday)", Double(mainViewModel.model.oneWeekAgoPower)), ("\(mainViewModel.model.lastMonday) - \(mainViewModel.model.today)", Double(mainViewModel.model.currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
-                PieChartView(data: findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
+                PieChartView(data: mainViewModel.findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
             }
