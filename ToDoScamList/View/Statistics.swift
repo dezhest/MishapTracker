@@ -9,25 +9,6 @@ import SwiftUI
 import SwiftUICharts
 
 struct Statistics: View {
-//    @Binding var type: String
-//    @Binding var allPower: Double
-//    @Binding var averagePowerOfAll: Double
-//    @Binding var averagePowerSameType: Double
-//    @Binding var averagePowerOfLast30day: Double
-//    @Binding var mostFrequentTypeCount: Int
-//    @Binding var mostFrequentType: String
-//    @Binding var sameTypeCount: Int
-//    @Binding var last30dayPower: Int
-//    @Binding var last30daySameTypeCount: Int
-//    @Binding var currentWeekSameTypeCount: Int
-//    @Binding var currentWeekPower: Int
-//    @Binding var oneWeekAgoPower: Int
-//    @Binding var twoWeeksAgoPower: Int
-//    @Binding var threeWeeksAgoPower: Int
-//    @Binding var fourWeeksAgoPower: Int
-//    @Binding var fiveWeeksAgoPower: Int
-//    @Binding var eachTypeCount: [Int]
-//    @Binding var allTypes: [String]
     @EnvironmentObject var mainViewModel: MainViewModel
     @State private var statistic = false
     @State private var general = false

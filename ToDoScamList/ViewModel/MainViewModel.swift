@@ -25,6 +25,7 @@ class MainViewModel: ObservableObject {
             return []
         }
     }
+    
     var sortedScams: [ScamCoreData] {
         switch model.pickerSelection {
         case(1): return fetchData().sorted(by: {$0.selectedDate > $1.selectedDate})
@@ -34,6 +35,7 @@ class MainViewModel: ObservableObject {
         default: return []
         }
     }
+    
     func updateView() {
         model.pickerSelection += 1
         model.pickerSelection -= 1
@@ -149,6 +151,7 @@ class MainViewModel: ObservableObject {
                 mostFrequentTypeCount = result.count
             }
         }
+        
         func findEachTypeCount() -> [Int] {
             var eachTypeCount = [Int]()
             for item in allTypes.removingDuplicates() {
@@ -156,6 +159,7 @@ class MainViewModel: ObservableObject {
             }
             return(eachTypeCount)
         }
+        
         DispatchQueue.main.async{
             self.model.id = iD
             self.model.title = title

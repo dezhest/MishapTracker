@@ -10,14 +10,14 @@ import Combine
 
 struct NewScam: View {
     @StateObject var viewModel = NewScamViewModel()
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
             NavigationView {
                 Form {
                     formAddScam()
                 }
-                .navigationBarItems(leading:  Button(action: { dismiss() }) {
+                .navigationBarItems(leading:  Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                     Image(systemName: "chevron.left")
                         .backButton()
                 }, trailing: Button("Сохранить") {
@@ -49,7 +49,7 @@ struct NewScam: View {
         }.environment(\.colorScheme, .light)
             .onReceive(viewModel.viewDismissal) { shouldDismiss in
                 if shouldDismiss {
-                    dismiss()
+                    self.presentationMode.wrappedValue.dismiss()
                 }
             }
     }
