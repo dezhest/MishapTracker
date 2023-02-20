@@ -20,6 +20,7 @@ struct MainModel {
     var indexOfImage = 0
     var showImage = Image("Scam")
     var imageIsShown = false
+    var newScamIsShown = false
     
     var statIsShown = false
     var statistic = false

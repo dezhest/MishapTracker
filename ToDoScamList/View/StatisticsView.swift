@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUICharts
 
-struct Statistics: View {
+struct StatisticsView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @Environment(\.presentationMode) var presentationMode
     let screenSize = UIScreen.main.bounds
@@ -173,8 +173,8 @@ struct Statistics: View {
     }
 }
 
-struct Statistics_Previews: PreviewProvider {
+struct StatisticsView_Previews: PreviewProvider {
     static var previews: some View {
-        Statistics()
+        StatisticsView()
     }
 }

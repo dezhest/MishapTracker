@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddCustomType: View {
+struct AddCustomTypeView: View {
     enum FocusedField: Hashable {
         case text
     }
@@ -70,8 +70,8 @@ struct AddCustomType: View {
     }
 }
 
-struct AZAlert_Previews: PreviewProvider {
+struct AddCistomTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCustomType(title: "", isShown: .constant(true), text: .constant(""))
+        AddCustomTypeView(title: "", isShown: .constant(true), text: .constant(""))
     }
 }

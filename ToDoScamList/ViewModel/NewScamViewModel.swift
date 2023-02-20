@@ -24,11 +24,7 @@ final class NewScamViewModel: ObservableObject {
     func dismissView() {
             self.shouldDismissView = true
     }
-    
-    func toggleNewScamIsShown() {
-        newScamModel.newScamIsShown.toggle()
-    }
-    
+        
     func toggleAddCustomTypeIsShown() {
         newScamModel.showsAddCustomType.toggle()
         newScamModel.type = "Финансовый"
@@ -98,4 +94,6 @@ final class NewScamViewModel: ObservableObject {
             newScamModel.description = String(newScamModel.description.prefix(upper))
         }
     }
+    
+    
 }

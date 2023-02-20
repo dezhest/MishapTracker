@@ -8,9 +8,10 @@
 import SwiftUI
 import Combine
 
-struct NewScam: View {
+struct NewScamView: View {
     @StateObject var viewModel = NewScamViewModel()
     @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         ZStack {
             NavigationView {
@@ -41,7 +42,7 @@ struct NewScam: View {
                         viewModel.toggleAddCustomTypeIsShown()
                     }
             }
-            AddCustomType(title: "Добавьте тип", isShown: $viewModel.newScamModel.showsAddCustomType, text: $viewModel.newScamModel.alertInput, onDone: {_ in
+            AddCustomTypeView(title: "Добавьте тип", isShown: $viewModel.newScamModel.showsAddCustomType, text: $viewModel.newScamModel.alertInput, onDone: {_ in
                 viewModel.checkSameTypes()
             }, onCancel: {
                 viewModel.newScamModel.type = viewModel.newScamModel.types[viewModel.newScamModel.types.count - 3]
@@ -189,8 +190,8 @@ struct NewScam: View {
     }
 }
 
-struct AddView_Previews: PreviewProvider {
+struct NewScamView_Previews: PreviewProvider {
     static var previews: some View {
-        NewScam()
+        NewScamView()
     }
 }

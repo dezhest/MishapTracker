@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 import Combine
 
-struct EditDescription: View {
+struct EditDescriptionView: View {
     let screenSize = UIScreen.main.bounds
     @Binding var isShown: Bool
     @Binding var isCanceled: Bool
@@ -85,8 +85,8 @@ struct EditDescription: View {
     }
 }
 
-struct DescriptionEdit_Previews: PreviewProvider {
+struct EditDescriptionView_Previews: PreviewProvider {
     static var previews: some View {
-        EditDescription(isShown: .constant(true), isCanceled: .constant(false), text: .constant(""))
+        EditDescriptionView(isShown: .constant(true), isCanceled: .constant(false), text: .constant(""))
     }
 }

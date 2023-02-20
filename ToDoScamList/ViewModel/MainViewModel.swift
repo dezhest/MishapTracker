@@ -16,6 +16,44 @@ class MainViewModel: ObservableObject {
     let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
     let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
     
+    func findIndex() -> Int {
+        var index = 0
+        do {
+            let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
+            for scam in results where scam.id == model.id {
+                if let unwrapped = results.firstIndex(of: scam) {index = unwrapped}
+            }
+        }
+        catch {
+            print("Error fetching data")
+        }
+        return index
+    }
+    
+    func saveToData() {
+        if !model.mDeditIsShown {
+            do {
+                let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
+                let editScam = results[findIndex()] as NSManagedObject
+                editScam.setValue(model.description, forKey: "scamDescription")
+                CoreDataManager.instance.saveContext()
+                updateView()
+            } catch {
+                let saveError = error as NSError
+                print(saveError)
+            }
+        }
+    }
+    
+    func getImage() -> Image {
+        if model.image != Data() {
+            return Image(uiImage: UIImage(data: model.image) ?? UIImage())
+        } else {
+            return Image("Scam")
+        }
+    }
+    
+    
     func fetchData() -> [ScamCoreData] {
         do {
             let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
@@ -41,6 +79,11 @@ class MainViewModel: ObservableObject {
         model.pickerSelection += 1
         model.pickerSelection -= 1
     }
+    
+        func toggleNewScamIsShown() {
+            model.newScamIsShown.toggle()
+        }
+
 
     func onChangeEditScam() {
             let editScam = sortedScams[model.indexOfEditScam] as NSManagedObject

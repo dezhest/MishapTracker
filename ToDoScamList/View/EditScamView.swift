@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct EditScam: View {
+struct EditScamView: View {
     let screenSize = UIScreen.main.bounds
     @Binding var isShown: Bool
     @Binding var isCanceled: Bool
@@ -90,8 +90,8 @@ struct EditScam: View {
     }
 }
 
-struct EditScam_Previews: PreviewProvider {
+struct EditScamView_Previews: PreviewProvider {
     static var previews: some View {
-        EditScam(isShown: .constant(true), isCanceled: .constant(false), text: .constant(""), power: .constant(0.00))
+        EditScamView(isShown: .constant(true), isCanceled: .constant(false), text: .constant(""), power: .constant(0.00))
     }
 }

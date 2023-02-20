@@ -9,47 +9,12 @@ import SwiftUI
 import FancyScrollView
 import CoreData
 
-struct MoreDetailed: View {
+struct MoreDetailedView: View {
     @EnvironmentObject var viewModel: MainViewModel
     let textLimit = 280
     let screenSize = UIScreen.main.bounds
     let coloredNavAppearance = UINavigationBarAppearance()
-    let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
-    func saveToData() {
-        if !viewModel.model.mDeditIsShown {
-            do {
-                let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
-                let editScam = results[findIndex()] as NSManagedObject
-                editScam.setValue(viewModel.model.description, forKey: "scamDescription")
-                CoreDataManager.instance.saveContext()
-                viewModel.updateView()
-            } catch {
-                let saveError = error as NSError
-                print(saveError)
-            }
-        }
-    }
-    func newOrSystemImage() -> Image {
-        if viewModel.model.image != Data() {
-            return Image(uiImage: UIImage(data: viewModel.model.image) ?? UIImage())
-        } else {
-            return Image("Scam")
-        }
-    }
-    func findIndex() -> Int {
-        let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
-        var index = 0
-        do {
-            let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
-            for scam in results where scam.id == viewModel.model.id {
-                if let unwrapped = results.firstIndex(of: scam) {index = unwrapped}
-            }
-        }
-        catch {
-            print("Error fetching data")
-        }
-        return index
-    }
+   
     var body: some View {
         ZStack {
             Text(" ")
@@ -60,7 +25,7 @@ struct MoreDetailed: View {
                             headerHeight: 350,
                             scrollUpHeaderBehavior: .sticky,
                             scrollDownHeaderBehavior: .sticky,
-                            header: { newOrSystemImage().resizable().aspectRatio(contentMode: .fill) }) {
+                            header: { viewModel.getImage().resizable().aspectRatio(contentMode: .fill) }) {
                 ZStack(alignment: .top) {
                     ZStack(alignment: .top) {
                         Text("Описание:")
@@ -115,12 +80,12 @@ struct MoreDetailed: View {
                 .frame(maxHeight: .infinity)
                 .onChange(of: viewModel.model.mDeditIsShown) { _ in
                     viewModel.model.description = viewModel.model.mDeditInput
-                    saveToData()
+                    viewModel.saveToData()
                 }
                 .frame(maxWidth: .infinity)
             }
                             .fullScreenCover(isPresented: $viewModel.model.statIsShown) {
-                                Statistics()}
+                                StatisticsView()}
             if viewModel.model.mDeditIsShown == true {
                 Text(" ")
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -131,7 +96,7 @@ struct MoreDetailed: View {
                         viewModel.model.mDeditIsShown = false
                     }
             }
-            EditDescription(isShown: $viewModel.model.mDeditIsShown, isCanceled: $viewModel.model.mDeditIsCanceled, text: $viewModel.model.mDeditInput)
+            EditDescriptionView(isShown: $viewModel.model.mDeditIsShown, isCanceled: $viewModel.model.mDeditIsCanceled, text: $viewModel.model.mDeditInput)
             if !viewModel.model.mDeditIsShown {
                 Text("Статистика")
                     .foregroundColor(.white)
@@ -152,8 +117,8 @@ struct MoreDetailed: View {
     }
 }
 
-struct MoreDetailed_Previews: PreviewProvider {
+struct MoreDetailedView_Previews: PreviewProvider {
     static var previews: some View {
-        MoreDetailed()
+        MoreDetailedView()
     }
 }

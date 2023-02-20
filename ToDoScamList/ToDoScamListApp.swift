@@ -10,7 +10,6 @@ import CoreData
 
 @main
 struct ToDoScamListApp: App {
-    @StateObject var main = MainViewModel()
     var body: some Scene {
         WindowGroup {
             MainView()

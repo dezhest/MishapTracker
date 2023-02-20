@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		BB705C3E295A07E6006585BB /* PinchZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C3D295A07E6006585BB /* PinchZoomView.swift */; };
-		BB705C46295C891E006585BB /* EditScam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C45295C891E006585BB /* EditScam.swift */; };
+		BB705C46295C891E006585BB /* EditScamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB705C45295C891E006585BB /* EditScamView.swift */; };
 		BB75873E297407D3001D1FA0 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB75873D297407D3001D1FA0 /* Image.xcassets */; };
-		BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75876129761A79001D1FA0 /* MoreDetailed.swift */; };
+		BB75876229761A7A001D1FA0 /* MoreDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75876129761A79001D1FA0 /* MoreDetailedView.swift */; };
 		BB7ACB8129782DB3008649E8 /* ShowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8029782DB3008649E8 /* ShowImage.swift */; };
-		BB7ACB8329785687008649E8 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8229785687008649E8 /* Calendar.swift */; };
+		BB7ACB8329785687008649E8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7ACB8229785687008649E8 /* Date.swift */; };
 		BB7D99B1297C342800442733 /* UniqItemsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7D99B0297C342800442733 /* UniqItemsArray.swift */; };
 		BBD34C09296C5736006ECC63 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = BBD34C08296C5736006ECC63 /* Preview Content */; };
 		BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */; };
@@ -21,8 +21,8 @@
 		BBF70623294CF54B006DA73A /* ToDoScamListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */; };
 		BBF70628294CF54B006DA73A /* ScamCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBF70626294CF54B006DA73A /* ScamCoreData.xcdatamodeld */; };
 		BBF7062A294CF54B006DA73A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70629294CF54B006DA73A /* MainView.swift */; };
-		BBF70637294CF835006DA73A /* NewScam.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70636294CF835006DA73A /* NewScam.swift */; };
-		BBFA467C2954AB46009E9E9A /* AddCustomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AddCustomType.swift */; };
+		BBF70637294CF835006DA73A /* NewScamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70636294CF835006DA73A /* NewScamView.swift */; };
+		BBFA467C2954AB46009E9E9A /* AddCustomTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AddCustomTypeView.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
 		C3372A6D29919F52008DF8DE /* PowerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A6C29919F52008DF8DE /* PowerColor.swift */; };
 		C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A722991BFA6008DF8DE /* TextModifiers.swift */; };
@@ -30,7 +30,8 @@
 		C357F438299841D0007CE050 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F437299841D0007CE050 /* MainViewModel.swift */; };
 		C357F442299A6BF2007CE050 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F441299A6BF2007CE050 /* CoreDataManager.swift */; };
 		C357F444299A6EA5007CE050 /* ScamCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F443299A6EA5007CE050 /* ScamCoreData.swift */; };
-		C39356612982E7410006DCAF /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* Statistics.swift */; };
+		C357F49429A3B399007CE050 /* CardScamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F49329A3B399007CE050 /* CardScamView.swift */; };
+		C39356612982E7410006DCAF /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* StatisticsView.swift */; };
 		C3C8423D2993E5A90068BB15 /* NewScamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */; };
 		C3C8423F2993F6940068BB15 /* NewScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423E2993F6940068BB15 /* NewScamModel.swift */; };
 		C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8424229940A5A0068BB15 /* MainModel.swift */; };
@@ -39,16 +40,16 @@
 		C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F58B2987D552005436CB /* SwiftUICharts */; };
 		C3F2F5B729885DD4005436CB /* NavigationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B629885DD4005436CB /* NavigationTheme.swift */; };
 		C3F2F5D8298B3C9D005436CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F2F5DA298B3C9D005436CB /* Localizable.strings */; };
-		C3F905AF2983366B00C2E649 /* EditDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F905AE2983366B00C2E649 /* EditDescription.swift */; };
+		C3F905AF2983366B00C2E649 /* EditDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F905AE2983366B00C2E649 /* EditDescriptionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB705C3D295A07E6006585BB /* PinchZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchZoomView.swift; sourceTree = "<group>"; };
-		BB705C45295C891E006585BB /* EditScam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScam.swift; sourceTree = "<group>"; };
+		BB705C45295C891E006585BB /* EditScamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScamView.swift; sourceTree = "<group>"; };
 		BB75873D297407D3001D1FA0 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
-		BB75876129761A79001D1FA0 /* MoreDetailed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailed.swift; sourceTree = "<group>"; };
+		BB75876129761A79001D1FA0 /* MoreDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailedView.swift; sourceTree = "<group>"; };
 		BB7ACB8029782DB3008649E8 /* ShowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImage.swift; sourceTree = "<group>"; };
-		BB7ACB8229785687008649E8 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		BB7ACB8229785687008649E8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		BB7D99B0297C342800442733 /* UniqItemsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqItemsArray.swift; sourceTree = "<group>"; };
 		BBD34C08296C5736006ECC63 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
 		BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchToZoom.swift; sourceTree = "<group>"; };
@@ -59,8 +60,8 @@
 		BBF70627294CF54B006DA73A /* ToDoScamList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoScamList.xcdatamodel; sourceTree = "<group>"; };
 		BBF70629294CF54B006DA73A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoScamList.entitlements; sourceTree = "<group>"; };
-		BBF70636294CF835006DA73A /* NewScam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScam.swift; sourceTree = "<group>"; };
-		BBFA467B2954AB46009E9E9A /* AddCustomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomType.swift; sourceTree = "<group>"; };
+		BBF70636294CF835006DA73A /* NewScamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamView.swift; sourceTree = "<group>"; };
+		BBFA467B2954AB46009E9E9A /* AddCustomTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomTypeView.swift; sourceTree = "<group>"; };
 		BBFA46812954E8A3009E9E9A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C3372A6C29919F52008DF8DE /* PowerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerColor.swift; sourceTree = "<group>"; };
 		C3372A722991BFA6008DF8DE /* TextModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifiers.swift; sourceTree = "<group>"; };
@@ -68,7 +69,8 @@
 		C357F437299841D0007CE050 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C357F441299A6BF2007CE050 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C357F443299A6EA5007CE050 /* ScamCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamCoreData.swift; sourceTree = "<group>"; };
-		C39356602982E7410006DCAF /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		C357F49329A3B399007CE050 /* CardScamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScamView.swift; sourceTree = "<group>"; };
+		C39356602982E7410006DCAF /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamViewModel.swift; sourceTree = "<group>"; };
 		C3C8423E2993F6940068BB15 /* NewScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamModel.swift; sourceTree = "<group>"; };
 		C3C8424229940A5A0068BB15 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
@@ -76,7 +78,7 @@
 		C3F2F5B629885DD4005436CB /* NavigationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTheme.swift; sourceTree = "<group>"; };
 		C3F2F5D9298B3C9D005436CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C3F2F5DB298B3C9F005436CB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C3F905AE2983366B00C2E649 /* EditDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDescription.swift; sourceTree = "<group>"; };
+		C3F905AE2983366B00C2E649 /* EditDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDescriptionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,13 +107,14 @@
 			isa = PBXGroup;
 			children = (
 				BBF70629294CF54B006DA73A /* MainView.swift */,
-				BBF70636294CF835006DA73A /* NewScam.swift */,
-				BB75876129761A79001D1FA0 /* MoreDetailed.swift */,
-				C39356602982E7410006DCAF /* Statistics.swift */,
+				BBF70636294CF835006DA73A /* NewScamView.swift */,
+				BB75876129761A79001D1FA0 /* MoreDetailedView.swift */,
+				C39356602982E7410006DCAF /* StatisticsView.swift */,
+				BBFA467B2954AB46009E9E9A /* AddCustomTypeView.swift */,
+				C3F905AE2983366B00C2E649 /* EditDescriptionView.swift */,
+				BB705C45295C891E006585BB /* EditScamView.swift */,
+				C357F49329A3B399007CE050 /* CardScamView.swift */,
 				BB7ACB8029782DB3008649E8 /* ShowImage.swift */,
-				BBFA467B2954AB46009E9E9A /* AddCustomType.swift */,
-				C3F905AE2983366B00C2E649 /* EditDescription.swift */,
-				BB705C45295C891E006585BB /* EditScam.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -132,7 +135,7 @@
 				BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */,
 				BBD7FD5F2970C40B006679BF /* DismissKeyboard.swift */,
 				BBD7FD612970C4BB006679BF /* Placeholder.swift */,
-				BB7ACB8229785687008649E8 /* Calendar.swift */,
+				BB7ACB8229785687008649E8 /* Date.swift */,
 				BB7D99B0297C342800442733 /* UniqItemsArray.swift */,
 				C3372A722991BFA6008DF8DE /* TextModifiers.swift */,
 				C3372A742991C4F5008DF8DE /* ImageModifier.swift */,
@@ -298,22 +301,23 @@
 				C3C842452996797C0068BB15 /* NewScamModelDefaultValues.swift in Sources */,
 				BBD7FD5E2970C3BF006679BF /* PinchToZoom.swift in Sources */,
 				C357F444299A6EA5007CE050 /* ScamCoreData.swift in Sources */,
-				BB705C46295C891E006585BB /* EditScam.swift in Sources */,
+				BB705C46295C891E006585BB /* EditScamView.swift in Sources */,
 				C357F442299A6BF2007CE050 /* CoreDataManager.swift in Sources */,
-				BB75876229761A7A001D1FA0 /* MoreDetailed.swift in Sources */,
-				C39356612982E7410006DCAF /* Statistics.swift in Sources */,
+				BB75876229761A7A001D1FA0 /* MoreDetailedView.swift in Sources */,
+				C39356612982E7410006DCAF /* StatisticsView.swift in Sources */,
 				C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */,
 				C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */,
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
-				BBFA467C2954AB46009E9E9A /* AddCustomType.swift in Sources */,
+				BBFA467C2954AB46009E9E9A /* AddCustomTypeView.swift in Sources */,
 				C3372A752991C4F5008DF8DE /* ImageModifier.swift in Sources */,
-				C3F905AF2983366B00C2E649 /* EditDescription.swift in Sources */,
+				C3F905AF2983366B00C2E649 /* EditDescriptionView.swift in Sources */,
 				C357F438299841D0007CE050 /* MainViewModel.swift in Sources */,
 				BBD7FD602970C40B006679BF /* DismissKeyboard.swift in Sources */,
-				BBF70637294CF835006DA73A /* NewScam.swift in Sources */,
+				BBF70637294CF835006DA73A /* NewScamView.swift in Sources */,
+				C357F49429A3B399007CE050 /* CardScamView.swift in Sources */,
 				BBF7062A294CF54B006DA73A /* MainView.swift in Sources */,
 				BBF70628294CF54B006DA73A /* ScamCoreData.xcdatamodeld in Sources */,
-				BB7ACB8329785687008649E8 /* Calendar.swift in Sources */,
+				BB7ACB8329785687008649E8 /* Date.swift in Sources */,
 				BB7ACB8129782DB3008649E8 /* ShowImage.swift in Sources */,
 				BBD7FD622970C4BB006679BF /* Placeholder.swift in Sources */,
 				C3372A6D29919F52008DF8DE /* PowerColor.swift in Sources */,

@@ -9,8 +9,7 @@ import SwiftUI
 import CoreData
 
 struct MainView: View {
-    
-    @StateObject var newScamViewModel = NewScamViewModel()
+
     @StateObject var viewModel = MainViewModel()
     @GestureState private var scale: CGFloat = 1.0
     let powerColor = PowerColor()
@@ -32,7 +31,7 @@ struct MainView: View {
                                 .onTapGesture {
                                     viewModel.showImage(item: item)
                                 }
-                            cardScamView(item: item)
+                            CardScamView().cardScamView(item: item)
                                 .onTapGesture {
                                     viewModel.findIndexForMdView(item: item)
                                     viewModel.toggleMdIsShown()
@@ -72,18 +71,18 @@ struct MainView: View {
                     Text("Сортировка по силе").tag(3)
                     Text("Сортировка по типу").tag(4)
                 } .pickerStyle(.menu), trailing: Button(action: {
-                    newScamViewModel.toggleNewScamIsShown()
+                    viewModel.toggleNewScamIsShown()
                 }) {
                     Image(systemName: "plus")
                 })
-                .fullScreenCover(isPresented: $newScamViewModel.newScamModel.newScamIsShown) {
-                    NewScam()
+                .fullScreenCover(isPresented: $viewModel.model.newScamIsShown) {
+                    NewScamView()
                 }
                 .sheet(isPresented: $viewModel.model.imageIsShown, content: {
                     ShowImage(image: $viewModel.model.showImage)
                 })
                 .fullScreenCover(isPresented: $viewModel.model.mdIsShown, content: {
-                    MoreDetailed()})
+                    MoreDetailedView()})
             }
             if viewModel.model.editIsShown == true {
                 Text(" ")
@@ -95,53 +94,9 @@ struct MainView: View {
                         viewModel.toggleEditIsShown()
                     }
             }
-            EditScam(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.model.editIsCanceled, text: $viewModel.model.editInput, power: $viewModel.model.editpower)
+            EditScamView(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.model.editIsCanceled, text: $viewModel.model.editInput, power: $viewModel.model.editpower)
         }
         .environmentObject(viewModel)
-    }
-
-    @ViewBuilder
-    private func cardScamView(item: ScamCoreData) -> some View {
-        ZStack {
-            VStack(alignment: .leading, spacing: 0) {
-                Text(item.title)
-                    .font(.system(size: 13, weight: .bold, design: .default))
-                Text("#\(item.type)")
-                    .font(.system(size: 10, weight: .medium, design: .default))
-                    .opacity(0.6)
-                    .padding(5)
-                    .padding(.bottom, 3)
-                    .padding(.leading, -5)
-                HStack {
-                    Text("\(Int(item.power))/10 скамов")
-                        .font(.system(size: 12, weight: .medium, design: .default))
-                        .foregroundColor(.white)
-                        .padding(3)
-                        .background(powerColor.chooseColor(power: Int(item.power)))
-                        .cornerRadius(20)
-                        .padding(.bottom, 3)
-                    Text("\(item.selectedDate, format: Date.FormatStyle(date: .numeric, time: .omitted))")
-                        .font(.system(size: 10, weight: .medium, design: .default))
-                        .padding(3)
-                        .padding(.bottom, -1)
-                        .foregroundColor(.gray)
-                        .opacity(0.7)
-                        .frame(alignment: .bottomLeading)
-                        .offset(y: -1)
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
-            .padding(.leading, 65)
-            .offset(x: 8)
-            VStack {
-                Image(systemName: "arrow.right.square")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .opacity(0.35)
-            }
-            .padding(.trailing, 10)
-        }
     }
 }
 

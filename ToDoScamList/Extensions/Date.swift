@@ -105,10 +105,10 @@ extension Date {
     static let threeMondayAgo = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).getFormattedDate(format: "dd/MM")
     static let fourMondayAgo = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday).getFormattedDate(format: "dd/MM")
     static let fiveMondayAgo = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday).getFormattedDate(format: "dd/MM")
-  static let oneWeekAgoDate = Date.today().previous(.monday).previous(.monday)
-  static let twoWeeksAgoDate = Date.today().previous(.monday).previous(.monday).previous(.monday)
-  static let threeWeeksAgoDate = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday)
-  static let fourWeeksAgoDate = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
-  static let fiveWeeksAgoDate = Date.today().previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday).previous(.monday)
-  static let monthAgoDate = Calendar(identifier: .iso8601).date(byAdding: .day, value: -30, to: Date())!
+    static let oneWeekAgoDate = Date.today().previous(.monday).previous(.monday)
+    static let twoWeeksAgoDate = oneWeekAgoDate.previous(.monday)
+    static let threeWeeksAgoDate = twoWeeksAgoDate.previous(.monday)
+    static let fourWeeksAgoDate = threeWeeksAgoDate.previous(.monday)
+    static let fiveWeeksAgoDate = fourWeeksAgoDate.previous(.monday)
+    static let monthAgoDate = Calendar(identifier: .iso8601).date(byAdding: .day, value: -30, to: Date())!
 }

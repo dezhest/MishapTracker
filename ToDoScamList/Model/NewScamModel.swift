@@ -22,6 +22,5 @@ struct NewScamModel {
     var showsAlertNameCount = false
     var showImageDialog = false
     var showsImagePicker = false
-    var newScamIsShown = false
     var source: UIImagePickerController.SourceType = .photoLibrary
 }
