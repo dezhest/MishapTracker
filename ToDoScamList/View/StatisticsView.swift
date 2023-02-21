@@ -21,13 +21,13 @@ struct StatisticsView: View {
                 Group {
                     Text("Количество скамов типа ")
                         .font(.system(size: 18, weight: .bold, design: .default))
-                    + Text("#\(mainViewModel.model.type)")
+                    + Text("#\(mainViewModel.statisticModel.type)")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .foregroundColor(.orange)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 VStack {
-                    Text("\(mainViewModel.model.sameTypeCount)")
+                    Text("\(mainViewModel.statisticModel.sameTypeCount)")
                         .medium14()
                 }
                 .frame(alignment: .trailing)
@@ -36,24 +36,24 @@ struct StatisticsView: View {
                 Group {
                     Text("Средняя сила типа ")
                         .font(.system(size: 18, weight: .bold, design: .default))
-                    + Text("#\(mainViewModel.model.type)")
+                    + Text("#\(mainViewModel.statisticModel.type)")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .foregroundColor(.orange)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 VStack {
-                    Text(String(format: "%.2f", mainViewModel.model.averagePowerSameType))
+                    Text(String(format: "%.2f", mainViewModel.statisticModel.averagePowerSameType))
                         .medium14()
                 }
                 .frame(alignment: .trailing)
             }
-            DisclosureGroup(isExpanded: $mainViewModel.model.general, content: {
+            DisclosureGroup(isExpanded: $mainViewModel.statisticModel.general, content: {
                 ZStack {
                     Text("Общая сила скама")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(Int(mainViewModel.model.allPower))")
+                        Text("\(Int(mainViewModel.statisticModel.allPower))")
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -63,7 +63,7 @@ struct StatisticsView: View {
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text(String(format: "%.2f", mainViewModel.model.averagePowerOfAll))
+                        Text(String(format: "%.2f", mainViewModel.statisticModel.averagePowerOfAll))
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -79,23 +79,23 @@ struct StatisticsView: View {
                             .offset(y: -7)
                     }.frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text(mainViewModel.model.mostFrequentType)
+                        Text(mainViewModel.statisticModel.mostFrequentType)
                             .medium14()
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .offset(y: 22.5)
-                        Text("\(mainViewModel.model.mostFrequentTypeCount)")
+                        Text("\(mainViewModel.statisticModel.mostFrequentTypeCount)")
                             .medium14()
                             .frame(maxWidth: .infinity, maxHeight: 80, alignment: .bottomTrailing)
                     }
                 }
             }, label: {Text("За все время").font(.system(size: 18, weight: .bold, design: .default))})
-            DisclosureGroup(isExpanded: $mainViewModel.model.month, content: {
+            DisclosureGroup(isExpanded: $mainViewModel.statisticModel.month, content: {
                 ZStack {
                     Text("Общая сила")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(mainViewModel.model.last30dayPower)")
+                        Text("\(mainViewModel.statisticModel.last30dayPower)")
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -104,13 +104,13 @@ struct StatisticsView: View {
                     Group {
                         Text("Количество скамов типа ")
                             .font(.system(size: 14, weight: .medium, design: .default))
-                        + Text("#\(mainViewModel.model.type)")
+                        + Text("#\(mainViewModel.statisticModel.type)")
                             .font(.system(size: 14, weight: .medium, design: .default))
                             .foregroundColor(.orange)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(mainViewModel.model.last30daySameTypeCount)")
+                        Text("\(mainViewModel.statisticModel.last30daySameTypeCount)")
                             .medium14()
                     }
                     .frame(alignment: .trailing)
@@ -120,19 +120,19 @@ struct StatisticsView: View {
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text(String(format: "%.2f", mainViewModel.model.averagePowerOfLast30day))
+                        Text(String(format: "%.2f", mainViewModel.statisticModel.averagePowerOfLast30day))
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }, label: {Text("За месяц").font(.system(size: 18, weight: .bold, design: .default))})
-            DisclosureGroup(isExpanded: $mainViewModel.model.week, content: {
+            DisclosureGroup(isExpanded: $mainViewModel.statisticModel.week, content: {
                 ZStack {
                     Text("Общая сила")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(mainViewModel.model.currentWeekPower)")
+                        Text("\(mainViewModel.statisticModel.currentWeekPower)")
                             .medium14()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -141,20 +141,20 @@ struct StatisticsView: View {
                     Group {
                         Text("Количество скамов типа ")
                             .font(.system(size: 14, weight: .medium, design: .default))
-                        + Text("#\(mainViewModel.model.type)")
+                        + Text("#\(mainViewModel.statisticModel.type)")
                             .font(.system(size: 14, weight: .medium, design: .default))
                             .foregroundColor(.orange)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     VStack {
-                        Text("\(mainViewModel.model.currentWeekSameTypeCount)")
+                        Text("\(mainViewModel.statisticModel.currentWeekSameTypeCount)")
                             .medium14()
                     }
                     .frame(alignment: .trailing)
                 }
             }, label: {Text("Текущая неделя").font(.system(size: 18, weight: .bold, design: .default))})
             VStack {
-                BarChartView(data: ChartData(values: [("\(mainViewModel.model.fiveMondayAgo) - \(mainViewModel.model.fourSundayAgo)", Double(mainViewModel.model.fiveWeeksAgoPower)), ("\(mainViewModel.model.fourMondayAgo) - \(mainViewModel.model.threeSundayAgo)", Double(mainViewModel.model.fourWeeksAgoPower)), ("\(mainViewModel.model.threeMondayAgo) - \(mainViewModel.model.twoSundayAgo)", Double(mainViewModel.model.threeWeeksAgoPower)), ("\(mainViewModel.model.twoMondayAgo) - \(mainViewModel.model.oneSundayAgo)", Double(mainViewModel.model.twoWeeksAgoPower)), ("\(mainViewModel.model.oneMondayAgo) - \(mainViewModel.model.lastSunday)", Double(mainViewModel.model.oneWeekAgoPower)), ("\(mainViewModel.model.lastMonday) - \(mainViewModel.model.today)", Double(mainViewModel.model.currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
+                BarChartView(data: ChartData(values: [("\(mainViewModel.statisticModel.fiveMondayAgo) - \(mainViewModel.statisticModel.fourSundayAgo)", Double(mainViewModel.statisticModel.fiveWeeksAgoPower)), ("\(mainViewModel.statisticModel.fourMondayAgo) - \(mainViewModel.statisticModel.threeSundayAgo)", Double(mainViewModel.statisticModel.fourWeeksAgoPower)), ("\(mainViewModel.statisticModel.threeMondayAgo) - \(mainViewModel.statisticModel.twoSundayAgo)", Double(mainViewModel.statisticModel.threeWeeksAgoPower)), ("\(mainViewModel.statisticModel.twoMondayAgo) - \(mainViewModel.statisticModel.oneSundayAgo)", Double(mainViewModel.statisticModel.twoWeeksAgoPower)), ("\(mainViewModel.statisticModel.oneMondayAgo) - \(mainViewModel.statisticModel.lastSunday)", Double(mainViewModel.statisticModel.oneWeekAgoPower)), ("\(mainViewModel.statisticModel.lastMonday) - \(mainViewModel.statisticModel.today)", Double(mainViewModel.statisticModel.currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, alignment: .bottom)
                 PieChartView(data: mainViewModel.findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
@@ -167,7 +167,7 @@ struct StatisticsView: View {
         .navigationBarItems(leading: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
             Image(systemName: "chevron.left")
                 .backButton()
-        }, trailing: Text(mainViewModel.model.type))
+        }, trailing: Text(mainViewModel.statisticModel.type))
     }
         .environment(\.colorScheme, .dark)
     }

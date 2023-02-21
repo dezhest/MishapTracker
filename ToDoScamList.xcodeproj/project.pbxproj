@@ -32,6 +32,7 @@
 		C357F444299A6EA5007CE050 /* ScamCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F443299A6EA5007CE050 /* ScamCoreData.swift */; };
 		C357F49429A3B399007CE050 /* CardScamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F49329A3B399007CE050 /* CardScamView.swift */; };
 		C357F4A029A4B413007CE050 /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F49F29A4B413007CE050 /* SortType.swift */; };
+		C357F4A429A4BBB5007CE050 /* StatisticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F4A329A4BBB5007CE050 /* StatisticModel.swift */; };
 		C39356612982E7410006DCAF /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* StatisticsView.swift */; };
 		C3C8423D2993E5A90068BB15 /* NewScamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */; };
 		C3C8423F2993F6940068BB15 /* NewScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423E2993F6940068BB15 /* NewScamModel.swift */; };
@@ -72,6 +73,7 @@
 		C357F443299A6EA5007CE050 /* ScamCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamCoreData.swift; sourceTree = "<group>"; };
 		C357F49329A3B399007CE050 /* CardScamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScamView.swift; sourceTree = "<group>"; };
 		C357F49F29A4B413007CE050 /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
+		C357F4A329A4BBB5007CE050 /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamViewModel.swift; sourceTree = "<group>"; };
 		C3C8423E2993F6940068BB15 /* NewScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamModel.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				C3C8424229940A5A0068BB15 /* MainModel.swift */,
 				C3C8423E2993F6940068BB15 /* NewScamModel.swift */,
+				C357F4A329A4BBB5007CE050 /* StatisticModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,11 +168,7 @@
 		BBF70621294CF54B006DA73A /* ToDoScamList */ = {
 			isa = PBXGroup;
 			children = (
-				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
-				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
-				BB705C3D295A07E6006585BB /* PinchZoomView.swift */,
-				C3372A6C29919F52008DF8DE /* PowerColor.swift */,
-				C3F2F5B629885DD4005436CB /* NavigationTheme.swift */,
+				C357F4A229A4B9A7007CE050 /* Helpers */,
 				BBD34C03296C4C41006ECC63 /* Model */,
 				BBD34C04296C4C93006ECC63 /* View */,
 				C3C8423B2993E3F60068BB15 /* ViewModel */,
@@ -182,6 +181,18 @@
 				C357F49F29A4B413007CE050 /* SortType.swift */,
 			);
 			path = ToDoScamList;
+			sourceTree = "<group>";
+		};
+		C357F4A229A4B9A7007CE050 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
+				C3F2F5B629885DD4005436CB /* NavigationTheme.swift */,
+				C3372A6C29919F52008DF8DE /* PowerColor.swift */,
+				BB705C3D295A07E6006585BB /* PinchZoomView.swift */,
+				BBFA46812954E8A3009E9E9A /* ImagePicker.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		C3C8423B2993E3F60068BB15 /* ViewModel */ = {
@@ -325,6 +336,7 @@
 				BB7ACB8129782DB3008649E8 /* ShowImage.swift in Sources */,
 				BBD7FD622970C4BB006679BF /* Placeholder.swift in Sources */,
 				C3372A6D29919F52008DF8DE /* PowerColor.swift in Sources */,
+				C357F4A429A4BBB5007CE050 /* StatisticModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

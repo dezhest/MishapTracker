@@ -13,6 +13,7 @@ import SwiftUICharts
 
 class MainViewModel: ObservableObject {
     @Published var model = MainModel()
+    @Published var statisticModel = StatisticModel()
     let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
     let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
     @Published var editIsShown = false {
@@ -51,13 +52,16 @@ class MainViewModel: ObservableObject {
         }
     }
     
+    func mDtoggleEditIsShown() {
+        mDeditIsShown.toggle()
+    }
+    
     var sortedScams: [ScamCoreData] {
         switch model.pickerSelection {
         case(SortType.date): return fetchData().sorted(by: {$0.selectedDate > $1.selectedDate})
         case(SortType.name): return fetchData().sorted(by: {$0.title < $1.title})
         case(SortType.power): return fetchData().sorted(by: {$0.power > $1.power})
         case(SortType.type): return fetchData().sorted(by: {$0.type > $1.type})
-        default: return []
         }
     }
     
@@ -124,31 +128,31 @@ class MainViewModel: ObservableObject {
         if let unwrapped = sortedScams[model.indexOfMoreDetailed].imageD {model.image = unwrapped}
     }
     
-    func computedStatistic() {
+    func computeStatistic() {
         concurrentQueue.async {
-            self.globalStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
+            self.computeGlobalStatistic(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
-            self.monthStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
+            self.computeWeekStatistic(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
-            self.weekStat(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
+            self.computeWeekStatistic(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
     }
     
-    func monthStat(scam: [ScamCoreData], index: Int) {
+    func computeMonthStatistic(scam: [ScamCoreData], index: Int) {
         let last30DayScams = scam.filter({$0.selectedDate > Date.monthAgoDate})
         let last30dayPower = last30DayScams.map({Int($0.power)}).reduce(0, +)
         let last30daySameTypeCount = last30DayScams.filter({$0.type == scam[index].type}).count
         let averagePowerOfLast30day = (Double(last30dayPower) / Double(last30DayScams.count)*100).rounded()/100
         DispatchQueue.main.async {
-            self.model.last30dayPower = last30dayPower
-            self.model.last30daySameTypeCount = last30daySameTypeCount
-            self.model.averagePowerOfLast30day = averagePowerOfLast30day
+            self.statisticModel.last30dayPower = last30dayPower
+            self.statisticModel.last30daySameTypeCount = last30daySameTypeCount
+            self.statisticModel.averagePowerOfLast30day = averagePowerOfLast30day
         }
     }
     
-    func globalStat(scam: [ScamCoreData], index: Int) {
+    func computeGlobalStatistic(scam: [ScamCoreData], index: Int) {
         let allTypes = scam.map({$0.type}).removingDuplicates()
         let arrayallPower = scam.map({Int($0.power)})
         let sameTypeScams = scam.filter({$0.type == scam[index].type})
@@ -191,22 +195,22 @@ class MainViewModel: ObservableObject {
         }
         
         DispatchQueue.main.async{
-            self.model.id = iD
+            self.statisticModel.id = iD
             self.model.title = title
-            self.model.type = type
+            self.statisticModel.type = type
             self.model.description = description
-            self.model.sameTypeCount = sameTypeCount
-            self.model.allPower = allPower
-            self.model.averagePowerOfAll = averagePowerOfAll
-            self.model.averagePowerSameType = averagePowerSameType
-            self.model.mostFrequentTypeCount = mostFrequentTypeCount
-            self.model.mostFrequentType = mostFrequentType
-            self.model.eachTypeCount = eachTypeCount
-            self.model.allTypes = allTypes
+            self.statisticModel.sameTypeCount = sameTypeCount
+            self.statisticModel.allPower = allPower
+            self.statisticModel.averagePowerOfAll = averagePowerOfAll
+            self.statisticModel.averagePowerSameType = averagePowerSameType
+            self.statisticModel.mostFrequentTypeCount = mostFrequentTypeCount
+            self.statisticModel.mostFrequentType = mostFrequentType
+            self.statisticModel.eachTypeCount = eachTypeCount
+            self.statisticModel.allTypes = allTypes
         }
     }
   
-    func weekStat(scam: [ScamCoreData], index: Int) {
+    func computeWeekStatistic(scam: [ScamCoreData], index: Int) {
         let currentWeekScams = scam.filter({$0.selectedDate > Date.today().previous(.monday)})
         let oneWeekAgoScams = scam.filter({($0.selectedDate > Date.oneWeekAgoDate) && ($0.selectedDate < Date.today().previous(.monday))})
         let twoWeeksAgoScams = scam.filter({($0.selectedDate > Date.twoWeeksAgoDate) && ($0.selectedDate < Date.oneWeekAgoDate)})
@@ -221,28 +225,25 @@ class MainViewModel: ObservableObject {
         let fourWeeksAgoPower = fourWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
         let fiveWeeksAgoPower = fiveWeeksAgoScams.map({Int($0.power)}).reduce(0, +)
         DispatchQueue.main.async {
-            self.model.currentWeekSameTypeCount = currentWeekSameTypeCount
-            self.model.currentWeekPower = currentWeekPower
-            self.model.oneWeekAgoPower = oneWeekAgoPower
-            self.model.twoWeeksAgoPower = twoWeeksAgoPower
-            self.model.threeWeeksAgoPower = threeWeeksAgoPower
-            self.model.fourWeeksAgoPower = fourWeeksAgoPower
-            self.model.fiveWeeksAgoPower = fiveWeeksAgoPower
+            self.statisticModel.currentWeekSameTypeCount = currentWeekSameTypeCount
+            self.statisticModel.currentWeekPower = currentWeekPower
+            self.statisticModel.oneWeekAgoPower = oneWeekAgoPower
+            self.statisticModel.twoWeeksAgoPower = twoWeeksAgoPower
+            self.statisticModel.threeWeeksAgoPower = threeWeeksAgoPower
+            self.statisticModel.fourWeeksAgoPower = fourWeeksAgoPower
+            self.statisticModel.fiveWeeksAgoPower = fiveWeeksAgoPower
         }
     }
-    
-    func mDtoggleEditIsShown() {
-        mDeditIsShown.toggle()
-    }
+
     
     func findPieChartData() -> [PieChartData] {
         var pieChartData = [PieChartData]()
         var item = 0
         repeat {
-            pieChartData.append(PieChartData(label: model.allTypes[item], value: Double(model.eachTypeCount[item])))
+            pieChartData.append(PieChartData(label: statisticModel.allTypes[item], value: Double(statisticModel.eachTypeCount[item])))
             item += 1
         }
-        while model.allTypes.count > item
+        while statisticModel.allTypes.count > item
                 return pieChartData
     }
 }

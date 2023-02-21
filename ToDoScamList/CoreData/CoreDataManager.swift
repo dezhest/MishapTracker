@@ -15,7 +15,7 @@ class CoreDataManager {
     private init() {}
     
     func entityForName(entityName: String) -> NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: entityName, in: self.managedObjectContext)!
+        return NSEntityDescription.entity(forEntityName: entityName, in: self.managedObjectContext) ?? NSEntityDescription()
     }
 
     func fetchedResultsController(entityName: String, keyForSort: String) -> NSFetchedResultsController<NSFetchRequestResult> {
