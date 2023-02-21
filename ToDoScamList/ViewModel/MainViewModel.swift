@@ -15,32 +15,18 @@ class MainViewModel: ObservableObject {
     @Published var model = MainModel()
     let concurrentQueue = DispatchQueue(label: "scam.stat", qos: .userInitiated, attributes: .concurrent)
     let fetchRequest = NSFetchRequest<ScamCoreData>(entityName: "ScamCoreData")
-    
-    func findIndex() -> Int {
-        var index = 0
-        do {
-            let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
-            for scam in results where scam.id == model.id {
-                if let unwrapped = results.firstIndex(of: scam) {index = unwrapped}
+    @Published var editIsShown = false {
+        didSet {
+            if !editIsShown {
+                saveToDataEditScam()
             }
         }
-        catch {
-            print("Error fetching data")
-        }
-        return index
     }
-    
-    func saveToData() {
-        if !model.mDeditIsShown {
-            do {
-                let results = try CoreDataManager.instance.managedObjectContext.fetch(fetchRequest)
-                let editScam = results[findIndex()] as NSManagedObject
-                editScam.setValue(model.description, forKey: "scamDescription")
-                CoreDataManager.instance.saveContext()
-                updateView()
-            } catch {
-                let saveError = error as NSError
-                print(saveError)
+    @Published var mDeditIsShown = false {
+        didSet {
+            model.description = model.mDeditInput
+            if !mDeditIsShown {
+                saveToDataEditDescription()
             }
         }
     }
@@ -75,22 +61,22 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    func updateView() {
-        model.pickerSelection += 1
-        model.pickerSelection -= 1
-    }
-    
         func toggleNewScamIsShown() {
             model.newScamIsShown.toggle()
         }
 
 
-    func onChangeEditScam() {
+    func saveToDataEditScam() {
             let editScam = sortedScams[model.indexOfEditScam] as NSManagedObject
             editScam.setValue(model.editInput, forKey: "title")
             editScam.setValue(model.editpower, forKey: "power")
             CoreDataManager.instance.saveContext()
-            updateView()
+    }
+    
+    func saveToDataEditDescription() {
+        let editDescription = sortedScams[model.indexOfMoreDetailed] as NSManagedObject
+        editDescription.setValue(model.description, forKey: "scamDescription")
+                CoreDataManager.instance.saveContext()
     }
     
     func placeholderTextField(item: ScamCoreData) {
@@ -126,7 +112,7 @@ class MainViewModel: ObservableObject {
     }
     
     func toggleEditIsShown() {
-        model.editIsShown.toggle()
+        editIsShown.toggle()
     }
     
     func toggleMdIsShown() {
@@ -246,7 +232,7 @@ class MainViewModel: ObservableObject {
     }
     
     func mDtoggleEditIsShown() {
-        model.mDeditIsShown.toggle()
+        mDeditIsShown.toggle()
     }
     
     func findPieChartData() -> [PieChartData] {

@@ -58,11 +58,6 @@ struct MainView: View {
                             .tint(.green)
                         }
                     }
-                    .onChange(of: viewModel.model.editIsShown) { _ in
-                        if !viewModel.model.editIsShown {
-                            viewModel.onChangeEditScam()
-                        }
-                    }
                 }
                 .navigationBarTitle(Text("Scam List"))
                 .navigationBarItems(leading: Picker("Select number", selection: $viewModel.model.pickerSelection) {
@@ -84,7 +79,7 @@ struct MainView: View {
                 .fullScreenCover(isPresented: $viewModel.model.mdIsShown, content: {
                     MoreDetailedView()})
             }
-            if viewModel.model.editIsShown == true {
+            if viewModel.editIsShown == true {
                 Text(" ")
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                     .background(Color.black)
@@ -94,7 +89,7 @@ struct MainView: View {
                         viewModel.toggleEditIsShown()
                     }
             }
-            EditScamView(isShown: $viewModel.model.editIsShown, isCanceled: $viewModel.model.editIsCanceled, text: $viewModel.model.editInput, power: $viewModel.model.editpower)
+            EditScamView(isShown: $viewModel.editIsShown, isCanceled: $viewModel.model.editIsCanceled, text: $viewModel.model.editInput, power: $viewModel.model.editpower)
         }
         .environmentObject(viewModel)
     }

@@ -78,26 +78,21 @@ struct MoreDetailedView: View {
                     }
                 }
                 .frame(maxHeight: .infinity)
-                .onChange(of: viewModel.model.mDeditIsShown) { _ in
-                    viewModel.model.description = viewModel.model.mDeditInput
-                    viewModel.saveToData()
-                }
-                .frame(maxWidth: .infinity)
             }
                             .fullScreenCover(isPresented: $viewModel.model.statIsShown) {
                                 StatisticsView()}
-            if viewModel.model.mDeditIsShown == true {
+            if viewModel.mDeditIsShown == true {
                 Text(" ")
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                     .background(Color.black)
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.8)
                     .onTapGesture{
-                        viewModel.model.mDeditIsShown = false
+                        viewModel.mDeditIsShown = false
                     }
             }
-            EditDescriptionView(isShown: $viewModel.model.mDeditIsShown, isCanceled: $viewModel.model.mDeditIsCanceled, text: $viewModel.model.mDeditInput)
-            if !viewModel.model.mDeditIsShown {
+            EditDescriptionView(isShown: $viewModel.mDeditIsShown, isCanceled: $viewModel.model.mDeditIsCanceled, text: $viewModel.model.mDeditInput)
+            if !viewModel.mDeditIsShown {
                 Text("Статистика")
                     .foregroundColor(.white)
                     .font(.system(size: 18, weight: .bold, design: .default))

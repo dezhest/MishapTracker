@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct MainModel {
-    var editIsShown = false
     var mdIsShown = false
     var indexOfMoreDetailed = 0
     var editIsCanceled = false
@@ -27,7 +26,6 @@ struct MainModel {
     var general = false
     var month = false
     var week = false
-    var mDeditIsShown = false
     var mDeditIsCanceled = false
     var mDeditInput = ""
     
