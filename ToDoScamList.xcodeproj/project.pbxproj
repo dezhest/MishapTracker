@@ -168,17 +168,16 @@
 		BBF70621294CF54B006DA73A /* ToDoScamList */ = {
 			isa = PBXGroup;
 			children = (
-				C357F4A229A4B9A7007CE050 /* Helpers */,
 				BBD34C03296C4C41006ECC63 /* Model */,
 				BBD34C04296C4C93006ECC63 /* View */,
 				C3C8423B2993E3F60068BB15 /* ViewModel */,
 				BBD7FD5C2970C3AF006679BF /* Extensions */,
 				BBD34C05296C4CB5006ECC63 /* CoreData */,
+				C357F4A229A4B9A7007CE050 /* Helpers */,
 				BB75873D297407D3001D1FA0 /* Image.xcassets */,
 				BBD34C08296C5736006ECC63 /* Preview Content */,
 				BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */,
 				C3F2F5DA298B3C9D005436CB /* Localizable.strings */,
-				C357F49F29A4B413007CE050 /* SortType.swift */,
 			);
 			path = ToDoScamList;
 			sourceTree = "<group>";
@@ -186,6 +185,7 @@
 		C357F4A229A4B9A7007CE050 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C357F49F29A4B413007CE050 /* SortType.swift */,
 				BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */,
 				C3F2F5B629885DD4005436CB /* NavigationTheme.swift */,
 				C3372A6C29919F52008DF8DE /* PowerColor.swift */,

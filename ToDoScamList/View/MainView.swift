@@ -35,7 +35,7 @@ struct MainView: View {
                                 .onTapGesture {
                                     viewModel.findIndexForMdView(item: item)
                                     viewModel.toggleMdIsShown()
-                                    viewModel.computedStatistic()
+                                    viewModel.computeStatistic()
                                 }
                         }
                         .frame(maxWidth: .infinity)
