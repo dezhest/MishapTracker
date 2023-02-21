@@ -53,10 +53,10 @@ class MainViewModel: ObservableObject {
     
     var sortedScams: [ScamCoreData] {
         switch model.pickerSelection {
-        case(1): return fetchData().sorted(by: {$0.selectedDate > $1.selectedDate})
-        case(2): return fetchData().sorted(by: {$0.title < $1.title})
-        case(3): return fetchData().sorted(by: {$0.power > $1.power})
-        case(4): return fetchData().sorted(by: {$0.type > $1.type})
+        case(SortType.date): return fetchData().sorted(by: {$0.selectedDate > $1.selectedDate})
+        case(SortType.name): return fetchData().sorted(by: {$0.title < $1.title})
+        case(SortType.power): return fetchData().sorted(by: {$0.power > $1.power})
+        case(SortType.type): return fetchData().sorted(by: {$0.type > $1.type})
         default: return []
         }
     }

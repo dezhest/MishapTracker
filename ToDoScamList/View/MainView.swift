@@ -61,10 +61,10 @@ struct MainView: View {
                 }
                 .navigationBarTitle(Text("Scam List"))
                 .navigationBarItems(leading: Picker("Select number", selection: $viewModel.model.pickerSelection) {
-                    Text("Сортировка по дате").tag(1)
-                    Text("Сортировка по алфавиту").tag(2)
-                    Text("Сортировка по силе").tag(3)
-                    Text("Сортировка по типу").tag(4)
+                    Text("Сортировка по дате").tag(SortType.date)
+                    Text("Сортировка по алфавиту").tag(SortType.name)
+                    Text("Сортировка по силе").tag(SortType.power)
+                    Text("Сортировка по типу").tag(SortType.type)
                 } .pickerStyle(.menu), trailing: Button(action: {
                     viewModel.toggleNewScamIsShown()
                 }) {

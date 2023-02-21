@@ -31,6 +31,7 @@
 		C357F442299A6BF2007CE050 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F441299A6BF2007CE050 /* CoreDataManager.swift */; };
 		C357F444299A6EA5007CE050 /* ScamCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F443299A6EA5007CE050 /* ScamCoreData.swift */; };
 		C357F49429A3B399007CE050 /* CardScamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F49329A3B399007CE050 /* CardScamView.swift */; };
+		C357F4A029A4B413007CE050 /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F49F29A4B413007CE050 /* SortType.swift */; };
 		C39356612982E7410006DCAF /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* StatisticsView.swift */; };
 		C3C8423D2993E5A90068BB15 /* NewScamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */; };
 		C3C8423F2993F6940068BB15 /* NewScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423E2993F6940068BB15 /* NewScamModel.swift */; };
@@ -70,6 +71,7 @@
 		C357F441299A6BF2007CE050 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C357F443299A6EA5007CE050 /* ScamCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamCoreData.swift; sourceTree = "<group>"; };
 		C357F49329A3B399007CE050 /* CardScamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScamView.swift; sourceTree = "<group>"; };
+		C357F49F29A4B413007CE050 /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamViewModel.swift; sourceTree = "<group>"; };
 		C3C8423E2993F6940068BB15 /* NewScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamModel.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				BBD34C08296C5736006ECC63 /* Preview Content */,
 				BBF7062D294CF54F006DA73A /* ToDoScamList.entitlements */,
 				C3F2F5DA298B3C9D005436CB /* Localizable.strings */,
+				C357F49F29A4B413007CE050 /* SortType.swift */,
 			);
 			path = ToDoScamList;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				C357F438299841D0007CE050 /* MainViewModel.swift in Sources */,
 				BBD7FD602970C40B006679BF /* DismissKeyboard.swift in Sources */,
 				BBF70637294CF835006DA73A /* NewScamView.swift in Sources */,
+				C357F4A029A4B413007CE050 /* SortType.swift in Sources */,
 				C357F49429A3B399007CE050 /* CardScamView.swift in Sources */,
 				BBF7062A294CF54B006DA73A /* MainView.swift in Sources */,
 				BBF70628294CF54B006DA73A /* ScamCoreData.xcdatamodeld in Sources */,
