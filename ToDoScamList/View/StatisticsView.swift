@@ -10,7 +10,7 @@ import SwiftUICharts
 
 struct StatisticsView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     let screenSize = UIScreen.main.bounds
     let pieChartStyle = ChartStyle(backgroundColor: .black, accentColor: .orange, gradientColor: GradientColor(start: .orange, end: .red), textColor: .white, legendTextColor: .white, dropShadowColor: .gray)
     
@@ -164,7 +164,7 @@ struct StatisticsView: View {
             
         }
         .navigationBarTitle("Статистика")
-        .navigationBarItems(leading: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
+        .navigationBarItems(leading: Button(action: { dismiss() }) {
             Image(systemName: "chevron.left")
                 .backButton()
         }, trailing: Text(mainViewModel.statisticModel.type))

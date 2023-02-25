@@ -13,17 +13,6 @@ import SwiftUI
 final class NewScamViewModel: ObservableObject {
     @Published var newScamModel = NewScamModel()
     let textLimit = 280
-    var viewDismissal = PassthroughSubject<Bool, Never>()
-    
-    private var shouldDismissView = false {
-        didSet {
-            viewDismissal.send(shouldDismissView)
-        }
-    }
-    
-    func dismissView() {
-            self.shouldDismissView = true
-    }
         
     func toggleAddCustomTypeIsShown() {
         newScamModel.showsAddCustomType.toggle()
@@ -80,12 +69,13 @@ final class NewScamViewModel: ObservableObject {
         }
     }
     
-    func tryToSave() {
+    func tryToSave() -> Bool {
         if checkNameCount() {
+            return false
         } else {
             saveToCoreData()
             UserDefaults.standard.set(newScamModel.types, forKey: "typess")
-            self.shouldDismissView = true
+            return true
         }
     }
     
