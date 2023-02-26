@@ -32,17 +32,18 @@ struct CardScamView: View {
                         .background(powerColor.chooseColor(power: Int(item.power)))
                         .cornerRadius(20)
                         .padding(.bottom, 3)
+                        .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
                     Text("\(item.selectedDate, format: Date.FormatStyle(date: .numeric, time: .omitted))")
                         .font(.system(size: 10, weight: .medium, design: .default))
                         .padding(3)
                         .padding(.bottom, -1)
                         .foregroundColor(.gray)
                         .opacity(0.7)
-                        .frame(alignment: .bottomLeading)
-                        .offset(y: -1)
+                        .frame(maxHeight: .infinity, alignment: .bottomTrailing)
+                        .offset(x: -50, y: -1)
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
+//            .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
             .padding(.leading, 65)
             .offset(x: 8)
             VStack {
