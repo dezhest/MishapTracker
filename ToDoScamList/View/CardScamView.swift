@@ -43,7 +43,6 @@ struct CardScamView: View {
                         .offset(x: -50, y: -1)
                 }
             }
-//            .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
             .padding(.leading, 65)
             .offset(x: 8)
             VStack {
