@@ -17,21 +17,21 @@
 "Финансовый" = "Financial";
 "Свой тип" = "Custom type";
 "Очистить типы" = "Delete types";
-"Сортировка по дате" = "Sort by date"
-"Сортировка по алфавиту" = "Sort by AZ"
-"Сортировка по power" = "Sort by power"
-"Сортировка по типу" = "Sort by type"
-"Описание" = "Description"
-"Статистика" = "Статистика"
-"Количество скамов типа" = "Scams of type"
-"Средняя сила типа" = "Average power of type"
-"За все время" = "All time"
-"За месяц" = "Month"
-"Текущая неделя" = "Current week"
-"Общая сила скама" = "All power"
-"Средняя сила" = "Average power"
-"Самый популярный тип" = "Most popular type"
-"Встречается" = "Is used"
-"Типы скамов" = "Scam types"
+"Сортировка по дате" = "Sort by date";
+"Сортировка по алфавиту" = "Sort by AZ";
+"Сортировка по power" = "Sort by power";
+"Сортировка по типу" = "Sort by type";
+"Описание" = "Description";
+"Статистика" = "Статистика";
+"Количество скамов типа" = "Scams of type";
+"Средняя сила типа" = "Average power of type";
+"За все время" = "All time";
+"За месяц" = "Month";
+"Текущая неделя" = "Current week";
+"Общая сила скама" = "All power";
+"Средняя сила" = "Average power";
+"Самый популярный тип" = "Most popular type";
+"Встречается" = "Is used";
+"Типы скамов" = "Scam types";
 
 
