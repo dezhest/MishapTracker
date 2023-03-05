@@ -24,6 +24,8 @@
 		BBF70637294CF835006DA73A /* NewScamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF70636294CF835006DA73A /* NewScamView.swift */; };
 		BBFA467C2954AB46009E9E9A /* AddCustomTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA467B2954AB46009E9E9A /* AddCustomTypeView.swift */; };
 		BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA46812954E8A3009E9E9A /* ImagePicker.swift */; };
+		C33301C529B513D2002DEED6 /* NewScamFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33301C429B513D2002DEED6 /* NewScamFormView.swift */; };
+		C33301C729B5153F002DEED6 /* StatisticDisclosureGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33301C629B5153F002DEED6 /* StatisticDisclosureGroupsView.swift */; };
 		C3372A6D29919F52008DF8DE /* PowerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A6C29919F52008DF8DE /* PowerColor.swift */; };
 		C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A722991BFA6008DF8DE /* TextModifiers.swift */; };
 		C3372A752991C4F5008DF8DE /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3372A742991C4F5008DF8DE /* ImageModifier.swift */; };
@@ -65,6 +67,8 @@
 		BBF70636294CF835006DA73A /* NewScamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamView.swift; sourceTree = "<group>"; };
 		BBFA467B2954AB46009E9E9A /* AddCustomTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomTypeView.swift; sourceTree = "<group>"; };
 		BBFA46812954E8A3009E9E9A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C33301C429B513D2002DEED6 /* NewScamFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamFormView.swift; sourceTree = "<group>"; };
+		C33301C629B5153F002DEED6 /* StatisticDisclosureGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticDisclosureGroupsView.swift; sourceTree = "<group>"; };
 		C3372A6C29919F52008DF8DE /* PowerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerColor.swift; sourceTree = "<group>"; };
 		C3372A722991BFA6008DF8DE /* TextModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifiers.swift; sourceTree = "<group>"; };
 		C3372A742991C4F5008DF8DE /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
@@ -112,13 +116,15 @@
 			isa = PBXGroup;
 			children = (
 				BBF70629294CF54B006DA73A /* MainView.swift */,
+				C357F49329A3B399007CE050 /* CardScamView.swift */,
 				BBF70636294CF835006DA73A /* NewScamView.swift */,
+				C33301C429B513D2002DEED6 /* NewScamFormView.swift */,
 				BB75876129761A79001D1FA0 /* MoreDetailedView.swift */,
 				C39356602982E7410006DCAF /* StatisticsView.swift */,
+				C33301C629B5153F002DEED6 /* StatisticDisclosureGroupsView.swift */,
 				BBFA467B2954AB46009E9E9A /* AddCustomTypeView.swift */,
 				C3F905AE2983366B00C2E649 /* EditDescriptionView.swift */,
 				BB705C45295C891E006585BB /* EditScamView.swift */,
-				C357F49329A3B399007CE050 /* CardScamView.swift */,
 				BB7ACB8029782DB3008649E8 /* ShowImage.swift */,
 			);
 			path = View;
@@ -319,9 +325,11 @@
 				C357F442299A6BF2007CE050 /* CoreDataManager.swift in Sources */,
 				BB75876229761A7A001D1FA0 /* MoreDetailedView.swift in Sources */,
 				C39356612982E7410006DCAF /* StatisticsView.swift in Sources */,
+				C33301C529B513D2002DEED6 /* NewScamFormView.swift in Sources */,
 				C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */,
 				C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */,
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
+				C33301C729B5153F002DEED6 /* StatisticDisclosureGroupsView.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AddCustomTypeView.swift in Sources */,
 				C3372A752991C4F5008DF8DE /* ImageModifier.swift in Sources */,
 				C3F905AF2983366B00C2E649 /* EditDescriptionView.swift in Sources */,

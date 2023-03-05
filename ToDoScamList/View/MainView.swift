@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 
 struct MainView: View {
-
     @StateObject var viewModel = MainViewModel()
     @GestureState private var scale: CGFloat = 1.0
     let powerColor = PowerColor()
