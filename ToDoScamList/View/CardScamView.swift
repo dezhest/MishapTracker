@@ -9,11 +9,8 @@ import SwiftUI
 
 struct CardScamView: View {
     let powerColor = PowerColor()
+    var item: ScamCoreData
     var body: some View {
-        Text("")
-    }
-    @ViewBuilder
-   func cardScamView(item: ScamCoreData) -> some View {
         ZStack {
             VStack(alignment: .leading, spacing: 0) {
                 Text(item.title)
@@ -59,6 +56,6 @@ struct CardScamView: View {
 
 struct CardScamView_Previews: PreviewProvider {
     static var previews: some View {
-        CardScamView()
+        CardScamView(item: ScamCoreData())
     }
 }

@@ -31,7 +31,7 @@ struct MainView: View {
                                 .onTapGesture {
                                     viewModel.showImage(item: item)
                                 }
-                            CardScamView().cardScamView(item: item)
+                            CardScamView(item: item)
                                 .onTapGesture {
                                     viewModel.findIndexForMdView(item: item)
                                     viewModel.toggleMdIsShown()
