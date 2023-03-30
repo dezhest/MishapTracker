@@ -19,7 +19,7 @@ struct StatisticsView: View {
             List {
                 HStack {
                     Group {
-                        Text("Количество скамов типа ")
+                        Text("Количество событий типа")
                             .font(.system(size: 18, weight: .bold, design: .default))
                         + Text("#\(mainViewModel.statisticModel.type)")
                             .font(.system(size: 14, weight: .medium, design: .default))
@@ -34,7 +34,7 @@ struct StatisticsView: View {
                 }
                 HStack {
                     Group {
-                        Text("Средняя сила типа ")
+                        Text("Средняя сила типа")
                             .font(.system(size: 18, weight: .bold, design: .default))
                         + Text("#\(mainViewModel.statisticModel.type)")
                             .font(.system(size: 14, weight: .medium, design: .default))
@@ -49,10 +49,10 @@ struct StatisticsView: View {
                 }
                 StatisticDisclosureGroupsView()
                 VStack {
-                    BarChartView(data: ChartData(values: [("\(mainViewModel.statisticModel.fiveMondayAgo) - \(mainViewModel.statisticModel.fourSundayAgo)", Double(mainViewModel.statisticModel.fiveWeeksAgoPower)), ("\(mainViewModel.statisticModel.fourMondayAgo) - \(mainViewModel.statisticModel.threeSundayAgo)", Double(mainViewModel.statisticModel.fourWeeksAgoPower)), ("\(mainViewModel.statisticModel.threeMondayAgo) - \(mainViewModel.statisticModel.twoSundayAgo)", Double(mainViewModel.statisticModel.threeWeeksAgoPower)), ("\(mainViewModel.statisticModel.twoMondayAgo) - \(mainViewModel.statisticModel.oneSundayAgo)", Double(mainViewModel.statisticModel.twoWeeksAgoPower)), ("\(mainViewModel.statisticModel.oneMondayAgo) - \(mainViewModel.statisticModel.lastSunday)", Double(mainViewModel.statisticModel.oneWeekAgoPower)), ("\(mainViewModel.statisticModel.lastMonday) - \(mainViewModel.statisticModel.today)", Double(mainViewModel.statisticModel.currentWeekPower))]), title: "Общая сила", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
+                    BarChartView(data: ChartData(values: [("\(mainViewModel.statisticModel.fiveMondayAgo) - \(mainViewModel.statisticModel.fourSundayAgo)", Double(mainViewModel.statisticModel.fiveWeeksAgoPower)), ("\(mainViewModel.statisticModel.fourMondayAgo) - \(mainViewModel.statisticModel.threeSundayAgo)", Double(mainViewModel.statisticModel.fourWeeksAgoPower)), ("\(mainViewModel.statisticModel.threeMondayAgo) - \(mainViewModel.statisticModel.twoSundayAgo)", Double(mainViewModel.statisticModel.threeWeeksAgoPower)), ("\(mainViewModel.statisticModel.twoMondayAgo) - \(mainViewModel.statisticModel.oneSundayAgo)", Double(mainViewModel.statisticModel.twoWeeksAgoPower)), ("\(mainViewModel.statisticModel.oneMondayAgo) - \(mainViewModel.statisticModel.lastSunday)", Double(mainViewModel.statisticModel.oneWeekAgoPower)), ("\(mainViewModel.statisticModel.lastMonday) - \(mainViewModel.statisticModel.today)", Double(mainViewModel.statisticModel.currentWeekPower))]), title: "All power", legend: "за последние недели", style: Styles.barChartStyleOrangeLight, form: CGSize(width: screenSize.width * 0.8, height: 200))
                         .padding(.top, 15)
                         .frame(maxWidth: .infinity, alignment: .bottom)
-                    PieChartView(data: mainViewModel.findPieChartData(), title: "Типы скамов", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
+                    PieChartView(data: mainViewModel.findPieChartData(), title: "Mishap types", style: pieChartStyle, form: CGSize(width: screenSize.width * 0.8, height: 300))
                         .padding(.top, 15)
                         .frame(maxWidth: .infinity, alignment: .bottom)
                 }

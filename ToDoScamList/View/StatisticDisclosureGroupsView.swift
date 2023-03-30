@@ -12,7 +12,7 @@ struct StatisticDisclosureGroupsView: View {
     var body: some View {
         DisclosureGroup(isExpanded: $mainViewModel.statisticModel.general, content: {
             ZStack {
-                Text("Общая сила скама")
+                Text("Общая сила")
                     .font(.system(size: 14, weight: .medium, design: .default))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 VStack {
@@ -65,7 +65,7 @@ struct StatisticDisclosureGroupsView: View {
             }
             HStack {
                 Group {
-                    Text("Количество скамов типа ")
+                    Text("Количество событий типа")
                         .font(.system(size: 14, weight: .medium, design: .default))
                     + Text("#\(mainViewModel.statisticModel.type)")
                         .font(.system(size: 14, weight: .medium, design: .default))
@@ -102,7 +102,7 @@ struct StatisticDisclosureGroupsView: View {
             }
             HStack {
                 Group {
-                    Text("Количество скамов типа ")
+                    Text("Количество событий типа")
                         .font(.system(size: 14, weight: .medium, design: .default))
                     + Text("#\(mainViewModel.statisticModel.type)")
                         .font(.system(size: 14, weight: .medium, design: .default))

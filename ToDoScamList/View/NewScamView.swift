@@ -26,12 +26,12 @@ struct NewScamView: View {
                         dismiss()
                     }
                 })
-                .navigationBarTitle("Добавить скам")
+                .navigationBarTitle("Добавить")
                 .onAppear {
                     viewModel.onAppearSavedOrDefaultTypes()
                 }
                 .alert(isPresented: $viewModel.newScamModel.showsAlertNameCount) {
-                    Alert(title: Text("Название скама не может быть пустым или превышать 30 символов"))
+                    Alert(title: Text("Название не может быть пустым или превышать 30 символов"))
                 }
             }
             if viewModel.newScamModel.showsAddCustomType {

@@ -13,18 +13,24 @@ import SwiftUI
 final class NewScamViewModel: ObservableObject {
     @Published var newScamModel = NewScamModel()
     let textLimit = 280
+    let stringsArray = [
+        NSLocalizedString("Emotional", comment: ""),
+        NSLocalizedString("Financial", comment: ""),
+        NSLocalizedString("Custom", comment: ""),
+        NSLocalizedString("Clear", comment: "")
+    ]
         
     func toggleAddCustomTypeIsShown() {
         newScamModel.showsAddCustomType.toggle()
-        newScamModel.type = "Финансовый"
+        newScamModel.type = "Financial"
     }
     
     func onAppearSavedOrDefaultTypes() {
-        newScamModel.types = UserDefaults.standard.stringArray(forKey: "typess") ?? ["Эмоциональный", "Финансовый", "Свой тип", "Очистить типы"]
+        newScamModel.types = UserDefaults.standard.stringArray(forKey: "typess") ?? stringsArray
     }
     
     func customTypeTapped() {
-        if newScamModel.type == "Свой тип" {
+        if newScamModel.type == "Custom" {
             withAnimation(.spring()) {
                 newScamModel.showsAddCustomType.toggle()
             }
@@ -32,10 +38,10 @@ final class NewScamViewModel: ObservableObject {
     }
     
     func clearTypeTapped() {
-        if newScamModel.type == "Очистить типы" {
-            newScamModel.types = ["Эмоциональный", "Финансовый", "Свой тип", "Очистить типы"]
+        if newScamModel.type == "Clear" {
+            newScamModel.types = stringsArray
             UserDefaults.standard.set(newScamModel.types, forKey: "typess")
-            newScamModel.type = "Финансовый"
+            newScamModel.type = "Financial"
         }
     }
     

@@ -32,7 +32,7 @@ struct EditScamView: View {
             }
             TextField("", text: $text)
                 .placeholder(when: text.isEmpty) {
-                    Text("Название скама").foregroundColor(.gray)}
+                    Text("Название события").foregroundColor(.gray)}
                 .padding(10)
                 .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray))
                 .background(Color(.white))

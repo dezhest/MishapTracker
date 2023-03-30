@@ -57,8 +57,8 @@ struct MainView: View {
                             .tint(.green)
                         }
                     }
+                    .id(UUID())
                 }
-                .navigationBarTitle(Text("Scam List"))
                 .navigationBarItems(leading: Picker("Select number", selection: $viewModel.model.pickerSelection) {
                     Text("Сортировка по дате").tag(SortType.date)
                     Text("Сортировка по алфавиту").tag(SortType.name)

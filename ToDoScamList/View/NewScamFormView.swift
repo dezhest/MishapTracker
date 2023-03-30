@@ -12,7 +12,7 @@ struct NewScamFormView: View {
     @EnvironmentObject var viewModel: NewScamViewModel
     var body: some View {
             VStack {
-                TextField("Название скама", text: $viewModel.newScamModel.name)
+                TextField("Название", text: $viewModel.newScamModel.name)
                     .padding(10)
                     .padding(.top, 12)
                 Spacer()
@@ -35,7 +35,7 @@ struct NewScamFormView: View {
                 .offset(x: -4)
             }
             VStack(alignment: .leading) {
-                Text("Сила скама:")
+                Text("Сила:")
                 ZStack {
                     LinearGradient(
                         gradient: Gradient(colors: [.yellow, .red]),
@@ -58,7 +58,7 @@ struct NewScamFormView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }, alignment: .top)
                     VStack {
-                        Text("Max Scam")
+                        Text("Max")
                             .foregroundColor(.white)
                             .padding(3)
                             .background(Color(.red))
@@ -74,7 +74,7 @@ struct NewScamFormView: View {
             }
             .padding(.top, 7)
             VStack {
-                DatePicker("Дата скама", selection: $viewModel.newScamModel.selectedDate, displayedComponents: .date)
+                DatePicker("Дата события", selection: $viewModel.newScamModel.selectedDate, displayedComponents: .date)
                     .datePickerStyle(.automatic)
                     .id(viewModel.newScamModel.calendarId)
                     .onChange(of: viewModel.newScamModel.selectedDate, perform: { _ in
@@ -82,10 +82,10 @@ struct NewScamFormView: View {
                     })
             }
             VStack {
-                Picker("Тип скама", selection: $viewModel.newScamModel.type) {
+                Picker("Тип", selection: $viewModel.newScamModel.type) {
                     ForEach(viewModel.newScamModel.types, id: \.self) {
                         Text($0)
-                            .foregroundColor($0 == "Свой тип" ? .blue : $0 == "Очистить типы" ? .red : .black)
+                            .foregroundColor($0 == "Custom" ? .blue : $0 == "Clear" ? .red : .black)
                     }
                 }
                 .onChange(of: viewModel.newScamModel.type) { _ in
@@ -95,7 +95,7 @@ struct NewScamFormView: View {
             }
             VStack {
                 HStack {
-                    Text("Фото скама")
+                    Text("Фото")
                         .fullScreenCover(isPresented: $viewModel.newScamModel.showsImagePicker) {
                             ImagePicker(show: $viewModel.newScamModel.showsImagePicker, image: $viewModel.newScamModel.imageData, source: viewModel.newScamModel.source)
                         }
@@ -109,7 +109,7 @@ struct NewScamFormView: View {
                             .onTapGesture {
                                 viewModel.newScamModel.showImageDialog.toggle()
                             }
-                            .confirmationDialog("Выберите фото скама", isPresented: $viewModel.newScamModel.showImageDialog, titleVisibility: .visible) {
+                            .confirmationDialog("Выберите фото", isPresented: $viewModel.newScamModel.showImageDialog, titleVisibility: .visible) {
                                 Button("Камера") {
                                     viewModel.newScamModel.source = .camera
                                     viewModel.newScamModel.showsImagePicker.toggle()
@@ -128,7 +128,7 @@ struct NewScamFormView: View {
                             .onTapGesture {
                                 viewModel.newScamModel.showImageDialog.toggle()
                             }
-                            .confirmationDialog("Выберите фото скама", isPresented: $viewModel.newScamModel.showImageDialog, titleVisibility: .visible) {
+                            .confirmationDialog("Выберите фото", isPresented: $viewModel.newScamModel.showImageDialog, titleVisibility: .visible) {
                                 Button("Камера") {
                                     viewModel.newScamModel.source = .camera
                                     viewModel.newScamModel.showsImagePicker.toggle()

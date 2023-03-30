@@ -5,33 +5,40 @@
   Created by Denis Zhesterev on 02.02.2023.
   
 */
-"Добавить скам" = "New Scam" ;
-"Сохранить" = "Save" ;
-"Название скама" = "Scam name";
-"Сила скама:" = "Scam power";
+"Добавить" = "Add" ;
+"Отмена" = "Cancel" ;
+"Редактировать" = "Edit";
+"Сохранить" = "Save";
+"Название" = "Mishap name";
+"Сила:" = "Mishap power:";
 "Введите описание" = "Enter description";
-"Дата скама" = "Scam date" ;
-"Тип скама" = "Scam type" ;
-"Фото скама" = "Scam photo";
-"Эмоциональный" = "Emotional" ;
-"Финансовый" = "Financial";
+"Дата события" = "Mishap date" ;
+"Тип" = "Mishap type" ;
+"Фото" = "Mishap photo";
 "Свой тип" = "Custom type";
 "Очистить типы" = "Delete types";
 "Сортировка по дате" = "Sort by date";
 "Сортировка по алфавиту" = "Sort by AZ";
-"Сортировка по power" = "Sort by power";
+"Сортировка по силе" = "Sort by power";
 "Сортировка по типу" = "Sort by type";
 "Описание" = "Description";
 "Статистика" = "Статистика";
-"Количество скамов типа" = "Scams of type";
+"Количество событий типа" = "Mishaps count of type";
 "Средняя сила типа" = "Average power of type";
 "За все время" = "All time";
 "За месяц" = "Month";
 "Текущая неделя" = "Current week";
-"Общая сила скама" = "All power";
+"Общая сила" = "All power";
+"Типы событий" = "Mishap types";
 "Средняя сила" = "Average power";
-"Самый популярный тип" = "Most popular type";
+"Самый популярный тип:" = "Most popular type:";
 "Встречается" = "Is used";
-"Типы скамов" = "Scam types";
-
+"Статистика" = "Statistic";
+"Эмоциональный" = "Emotional";
+"Финансовый" = "Financial";
+"Описание:" = "Description";
+"Добавить описание" = "Add description";
+"Название не может быть пустым или превышать 30 символов" = "The name cannot be empty or exceed 30 characters";
+"Длина типа не может быть пустой или превышать 20 символов" = "The length of the type cannot be empty or exceed 20 characters";
+"Сохранить и выйти" = "Save";
 

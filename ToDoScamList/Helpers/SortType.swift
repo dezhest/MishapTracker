@@ -8,9 +8,5 @@
 import Foundation
 
 enum SortType: String, CaseIterable {
-    case name
-    case date
-    case type
-    case power
-    
+    case name,date,type,power
 }
