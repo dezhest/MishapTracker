@@ -9,5 +9,5 @@ import Foundation
 
 extension NewScamModel {
     static let typeDefaultValue = "Финансовый"
-    static let typesArrayDefaultValues =  ["Эмоциональный","Финансовый","Свой тип","Очистить типыТы"]
+    static let typesArrayDefaultValues =  ["Эмоциональный","Финансовый","Свой тип","Очистить типы"]
 }

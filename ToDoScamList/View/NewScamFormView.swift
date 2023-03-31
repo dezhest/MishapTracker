@@ -11,12 +11,14 @@ import Combine
 struct NewScamFormView: View {
     @EnvironmentObject var viewModel: NewScamViewModel
     var body: some View {
+        if !viewModel.newScamModel.showsAddCustomType {
             VStack {
                 TextField("Название", text: $viewModel.newScamModel.name)
                     .padding(10)
                     .padding(.top, 12)
                 Spacer()
             }
+            .frame(height: 40)
             VStack {
                 ZStack(alignment: .leading) {
                     if viewModel.newScamModel.description.isEmpty {
@@ -24,16 +26,18 @@ struct NewScamFormView: View {
                             .font(.custom("Helvetica", size: 17))
                             .opacity(0.22)
                             .foregroundColor(.black)
+                            .offset(x: -2)
                     }
                     TextEditor(text: $viewModel.newScamModel.description)
                         .onReceive(Just(viewModel.newScamModel.description)) { _ in viewModel.limitText(viewModel.textLimit) }
                         .font(.custom("Helvetica", size: 17))
-                        .offset(x: 10)
-                        .offset(x: -14)
+                        .offset(x: -6)
+                        .frame(height: 30)
                 }
                 .padding(15)
                 .offset(x: -4)
             }
+            .frame(height: 60)
             VStack(alignment: .leading) {
                 Text("Сила:")
                 ZStack {
@@ -73,6 +77,7 @@ struct NewScamFormView: View {
                 }
             }
             .padding(.top, 7)
+            .frame(height: 80)
             VStack {
                 DatePicker("Дата события", selection: $viewModel.newScamModel.selectedDate, displayedComponents: .date)
                     .datePickerStyle(.automatic)
@@ -81,18 +86,21 @@ struct NewScamFormView: View {
                         viewModel.newScamModel.calendarId += 1
                     })
             }
+            .frame(height: 40)
             VStack {
                 Picker("Тип", selection: $viewModel.newScamModel.type) {
                     ForEach(viewModel.newScamModel.types, id: \.self) {
                         Text($0.localized)
                             .foregroundColor($0 == "Свой тип" ? .blue : $0 == "Очистить типы" ? .red : .black)
                     }
+                    .id(UUID())
                 }
                 .onChange(of: viewModel.newScamModel.type) { _ in
                     viewModel.customTypeTapped()
                     viewModel.clearTypeTapped()
                 }
             }
+            .frame(height: 40)
             VStack {
                 HStack {
                     Text("Фото")
@@ -141,7 +149,8 @@ struct NewScamFormView: View {
                     }
                 }
             }
-        
+            .frame(height: 40)
+        }
     }
 }
 

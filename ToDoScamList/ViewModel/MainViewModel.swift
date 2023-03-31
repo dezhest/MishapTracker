@@ -111,10 +111,6 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    func prinWillSet() {
-        print("willset works")
-    }
-    
     func toggleEditIsShown() {
         editIsShown.toggle()
     }

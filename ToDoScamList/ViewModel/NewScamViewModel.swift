@@ -25,7 +25,7 @@ final class NewScamViewModel: ObservableObject {
     }
     
     func customTypeTapped() {
-        if newScamModel.type == "Custom" {
+        if newScamModel.type == "Свой тип" {
             withAnimation(.spring()) {
                 newScamModel.showsAddCustomType.toggle()
             }
@@ -33,7 +33,7 @@ final class NewScamViewModel: ObservableObject {
     }
     
     func clearTypeTapped() {
-        if newScamModel.type == "Clear" {
+        if newScamModel.type == "Очистить типы".localized {
             newScamModel.types = stringsArray
             UserDefaults.standard.set(newScamModel.types, forKey: "typess")
             newScamModel.type = "Финансовый".localized

@@ -41,4 +41,5 @@
 "Название не может быть пустым или превышать 30 символов" = "The name cannot be empty or exceed 30 characters";
 "Длина типа не может быть пустой или превышать 20 символов" = "The length of the type cannot be empty or exceed 20 characters";
 "Сохранить и выйти" = "Save";
+"Введите свой тип" = "Enter your type";
 

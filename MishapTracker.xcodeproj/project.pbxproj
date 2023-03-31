@@ -36,7 +36,7 @@
 		C357F4A029A4B413007CE050 /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F49F29A4B413007CE050 /* SortType.swift */; };
 		C357F4A429A4BBB5007CE050 /* StatisticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357F4A329A4BBB5007CE050 /* StatisticModel.swift */; };
 		C39356612982E7410006DCAF /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39356602982E7410006DCAF /* StatisticsView.swift */; };
-		C3A2321D29D6FFE100458D51 /* ArrayOfStringLoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A2321C29D6FFE100458D51 /* ArrayOfStringLoc.swift */; };
+		C3A2321D29D6FFE100458D51 /* ArrayOfStringLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A2321C29D6FFE100458D51 /* ArrayOfStringLocalization.swift */; };
 		C3C8423D2993E5A90068BB15 /* NewScamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */; };
 		C3C8423F2993F6940068BB15 /* NewScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423E2993F6940068BB15 /* NewScamModel.swift */; };
 		C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8424229940A5A0068BB15 /* MainModel.swift */; };
@@ -60,7 +60,7 @@
 		BBD7FD5D2970C3BF006679BF /* PinchToZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchToZoom.swift; sourceTree = "<group>"; };
 		BBD7FD5F2970C40B006679BF /* DismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboard.swift; sourceTree = "<group>"; };
 		BBD7FD612970C4BB006679BF /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
-		BBF7061F294CF54B006DA73A /* Mishap tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mishap tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBF7061F294CF54B006DA73A /* MishapTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MishapTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF70622294CF54B006DA73A /* ToDoScamListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoScamListApp.swift; sourceTree = "<group>"; };
 		BBF70627294CF54B006DA73A /* ToDoScamList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoScamList.xcdatamodel; sourceTree = "<group>"; };
 		BBF70629294CF54B006DA73A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 		C357F49F29A4B413007CE050 /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
 		C357F4A329A4BBB5007CE050 /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
-		C3A2321C29D6FFE100458D51 /* ArrayOfStringLoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayOfStringLoc.swift; sourceTree = "<group>"; };
+		C3A2321C29D6FFE100458D51 /* ArrayOfStringLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayOfStringLocalization.swift; sourceTree = "<group>"; };
 		C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamViewModel.swift; sourceTree = "<group>"; };
 		C3C8423E2993F6940068BB15 /* NewScamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamModel.swift; sourceTree = "<group>"; };
 		C3C8424229940A5A0068BB15 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 				C3372A722991BFA6008DF8DE /* TextModifiers.swift */,
 				C3372A742991C4F5008DF8DE /* ImageModifier.swift */,
 				C3C842442996797C0068BB15 /* NewScamModelDefaultValues.swift */,
-				C3A2321C29D6FFE100458D51 /* ArrayOfStringLoc.swift */,
+				C3A2321C29D6FFE100458D51 /* ArrayOfStringLocalization.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 		BBF70620294CF54B006DA73A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BBF7061F294CF54B006DA73A /* Mishap tracker.app */,
+				BBF7061F294CF54B006DA73A /* MishapTracker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,9 +216,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BBF7061E294CF54B006DA73A /* Mishap tracker */ = {
+		BBF7061E294CF54B006DA73A /* MishapTracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BBF70633294CF54F006DA73A /* Build configuration list for PBXNativeTarget "Mishap tracker" */;
+			buildConfigurationList = BBF70633294CF54F006DA73A /* Build configuration list for PBXNativeTarget "MishapTracker" */;
 			buildPhases = (
 				BBF7061B294CF54B006DA73A /* Sources */,
 				BBF7061C294CF54B006DA73A /* Frameworks */,
@@ -229,13 +229,13 @@
 			);
 			dependencies = (
 			);
-			name = "Mishap tracker";
+			name = MishapTracker;
 			packageProductDependencies = (
 				C3F2F5852986CDCD005436CB /* FancyScrollView */,
 				C3F2F58B2987D552005436CB /* SwiftUICharts */,
 			);
 			productName = ToDoScamList;
-			productReference = BBF7061F294CF54B006DA73A /* Mishap tracker.app */;
+			productReference = BBF7061F294CF54B006DA73A /* MishapTracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -253,7 +253,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BBF7061A294CF54B006DA73A /* Build configuration list for PBXProject "Mishap tracker" */;
+			buildConfigurationList = BBF7061A294CF54B006DA73A /* Build configuration list for PBXProject "MishapTracker" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -271,7 +271,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BBF7061E294CF54B006DA73A /* Mishap tracker */,
+				BBF7061E294CF54B006DA73A /* MishapTracker */,
 			);
 		};
 /* End PBXProject section */
@@ -331,7 +331,7 @@
 				C33301C529B513D2002DEED6 /* NewScamFormView.swift in Sources */,
 				C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */,
 				C3372A732991BFA6008DF8DE /* TextModifiers.swift in Sources */,
-				C3A2321D29D6FFE100458D51 /* ArrayOfStringLoc.swift in Sources */,
+				C3A2321D29D6FFE100458D51 /* ArrayOfStringLocalization.swift in Sources */,
 				BBFA46822954E8A3009E9E9A /* ImagePicker.swift in Sources */,
 				C33301C729B5153F002DEED6 /* StatisticDisclosureGroupsView.swift in Sources */,
 				BBFA467C2954AB46009E9E9A /* AddCustomTypeView.swift in Sources */,
@@ -585,7 +585,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BBF7061A294CF54B006DA73A /* Build configuration list for PBXProject "Mishap tracker" */ = {
+		BBF7061A294CF54B006DA73A /* Build configuration list for PBXProject "MishapTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BBF70631294CF54F006DA73A /* Debug */,
@@ -594,7 +594,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BBF70633294CF54F006DA73A /* Build configuration list for PBXNativeTarget "Mishap tracker" */ = {
+		BBF70633294CF54F006DA73A /* Build configuration list for PBXNativeTarget "MishapTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BBF70634294CF54F006DA73A /* Debug */,
