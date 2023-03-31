@@ -5,7 +5,7 @@
   Created by Denis Zhesterev on 02.02.2023.
   
 */
-"Добавить" = "Add" ;
+"Добавить" = "Add Mishap" ;
 "Отмена" = "Cancel" ;
 "Редактировать" = "Edit";
 "Сохранить" = "Save";
@@ -28,7 +28,7 @@
 "За все время" = "All time";
 "За месяц" = "Month";
 "Текущая неделя" = "Current week";
-"Общая сила" = "All power";
+"Общая сила" = "Total power";
 "Типы событий" = "Mishap types";
 "Средняя сила" = "Average power";
 "Самый популярный тип:" = "Most popular type:";

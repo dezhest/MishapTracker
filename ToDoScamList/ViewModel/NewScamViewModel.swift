@@ -13,16 +13,11 @@ import SwiftUI
 final class NewScamViewModel: ObservableObject {
     @Published var newScamModel = NewScamModel()
     let textLimit = 280
-    let stringsArray = [
-        NSLocalizedString("Emotional", comment: ""),
-        NSLocalizedString("Financial", comment: ""),
-        NSLocalizedString("Custom", comment: ""),
-        NSLocalizedString("Clear", comment: "")
-    ]
+    let stringsArray = ["Эмоциональный","Финансовый","Свой тип","Очистить типы"]
         
     func toggleAddCustomTypeIsShown() {
         newScamModel.showsAddCustomType.toggle()
-        newScamModel.type = "Financial"
+        newScamModel.type = "Финансовый".localized
     }
     
     func onAppearSavedOrDefaultTypes() {
@@ -41,7 +36,7 @@ final class NewScamViewModel: ObservableObject {
         if newScamModel.type == "Clear" {
             newScamModel.types = stringsArray
             UserDefaults.standard.set(newScamModel.types, forKey: "typess")
-            newScamModel.type = "Financial"
+            newScamModel.type = "Финансовый".localized
         }
     }
     

@@ -15,7 +15,7 @@ struct CardScamView: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text(item.title)
                     .font(.system(size: 13, weight: .bold, design: .default))
-                Text("#\(item.type)")
+                Text("#\(item.type.localized)")
                     .font(.system(size: 10, weight: .medium, design: .default))
                     .opacity(0.6)
                     .padding(5)

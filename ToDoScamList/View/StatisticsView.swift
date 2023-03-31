@@ -21,7 +21,7 @@ struct StatisticsView: View {
                     Group {
                         Text("Количество событий типа")
                             .font(.system(size: 18, weight: .bold, design: .default))
-                        + Text("#\(mainViewModel.statisticModel.type)")
+                        + Text("#\(mainViewModel.statisticModel.type.localized)")
                             .font(.system(size: 14, weight: .medium, design: .default))
                             .foregroundColor(.orange)
                     }
@@ -36,7 +36,7 @@ struct StatisticsView: View {
                     Group {
                         Text("Средняя сила типа")
                             .font(.system(size: 18, weight: .bold, design: .default))
-                        + Text("#\(mainViewModel.statisticModel.type)")
+                        + Text("#\(mainViewModel.statisticModel.type.localized)")
                             .font(.system(size: 14, weight: .medium, design: .default))
                             .foregroundColor(.orange)
                     }
@@ -62,7 +62,7 @@ struct StatisticsView: View {
             .navigationBarItems(leading: Button(action: { dismiss() }) {
                 Image(systemName: "chevron.left")
                     .backButton()
-            }, trailing: Text(mainViewModel.statisticModel.type))
+            }, trailing: Text(mainViewModel.statisticModel.type.localized))
         }
         .environment(\.colorScheme, .dark)
     }

@@ -42,7 +42,7 @@ struct StatisticDisclosureGroupsView: View {
                         .offset(y: -7)
                 }.frame(maxWidth: .infinity, alignment: .leading)
                 VStack {
-                    Text(mainViewModel.statisticModel.mostFrequentType)
+                    Text(mainViewModel.statisticModel.mostFrequentType.localized)
                         .medium14()
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .offset(y: 22.5)
@@ -67,7 +67,7 @@ struct StatisticDisclosureGroupsView: View {
                 Group {
                     Text("Количество событий типа")
                         .font(.system(size: 14, weight: .medium, design: .default))
-                    + Text("#\(mainViewModel.statisticModel.type)")
+                    + Text("#\(mainViewModel.statisticModel.type.localized)")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .foregroundColor(.orange)
                 }
@@ -104,7 +104,7 @@ struct StatisticDisclosureGroupsView: View {
                 Group {
                     Text("Количество событий типа")
                         .font(.system(size: 14, weight: .medium, design: .default))
-                    + Text("#\(mainViewModel.statisticModel.type)")
+                    + Text("#\(mainViewModel.statisticModel.type.localized)")
                         .font(.system(size: 14, weight: .medium, design: .default))
                         .foregroundColor(.orange)
                 }

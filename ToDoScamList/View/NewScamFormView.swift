@@ -84,8 +84,8 @@ struct NewScamFormView: View {
             VStack {
                 Picker("Тип", selection: $viewModel.newScamModel.type) {
                     ForEach(viewModel.newScamModel.types, id: \.self) {
-                        Text($0)
-                            .foregroundColor($0 == "Custom" ? .blue : $0 == "Clear" ? .red : .black)
+                        Text($0.localized)
+                            .foregroundColor($0 == "Свой тип" ? .blue : $0 == "Очистить типы" ? .red : .black)
                     }
                 }
                 .onChange(of: viewModel.newScamModel.type) { _ in
