@@ -11,7 +11,6 @@ import Combine
 struct NewScamFormView: View {
     @EnvironmentObject var viewModel: NewScamViewModel
     var body: some View {
-        if !viewModel.newScamModel.showsAddCustomType {
             VStack {
                 TextField("Название", text: $viewModel.newScamModel.name)
                     .padding(10)
@@ -150,7 +149,7 @@ struct NewScamFormView: View {
                 }
             }
             .frame(height: 40)
-        }
+        
     }
 }
 

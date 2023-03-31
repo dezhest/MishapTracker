@@ -59,6 +59,7 @@ struct MainView: View {
                     }
                     .id(UUID())
                 }
+                .navigationBarTitle("Mishaps")
                 .navigationBarItems(leading: Picker("Select number", selection: $viewModel.model.pickerSelection) {
                     Text("Сортировка по дате").tag(SortType.date)
                     Text("Сортировка по алфавиту").tag(SortType.name)

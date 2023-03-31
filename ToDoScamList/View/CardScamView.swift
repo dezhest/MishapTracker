@@ -22,7 +22,7 @@ struct CardScamView: View {
                     .padding(.bottom, 3)
                     .padding(.leading, -5)
                 HStack {
-                    Text("\(Int(item.power))/10 miss")
+                    Text("\(Int(item.power))/10 ")
                         .font(.system(size: 12, weight: .medium, design: .default))
                         .foregroundColor(.white)
                         .padding(3)
