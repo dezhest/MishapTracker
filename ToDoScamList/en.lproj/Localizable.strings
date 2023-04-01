@@ -10,11 +10,11 @@
 "Редактировать" = "Edit";
 "Сохранить" = "Save";
 "Название" = "Mishap name";
-"Сила:" = "Mishap power:";
+"Сила:" = "Power:";
 "Введите описание" = "Enter description";
-"Дата события" = "Mishap date" ;
-"Тип" = "Mishap type" ;
-"Фото" = "Mishap photo";
+"Дата события" = "Date" ;
+"Тип" = "Type" ;
+"Фото" = "Photo";
 "Свой тип" = "Custom type";
 "Очистить типы" = "Delete types";
 "Сортировка по дате" = "Sort by date";

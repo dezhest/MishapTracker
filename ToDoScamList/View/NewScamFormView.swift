@@ -62,6 +62,7 @@ struct NewScamFormView: View {
                         }, alignment: .top)
                     VStack {
                         Text("Max")
+                            .fontWeight(.bold)
                             .foregroundColor(.white)
                             .padding(3)
                             .background(Color(.red))
