@@ -508,7 +508,7 @@
 				INFOPLIST_FILE = "MishapTracker-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MishapTracker;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need permission to use the camera for taking photos";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -557,7 +557,7 @@
 				INFOPLIST_FILE = "MishapTracker-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MishapTracker;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need permission to use the camera for taking photos";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
