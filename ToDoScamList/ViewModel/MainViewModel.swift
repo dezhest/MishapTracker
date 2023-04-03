@@ -129,7 +129,7 @@ class MainViewModel: ObservableObject {
             self.computeGlobalStatistic(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
-            self.computeWeekStatistic(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
+            self.computeMonthStatistic(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
         }
         concurrentQueue.async {
             self.computeWeekStatistic(scam: self.sortedScams, index: self.model.indexOfMoreDetailed)
