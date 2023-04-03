@@ -79,6 +79,8 @@
 		C357F49329A3B399007CE050 /* CardScamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScamView.swift; sourceTree = "<group>"; };
 		C357F49F29A4B413007CE050 /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
 		C357F4A329A4BBB5007CE050 /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
+		C359477D29DB8AAC0069C681 /* MishapTrackerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MishapTrackerRelease.entitlements; sourceTree = "<group>"; };
+		C359477E29DB8AC70069C681 /* MishapTracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MishapTracker-Info.plist"; sourceTree = "<group>"; };
 		C39356602982E7410006DCAF /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		C3A2321C29D6FFE100458D51 /* ArrayOfStringLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayOfStringLocalization.swift; sourceTree = "<group>"; };
 		C3C8423C2993E5A90068BB15 /* NewScamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScamViewModel.swift; sourceTree = "<group>"; };
@@ -161,6 +163,8 @@
 		BBF70616294CF54B006DA73A = {
 			isa = PBXGroup;
 			children = (
+				C359477E29DB8AC70069C681 /* MishapTracker-Info.plist */,
+				C359477D29DB8AAC0069C681 /* MishapTrackerRelease.entitlements */,
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
 				BBF70620294CF54B006DA73A /* Products */,
 			);
@@ -501,6 +505,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MishapTracker-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MishapTracker;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission";
@@ -539,7 +544,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ToDoScamList/ToDoScamList.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MishapTrackerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -549,6 +554,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MishapTracker-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MishapTracker;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission";
