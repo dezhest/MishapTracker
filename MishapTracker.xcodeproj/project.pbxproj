@@ -41,8 +41,8 @@
 		C3C8423F2993F6940068BB15 /* NewScamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8423E2993F6940068BB15 /* NewScamModel.swift */; };
 		C3C8424329940A5A0068BB15 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8424229940A5A0068BB15 /* MainModel.swift */; };
 		C3C842452996797C0068BB15 /* NewScamModelDefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C842442996797C0068BB15 /* NewScamModelDefaultValues.swift */; };
+		C3D934C829E7F7D800ECEBE6 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C3D934C729E7F7D800ECEBE6 /* SwiftUICharts */; };
 		C3F2F5862986CDCD005436CB /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F5852986CDCD005436CB /* FancyScrollView */; };
-		C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = C3F2F58B2987D552005436CB /* SwiftUICharts */; };
 		C3F2F5B729885DD4005436CB /* NavigationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F2F5B629885DD4005436CB /* NavigationTheme.swift */; };
 		C3F2F5D8298B3C9D005436CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F2F5DA298B3C9D005436CB /* Localizable.strings */; };
 		C3F905AF2983366B00C2E649 /* EditDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F905AE2983366B00C2E649 /* EditDescriptionView.swift */; };
@@ -99,7 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F2F5862986CDCD005436CB /* FancyScrollView in Frameworks */,
-				C3F2F58C2987D552005436CB /* SwiftUICharts in Frameworks */,
+				C3D934C829E7F7D800ECEBE6 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +167,7 @@
 				C359477D29DB8AAC0069C681 /* MishapTrackerRelease.entitlements */,
 				BBF70621294CF54B006DA73A /* ToDoScamList */,
 				BBF70620294CF54B006DA73A /* Products */,
+				C3D934C629E7F7D800ECEBE6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -217,6 +218,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C3D934C629E7F7D800ECEBE6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -236,7 +244,7 @@
 			name = MishapTracker;
 			packageProductDependencies = (
 				C3F2F5852986CDCD005436CB /* FancyScrollView */,
-				C3F2F58B2987D552005436CB /* SwiftUICharts */,
+				C3D934C729E7F7D800ECEBE6 /* SwiftUICharts */,
 			);
 			productName = ToDoScamList;
 			productReference = BBF7061F294CF54B006DA73A /* MishapTracker.app */;
@@ -631,15 +639,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C3D934C729E7F7D800ECEBE6 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3F2F58A2987D552005436CB /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
 		C3F2F5852986CDCD005436CB /* FancyScrollView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C3F2F5842986CDCD005436CB /* XCRemoteSwiftPackageReference "FancyScrollView" */;
 			productName = FancyScrollView;
-		};
-		C3F2F58B2987D552005436CB /* SwiftUICharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C3F2F58A2987D552005436CB /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 
