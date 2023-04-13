@@ -42,7 +42,7 @@
 "Длина типа не может быть пустой или превышать 20 символов" = "The length of the type cannot be empty or exceed 20 characters";
 "Сохранить и выйти" = "Save";
 "Введите свой тип" = "Enter your type";
-"Камера" = " Camera";
+"Камера" = "Camera";
 "Галерея" = "Galery";
 "Выберите фото" = "Select a photo";
 "Редактировать описание" = "Edit description";
