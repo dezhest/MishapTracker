@@ -33,7 +33,7 @@ Scam - any unpleasant event that can happen to anyone.
  # Tech stacks
  - **SwiftUI** iOS 15 functions are applied for support for a larger number of devices
  - **Combine** is used to validate the number of characters in the entered data. If the criteria are not met, corresponding alerts appear.
- - **CoreDate, CloudKit ** Core data for storing card data, UserDefaults for storing the array of editable types
+ - **CoreDate** Core data for storing card data, UserDefaults for storing the array of editable types
  - **UIImagePickerController** UIImagePickerController for photo selection
  - **GCD** Statistics are calculated by independent functions - total, monthly, and weekly, working on parallel threads 
  - **Date** extension is used in the card and in statistics
