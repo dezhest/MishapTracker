@@ -1,7 +1,6 @@
 # MishapTracker
-ScamList - Easy-to-use meme app that helps you to create and maintain your everyday mishaps. It enables to keep a list of your mishaps and track their statistics.
+MishapTracker - Easy-to-use meme app that helps you to create and maintain your everyday mishaps. It enables to keep a list of your mishaps and track their statistics.
 
-Scam - any unpleasant event that can happen to anyone.
  
 **Add your new mishaps:** 
 - Enter a description and intensity on a ten-point scale
